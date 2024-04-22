@@ -1,0 +1,176 @@
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family: "Poppins", sans-serif
+}
+
+html, body{
+    height: 100%;
+    display: flex; 
+    justify-content: center; 
+    align-items: center; 
+    background:#faf2e8;
+}
+
+.container{
+    background: #faf2e8;
+    width: 400px;
+    padding:1.5rem;
+    padding:1.5rem;
+    margin: 50px auto;
+    border-radius:10px;
+    box-shadow: 0 4px 10px;
+    border:2px #6c4a21 solid;
+    transition: all 0.3s ease; 
+}
+
+.container:hover {
+    width: 450px; /* Increase width on hover */
+    padding: 2rem; /* Increase padding on hover */
+    box-shadow: 0 8px 20px; /* Change box shadow on hover */
+}
+
+form{
+    margin:0 2rem;
+}
+.form-title{
+    font-size:3rem;
+    font-weight:bold;
+    text-align:center;
+    margin-top: 1.3rem;
+    margin-bottom: 0; 
+    color: #6c4a21;
+}
+.form-subtitle{
+    font-size:1rem;
+    font-weight: lighter;
+    text-align:center;
+    margin-bottom: 3rem;
+    margin-top: 0;
+    color: #6c4a21;
+}
+input[type="text"], input[type="email"], input[type="password"]{
+    color:inherit;
+    width:100%;
+    background-color: transparent;
+    border: none;
+    border-bottom: 2px solid #6c4a21;
+    padding-left:2px;
+    font-size: 15px;;
+}
+.input-group{
+    padding:1% 0;
+    position: relative;
+
+}
+
+input[type="text"]:focus, input[type="email"]:focus, input[type="password"]:focus{
+    background-color: transparent;
+    outline: transparent;
+    border-bottom: 2px solid #563103;
+}
+input[type="text"]::placeholder, input[type="email"]::placeholder, input[type="password"]::placeholder{
+    color:transparent;
+}
+label{
+    color:#6c4a21;
+    position: relative;
+    top: -1.3em;
+    cursor:auto;
+    transition:0.3s ease all;
+}
+input[type="text"]:focus~label, input[type="email"]:focus~label, input[type="password"]:focus~label,input[type="text"]:not(:placeholder-shown)~label, input[type="email"]:not(:placeholder-shown)~label, input[type="password"]:not(:placeholder-shown)~label{
+    top:-3em;
+    color:#563103;
+    font-size: 15px;
+}
+.btnclck{
+    font-size:1.1rem;
+    padding:10px 0;
+    border-radius: 20px;
+    outline: none;
+    border: none;
+    width: 100%;
+    margin-top: 20px;
+    background-color: #6c4a21;
+    color: #faf2e8;
+    cursor: pointer;
+    transition: 1.0s;
+}
+.btnclck:hover{
+    font-size:1.2rem;
+}
+
+.rememberme input[type="checkbox"] {
+    position:relative;
+    top: -1.10rem;
+    appearance: none;
+    -webkit-appearance: none;
+    height: 13px;
+    width: 13px;
+    border: 2px #b08755 solid;
+    border-radius: 4px;
+    cursor: pointer;
+    align-items: center;
+}
+
+
+
+.rememberme input[type="checkbox"]:hover{
+    border: 2px #6c4a21 solid;
+}
+
+.rememberme label i {
+    position: absolute;
+    left: -1rem;
+    top: 0.1rem;
+    font-size: 13px;
+    display:none;
+}
+
+.rememberme label:hover{
+    color: #6c4a21;
+}
+
+.rememberme label{
+    text-align: left;
+    font-size: 15px; 
+    color: #b08755;
+    cursor: pointer;
+
+}
+
+.rememberme .forgot-password {
+    float: right;
+    font-size: 15px;
+    margin-top: -1rem; 
+    margin-bottom: 2rem;
+    text-decoration: none;
+    color: #b08755;
+}
+
+.rememberme .forgot-password:hover {
+    color: #6c4a21;
+    text-decoration: underline;
+    cursor: pointer;
+}
+
+
+.links{
+    display: flex;
+    justify-content: space-around;
+    padding: 0 rem;
+    margin-top: 0.9rem;
+    margin-bottom: 0.5rem;
+    font-weight:medium;
+    color:#6c4a21
+}
+.links a{
+    text-decoration: none;
+    color: #6c4a21;
+    font-weight: bold;
+}
+.links a:hover{
+    text-decoration: underline;
+}
