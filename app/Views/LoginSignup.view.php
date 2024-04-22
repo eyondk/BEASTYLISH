@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>BeAstylish</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
-    <link rel="stylesheet" href="<?=ROOT?>css/signUpInStyles.css">
+    <link rel="stylesheet" href="<?=ASSETS?>css/signUpInStyles.css">
    
 </head>
 <body>
@@ -73,6 +73,6 @@
         </div>
     </div>
 
-    <script src="<?=ROOT?>js/signUpInForm.js"></script>
+    <script src="<?=ASSETS?>js/signUpInForm.js"></script>
 </body>
 </html>

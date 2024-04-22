@@ -2,12 +2,19 @@
 if($_SERVER['SERVER_NAME'] == 'localhost'){
 
 
-    
+   
+
+
     define('DB_HOST', 'localhost');
     define('DB_NAME', 'IM');
     define('DB_USER', 'postgres');
     define('DB_PASSWORD', 'yron312');
-    define('ROOT', 'http://localhost/mvc/public');
+
+    $path = $_SERVER['REQUEST_SCHEME'] . "://" . $_SERVER['SERVER_NAME'] .$_SERVER['PHP_SELF'];
+    $path = str_replace("index.php", "", $path);
+
+    define('ROOT', $path);
+    define('ASSETS', $path. "assets/");
 
 }
 else{
@@ -15,7 +22,6 @@ else{
     define('DB_HOST', 'localhost');
     define('DB_NAME', 'IM');
     define('DB_USER', 'postgres');
-    define('DB_PASSWORD', 'yron312');
- 
+    
 }
 

@@ -23,6 +23,7 @@ class App{
         }
         
         else{
+
             $filename = "../app/controllers/".ucfirst($URL[0])."/".ucfirst($URL[0]).".php";
     
             if(file_exists($filename)){
@@ -34,8 +35,8 @@ class App{
             $filename = "../app/controllers/_404.php";
             require $filename;
             $this->controller = "_404";
+            }
         }
-    }
         
         $controller = new $this->controller;
         call_user_func_array([$controller,$this->method], []);
