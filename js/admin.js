@@ -1,7 +1,8 @@
-const body = document.querySelector("body"),
-      sidebar = document.querySelector(".sidebar"),
-      toggle = document.querySelector(".toggle");
+const body = document.querySelector('body'),
+      sidebar = body.querySelector('nav'),
+      toggle = body.querySelector(".toggle")
 
-      toggle.addEventListener("click", () =>{
-        sidebar.classList.toggle("close");
-      });
+    toggle.addEventListener("click" , () =>{
+    sidebar.classList.toggle("close");
+})
+
