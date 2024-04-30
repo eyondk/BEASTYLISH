@@ -14,22 +14,28 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Admin Page</title>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
     <link rel="stylesheet" href="css/admin.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+    <title>Admin Page</title>
 </head>
 <body>
-
     <nav class="sidebar close">
         <header>
-            <div class="img-text">
+            <div class="image-text">
+                <?php
+                    $select_profile = $conn->prepare("SELECT * FROM user WHERE USER_ID = ?");
+                    $select_profile->execute([$admin_id]);
+                    $fetch_profile = $select_profile->fetch(PDO::FETCH_ASSOC);
+
+                ?>
                 <span class="image">
-                    <img src="img/IMG_20221210_141334.jpg" alt="dp">
+                    <img src="uploaded_img/<?= $fetch_profile['IMAGE']?>" alt="dp">
                 </span>
 
                 <div class="text header-text">
-                    <span class="name">ADMIN NAME</span>
+                    <span class="name"><?= $fetch_profile['NAME']?></span>
                     <span class="admin">ADMIN</span>
                 </div>
             </div>
@@ -39,7 +45,7 @@
 
         <div class="menu-bar">
             <div class="menu">
-                <ul class="menu links">
+                <ul class="menu-links">
                     <li class="nav-link">
                         <a href="#">
                         <i class="fa fa-dashboard icon"></i>
@@ -67,20 +73,31 @@
                 </ul>
             </div>
 
-            <div class="botton-content">
-                    <li class="">
-                        <a href="logout.php">
-                        <i class='fas fa-sign-out icon'></i>                        
-                        <span class="text nav-text">LOG OUT</span>
-                        </a>
-                    </li>
+            <div class="bottom-content">
+                <li class="">
+                    <a href="#">
+                    <i class='fas fa-user icon'></i>
+                    <span class="text nav-text">ACCOUNT</span>
+                    </a>
+                </li>
+
+                <li class="logout">
+                    <a href="logout.php">
+                    <i class='fas fa-sign-out icon'></i>                        
+                    <span class="text nav-text">LOG OUT</span>
+                    </a>
+                </li>
+                
             </div>
         </div>
-    </nav> 
-    
+
+    </nav>
+
     <section class="home">
-        <div class="text">DASHBOARD</div>
+        <div class="text">Dashboard Sidebar</div>
     </section>
+
+    <script src="js/admin.js"></script>
+
 </body>
-<script src="js/admin.js"></script>
 </html>
