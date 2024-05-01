@@ -1,0 +1,135 @@
+*{
+    font-family: "Montserrat", sans-serif;
+    color:#6c4a21;
+}
+body{
+    background-color: #faf2e8;
+}
+
+.navbar{
+    box-sizing: border-box;
+    background-color: transparent;
+    border-bottom: 2px #6c4a21 solid;
+}
+
+.navbar-nav .nav-link{
+    width: 180px;
+    margin: 10px;
+    text-align: center;
+    color: #6c4a21;
+}
+
+#brandname {
+    width: 300px;
+    border-left: 2px solid #6c4a21; 
+    border-right: 2px solid #6c4a21; 
+}
+
+.newcoll{ 
+    font-weight: lighter;
+    font-size: 100px;
+    color:#6c4a21;
+    text-align: center;
+    
+}
+
+.line{
+    margin-top: -50px;
+    border-bottom: 2px #6c4a21 solid;
+}
+
+.uniqueness{
+    margin-top: 1rem;
+    width: 30%;
+    margin-left: 2rem;
+}
+
+.uniqueness h1{
+    font-weight:normal;
+    font-size: 50px;
+    margin-bottom: -5px;
+}
+.uniqueness p{
+    max-width: 80%;
+}
+.btnShop{
+    padding: 10px;
+    background-color: #b99b77 ;
+    color: #faf2e8;
+    font-weight: medium;
+    border-radius: 3px;
+    width: 50%; /* Make the button occupy all available width */
+    display: block; /* Ensure the button spans the entire width */
+    text-align: center; /* Center the text horizontally within the button */
+}
+
+.container{
+    margin-top: 2rem;
+    width: 59%; 
+    float: right;
+    padding-right: 3rem;
+}
+
+.row{
+    margin-top: 1rem;
+}
+
+.viewAll{
+    text-align: right;
+}
+
+.card{
+    border: 2px #6c4a21 solid;
+    border-radius: 0;
+    overflow: hidden; /* Hide any overflow content within the card */
+    height: 100%;
+    width: 280px;
+    background-color: transparent;
+    box-shadow: none;
+    margin-bottom: 30px; /* Add margin to create space between cards */
+}
+
+
+
+.card-img-top{
+    width: 100%; /* Ensure the image fills the width of the card */
+    height: 250px; /* Set a fixed height for the image */
+    object-fit: cover; /* Ensure the image maintains its aspect ratio and covers the entire space */
+    border-radius: 0;
+}
+
+.card-body {
+    padding: 10px; /* Add padding to the card body */
+    height: 100px; /* Set a fixed height for the card body */
+}
+
+.card-title,
+.card-price,
+.btn {
+    font-family: "Montserrat", sans-serif;
+    color:#6c4a21;
+    margin-bottom: 10px; /* Add margin to separate the elements within the card body */
+}
+
+.card-title{
+    font-size: medium;
+
+}
+.card-price{
+    margin-top: -8px;
+}
+
+.btn{
+    background-color: transparent;
+    border: 2px #6c4a21 solid;
+    border-radius: 3px;
+    width: 100%; /* Make the button occupy all available width */
+    display: block; /* Ensure the button spans the entire width */
+    text-align: center; /* Center the text horizontally within the button */
+}
+
+
+
+
+
+
