@@ -7,6 +7,13 @@
     box-sizing: border-box;
 }
 
+html{
+    font-size: 62.5%;
+    overflow-x: hidden;
+    scroll-behavior: smooth;
+    scroll-padding-top: 6.5rem;
+}
+
 body{
     min-height: 100vh;
     background-color:#faf2e8;
@@ -16,6 +23,17 @@ body{
 ::selection{
     background-color:#6c4a2191;
     color:#6c4a21;
+}
+
+*::placeholder{
+    color: #6c4a21;
+    font-size: 1.3rem;
+}
+*::-webkit-scrollbar{
+    background-color: transparent;
+}
+*::-webkit-scrollbar-thumb{
+    background-color: transparent;
 }
 
 .sidebar{
@@ -217,19 +235,155 @@ header .image-text .admin{
     position: absolute;
     top: 0;
     top: 0;
-    left: 250px;
+    left: 280px;
+    right: 2rem;
     height: 100vh;
-    width: calc(100% - 250px);
+    width: calc(100% - 280px);
     transition: all 0.3s ease;
-}
-.home .text{
-    font-size: 30px;
-    font-weight: 500;
-    padding: 40px 50px;    
 }
 
 .sidebar.close ~ .home{
-    left: 78px;
+    left: 100px;
     height: 100vh;
-    width: calc(100% - 78px);
+    width: calc(100% - 100px);
+}
+
+.home .text{
+    font-size: 55px;
+    font-weight: 400;
+    padding: 40px 30px; 
+    color: #6c4a21;
+       
+}
+
+.home .line{
+    width: 98%;
+    margin-top: -1.5rem;
+    border-bottom: 2px solid #6c4a21;
+}
+
+.flex-btn{
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1.5rem;
+}
+
+.flex-btn > *{
+    flex: 1;
+}
+
+input{
+    color: #6c4a21;
+}
+
+input[type="file"]::file-selector-button {
+    border: 2px solid #6c4a21;
+    padding: 0.1em 0.2em;
+    border-radius: 2px;
+    background-color: transparent;
+    transition: 1s;
+    text-transform: uppercase;
+    color: #6c4a21;
+    display: none;
+}
+
+input[type="file"]::file-selector-button:hover {
+    background-color: #6c4a21;
+    color: #faf2e8;
+}
+
+.update_profile form i{
+    color: #6c4a21;
+    font-size: 1.7rem;
+}
+
+.update_profile form .inputBox{
+    text-align: left;
+}
+
+.update_profile form .inputBox span{
+    display: block;
+    padding-top: 1rem;
+    padding-bottom: 0.1rem;
+    font-size: 1.3rem;
+    font-weight: 450;
+    color: #6c4a21;
+}
+
+.update_profile form{
+    max-width: 65rem;
+    margin: 3rem auto;
+    border:2px solid #6c4a21;
+    border-radius: 2px;
+    padding: 2rem;
+    text-align: center;
+    background-color: transparent;
+
+}
+
+form img{
+    width: 200px;
+    height: 200px;
+    border-radius: 4px;
+    border: 2px solid #6c4a21;
+    margin-bottom: 2rem;
+    object-fit: cover;
+}
+.update_profile form .inputBox .box{
+    width: 100%;
+    padding: 1.2rem 1.4rem;
+    font-size: 1.3rem;
+    color: #6c4a21;
+    border: 2px solid #6c4a21;
+    background-color: transparent;
+}
+
+.btn, .option-btn{
+    display: block;
+    width: 100%;
+    margin-top: 1rem;
+    border-radius: 2px;
+    font-size: 1.5rem;
+    padding: 1.2rem 1.4rem;
+    cursor: pointer;
+    text-decoration: none;
+    background-color: transparent;
+    transition: all 0.3s ease;
+}
+
+.btn{
+    background-color: #6c4a2165;
+    border:#6c4a2165;
+    color: #6c4a21;
+    font-weight: 500;
+}
+
+.option-btn{
+    color: #6c4a2182;
+    border: 2px solid  #6c4a2182;
+    font-weight: 500;
+}
+
+.btn:hover{
+    background-color: #6c4a21;
+    color: #faf2e8;
+}
+
+.option-btn:hover{
+    color: #6c4a21;
+    border: 2px solid #6c4a21;
+    font-weight: 550;
+}
+
+/* media quries */
+@media(max-width:991px){
+    html{
+        font-size: 55%;
+    }
+}
+
+@media(max-width:450px){
+    html{
+        font-size: 50%;
+    }
 }
