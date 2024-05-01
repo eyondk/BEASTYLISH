@@ -7,7 +7,7 @@ if($_SERVER['SERVER_NAME'] == 'localhost')
     define('DB_NAME', 'CC214A');
     define('DB_HOST', 'localhost');
     define('DB_USER', 'postgres');
-    define('DB_PASSWORD', 'addyimba123desu');
+    define('DB_PASSWORD', '');
     //define('DBDRIVER', ''); /** incase u want to switch db like postgre**/
 
     define('ROOT', 'http://localhost/mvc/public');
