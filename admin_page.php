@@ -11,3 +11,7 @@
 ?>
 
 <?php include'admin_header.php';?>
+
+<section class="home">
+
+</section>
