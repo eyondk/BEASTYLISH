@@ -262,35 +262,27 @@ header .image-text .admin{
     border-bottom: 2px solid #6c4a21;
 }
 
-.flex-btn{
+.update_profile form .flex{
     display: flex;
-    flex-wrap: wrap;
     gap: 1.5rem;
+    justify-content: space-between;
+    flex-wrap: wrap;
 }
 
-.flex-btn > *{
+.flex> *{
     flex: 1;
 }
+
+
 
 input{
     color: #6c4a21;
 }
 
 input[type="file"]::file-selector-button {
-    border: 2px solid #6c4a21;
-    padding: 0.1em 0.2em;
-    border-radius: 2px;
-    background-color: transparent;
-    transition: 1s;
-    text-transform: uppercase;
-    color: #6c4a21;
     display: none;
 }
 
-input[type="file"]::file-selector-button:hover {
-    background-color: #6c4a21;
-    color: #faf2e8;
-}
 
 .update_profile form i{
     color: #6c4a21;
@@ -328,6 +320,7 @@ form img{
     border: 2px solid #6c4a21;
     margin-bottom: 2rem;
     object-fit: cover;
+    align-content: center;
 }
 .update_profile form .inputBox .box{
     width: 100%;
@@ -380,10 +373,49 @@ form img{
     html{
         font-size: 55%;
     }
+    .home .text{
+        font-size: 40px;
+        padding: 4rem 2rem;
+    }
+
+    .update_profile form .flex .inputBox{
+        width: 100%;
+    }
+
+
+
 }
 
-@media(max-width:450px){
+@media screen and (max-width:450px){
     html{
         font-size: 50%;
     }
+
+    .home .text{
+        font-size: 35px;
+        padding: 2rem 2rem;
+    }
+
+    .flex{
+        flex-flow: column;
+        gap: 0;
+        padding-top: 0.5rem;
+    }
+    .update_profile form img {
+        width: calc(100% - 20px); 
+    }
+
+    .update_profile form{
+        margin-right: 1.5rem;
+    }
+
+}
+
+@media screen and (max-width: 768px) {
+
+    .update_profile form{
+        margin-left: auto;
+        margin-right: 1.5rem
+    }
+    
 }
