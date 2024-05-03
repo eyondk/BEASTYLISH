@@ -3,8 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="shortcut icon" href="img/Beastylish-favicon.png" type="image/x-icon">
-    <link rel="stylesheet" href="css/header.css">    
+    <link rel="stylesheet" href="css/header.css">  
+    <link rel="shortcut icon" href="img/Beastylish-favicon.png" type="image/x-icon">  
 </head>
 <body>
     <nav>
@@ -36,7 +36,6 @@
                 menuList.style.maxHeight = "0px";
             }
         }
-        
     </script>
     <script src="https://kit.fontawesome.com/f8e1a90484.js" crossorigin="anonymous"></script>
 </body>
