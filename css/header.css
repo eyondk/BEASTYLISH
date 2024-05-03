@@ -1,0 +1,119 @@
+@import url('https://fonts.googleapis.com/css2?family=Dancing+Script:wght@400..700&family=Montserrat:ital,wght@0,100..900;1,100..900&family=Style+Script&display=swap');
+    
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: "Montserrat", sans-serif;
+}
+
+html, body {
+    font-size: 62.5%;
+    width: 100%;
+    background-color:#faf2e8;
+}
+
+nav {
+    padding: 10px 30px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    background: transparent;
+    position: relative;
+    height: 70px;
+    border-bottom: 2px solid #6c4a21;
+}
+
+.logo {
+    color: #6c4a21;
+    border-right:2px solid #6c4a21;
+    border-left:2px solid #6c4a21;
+    padding: 0 3rem;
+}
+
+nav ul li .link:hover{
+    font-weight: 550;
+}
+
+nav ul {
+    display: flex;
+    gap: 30px;
+    justify-content: space-between; /* Updated to justify content */
+    align-items: center;
+    flex: 1; /* Fill remaining space */
+}
+
+nav ul li {
+    list-style-type: none;
+}
+
+nav ul li a {
+    font-size: 18px;
+    font-weight: 450;
+    text-transform: uppercase;
+    color: #6c4a21;
+    text-decoration: none;
+    position: relative;
+    z-index: 1;
+    display: inline-block;
+    text-align: center;
+    transition: all 0.3s ease;
+}
+
+.menu-icon {
+    display: none;
+}
+
+.menu-icon i {
+    color: #6c4a21;
+    font-size: 30px;
+}
+
+@media (max-width: 991px){
+	html{
+        font-size: 55%;
+    }
+}
+
+@media (max-width:780px) {
+    html{
+		font-size: 35%;
+	}
+
+    nav {
+        border-bottom: none;
+    }
+
+    nav ul {
+        position: absolute;
+        top: 70px;
+        left: 0;
+        right: 0;
+        flex-direction: column;
+        text-align: center;
+        background: transparent;
+        gap: 0;
+        overflow: hidden;
+        border-bottom: 2px solid #6c4a21;
+        justify-content: center; /* Center align the links */
+    }
+
+    nav ul li  .logo {
+        display: none;
+        padding: 0px;
+    }
+
+    nav ul li .link{
+        padding: 20px;
+        padding-top: 0;
+    }
+
+    .menu-icon {
+        display: block;
+    }
+
+    #menuList {
+        transition: all 0.5s ease;
+    }
+
+}
