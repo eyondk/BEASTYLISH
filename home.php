@@ -19,9 +19,7 @@
 </head>
 <body>
 
-<h1>HOME PAGE</h1>
-
-<a href="logout.php">logout</a>
+<?php include("home_header.inc.php");?>
     
 </body>
 </html>
