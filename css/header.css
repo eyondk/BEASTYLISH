@@ -28,19 +28,25 @@ nav {
     color: #6c4a21;
     border-right:2px solid #6c4a21;
     border-left:2px solid #6c4a21;
-    padding: 0 3rem;
+    padding: 0 10rem;
+}
+
+nav ul li .link{
+    transition: all 0.3s ease;
 }
 
 nav ul li .link:hover{
     font-weight: 550;
+    transform: scale(1.1);
 }
+
 
 nav ul {
     display: flex;
     gap: 30px;
-    justify-content: space-between; /* Updated to justify content */
+    justify-content: space-between; 
     align-items: center;
-    flex: 1; /* Fill remaining space */
+    flex: 1;
 }
 
 nav ul li {
@@ -73,6 +79,7 @@ nav ul li a {
 	html{
         font-size: 55%;
     }
+
 }
 
 @media (max-width:780px) {
@@ -91,11 +98,12 @@ nav ul li a {
         right: 0;
         flex-direction: column;
         text-align: center;
-        background: transparent;
+        background: #faf2e8e1;
         gap: 0;
         overflow: hidden;
         border-bottom: 2px solid #6c4a21;
-        justify-content: center; /* Center align the links */
+        justify-content: center; 
+        z-index: 1000; 
     }
 
     nav ul li  .logo {
@@ -108,12 +116,15 @@ nav ul li a {
         padding-top: 0;
     }
 
-    .menu-icon {
+    .menu-icon{
         display: block;
-    }
+        font-size: 15px;
+    }  
 
     #menuList {
         transition: all 0.5s ease;
     }
 
 }
+
+
