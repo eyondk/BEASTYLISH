@@ -1,0 +1,405 @@
+@import url('https://fonts.googleapis.com/css2?family=Dancing+Script:wght@400..700&family=Montserrat:ital,wght@0,100..900;1,100..900&family=Style+Script&display=swap');
+
+* {
+    color: #6c4a21;
+}
+
+html {
+    font-size: 62.5%;
+}
+
+*::selection{
+    background-color: #6c4a21;
+    color: #faf2e8;
+}
+*::-webkit-scrollbar{
+    background-color: transparent;
+}
+*::-webkit-scrollbar-thumb{
+    background-color: #b79c7b;
+}
+
+*::placeholder{
+    color: #6c4a21;
+}
+
+.account {
+    display: flex; 
+}
+
+.account-sidebar{
+    padding-top: 7rem;
+    padding-left: 3rem;
+    width: 20%;
+    height: 90.5vh; 
+    border-right: 2px solid #6c4a21;
+}
+
+.account-sidebar .profile{
+    display: flex; 
+    align-items: center; 
+    flex-direction: row; 
+}
+
+.account-sidebar img{
+    border: 2px solid #6c4a21;
+    border-radius: 5px;
+    height: 100px;
+    width: 100px;
+    margin-right: 20px; 
+}
+
+.account-sidebar p{
+    font-size: 18px;
+    width: 90px;
+    margin: 0; 
+    text-transform: uppercase;
+    font-weight: 450;
+}
+
+.account-sidebar ul{
+    padding-top: 2rem;
+    text-align: center;
+    align-items: center;
+}
+.account-sidebar ul a{
+    display: flex;
+    text-align: center;
+    margin-top: 3rem;
+    margin-right: 1rem;
+    padding-bottom: 1rem;
+    text-decoration: none;
+    text-transform: uppercase;
+    font-size: 18px;
+}
+
+.account-sidebar ul a .fas,
+.account-sidebar ul a .far {
+    margin-right: 1rem;
+    color: #6c4a21cf;
+    font-size: 21px;
+    transition: all 0.3s ease;
+}
+
+.account-sidebar ul a:hover{
+    border-bottom: 2px solid #6c4a21;
+}
+
+
+.acc_info, .changePass, .orders{
+    display: flex;
+    flex-direction: row;
+    font-size: 20px;
+    text-align: center;
+    flex: 1; 
+    padding: 7rem 3rem;
+}
+
+.acc_info form{
+    max-width: 65rem;
+    margin: 5rem;
+    margin: 1rem auto;
+    border:2px solid #6c4a21;
+    border-radius: 2px;
+    padding: 2rem;
+    text-align: center;
+    background-color: transparent;
+    max-height: 63vh;
+}
+
+.changePass form{
+    width: 70rem;
+    margin: 5rem;
+    margin: 1rem auto;
+    border:2px solid #6c4a21;
+    border-radius: 2px;
+    padding: 2rem;
+    text-align: center;
+    background-color: transparent;
+    max-height: 44vh;
+}
+
+input{
+    color: #6c4a21;
+}
+
+input[type="file"]::file-selector-button {
+    display: none;
+}
+
+
+form i{
+    color: #6c4a21;
+    font-size: 1.7rem;
+}
+
+form .inputBox{
+    text-align: left;
+}
+
+.inputBox span{
+    display: block;
+    padding-top: 1rem;
+    padding-bottom: 0.1rem;
+    font-size: 1.3rem;
+    font-weight: 450;
+    color: #6c4a21;
+}
+
+.acc_info form .flex{
+    display: flex;
+    gap: 1.5rem;
+    justify-content: space-between;
+    flex-wrap: wrap;
+}
+
+
+.flex> *{
+    flex: 1;
+}
+
+
+
+form .inputBox .box{
+    width: 100%;
+    padding: 1.2rem 1.4rem;
+    font-size: 1.3rem;
+    color: #6c4a21;
+    border: 2px solid #6c4a21;
+    background-color: transparent;
+}
+
+.btn, .option-btn{
+    width: 100%;
+    display: block;
+    margin-top: 1rem;
+    border-radius: 2px;
+    font-size: 1.5rem;
+    padding: 1.2rem 1.4rem;
+    cursor: pointer;
+    text-decoration: none;
+    background-color: transparent;
+    transition: all 0.3s ease;
+}
+
+.btn{
+    background-color: #6c4a2165;
+    border:#6c4a2165;
+    color: #6c4a21;
+    font-weight: 500;
+}
+
+.option-btn{
+    color: #6c4a2182;
+    border: 2px solid  #6c4a2182;
+    font-weight: 500;
+}
+
+.btn:hover{
+    background-color: #6c4a21;
+    color: #faf2e8;
+}
+
+.option-btn:hover{
+    color: #6c4a21;
+    border: 2px solid #6c4a21;
+    font-weight: 550;
+}
+
+.orders .order-container{
+    width: 110rem;
+    margin: 5rem;
+    margin: 1rem auto;
+    border:2px solid #6c4a21;
+    border-radius: 2px;
+    padding: 2rem 2rem;
+    text-align: left;
+    background-color: transparent;
+    max-height: 44vh;
+}
+
+.orders .order-container p{
+    font-size: 30px;
+    font-weight: 450;
+
+}
+
+/* media quries */
+@media(max-width:1200px){
+    html{
+        font-size: 55%;
+    }
+
+    .account-sidebar .profile{
+        display: flex;
+        align-items: center; 
+        justify-content: center;
+    }
+    .account-sidebar .profile img{
+        width: 80px;
+        height: 80px;
+    }
+
+
+    form .flex .inputBox{
+        width: 100%;
+    }
+
+    .account-sidebar{
+        height: 95vh;
+        width: 22%;  
+    }
+    
+
+
+    .account-sidebar ul a:hover{
+        border-bottom: 2px solid #6c4a21;
+    }
+
+    .account-sidebar ul a span {
+        font-size: 18px; 
+    }
+
+
+    .acc_info form{
+        align-self: center;
+        max-height: 66vh;
+    }
+
+    .changePass form{
+        align-self: center;
+        max-height: 48vh;
+        margin-top: -5rem;
+    }
+
+
+
+}
+
+@media screen and (max-width:991px) {
+        
+    .account-sidebar .profile{
+        display: flex;
+        align-items: center; 
+        justify-content: center;
+    }
+    .account-sidebar .profile img{
+        width: 80px;
+        height: 80px;
+    }
+
+
+    .account-sidebar .profile .name{
+        display: none;
+    }
+
+
+    .account-sidebar ul a {
+        display: flex;
+        align-items: center; 
+        justify-content: center;  
+        margin-top: 1rem; 
+    }
+
+    .account-sidebar ul a .fas,
+    .account-sidebar ul a .far {
+        margin-right: 0.5rem;
+        margin-top: 4rem;
+        display: block;
+    }
+
+    .account-sidebar ul a span {
+        font-size: 0; 
+    }
+
+
+    .acc_info form{
+        align-self: center;
+    }
+
+    .changePass form{
+        align-self: center;
+        max-height: 45vh;
+
+    }
+}
+@media screen and (max-width:450px){
+    html{
+        font-size: 50%;
+    }
+
+
+    .flex{
+        flex-flow: column;
+        gap: 0;
+        padding-top: 0.5rem;
+    }
+    .acc_info form img {
+        width: calc(100% - 20px); 
+    }
+
+    .acc_info form{
+        margin-top: -2rem;
+        align-self: center;
+    }
+
+    .changePass form{
+        margin-top: -5rem;
+    }
+
+}
+
+@media screen and (max-width: 768px) {    
+
+    .account-sidebar{
+        height: 95vh;
+        width: 22%;  
+    }
+    
+    .account-sidebar .profile{
+        display: flex;
+        align-items: center; 
+        justify-content: center;
+    }
+    .account-sidebar .profile img{
+        width: 50px;
+        height: 50px;
+    }
+
+
+    .account-sidebar .profile .name{
+        display: none;
+    }
+
+
+    .account-sidebar ul a {
+        display: flex;
+        align-items: center; 
+        justify-content: center;  
+        margin-top: 1rem; 
+    }
+
+    .account-sidebar ul a .fas,
+    .account-sidebar ul a .far {
+        margin-right: 0.5rem;
+        margin-top: 4rem;
+        display: block;
+    }
+
+    .account-sidebar ul a span {
+        font-size: 0; 
+    }
+
+
+    .acc_info form{
+        align-self: center;
+        max-height: none; 
+        padding: 2rem; 
+    }
+
+    .changePass form{
+        width: 40rem;
+        max-height: 30vh ;
+    }
+
+}
