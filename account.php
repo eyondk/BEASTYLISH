@@ -20,7 +20,7 @@
     <link rel="stylesheet" href="css/account.css">
 </head>
 <body>
-    <?php require("user_header.inc.php")?>
+    <?php require("home_header.inc.php")?>
 
     <section class="account">
         <div class="account-sidebar">
