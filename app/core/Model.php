@@ -1,8 +1,6 @@
 <?php
-class Model {
+class Model extends Database {
     
-    use Database;
-
     public function test()
     {
             $stmt = "SELECT * FROM vendor";
@@ -12,7 +10,7 @@ class Model {
            show($results);
     }
 
-    use Database;
+    
 
 	protected $limit 		= 10;
 	protected $offset 		= 0;

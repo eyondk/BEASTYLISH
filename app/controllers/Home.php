@@ -7,8 +7,6 @@ class Home extends Controller
     {
 
        
-        $model = new Model;
-        $model -> test();
 
         echo "This is the home controller";
         $this->view('home');

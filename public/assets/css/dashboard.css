@@ -1,0 +1,59 @@
+.main{
+    position: relative;
+    left: 10px;
+    width: calc(100% - 260px);
+    min-height: calc(100vh - 60px);
+    
+   
+}
+
+.cards{
+    width: 100%;
+    padding: 35px 20px;
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    grid-gap: 50px;
+}
+
+.cards .card{
+    padding: 30px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    background: #eac5a1;
+    border-radius: 10px;
+    box-shadow: 0 7px 25px 0 rgba(0, 0, 0, 0.08);
+
+}
+.number {
+    font-size: 35px;
+    font-weight: 500;
+    color: #299b63;
+}
+
+.card-name{
+    color: #888;
+    font-weight: 600;
+}
+
+.icon-box i{
+    font-size: 45px;
+    color: #299B63;
+}
+
+
+.charts{
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    grid-gap: 100px;
+    width: 100%;
+    padding: 30px;
+    padding-top: 10;
+    padding-left: 30;
+}
+.chart{
+    background: #fff;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 7px 25px rgba(0, 0, 0, 0.08);
+}
