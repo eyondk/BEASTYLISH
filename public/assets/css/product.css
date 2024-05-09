@@ -1,8 +1,8 @@
-@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;300;400;500;600&display=swap'); */
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;300;400;500;600&display=swap');
 
 :root{
-   --green:hsl(145, 63%, 42%);
-   --black:#333; 
+   --green:#27ae60;
+   --black:#333;
    --white:#fff;
    --bg-color:#eee;
    --box-shadow:0 .5rem 1rem rgba(0,0,0,.1);
@@ -23,11 +23,26 @@ html{
    overflow-x: hidden;
 }
 
-
-
 .add-btn{
+    display: block;
+    width: 100%;
+    cursor: pointer;
+    border-radius: .5rem;
+    margin-top: 1rem;
+    font-size: 1.7rem;
+    padding:1rem 3rem;
+    background: var(--green);
+    color:var(--white);
+    text-align: center;
+ }
+ 
+ .add-btn:hover{
+    background: var(--black);
+ }
+
+.btn{
    display: block;
-   width: 100%;
+   width: 90%;
    cursor: pointer;
    border-radius: .5rem;
    margin-top: 1rem;
@@ -38,26 +53,23 @@ html{
    text-align: center;
 }
 
-.add-btn:hover{
+.btn:hover{
    background: var(--black);
 }
 
-.btns{
-   display: absolute;
-   width: 20%;
-   cursor: pointer;
-   border-radius: .5rem;
-   margin-top: 1rem;
-   font-size: 1.7rem;
-   padding:1rem 3rem;
-   background: var(--green);
-   color:var(--white);
-   text-align: center;
+.search {
+    width: 20%; 
+    padding: 0.5rem; 
+    border: 1px solid #ccc; 
+    border-radius: 5px; 
+    margin-bottom: 1rem; 
 }
 
-.btns:hover{
-   background: var(--black);
+.search:focus {
+    outline: none; 
+    border-color: dodgerblue;
 }
+
 .message{
    display: block;
    background: var(--bg-color);
@@ -72,6 +84,38 @@ html{
    max-width: 1200px;
    padding:2rem;
    margin:0 auto;
+}
+
+.container1 {
+    position: relative;
+    max-width: 1000px;
+    padding: 2rem;
+    margin: 0 auto;
+    border-right: 2px solid #6c4a21 ;
+    left: -370px; /* Adjust the value as needed */
+    top: -20px;
+    height: 900px;
+}
+
+/* .whole-container {
+    position: relative;
+    max-width: 350px;
+    height: 900px;
+    padding: 2rem;
+    margin: 0 auto;
+    border-right: 2px solid #6c4a21 ;
+    top: -20px;
+    
+}    */
+
+.categ-container {
+    position: relative;
+    max-width: 500px;
+    padding: 2rem;
+    margin: 0 auto;
+    right: -500px; /* Adjust the value as needed */
+    top: -870px;
+    
 }
 
 .admin-product-form-container.centered{
@@ -109,13 +153,18 @@ html{
 }
 
 .product-display{
+   position: relative;
    margin:2rem 0;
-   overflow: hidden !important;
+   max-height: 500px;
+   overflow: auto;
+   
 }
 
 .product-display .product-display-table{
-   width: 100%;
+   position: relative;
+   width: 90%;
    text-align: center;
+   
 }
 
 .product-display .product-display-table thead{

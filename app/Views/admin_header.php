@@ -53,7 +53,7 @@
                         </a>
                     </li>
                     <li class="nav-link">
-                        <a href="#">
+                        <a href="<?=ROOT?>Orders">
                         <i class='fas fa-clipboard-list icon'></i>
                         <span class="text nav-text">ORDERS</span>
                         </a>

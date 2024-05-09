@@ -13,20 +13,21 @@ if(isset($_GET['delete'])){
 }
 ?>
 
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
-    <link rel="stylesheet" href="<?=ASSETS?>css/product.css">
+    <link rel="stylesheet" href="<?=ASSETS?>css/orders.css">
     <title>Document</title>
 </head>
 <body>
     <?php include 'admin_header.php';?>
 
     <section class="home">
-    <div class="text">PRODUCTS</div>
+    <div class="text">ORDERS</div>
     <hr id = "line" />
     <div class = "whole-container">
     
@@ -62,43 +63,9 @@ if(isset($_GET['delete'])){
 
       </table>
    </div>
-   <a href="<?=ROOT?>AddProduct" class="btn">Add Product</a>
         </div>
     </div>
 </div>
-
-
-<!-- Category -->
-
-<div class = "categ-container">
-    <div class="product-display">
-      <table class="product-display-table">
-         <thead>
-         <tr>
-            <th>CATEGORY NAME</th>
-           
-            <th>action</th>
-         </tr>
-         </thead>
-        <?php while ($row = $stmt->fetch(PDO::FETCH_ASSOC)) { ?>
-        <tr>
-            
-            <td><?php echo $row['prod_name']; ?></td>
-            
-            <td>
-                <a href="<?=ROOT?>AddProduct?edit=<?php echo $row['prod_id']; ?>" class="btn"> <i class="fas fa-edit"></i> edit </a>
-                <a href="<?=ROOT?>Products/?delete=<?php echo $row['prod_id']; ?>" class="btn"> <i class="fas fa-trash"></i> delete </a>
-            </td>
-        </tr>
-    <?php } ?>
-
-      </table>
-   </div>
-   <a href="<?=ROOT?>AddProduct" class="btn">Add Category</a>
-</div>
-
-</div>
-
 
 </section>
 </body>

@@ -12,7 +12,6 @@
 
 <body>
     <?php include 'admin_header.php';?>
-
     <section class="home">
         <div class="text">DASHBOARD</div>
         <hr id = "line" />
