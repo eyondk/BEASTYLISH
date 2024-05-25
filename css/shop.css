@@ -1,0 +1,425 @@
+.flex{
+    display: flex; 
+}
+
+*::-webkit-scrollbar-thumb{ 
+    background-color: #b79c7b; 
+    border-radius: 5px;
+    height: 10px;
+}
+
+::-webkit-scrollbar {
+    width: 8px;
+    
+}
+
+::-webkit-scrollbar-track {
+    background: #b79c7b68; 
+}
+
+
+.shopCat{
+    padding-top: 2rem;
+    padding-left: 3rem;
+    left: 0;
+    width: 15%;
+    float: left; /* Ensure it sits to the left of the main content */
+    border-right: 2px solid #6c4a21;
+}
+
+.shopCat ul{
+    height: 100%;
+    width: 100%;
+    list-style: none;
+}
+
+.shopCat ul ul{
+    display: none;
+    z-index: 1;
+    color: #6c4a21;
+    left: 0; /* Ensure dropdowns start from the left */
+    width: 100%; /* Set full width */
+}
+
+.shopCat ul ul li {
+    width: 100%; /* Make dropdown items full width */
+    float: none;
+    text-align: left;
+
+}
+
+.shopCat ul ul a {
+    margin-bottom: 0.5rem;
+    padding-top: 0.3rem;
+    padding-bottom: 0.3rem;
+    display: flex;
+    text-align: center;
+    color: #6c4a21;
+    text-decoration: none;
+    text-transform: uppercase;
+    font-size: 18px;
+    border: none;
+}
+
+.shopCat ul a{
+    display: flex;
+    text-align: left;
+    margin-left: -2.9rem;
+    padding-bottom: 1.5rem;
+    padding-top: 1.5rem;
+    padding-left: 4rem;
+    text-decoration: none;
+    text-transform: uppercase;
+    font-size: 18px;
+    color: #6c4a21;
+    align-items: center; /* Center items vertically */
+    transition: all 0.3s ease;
+    border-top: 2px solid #6c4a21;
+}
+
+.shopCat ul .shopAll, .shopCat ul .shopNew, .shopCat ul .shopSale{
+    border-top: none;
+    padding-top: 0;
+}
+
+.shopCat ul .shopAll{
+    font-weight: 500;
+}
+
+.shopCat ul ul li .first-sub{
+    border-top: 2px solid #6c4a21;
+}
+
+.shopCat ul .hand{
+    border-bottom:2px solid #6c4a21;
+}
+
+.shopCat ul a:hover{
+    font-weight: 500;
+}
+.shopCat ul ul.show {
+    display: block !important; /* Override the initial display: none */
+}
+
+.fa-chevron-down {
+    margin-left: 1rem; /* Push chevron to the end of the container */
+    font-size: 16px;
+    color: #6c4a21b5;
+    display: flex;
+    align-self: center; /* Center chevron vertically */
+}
+
+.fa-chevron-down:hover, .fa-chevron-down:focus{
+    color: #6c4a21;
+    transform: scale(1.1);
+}
+
+.fa-chevron-down.flip {
+    transform: scaleY(-1);
+    transition: transform 0.3s ease;
+}
+
+/* sidebar category end */
+
+.product-display{
+    display: flex;
+    flex-direction: column;
+    font-size: 20px;
+    text-align: center;
+    flex: 1; 
+    padding: 5rem 3rem;
+}
+
+.searchbar{
+    display: flex;
+    justify-content: left;
+}
+
+.searchbar .search{
+    padding: 0.7rem 1rem;
+    border: none;
+    background-color:#6c4a21;
+    color: #faf2e8;
+    border-radius: 2px;
+    margin-right: 0.5rem;
+}
+
+.searchbar .searchInput::placeholder{
+    color: #6c4a21;
+    padding-left: 0.5rem;
+}
+
+.searchbar .searchInput{
+    background-color: transparent;
+    color: #6c4a21;
+    border: 2px solid #6c4a21;
+    height: 30px;
+    width: 300px;
+    padding-left: 0.5rem;
+    font-size: 15px;
+}
+
+input[type="search"]::-webkit-search-cancel-button {
+    -webkit-appearance: none; 
+}
+
+
+/* search bar end */
+
+.product-card {
+    position: relative;
+    text-align: left;
+    max-width: 300px;
+    width: 100%;
+    height: 384px;
+    padding: 10px 10px 15px 10px;
+    background:transparent;
+    border: 2px solid #6c4a21;
+    z-index: 3;
+    margin-top: 3rem;
+    margin-right: 1rem;
+    overflow: hidden;
+    transition: all 0.3s ease;
+    cursor: pointer;
+}
+
+.product-gallery{
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    gap: 0.5rem; /* Adjust the gap between the cards as needed */
+    padding: 2px; /* Optional: add some padding around the grid */
+}
+
+.product-card:hover, .product-card:focus {
+    box-shadow: 0 0 10px #6c4a21; /* Use pixel values for a clear shadow */
+}
+
+.sale-details{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0.2rem;
+    margin-bottom: -4.5rem;
+}
+
+.sale-details .sale{
+    height: 50px;
+    width: 50px;
+    color: #faf2e8;
+    font-size: 20px;
+    background-color: #cc852f;
+    padding: 1rem 1rem;
+    text-align: center;
+    border-radius: 50%;
+    transition: all 0.3s ease;
+    z-index: 9;
+
+}
+
+.sale-details .sale:hover{
+    transform: scale(1.1)
+}
+    
+.product-card .main-images{
+    position: relative;
+    height: 250px;
+    width: 300px;
+    box-sizing: border-box; /* Include padding and border in the element's total width and height */
+}
+
+.product-card .main-images .product-img{
+    position: absolute;
+    width: 100%;
+    height: 280px;
+    margin-left: -10px; /* Adjust to align with the border */
+    top: -45px;
+    z-index: -1;
+    object-fit: cover; /* Ensure the image covers the entire area */
+    display: block;
+}
+
+.product-card .details .product-name{
+    font-size: 18px;
+    font-weight: 500;
+    margin-bottom: -0.5rem;
+    text-transform: uppercase;
+    color: #6c4a21;
+    display: flex;
+    justify-self: left;
+}
+
+.product-card .size-price .price .price-num{
+    margin-top: -1rem;
+    font-size: 15px;
+    font-weight: 500;
+    color: #6c4a21;
+}
+
+.product-card .size-price .price .origprice-num{
+    font-size: 20px;
+    color: #6c4a21;
+}
+
+.product-card .button{
+    position: relative;
+    height: 45px;
+    width: 100%;
+    margin-top: 10px;
+    overflow: hidden;
+    display: flex;
+    flex-direction: row;
+}
+
+.product-card .button button{
+    position: relative;
+    height: 100%;
+    outline: none;
+    font-size: 12px;
+    font-weight: 400;
+    text-transform: uppercase;
+    cursor: pointer;
+}
+
+.buy-btn{
+    width: 50%;
+    border: none;
+    color: #faf2e8;
+    background-color: #6c4a21;
+    transition: color 0.3s ease;
+}
+
+.add-btn{
+    width: 50%;
+    padding: 0.5rem 1rem;
+    border: 2px solid #6c4a21;
+    color: #6c4a21;
+    background-color: transparent;
+    transition: all 0.3s ease;
+}
+
+
+.buy-btn:hover{
+    background-color: #c77a1cc1;
+}
+
+.add-btn:hover{
+    border: none;
+    background-color: #b67c3799;
+    color: #faf2e8;
+}
+
+
+
+/* product details using modal */
+/* The Modal (background) */
+.modal {
+    display: none; /* Hidden by default */
+    position: fixed; /* Stay in place */
+    z-index: 80; /* Sit on top */
+    padding-top: 100px; /* Location of the box */
+    left: 0;
+    top: 0;
+    width: 100%; /* Full width */
+    height: 100%; /* Full height */
+    overflow: auto; /* Enable scroll if needed */
+    background-color: rgb(0,0,0); /* Fallback color */
+    background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
+  }
+  
+/* Modal Content */
+.modal-content {
+background-color: transparent;
+margin: auto;
+padding: 20px;
+border: none;
+width: 30%;
+display: flex;
+justify-content: center;
+}
+
+.modal-content .product-card{
+background-color:#faf2e8;
+height: 500px;
+}
+
+.modal-content .product-card:hover, .modal-content .product-card:focus{
+box-shadow: none;
+}
+.modal-content .main-images{
+height: 250px;
+}
+
+.modal-content .product-img{
+height: 150px;
+}
+.modal-content .prod-det{
+color: #6c4a21;
+font-size: 13px;
+margin-top: 0.4rem;
+margin-bottom: 0.5rem;
+width: 100%;
+}
+
+.modal-content .price .price-num {
+    font-size: 25px !important;
+}
+ 
+.content{
+    margin: 10px 0;
+}
+.content .name{
+    font-size: 15px;
+    text-transform: uppercase;
+    font-weight: 500;
+    color: #6c4a21;
+}
+.content .size-value{
+    width: 50%;
+    display: flex;
+    margin: 2px;
+    margin-right:  15px;
+    justify-content: space-between;
+}
+.size-value span{
+    display: block;
+    height: 28px;
+    width: 28px;
+    text-align: center;
+    line-height: 28px;
+    border-radius: 50%;
+    font-size: 15px;
+    font-weight: 500;
+    cursor: pointer;
+    color: #6c4a21;
+}
+.size-value span.active{
+    background:  #6c4a21;
+    color: #fff;
+}
+  
+  
+  /* The Close Button */
+  .close {
+    color: #ca9453;
+    float: right;
+    font-size: 30px;
+    font-weight: bold;
+  }
+  
+  .close:hover,
+  .close:focus {
+    color: #6c4a21;
+    text-decoration: none;
+    cursor: pointer;
+  }
+
+/* product details using modal */
+
+
+@media  screen and (max-width: 780px) {
+    .shopCat{
+        height: 95vh;
+        width: 20%;  
+    }
+}
+
