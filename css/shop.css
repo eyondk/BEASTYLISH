@@ -23,7 +23,7 @@
     padding-left: 3rem;
     left: 0;
     width: 15%;
-    float: left; /* Ensure it sits to the left of the main content */
+    float: left;
     border-right: 2px solid #6c4a21;
 }
 
@@ -37,12 +37,12 @@
     display: none;
     z-index: 1;
     color: #6c4a21;
-    left: 0; /* Ensure dropdowns start from the left */
-    width: 100%; /* Set full width */
+    left: 0; 
+    width: 100%; 
 }
 
 .shopCat ul ul li {
-    width: 100%; /* Make dropdown items full width */
+    width: 100%; 
     float: none;
     text-align: left;
 
@@ -72,7 +72,7 @@
     text-transform: uppercase;
     font-size: 18px;
     color: #6c4a21;
-    align-items: center; /* Center items vertically */
+    align-items: center; 
     transition: all 0.3s ease;
     border-top: 2px solid #6c4a21;
 }
@@ -98,15 +98,15 @@
     font-weight: 500;
 }
 .shopCat ul ul.show {
-    display: block !important; /* Override the initial display: none */
+    display: block !important; 
 }
 
 .fa-chevron-down {
-    margin-left: 1rem; /* Push chevron to the end of the container */
+    margin-left: 1rem; 
     font-size: 16px;
     color: #6c4a21b5;
     display: flex;
-    align-self: center; /* Center chevron vertically */
+    align-self: center; 
 }
 
 .fa-chevron-down:hover, .fa-chevron-down:focus{
@@ -136,12 +136,12 @@
 }
 
 .searchbar .search{
-    padding: 0.7rem 1rem;
+    padding: 1rem 1rem;
     border: none;
     background-color:#6c4a21;
     color: #faf2e8;
     border-radius: 2px;
-    margin-right: 0.5rem;
+    margin-right: 0.2rem;
 }
 
 .searchbar .searchInput::placeholder{
@@ -153,8 +153,8 @@
     background-color: transparent;
     color: #6c4a21;
     border: 2px solid #6c4a21;
-    height: 30px;
-    width: 300px;
+    height: 35px;
+    width: 350px;
     padding-left: 0.5rem;
     font-size: 15px;
 }
@@ -162,10 +162,9 @@
 input[type="search"]::-webkit-search-cancel-button {
     -webkit-appearance: none; 
 }
-
-
 /* search bar end */
 
+/* product cards starts */
 .product-card {
     position: relative;
     text-align: left;
@@ -186,12 +185,12 @@ input[type="search"]::-webkit-search-cancel-button {
 .product-gallery{
     display: grid;
     grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
-    gap: 0.5rem; /* Adjust the gap between the cards as needed */
-    padding: 2px; /* Optional: add some padding around the grid */
+    gap: 0.5rem; 
+    padding: 2px; 
 }
 
 .product-card:hover, .product-card:focus {
-    box-shadow: 0 0 10px #6c4a21; /* Use pixel values for a clear shadow */
+    box-shadow: 0 0 10px #6c4a21; 
 }
 
 .sale-details{
@@ -224,17 +223,17 @@ input[type="search"]::-webkit-search-cancel-button {
     position: relative;
     height: 250px;
     width: 300px;
-    box-sizing: border-box; /* Include padding and border in the element's total width and height */
+    box-sizing: border-box; 
 }
 
 .product-card .main-images .product-img{
     position: absolute;
     width: 100%;
     height: 280px;
-    margin-left: -10px; /* Adjust to align with the border */
+    margin-left: -10px; 
     top: -45px;
     z-index: -1;
-    object-fit: cover; /* Ensure the image covers the entire area */
+    object-fit: cover; 
     display: block;
 }
 
@@ -248,16 +247,16 @@ input[type="search"]::-webkit-search-cancel-button {
     justify-self: left;
 }
 
-.product-card .size-price .price .price-num{
+.product-card .price .price-num{
     margin-top: -1rem;
     font-size: 15px;
     font-weight: 500;
     color: #6c4a21;
 }
 
-.product-card .size-price .price .origprice-num{
+.product-card .price .origprice-num{
     font-size: 20px;
-    color: #6c4a21;
+    color: #6c4a21d4 !important;
 }
 
 .product-card .button{
@@ -307,39 +306,37 @@ input[type="search"]::-webkit-search-cancel-button {
     background-color: #b67c3799;
     color: #faf2e8;
 }
-
+/* product cards starts */
 
 
 /* product details using modal */
-/* The Modal (background) */
 .modal {
-    display: none; /* Hidden by default */
-    position: fixed; /* Stay in place */
-    z-index: 80; /* Sit on top */
-    padding-top: 100px; /* Location of the box */
+    display: none; 
+    position: fixed; 
+    z-index: 80; 
+    padding-top: 100px; 
     left: 0;
     top: 0;
-    width: 100%; /* Full width */
-    height: 100%; /* Full height */
-    overflow: auto; /* Enable scroll if needed */
-    background-color: rgb(0,0,0); /* Fallback color */
-    background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
+    width: 100%; 
+    height: 100%; 
+    overflow: auto; 
+    background-color: rgb(0,0,0); 
+    background-color: rgba(0,0,0,0.4); 
   }
   
 /* Modal Content */
 .modal-content {
 background-color: transparent;
 margin: auto;
-padding: 20px;
 border: none;
-width: 30%;
-display: flex;
-justify-content: center;
+width: 21%;
+position: relative;
 }
 
 .modal-content .product-card{
 background-color:#faf2e8;
 height: 500px;
+
 }
 
 .modal-content .product-card:hover, .modal-content .product-card:focus{
@@ -357,11 +354,13 @@ color: #6c4a21;
 font-size: 13px;
 margin-top: 0.4rem;
 margin-bottom: 0.5rem;
-width: 100%;
+text-align:left;
+padding-bottom: 0.5rem;
 }
 
-.modal-content .price .price-num {
-    font-size: 25px !important;
+.modal-content .details .price .price-num {
+    font-size: 20px !important;
+    color: #6c4a21;
 }
  
 .content{
@@ -373,47 +372,134 @@ width: 100%;
     font-weight: 500;
     color: #6c4a21;
 }
-.content .size-value{
-    width: 50%;
+
+.content form{
+    font-size: 16px;
+    font-weight: 400;
+    color: #6c4a21;
     display: flex;
-    margin: 2px;
-    margin-right:  15px;
-    justify-content: space-between;
+    flex-direction: column;
 }
-.size-value span{
-    display: block;
-    height: 28px;
-    width: 28px;
-    text-align: center;
-    line-height: 28px;
-    border-radius: 50%;
-    font-size: 15px;
+
+.size-select {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+}
+
+.size-select p{
     font-weight: 500;
+    width: 50px;
+}
+
+
+.size-select input:checked + span{
+    color: #faf2e8;
+    background-color: #6c4a2176;
+    border-radius: 2px;
+    padding: 0.2rem 0.4rem;
+    font-weight: 500;
+}
+
+.size-select input{
+    display: none;
+}
+
+.size-select span{
+    padding: 5px;
+    margin-right: 10px;
+    cursor: pointer;
+
+}
+
+.qty-container{
+    display: flex;
+    justify-content:left ;
+}
+
+.qty-container p{
+    color: #6c4a21;
+    font-size: 16px;
+    font-weight: 500;
+    align-self: center;
+    width: 50px;
+}
+
+.wrapper{
+    height: 20px;
+    width: 160px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: transparent;
+    border: #6c4a21 1.5px solid;
+    color: #6c4a21;
+    margin-top: 0.5rem;
+    margin-left: 0.5rem;
+}
+.wrapper button{
+    width: 100%;
+    height: 100%;
+    text-align: center;
+    font-size: 15px;
+    font-weight: 700;
+    user-select: none;
+    background-color: transparent;
+    box-shadow: none;
+    border: none;
+    transition: all 0.3s ease;
+}
+
+.wrapper .plus{
     cursor: pointer;
     color: #6c4a21;
 }
-.size-value span.active{
-    background:  #6c4a21;
-    color: #fff;
+
+.wrapper input{
+    background-color: transparent;
+    border-left: 1px solid #b67c3799;
+    border-right: 1px solid #b67c3799;
+    border-bottom: none;
+    border-top: none;
+    color: #6c4a21;
+    font-size: 16px;
+    font-weight: 600;
+    width: 100px;
+    text-align: center;
+}
+
+.wrapper ::placeholder{
+    background-color: transparent;
+    color: #6c4a21;
+    border: none;
+}
+
+
+.wrapper button.clicked{
+    transform: scale(1.2);
+    box-shadow: inset 0 0 5px #b79c7b;
+}
+
+/* The Close Button */
+.close {
+    color: #6c4a21;
+    float: right;
+    font-size: 20px;
+    font-weight: bolder;
+    margin-top: -3rem;
+    margin-right: -0.5rem;
+    margin-bottom: -4rem;
+    z-index: 99;
 }
   
-  
-  /* The Close Button */
-  .close {
-    color: #ca9453;
-    float: right;
-    font-size: 30px;
-    font-weight: bold;
-  }
-  
-  .close:hover,
-  .close:focus {
-    color: #6c4a21;
+.close:hover,
+.close:focus {
+    color: #563c1b;
     text-decoration: none;
     cursor: pointer;
-  }
+}
 
-/* product details using modal */
+/* product details using modal end */
 
 
 @media  screen and (max-width: 780px) {
@@ -421,5 +507,7 @@ width: 100%;
         height: 95vh;
         width: 20%;  
     }
+
+
 }
 
