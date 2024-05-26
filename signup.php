@@ -49,6 +49,8 @@
     <title>Register</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
     <link rel="stylesheet" href="css/components.css">
+    <link rel="shortcut icon" href="img/Beastylish-favicon.png" type="image/x-icon">
+    <title>Beastylish</title>
 </head>
 <body>
 
@@ -71,7 +73,8 @@
         ?>
         <input type="text" name="name" class="box" placeholder="FULL NAME" required>
         <input type="email" name="email" class="box" placeholder="EMAIL" required>
-        <input type="password" name="password" class="box" placeholder="PASSWORD" required>
+        <input type="password" name="password" class="box" placeholder="PASSWORD" pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}" 
+        title="Must contain at least one number and one uppercase and lowercase letter, and at least 8 or more characters" required>
         <input type="password" name="cpassword" class="box" placeholder="CONFIRM PASSWORD" required>
         <input type="file" name="image" id="files" class="box" style="display: flex;" required accept="image/jpg, image/jpeg, image/png">
         <input type="submit" value="Signup" class="btn" name="submit">
