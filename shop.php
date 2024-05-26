@@ -1,4 +1,14 @@
+<?php
+    include 'config.php';
 
+    session_start();
+
+    $user_id = $_SESSION['user_id'];
+
+    if(!isset($user_id)){
+        header('location:login.php');
+    }
+?>
 
 <!DOCTYPE html>
 <html lang="en">
@@ -63,8 +73,10 @@
 
         <div class="product-display">
             <div class="searchbar">
-                <button type="submit" id="search-btn" class="search"><i class="fa-solid fa-magnifying-glass"></i></button>
-                <input type="search" name="" id="" class="searchInput" placeholder="Search for Products">
+              <form action="" method="get">
+                    <button type="submit" id="search-btn" class="search"><i class="fa-solid fa-magnifying-glass"></i></button>
+                    <input type="search" name="" id="" class="searchInput" placeholder="Search for Products">
+              </form>
             </div>
 
             <div class="product-gallery">
@@ -206,7 +218,7 @@
             <div id="myModal" class="modal">
                 <!-- Modal content -->
                 <div class="modal-content">
-                    <span class="close">&times;</span>
+                    <span class="close"> <i class="fa-solid fa-x"></i></span>
                     <div class="product-card">
                         <div class="sale-details">
                             <p class="sale">5&#37;</p>
@@ -215,26 +227,52 @@
                             <img class="product-img" src="img/tshirt.jpg">
                         </div>
                         <div class="details">
-                            <span class="product-name">ADDIDAS GAZE</span>
-                            <p class="prod-det">Lorem ipsum dolor sit lorenm i amet, consectetur adipisicing elit. Eum, ea, ducimus!</p>
-
+                            <span class="product-name">ADDIDAS GAZE</span>                            
+                            <div class="price" style="margin-top:0.5rem;">
+                                <span class="price-num" style="color: #6c4a21;">&#x20B1;9.00</span>
+                                <span class="origprice-num" style="color: #6c4a21d4;"><del>&#x20B1;12.00</del></span>
+                            </div>
                         </div>
                         <div class="size-price">
-                            <div class="price">
-                                <span class="price-num">&#x20B1;9.00</span>
-                                <span class="origprice-num"><del>&#x20B1;12.00</del></span>
-                            </div>
+                            <p class="prod-det">Lorem ipsum dolor sit lorenm i amet, consectetur adipisicing elit. Eum, ea, ducimus!</p>
                             <div class="content size">
-                                <div class="name size-name">
-                                    Size:
+                                <form action="" method="post">
+                                    <div class="size-select">
+                                        <p>Size:</p>
+                                        <label for="xsmall">
+                                            <input type="radio" name="size" id="xsmall">
+                                            <span>XS</span>
+                                        </label>
+                                        <label for="small">
+                                            <input type="radio" name="size" id="small">
+                                            <span>S</span>
+                                        </label>
+                                        <label for="medium">
+                                            <input type="radio" name="size" id="medium">
+                                            <span>M</span>
+                                        </label>
+                                        <label for="large">
+                                            <input type="radio" name="size" id="large">
+                                            <span>L</span>
+                                        </label>
+                                        <label for="xlarge">
+                                            <input type="radio" name="size" id="xlarge">
+                                            <span>XL</span>
+                                        </label>
+                                    </div>
+                                </form>
+
+
+                                <div class="qty-container">
+                                    <p>Qty: </p>
+                                    <div class="wrapper">
+                                        <button class="minus" style="color:#6c4a2186;" disabled>-</button>
+                                        <input type="text" name="" id="" class="num" value="01">
+                                        <button class="plus">+</button>
+                                    </div>
+
                                 </div>
-                                <div class="size-value">
-                                    <span class="color">XS</span>
-                                    <span class="color">S</span>
-                                    <span class="active">M</span>
-                                    <span class="color">L</span>
-                                    <span class="color">XL</span>
-                                </div>
+
                             </div>
                             
                         </div>
@@ -255,35 +293,6 @@
 
     <script src="js/shop.js"></script>
     <script src="https://kit.fontawesome.com/f8e1a90484.js" crossorigin="anonymous"></script>
-    <script>
-    // Get the modal
-    var modal = document.getElementById("myModal");
-
-    // Get all product cards
-    var cards = document.querySelectorAll(".product-gallery .product-card");
-
-    // Get the <span> element that closes the modal
-    var span = document.getElementsByClassName("close")[0];
-
-    // Add click event listener to each product card
-    cards.forEach(function(card) {
-        card.addEventListener("click", function() {
-            modal.style.display = "block";
-        });
-    });
-
-    // When the user clicks on <span> (x), close the modal
-    span.onclick = function() {
-        modal.style.display = "none";
-    }
-
-    // When the user clicks anywhere outside of the modal, close it
-    window.onclick = function(event) {
-        if (event.target == modal) {
-            modal.style.display = "none";
-        }
-    }
-    </script>   
 
 </body>
 </html>
