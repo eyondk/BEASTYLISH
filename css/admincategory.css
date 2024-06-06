@@ -1,0 +1,42 @@
+.tittle{
+    color: #6c4a21;
+    font-size: 3rem;
+    width: 1000vh;
+    border-bottom: #6c4a21 2px solid;
+    margin-top: -1rem;
+    padding-bottom: 1rem;
+}
+
+.secbod{
+    margin-top: 2rem;
+}
+
+.secbod .table-container {
+    width: 50%;
+}
+
+.secbod .totalcategory{
+    color: #412c14;
+    margin-top: 0.4rem;
+}
+
+.secbod .addbtn{
+    color: #57340b;
+    background-color: #d0b492cb;
+    border: none;
+    border-radius: 0.4rem;
+    padding: 1rem 1.5rem;
+    margin-top: 1rem;
+    font-size: 1.5rem;
+    transition: all 0.3s ease;
+}
+
+.secbod .addbtn:hover{
+    transform: scale(1.1);
+}
+
+.table-container{
+    max-height: 400px; 
+
+}
+
