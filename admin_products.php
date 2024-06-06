@@ -56,9 +56,9 @@
     <h1>ADD NEW PRODUCTS</h1>
     <form action="" method="post" enctype="multipart/form-data">
         <input type="text" placeholder="Enter Product Name" name="product_name" class="box">
-        <input type="number" placeholder="Price" step="0.11" name="product_price" class="box">
+        <input type="number" placeholder="Price" step=".01" min="1" name="product_price" class="box">
         <input type="text" placeholder="Description" name="product_description" class="box">
-        <input type="number" placeholder="Stocks" name="product_stocks" class="box">
+        <input type="number" placeholder="Stocks" min="1" name="product_stocks" class="box">
         <select  name="product_category" class="box">
             <option value="1">Shirt</option>
             <option value="2">Pants</option>
@@ -83,9 +83,9 @@
     <h1>EDIT PRODUCTS</h1>
     <form action="" method="post" enctype="multipart/form-data">
         <input type="text" placeholder="Enter Product Name" name="product_name" class="box">
-        <input type="number" placeholder="Price" step="0.11" name="product_price" class="box">
+        <input type="number" placeholder="Price" step=".01" min="1" name="product_price" class="box">
         <input type="text" placeholder="Description" name="product_description" class="box">
-        <input type="number" placeholder="Stocks" name="product_stocks" class="box">
+        <input type="number" placeholder="Stocks" min="1"  name="product_stocks" class="box">
         <select  name="product_category" class="box">
             <option value="1">Shirt</option>
             <option value="2">Pants</option>
