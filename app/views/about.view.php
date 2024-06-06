@@ -1,4 +1,4 @@
-
+<?php require("shared/header.inc.php")?>
 
 <!DOCTYPE html>
 <html lang="en">
@@ -9,12 +9,12 @@
     <title>About Us</title>
     
     <!-- my css -->
-    <link rel="stylesheet" type="text/css" href="../../public/assets/css/aboutus.css">
+    <link rel="stylesheet" type="text/css" href="<?=ROOT?>/assets/css/aboutus.css">
     
     <!-- Add icon library -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 
-    <?php require('shared/header.inc.php')?>
+   
     
 </head>
 <body>
@@ -30,7 +30,7 @@
     <div class="container">
         <section class="about">
             <div class="about-image">
-                <img src="../../public/assets/images/logo.png">
+                <img src="<?=ROOT?>/assets/images/logo.png">
             </div>
             <div class="about-content">
                 
