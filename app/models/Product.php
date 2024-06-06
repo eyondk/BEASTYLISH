@@ -28,7 +28,7 @@ class Product
     public function get_products() {
       try {
           $conn = $this->connect();
-          $stmt = $conn->prepare("SELECT * FROM products");
+          $stmt = $conn->prepare("SELECT * FROM products ORDER BY prod_id DESC");
           $stmt->execute();
           $products = $stmt->fetchAll(PDO::FETCH_ASSOC);
           return $products;
