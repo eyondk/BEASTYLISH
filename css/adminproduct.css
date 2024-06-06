@@ -1,0 +1,327 @@
+*::selection{ 
+    background-color: #6c4a21; 
+    color: #faf2e8; 
+} 
+*::-webkit-scrollbar-thumb{ 
+    background-color: #b79c7b; 
+    border-radius: 5px;
+    height: 10px;
+}
+
+::-webkit-scrollbar {
+    width: 8px;
+    
+}
+
+::-webkit-scrollbar-track {
+    background: #b79c7b68; 
+}
+
+/* Style for horizontal scrollbar */
+.product-display-table::-webkit-scrollbar-thumb {
+    width: 4px;
+}
+
+.home {
+    padding-left: 0.5rem;
+    margin-top: 4rem;
+}
+
+.container {
+    display: flex;
+    justify-content: center;
+    padding: 2rem;
+    width: 100%;
+    margin-top: 0.5rem;
+    position: relative;
+}
+
+.product-display {
+    width: 100%;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+.table-container {
+    max-height: 500px; 
+    overflow-y: auto; 
+    border: 2px solid #6c4a21;
+}
+
+.product-display-table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+.product-display-table thead {
+    color: #faf2e8; 
+    font-weight: 400;
+    position: sticky; 
+    top: 0;
+    background-color: #6c4a21; 
+    z-index: 1;
+}
+
+.product-display-table th,
+.product-display-table td {
+    font-size: medium;
+    padding: 1rem;
+    text-align: center;
+    border: 1px solid #6c4a21;
+}
+
+.product-display-table th {
+    background-color: #6c4a213e;
+    text-transform: uppercase;
+}
+
+.product-display-table tbody {
+    font-size: medium;
+    font-weight: 500;
+    color: #6c4a21;
+}
+
+.product-display-table td {
+    width: auto;
+}
+
+.product-display-table td img {
+    max-width: 100px;
+    height: auto;
+}
+
+.product-display-table td:nth-child(4) {
+    max-width: 300px;
+    word-wrap: break-word;
+    white-space: normal; 
+}
+
+.product-display-table td button, .home .add {
+    margin: 0.5rem;
+    padding: 1rem;
+    border: 2px solid;
+    border-radius: 0.5rem;
+    transition: all 0.3s ease;
+}
+
+.product-display-table .edit {
+    background-color: #90734f;
+    color: cornsilk;
+    border: 2px solid #90734f;
+    padding-left: 1.7rem;
+    padding-right: 1.7rem;
+}
+
+.product-display-table .delete {
+    background-color: #352512;
+    color: cornsilk;
+}
+
+.product-display-table .edit:hover, .product-display-table .delete:hover, .home .add:hover {
+    transform: scale(1.1);
+}
+
+.home .add {
+    background-color: rgb(229, 196, 152);
+    color: #6c4a21;
+    font-size: small;
+    font-weight: 500;
+    padding: 1rem 3rem;
+    border: 2px solid rgb(229, 196, 152);
+    position: absolute;
+    right: 10rem;
+    bottom: -3.5rem;
+}
+
+.totalproduct {
+    padding-top: 0.5rem;
+}
+
+.totalproduct .tottext {
+    font-size: medium;
+    color: #352512;
+}
+
+.searchbar {
+    margin-left: 10.5rem;
+}
+
+.searchbar {
+    display: flex;
+    justify-content: left;
+}
+
+.searchbar .search {
+    padding: 1rem 1rem;
+    border: none;
+    background-color: #6c4a21;
+    color: #faf2e8;
+    border-radius: 2px;
+    margin-right: 0.2rem;
+}
+
+.searchbar .searchInput::placeholder {
+    color: #6c4a21;
+    padding-left: 0.5rem;
+}
+
+.searchbar .searchInput {
+    background-color: transparent;
+    color: #6c4a21;
+    border: 2px solid #6c4a21;
+    height: 35px;
+    width: 350px;
+    padding-left: 0.5rem;
+    font-size: 15px;
+}
+
+input[type="search"]::-webkit-search-cancel-button {
+    -webkit-appearance: none;
+}
+
+
+/* The Modal (background) */
+.modal {
+    display: none;
+    position: fixed; 
+    z-index: 99999; 
+    padding-top: 100px; 
+    left: 0;
+    top: 0;
+    width: 100%; 
+    height: 100%; 
+    overflow: auto; 
+    background-color: rgb(0,0,0); 
+    background-color: rgba(0,0,0,0.4); 
+}
+  
+/* Modal Content */
+.modal-content {
+    background-color: #faf2e8;
+    margin: auto;
+    padding: 20px;
+    border: 1px solid #888;
+    width: 40%; 
+    display: flex;
+    flex-direction: column; 
+    align-items: center; 
+}
+  
+/* The Close Button */
+.closemodal {
+    color: #6c4a21;
+    align-self: flex-end; 
+    font-size: 28px;
+    font-weight: bold;
+    z-index: 999999;
+}
+  
+.closemodal:hover,
+.closemodal:focus {
+    color: #352512;
+    text-decoration: none;
+    cursor: pointer;
+}
+  
+/* Style the form elements */
+.modal-content form {
+    width: 100%; 
+    display: flex;
+    flex-direction: column; 
+    align-items: center;
+}
+  
+.modal-content .box {
+    width: 90%; 
+    margin-bottom: 10px; 
+    padding: 10px;
+    border: 2px solid #6c4a21;
+    background-color: transparent;
+}
+
+.modal-content select{
+    color: #6c4a21;
+}
+  
+.modal-content .add-btn, .modal-content .opt-btn {
+    width: 90%; 
+    margin: 5px 0;
+    padding: 10px;
+    border: none;
+    cursor: pointer;
+    text-align: center;
+    text-decoration: none;
+}
+  
+.modal-content .add-btn{
+    background-color: #6c4a21;
+    color: #faf2e8;
+}
+
+.modal-content .add-btn:hover {
+    background-color: #563b19;
+}
+
+.modal-content .opt-btn{
+    background-color: #90734f8e;
+    color: #352512;
+    margin-bottom: 2rem;
+}
+
+.modal-content .opt-btn:hover{
+    background-color: #90734f;
+
+}
+
+.modal-content h1{ 
+    color: #563b19;
+    margin-top: -2rem;
+    padding-bottom: 3rem;
+    text-align: center;
+}
+
+.modal-content h1 .fa-triangle-exclamation {
+    font-size: 6rem;
+}
+
+.modal-content h5{
+    margin-top: -2rem;
+    margin-bottom: 2rem;
+    color: #563b19;
+    font-size: small;
+    text-align: center;
+
+}
+
+
+/* Adjust search bar width for smaller screens */
+@media (max-width: 768px) {
+    .searchbar {
+        margin-left: 0;
+        width: 100%;
+        flex-direction: column;
+        align-items: center;
+        font-size: 15px;
+    }
+    
+    .searchbar .searchInput {
+        width: 80%;
+        margin-bottom: 0.5rem;
+    }
+
+    .searchbar .search {
+        width: 15%;
+      
+    }
+
+    .modal-content{
+        width: 60%;
+    }
+
+    .home .add{
+        right: 1rem;
+        bottom: -4.5rem;
+    }
+}
+
+
