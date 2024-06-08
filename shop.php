@@ -97,7 +97,6 @@
                         </div>
                     </div>
                     <div class="button">
-                        <button type="button" class="buy-btn">Buy Now</button>
                         <button type="button" class="add-btn">Add To Cart</button>
                     </div>
                 </div>
@@ -119,8 +118,7 @@
                         <span class="price-num"><del>&#x20B1;12.00</del></span>
                         </div>
                     </div>
-                    <div class="button">
-                        <button type="button" class="buy-btn">Buy Now</button>
+                   <div class="button">
                         <button type="button" class="add-btn">Add To Cart</button>
                     </div>
                 </div>
@@ -142,7 +140,6 @@
                         </div>
                     </div>
                     <div class="button">
-                        <button type="button" class="buy-btn">Buy Now</button>
                         <button type="button" class="add-btn">Add To Cart</button>
                     </div>
                 </div>
@@ -164,7 +161,6 @@
                         </div>
                     </div>
                     <div class="button">
-                        <button type="button" class="buy-btn">Buy Now</button>
                         <button type="button" class="add-btn">Add To Cart</button>
                     </div>
                 </div>
@@ -186,7 +182,6 @@
                         </div>
                     </div>
                     <div class="button">
-                        <button type="button" class="buy-btn">Buy Now</button>
                         <button type="button" class="add-btn">Add To Cart</button>
                     </div>
                 </div>
@@ -208,7 +203,6 @@
                         </div>
                     </div>
                     <div class="button">
-                        <button type="button" class="buy-btn">Buy Now</button>
                         <button type="button" class="add-btn">Add To Cart</button>
                     </div>
                 </div>
@@ -277,8 +271,7 @@
                             
                         </div>
                         <div class="button">
-                            <button type="button" class="buy-btn">Buy Now</button>
-                            <button type="button" class="add-btn">Add To Cart</button>
+                        <button type="button" class="add-btn">Add To Cart</button>
                         </div>
                     </div>
                 </div>
