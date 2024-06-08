@@ -1,0 +1,342 @@
+.tt{
+    margin-top: 3rem;
+    margin-left: 8rem;
+}
+
+.tt h1{
+    font-size: 5rem;
+    font-weight: 400;
+    color: #6c4a21;
+}
+
+
+.mainCart {
+    display: flex;
+    justify-content: center;
+    margin-top: 2rem;
+}
+
+input[type="number"] {
+    -moz-appearance: textfield; /* Firefox */
+    appearance: textfield;
+}
+
+input[type="number"]::-webkit-outer-spin-button,
+input[type="number"]::-webkit-inner-spin-button {
+    -webkit-appearance: none; /* Chrome, Safari, Edge, Opera */
+    margin: 0; /* Removes the default margin */
+}
+
+.qty-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.wrapper {
+    height: 30px;
+    width: 120px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: transparent;
+    border: #6c4a21 1.5px solid;
+    color:#6c4a21;
+    margin-top: 0.5rem;
+    margin-left: 0.5rem;
+}
+
+.wrapper button {
+    width: 30px;
+    height: 100%;
+    text-align: center;
+    font-size: 15px;
+    font-weight: 700;
+    user-select: none;
+    background-color: transparent;
+    box-shadow: none;
+    border: none;
+    transition: all 0.3s ease;
+    padding: 0;
+}
+
+.wrapper .plus, .wrapper .minus {
+    cursor: pointer;
+    color: #6c4a21;
+}
+
+.wrapper input.num {
+    background-color: transparent;
+    border-left: 1px solid #b67c3799;
+    border-right: 1px solid #b67c3799;
+    border-bottom: none;
+    border-top: none;
+    color:#6c4a21;
+    font-size: 16px;
+    font-weight: 600;
+    width: 80px;
+    text-align: center;
+    height: 100%;
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+.wrapper ::placeholder {
+    background-color: transparent;
+    color: #6c4a21;
+    border: none;
+}
+
+.wrapper button.clicked {
+    transform: scale(1.2);
+    box-shadow: inset 0 0 5px #a95920;
+}
+
+
+
+
+
+
+/* TABLE DESIGN START */
+.product-display {
+    width: 100%;
+    max-width: 900px;
+    margin: 0 auto;
+}
+
+.table-container {
+    max-height: 400px; 
+    overflow-y: auto; 
+    border: 2px solid #6c4a21;
+}
+
+.product-display-table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+.product-display-table thead {
+    color: #faf2e8; 
+    font-weight: 500;
+    position: sticky; 
+    top: 0;
+    background-color: #6c4a21; 
+    z-index: 1;
+}
+
+.product-display-table th,
+.product-display-table td {
+    font-size: medium;
+    padding: 1rem;
+    text-align: center;
+    border: none;
+}
+
+.product-display-table th {
+    background-color: #6c4a213e;
+    text-transform: uppercase;
+}
+
+.product-display-table tbody {
+    font-size: medium;
+    font-weight: 500;
+    color: #6c4a21;
+}
+
+.product-display-table td {
+    width: auto;
+}
+
+.product-display-table td img {
+    max-width: 100px;
+    height: auto;
+}
+
+.product-display-table td:nth-child(3) {
+    max-width: 200px;
+    word-wrap: break-word;
+    white-space: normal; 
+}
+
+
+
+
+
+.product-display-table .edit {
+    background-color: #90734f;
+    color: cornsilk;
+    border: 2px solid #90734f;
+    padding-left: 1.7rem;
+    padding-right: 1.7rem;
+}
+
+.product-display-table .delete {
+    margin: 0.5rem;
+    padding: 0.4rem 0.9rem;
+    border: 1px solid;
+    border-radius: 0rem;
+    transition: all 0.3s ease;
+    color: #6c4a21;
+    background-color: transparent;
+}
+
+
+.product-display-table .view{
+    background-color: #b79c7b;
+    color: cornsilk; /* Set text color */
+    border: 2px solid #b79c7b; /* Set border color */
+    transition: all 0.3s ease;
+}
+
+
+.product-display-table .edit:hover, .product-display-table .delete:hover, .product-display-table .view:hover, .home .add:hover {
+    transform: scale(1.1);
+}
+
+
+
+.deleteall {
+    color: #6c4a21;
+    font-weight: 500;
+    border: 2px solid #6c4a21;
+    background-color: transparent;
+    padding: 1rem;
+    transition: all 0.3s ease;
+    margin-top: 1rem;
+}
+
+.deleteall:hover {
+    background-color: #6c4a21;
+    color: #faf2e8;
+    transform: scale(1.1);
+}
+
+
+/* TABLE CART DESIGN END */
+
+
+/*cart totals start*/
+.cart {
+    display: flex;
+    justify-content: space-between;
+    width: 90%;
+}   
+
+
+
+.cartTotals {
+    flex: 1;
+    margin-left: 2rem;
+    display: flex;
+    justify-content: center;
+    height: 72%;
+
+}
+
+.carttot {
+    border: 2px solid #6c4a21;
+    padding: 2rem;
+    margin-bottom: 2rem;
+    border-radius: 0px;
+    width: 100%;
+    background-color:transparent;
+}
+
+.cart-tit {
+    font-size: 2.9rem;
+    font-weight: 500;
+    margin-bottom: 1rem;
+    text-align: center;
+    color: #6c4a21;
+    text-transform: uppercase;
+}
+
+.subtot, .shipping, .total, .discount {
+    display: flex;
+    justify-content: space-between;
+    padding: 0.5rem 0;
+    font-size: 2rem;
+    color:#6c4a21;
+}
+
+.total {
+    border-top:1px solid #6c4a21;
+    font-weight: 600;
+    margin-top: 1rem;
+}
+
+.button {
+    display: flex;
+    justify-content: center;
+    margin-top: 2rem;
+    width:100%;
+}
+
+.add-btn {
+    width:100%;
+    padding: 1.3rem 1.5rem;
+    background-color: #6c4a21;
+    color: #faf2e8; 
+    text-transform: uppercase;
+    border: none;
+    border-radius: 0px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+    .add-btn:hover {
+        background-color: #352512;
+        transform: scale(1.05);
+    }
+
+.delete {
+    font-size: 20px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+    .delete:hover,
+    .delete:focus {
+        transform: scale(1.5); /* Adjust the scale factor as needed */
+    }
+
+
+
+.paymentmethodicons{
+    margin-top: 2rem;
+}
+
+.paymentmethodicons img{
+    padding: 0.5rem;
+}
+
+.paymentmethodicons p{
+    font-size: 1.5rem;
+    font-weight: 400;
+    color: #ae8e67;
+    
+}
+
+
+/*cart totals end*/
+
+
+/* Modal container style */
+.modal-container {
+    display: none; /* Hidden by default */
+    position: fixed; /* Stay in place */
+    z-index: 9999; /* Sit on top */
+    left: 0;
+    top: 0;
+    width: 100%; /* Full width */
+    height: 100%; /* Full height */
+    background-color: rgba(0, 0, 0, 0.5); /* Black w/ opacity */
+    justify-content: center; /* Center items horizontally */
+    align-items: center; /* Center items vertically */
+    overflow: auto; /* Enable scroll if needed */
+}
+
+
+
+
