@@ -279,16 +279,10 @@ input[type="search"]::-webkit-search-cancel-button {
     cursor: pointer;
 }
 
-.buy-btn{
-    width: 50%;
-    border: none;
-    color: #faf2e8;
-    background-color: #6c4a21;
-    transition: color 0.3s ease;
-}
+ 
 
 .add-btn{
-    width: 50%;
+    width: 100%;
     padding: 0.5rem 1rem;
     border: 2px solid #6c4a21;
     color: #6c4a21;
@@ -297,9 +291,7 @@ input[type="search"]::-webkit-search-cancel-button {
 }
 
 
-.buy-btn:hover{
-    background-color: #c77a1cc1;
-}
+
 
 .add-btn:hover{
     border: none;
