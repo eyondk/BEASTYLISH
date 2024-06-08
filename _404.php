@@ -4,7 +4,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="css/404.css">
-    <title>ERROR</title>
+    <link rel="shortcut icon" href="img/Beastylish-favicon.png" type="image/x-icon">  
+    <title>File not found</title>
 </head>
 <body>
 
