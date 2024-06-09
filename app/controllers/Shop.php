@@ -1,26 +1,50 @@
 <?php
 
-/**
- *  shop class
- */
-
 class Shop extends Controller
-
 {  
-    
     public function index()
     {
         $product = new Product();
         $is_search = false;
         $search_results = [];
+
+        // $productData = [
+        //     'prod_name' => 'Bracelet Test 2',
+        //     'prod_description' => 'Test Product',
+        //     'prod_price' => 300,
+        //     'prod_stock' => 50,
+        //     'prod_sizes' => '',
+        //     'prod_color' => '',
+        //     'categ_name' => 'BRACELET'  // Category name as per your categories table
+        // ];
         
+        // $imageData = [
+        //     'image_path' => ROOT . '/assets/images/bracelet1.jpg'
+        // ];
+        // show($productData);
+        // show($imageData);
+        // show($product);
+        // // Attempt to insert product with image
+        // $inserted = $product->insert_product_with_image($productData, $imageData);
+     
+
+        // if ($inserted) {
+        //     echo "Product inserted successfully.";
+        // } else {
+        //     echo "Failed to insert product.";
+        // }
+
         if (isset($_GET['search']) && !empty($_GET['search'])) {
             $keyword = $_GET['search'];
             $is_search = true;
             $search_results = $product->search_products($keyword);
+        } elseif (isset($_GET['categ_name'])) {
+            $categ_name = $_GET['categ_name'];
+            $products = $product->get_products_by_category($categ_name);
         } else {
             $products = $product->get_products();
         }
+       
 
         $this->view('shop', [
             'is_search' => $is_search,
@@ -28,47 +52,4 @@ class Shop extends Controller
             'products' => $products ?? []
         ]);
     }
-
-    // public function index()
-    // {   
-    //     $product = new Product();
-    //     $search_results = [];
-    //     $is_search = false;
-
-    //     if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['search'])) {
-    //         $keyword = trim($_POST['search']);
-    //         if (!empty($keyword)) {
-    //             $search_results = $book->search_books($keyword);
-    //             $is_search = true;
-                
-    //         }
-    //     }
-    
-        
-    //     // $arr = [
-    //     //                 'prod_name' => 'Product Test 3',
-    //     //                 'prod_description' => 'Test Product',
-    //     //                 'prod_price' => 777,
-    //     //                 'prod_stock' => 70,
-    //     //                 'prod_image' => ROOT . '/assets/images/manga-bluelock.jpg',
-    //     //                 'categ_id' => 5
-    //     //         ];
-    //     //     $product->insert($arr);
-
-    //     // // Fetch products from the database
-    //     $products = $product->get_products();
-    
-
-   
-    //     // // Debugging: Check if products are fetched
-
-    //     // error_log(print_r($products, true));
-    
-    //     // Pass the products to the view
-    //     $this->view('shop', ['products' => $products]);
-    // }
 }
-
-
-
-

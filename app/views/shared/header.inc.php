@@ -9,13 +9,13 @@
 <body>
     <nav>
         <ul id="menuList">
-            <li><a href="" class="link">Home</a></li>
-            <li><a href="" class="link">SHOP</a></li>
-            <li><a href="" class="link">About</a></li>
+            <li><a href="<?=ROOT?>/home" class="link">Home</a></li>
+            <li><a href="<?=ROOT?>/shop" class="link">SHOP</a></li>
+            <li><a href="<?=ROOT?>/about" class="link">About</a></li>
             <li><a class="logo">BEASTYLISH</a></li>
-            <li><a href="" class="link">Account</a></li>
-            <li><a href="" class="link">Cart</a></li>
-            <li><a href="" class="link">Contact</a></li>
+            <li><a href="<?=ROOT?>/account" class="link">Account</a></li>
+            <li><a href="<?=ROOT?>/cart" class="link">Cart</a></li>
+            <li><a href="<?=ROOT?>/contact" class="link">Contact</a></li>
         </ul>
         <div class="menu-icon">
             <i class="fa-solid fa-bars" onclick="toggleMenu()"></i>

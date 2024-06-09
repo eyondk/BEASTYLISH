@@ -10,14 +10,12 @@ class Home extends Controller
     
     public function index()
     {   
+        $product = new Product();
+
+      
+        $products = $product->get_products();
         
-        $model = new Model;
-        $model -> test();
-        
-        echo "This is the home controller";
-        $this->view('home');
-        
-        $this->view('home');
+        $this->view('home', ['products' => $products]);
     }   
 }
 

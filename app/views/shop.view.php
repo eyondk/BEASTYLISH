@@ -14,7 +14,6 @@
 <div class="flex">
     <div class="shopCat">
         <ul>
-            <li ><a href="#" class="shopAll">SHOP ALL</a></li>
             <li ><a href="#" class="shopNew">NEW</a></li>
             <li ><a href="#" class="shopSale">SALE</a></li>
             <li>
@@ -22,12 +21,12 @@
                     <span class="fa fa-chevron-down first"></span>
                 </a>
                 <ul id="acc-show">
-                    <li><a href="#" class="first-sub">Necklace</a></li>
-                    <li><a href="#">Bracelet</a></li>
-                    <li><a href="#">Sunglass</a></li>
-                    <li><a href="#">Earring</a></li>
-                    <li><a href="#">Clip</a></li>
-                    <li><a href="#">Anklet</a></li>
+                    <li><a href="?categ_name=NECKLACE" class="first-sub">Necklace</a></li>
+                    <li><a href="?categ_name=BRACELET">Bracelet</a></li>
+                    <li><a href="?categ_name=SUNGLASS">Sunglass</a></li>
+                    <li><a href="?categ_name=EARRING">Earring</a></li>
+                    <li><a href="?categ_name=CLIP">Clip</a></li>
+                    <li><a href="?categ_name=ANKLET">Anklet</a></li>
                 </ul>
             </li>
             <li>
@@ -35,10 +34,10 @@
                     <span class="fa fa-chevron-down second"></span>
                 </a>
                 <ul id="brandnew-show">
-                    <li><a href="#" class="first-sub">Tops</a></li>
-                    <li><a href="#">Bottoms</a></li>
-                    <li><a href="#">Dress</a></li>
-                    <li><a href="#">Swimwear</a></li>
+                    <li><a href="?categ_name=NEW-TOPS" class="first-sub">Tops</a></li>
+                    <li><a href="?categ_name=NEW-BOTTOMS">Bottoms</a></li>
+                    <li><a href="?categ_name=NEW-DRESS">Dress</a></li>
+                    <li><a href="?categ_name=NEW-SWIMWEAR">Swimwear</a></li>
                 </ul>
             </li>
             <li>
@@ -46,13 +45,13 @@
                     <span class="fa fa-chevron-down third"></span>
                 </a>
                 <ul id="preloved-show">
-                    <li><a href="#" class="first-sub">Tops</a></li>
-                    <li><a href="#">Bottoms</a></li>
-                    <li><a href="#">Dress</a></li>
-                    <li><a href="#">Swimwear</a></li>
+                    <li><a href="?categ_name=PL-TOPS" class="first-sub">Tops</a></li>
+                    <li><a href="?categ_name=PL-BOTTOMS">Bottoms</a></li>
+                    <li><a href="?categ_name=PL-DRESS">Dress</a></li>
+                    <li><a href="?categ_name=PL-SWIMWEAR">Swimwear</a></li>
                 </ul>
             </li>
-            <li><a href="#" class="hand">HANDMADE BOUQUET</a></li>
+            <li><a href="?categ_name=HANDMADE-BOUQUET" class="hand">HANDMADE BOUQUET</a></li>
         </ul>
     </div>
 
@@ -68,25 +67,24 @@
             <?php if (isset($is_search) && $is_search): ?>
                 <?php if (!empty($search_results)): ?>
                     <?php foreach ($search_results as $product): ?>
-                        <div class="product-card">
+                        <div class="product-card" data-description="<?= $product['prod_description'] ?>" data-price="<?= $product['prod_price'] ?>" data-image="<?= $product['image_path'] ?>" data-name="<?= $product['prod_name'] ?>">
                             <div class="sale-details">
                                 <p class="sale">5&#37;</p>
                             </div>
-                            <div class="main-images">
-                                <img class="product-img" src="<?= $product['prod_image'] ?>" alt="<?= $product['prod_name'] ?>">
-                            </div>
-                            <div class="details">
-                                <span class="product-name"><?= $product['prod_name'] ?></span>
-                            </div>
-                            <div class="size-price">
-                                <div class="price">
-                                    <span class="price-num">&#x20B1;<?= $product['prod_price'] ?></span>
-                                    <span class="price-num"><del>&#x20B1;12.00</del></span>
+                                <div class="main-images">
+                                    <img class="product-img" src="<?= $product['image_path'] ?>" alt="<?= $product['prod_name'] ?>">
                                 </div>
-                            </div>
+                                <div class="details">
+                                    <span class="product-name"><?= $product['prod_name'] ?></span>
+                                </div>
+                                <div class="size-price">
+                                    <div class="price">
+                                        <span class="price-num">&#x20B1;<?= $product['prod_price'] ?></span>
+                                        <span class="price-num"><del>&#x20B1;12.00</del></span>
+                                    </div>
+                                </div>
                             <div class="button">
-                                <button type="button" class="buy-btn">Buy Now</button>
-                                <button type="button" class="add-btn">Add To Cart</button>
+                                <button type="button" style="width: 100%" class="add-btn">Add To Cart</button>
                             </div>
                         </div>
                     <?php endforeach; ?>
@@ -96,41 +94,39 @@
             <?php else: ?>
                 <?php if (!empty($products)): ?>
                     <?php foreach ($products as $product): ?>
-                        <div class="product-card">
+                        <div class="product-card" data-description="<?= $product['prod_description'] ?>" data-price="<?= $product['prod_price'] ?>" data-image="<?= $product['image_path'] ?>" data-name="<?= $product['prod_name'] ?>">
                             <div class="sale-details">
                                 <p class="sale">5&#37;</p>
                             </div>
-                            <div class="main-images">
-                                <img class="product-img" src="<?= $product['prod_image'] ?>" alt="<?= $product['prod_name'] ?>">
-                            </div>
-                            <div class="details">
-                                <span class="product-name"><?= $product['prod_name'] ?></span>
-                            </div>
-                            <div class="size-price">
-                                <div class="price">
-                                    <span class="price-num">&#x20B1;<?= $product['prod_price'] ?></span>
-                                    <span class="price-num"><del>&#x20B1;12.00</del></span>
+                                <div class="main-images">
+                                    <img class="product-img" src="<?= $product['image_path'] ?>" alt="<?= $product['prod_name'] ?>">
                                 </div>
-                            </div>
+                                <div class="details">
+                                    <span class="product-name"><?= $product['prod_name'] ?></span>
+                                </div>
+                                <div class="size-price">
+                                    <div class="price">
+                                        <span class="price-num">&#x20B1;<?= $product['prod_price'] ?></span>
+                                        <span class="price-num"><del>&#x20B1;12.00</del></span>
+                                    </div>
+                                </div>
                             <div class="button">
-                                <button type="button" class="buy-btn">Buy Now</button>
-                                <button type="button" class="add-btn">Add To Cart</button>
+                                <button type="button" style="width: 100%" class="add-btn">Add To Cart</button>
                             </div>
                         </div>
+
                     <?php endforeach; ?>
                 <?php else: ?>
                     <p>No products available.</p>
                 <?php endif; ?>
             <?php endif; ?>
         </div>
-        
-        <!-- The Modal -->
-        
+            <!-- The Modal -->
         <div id="myModal" class="modal">
             <!-- Modal content dynamically filled by JavaScript -->
             <div class="modal-content">
                 <span class="close">&times;</span>
-                <div class="product-card">
+                <div class="modal-product-card">
                     <div class="sale-details">
                         <p class="sale">5%</p>
                     </div>
@@ -166,12 +162,12 @@
                         </div>
                     </div>
                     <div class="button">
-                        <button type="button" class="buy-btn">Buy Now</button>
-                        <button type="button" class="add-btn">Add To Cart</button>
+                        <button type="button" style="width: 100%" class="add-btn">Add To Cart</button>
                     </div>
                 </div>
             </div>
         </div>
+
     </div>
 </div>
 
