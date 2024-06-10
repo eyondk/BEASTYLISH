@@ -29,12 +29,7 @@ body{
     color: #6c4a21;
     font-size: 1.3rem;
 }
-*::-webkit-scrollbar{
-    background-color: transparent;
-}
-*::-webkit-scrollbar-thumb{
-    background-color: transparent;
-}
+
 
 .sidebar{
     position: fixed;
@@ -58,7 +53,94 @@ body{
     display: flex;
     align-items: center;
     margin-top: 10px;
+    position: relative;
 }
+
+
+
+.sidebar ul ul{
+    display: none;
+    position: absolute;
+    top: 50px; 
+    left: 0;
+    background-color: #faf2e8;
+    border-bottom: 2px solid #6c4a21;
+    z-index: 1;
+    width: 100%;  
+}
+
+
+.sidebar ul ul.show {
+    display: block !important; 
+}
+
+.sidebar ul ul.close{
+    display:none;
+}
+
+.sidebar ul ul li {
+    width: 100%; 
+    float: none;
+    margin-top:0.5rem !important;
+    text-align: left;
+    left:5rem;
+}
+
+
+
+
+.sidebar ul ul a {
+    margin-bottom: 0.5rem;
+    padding-top: 0.3rem;
+    padding-bottom: 0.3rem;
+    display: flex;
+    text-align: center;
+    color: #6c4a21;
+    text-decoration: none;
+    text-transform: uppercase;
+    border: none;
+    font-size: 16px;
+    transition: all 0.3s ease;
+
+}
+
+.sidebar ul ul a:hover{
+    border-bottom:none;
+    color:#6c4a2193;
+    transform: scale(1.03);
+}
+
+.sidebar ul a{
+    display: flex;
+    text-align: left;
+    text-decoration: none;
+    text-transform: uppercase;
+    color: #6c4a21;
+    align-items: center; 
+    transition: all 0.3s ease;
+    font-size: 16px;
+}
+
+
+.fa-chevron-down {
+    margin-left: 1rem; 
+    font-size: 16px;
+    color: #6c4a21b5;
+    display: flex;
+    align-self: center; 
+}
+
+.fa-chevron-down:hover, .fa-chevron-down:focus{
+    color: #6c4a21;
+    transform: scale(1.1);
+}
+
+.fa-chevron-down.flip {
+    transform: scaleY(-1);
+    transition: transform 0.3s ease;
+}
+
+
 
 .sidebar header .image{
     width: 50px;
