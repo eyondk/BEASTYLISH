@@ -48,7 +48,17 @@
                                         <td>&#8369; <?= $order['order_total'] ?></td>
                                         <td><?= $order['payment_method'] ?></td>
                                         <td><?= $order['payment_status'] ?></td>
-                                        <td><?= $order['order_status'] ?></td>
+                                        <td>
+                                        <select name="order_status" class="order-status box" 
+                                            data-order-id="<?= $order['order_id'] ?>" 
+                                            data-original-status="<?= $order['order_status'] ?>" 
+                                            data-payment-method="<?= $order['payment_method'] ?>" 
+                                            data-payment-status="<?= $order['payment_status'] ?>">
+                                        <option value="Pending" <?= $order['order_status'] == 'Pending' ? 'selected' : '' ?>>Pending</option>
+                                        <option value="On Delivery" <?= $order['order_status'] == 'On Delivery' ? 'selected' : '' ?>>On Delivery</option>Wz`
+                                        <option value="Cancelled" <?= $order['order_status'] == 'Cancelled' ? 'selected' : '' ?>>Cancelled</option>
+                                        </select>
+                                        </td>
                                         <td>
                                         <button type="button" class="view" data-order-id="<?= $order['order_id'] ?>" data-customer-name="<?= $order['customer_name'] ?>" data-phone="<?= $order['phone'] ?>" data-email="<?= $order['email'] ?>" data-address="<?= $order['address'] ?>">
                                                 <i class="fa-solid fa-info"></i> View Details
@@ -94,6 +104,6 @@
 </div>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.6/umd/popper.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-<script src="<?=ASSETS?>js/order.js"></script>
+<script src="<?=ASSETS?>js/orderpending.js"></script>
 </body>
 </html>

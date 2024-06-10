@@ -1,59 +1,186 @@
-.main{
+/* Main container styling */
+.main {
     position: relative;
     left: 10px;
     width: calc(100% - 260px);
     min-height: calc(100vh - 60px);
-    
-   
+    padding: 20px;
 }
 
-.cards{
+/* Cards container styling */
+.cards {
     width: 100%;
     padding: 35px 20px;
     display: grid;
-    grid-template-columns: repeat(4, 1fr);
-    grid-gap: 50px;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    grid-gap: 20px;
 }
 
-.cards .card{
-    padding: 30px;
+/* Individual card styling */
+.cards .card {
+    padding: 20px;
     display: flex;
     align-items: center;
     justify-content: space-between;
     background: #eac5a1;
     border-radius: 10px;
     box-shadow: 0 7px 25px 0 rgba(0, 0, 0, 0.08);
-
 }
+
+/* Number text styling */
 .number {
     font-size: 35px;
     font-weight: 500;
     color: #299b63;
 }
 
-.card-name{
+/* Card name styling */
+.card-name {
     color: #888;
     font-weight: 600;
 }
 
-.icon-box i{
+/* Icon box styling */
+.icon-box i {
     font-size: 45px;
     color: #299B63;
 }
 
-
-.charts{
+/* Charts container styling */
+.charts {
     display: grid;
-    grid-template-columns: repeat(2, 1fr);
-    grid-gap: 100px;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    grid-gap: 20px;
     width: 100%;
-    padding: 30px;
-    padding-top: 10;
-    padding-left: 30;
+    padding: 20px;
 }
-.chart{
+
+/* Individual chart styling */
+.chart {
     background: #fff;
     padding: 20px;
     border-radius: 10px;
     box-shadow: 0 7px 25px rgba(0, 0, 0, 0.08);
+}
+
+/* Top products container styling */
+.top-products {
+    margin-top: 20px;
+}
+
+/* Top products header styling */
+.top-products h2 {
+    margin-bottom: 20px;
+    color: #6c4a21;
+    font-size: 24px;
+    font-weight: 600;
+}
+
+/* Table styling */
+.table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-bottom: 20px;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+    background-color: #fff;
+}
+
+.table th, .table td {
+    border: none;
+    padding: 12px 15px;
+    text-align: left;
+    font-size: 14px;
+    color: #333;
+}
+
+.table th {
+    background-color: #6c4a21;
+    color: #fff;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+}
+
+.table-striped tbody tr:nth-of-type(odd) {
+    background-color: #f9f9f9;
+}
+
+.table-striped tbody tr:hover {
+    background-color: #f1f1f1;
+}
+
+.table thead tr {
+    border-bottom: 2px solid #ddd;
+}
+
+.table tbody tr {
+    border-bottom: 1px solid #ddd;
+}
+
+/* Media Queries for Responsive Design */
+@media (max-width: 1200px) {
+    .main {
+        width: calc(100% - 220px);
+    }
+    .charts {
+        grid-gap: 20px;
+    }
+}
+
+@media (max-width: 992px) {
+    .main {
+        width: calc(100% - 200px);
+    }
+    .cards .card {
+        padding: 15px;
+        flex-direction: column;
+        align-items: flex-start;
+    }
+    .number {
+        font-size: 30px;
+    }
+    .icon-box i {
+        font-size: 40px;
+    }
+}
+
+@media (max-width: 768px) {
+    .main {
+        width: 100%;
+        left: 0;
+    }
+    .cards {
+        grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+        grid-gap: 15px;
+    }
+    .charts {
+        grid-template-columns: 1fr;
+        grid-gap: 15px;
+    }
+    .top-products h2 {
+        font-size: 20px;
+    }
+}
+
+@media (max-width: 576px) {
+    .cards {
+        grid-template-columns: 1fr;
+        grid-gap: 10px;
+    }
+    .number {
+        font-size: 25px;
+    }
+    .card-name {
+        font-size: 12px;
+    }
+    .icon-box i {
+        font-size: 35px;
+    }
+    .top-products h2 {
+        font-size: 18px;
+    }
+    .table th, .table td {
+        padding: 8px;
+        font-size: 12px;
+    }
 }

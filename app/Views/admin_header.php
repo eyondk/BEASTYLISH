@@ -1,87 +1,120 @@
-<?php 
-    if(isset($message)){
-        foreach($message as $message){
-        echo' 
-        <div class="message">
-                <span> '.$message.'</span>
-                <i class="fas fa-times" onclick="this.parentElement.remove();"></i>
-            </div>';
-        }
-    }
-?>
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Admin Page</title>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
     <link rel="stylesheet" href="<?=ASSETS?>css/admin.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+    <link rel="shortcut icon" href="img/Beastylish-favicon.png" type="image/x-icon">
+    <title>Admin Page</title>
 </head>
 <body>
-    
     <nav class="sidebar close">
         <header>
-            <div class="img-text">
+            <div class="image-text">
                 <span class="image">
-                    <img src="img/IMG_20221210_141334.jpg" alt="dp">
+                    <img src="img/admin.png" alt="dp">
                 </span>
-
                 <div class="text header-text">
-                    <span class="name">ADMIN NAME</span>
+                    <span></span>
                     <span class="admin">ADMIN</span>
                 </div>
             </div>
-
-            <i class='fas fa-angle-right toggle' ></i>
+            <i class='fas fa-angle-right toggle'></i>
         </header>
 
         <div class="menu-bar">
             <div class="menu">
-                <ul class="menu links">
+                <ul class="menu-links">
                     <li class="nav-link">
-                        <a href= "<?=ROOT?>Dashboard" >
-                        <i class="fa fa-dashboard icon"></i>
-                        <span class="text nav-text">DASHBOARD</span>
+                        <a href="<?=ROOT?>home">
+                            <i class="fa fa-dashboard icon"></i>
+                            <span class="text nav-text">DASHBOARD</span>
                         </a>
                     </li>
                     <li class="nav-link">
-                        <a href="<?=ROOT?>Products">
-                        <i class='fas fa-shopping-cart icon'></i>
-                        <span class="text nav-text">PRODUCTS</span>
+                        <a href="#" id="acc-btn" class="acc">
+                            <i class="fa fa-dashboard icon"></i>
+                            PRODUCTS
+                            <span class="fa fa-chevron-down"></span>
                         </a>
+                        <ul id="acc-show">
+                            <li><a href="<?=ROOT?>Products" class="first-sub">Product List</a></li>
+                            <li><a href="<?=ROOT?>Category">Category</a></li>
+                            
+                        </ul>
                     </li>
                     <li class="nav-link">
-                        <a href="<?=ROOT?>Orders">
-                        <i class='fas fa-clipboard-list icon'></i>
-                        <span class="text nav-text">ORDERS</span>
+                        <a href="#" id="acc-btn" class="acc">
+                            <i class='fas fa-clipboard-list icon'></i>
+                            ORDERS
+                            <span class="fa fa-chevron-down"></span>
                         </a>
+                        <ul id="acc-show">
+                            <li><a href="<?=ROOT?>Orders" class="first-sub">Order List</a></li>
+                            <li><a href="<?=ROOT?>OrderPending">Order Pending</a></li>
+                            <li><a href="<?=ROOT?>OrderOnDelivery">Order on Delivery</a></li>
+                            <li><a href="<?=ROOT?>OrderCompleted">Order Completed</a></li>
+                            <li><a href="<?=ROOT?>OrderCancel">Order Cancelled</a></li>
+                            
+                        </ul>
                     </li>
                     <li class="nav-link">
                         <a href="#">
-                        <i class='fas fa-user-friends icon'></i>
-                        <span class="text nav-text">CUSTOMER</span>
+                            <i class='fas fa-user-friends icon'></i>
+                            <span class="text nav-text">CUSTOMER</span>
                         </a>
                     </li>
                 </ul>
             </div>
 
-            <div class="botton-content">
-                    <li class="">
-                        <a href="logout.php">
-                        <i class='fas fa-sign-out icon'></i>                        
+            <div class="bottom-content">
+                <li>
+                    <a href="admin_update_profile.php">
+                        <i class='fas fa-user icon'></i>
+                        <span class="text nav-text">ACCOUNT</span>
+                    </a>
+                </li>
+                <li class="logout">
+                    <a href="logout.php">
+                        <i class='fas fa-sign-out icon'></i>
                         <span class="text nav-text">LOG OUT</span>
-                        </a>
-                    </li>
+                    </a>
+                </li>
             </div>
         </div>
-    </nav> 
-    
+    </nav>
+
+    <script src="js/admin.js"></script>
+    <script>
+        document.addEventListener("DOMContentLoaded", function() {
+            const accBtn = document.getElementById("acc-btn");
+            const accShow = document.getElementById("acc-show");
+
+            if (accBtn) {
+                accBtn.addEventListener("click", function(event) {
+                    event.preventDefault();
+                    accShow.classList.toggle("show");
+                    accBtn.querySelector(".fa-chevron-down").classList.toggle("flip");
+
+                    // Adjust the position of subsequent list items
+                    const parentLi = accBtn.parentElement;
+                    const allLis = Array.from(document.querySelectorAll('.sidebar > .menu-bar > .menu-links > li'));
+                    const submenuHeight = accShow.classList.contains('show') ? accShow.scrollHeight : 0;
+
+                    let nextElement = parentLi.nextElementSibling;
+                    if (nextElement) {
+                        nextElement.style.marginTop = accShow.classList.contains('show') ? `${submenuHeight}px` : '0';
+                        nextElement = nextElement.nextElementSibling;
+                    }
+                });
+            }
+
+            
+
+            
+        });
+    </script>
 </body>
-    
-<script src="https://cdn.jsdelivr.net/npm/chart.js@3.5.1/dist/chart.min.js"></script>
-<script src="<?=ASSETS?>js/chart1.js"></script>
-<script src="<?=ASSETS?>js/chart2.js"></script>
-<script src="<?=ASSETS?>js/admin.js"></script>
 </html>

@@ -1,26 +1,24 @@
 <?php
 
-class Products extends Controller
+class Category extends Controller
 {
 
     public function index()
     {
       
         
-        $prod = new Product;
+        $categ = new Categ;
     
         if ($_SERVER["REQUEST_METHOD"] == "POST") {
             $data = $_POST;
-            $files = $_FILES;
-           
+            print_r($data);
+          
 
             if (isset($data['action'])) {
                 if ($data['action'] == 'insert') {
-                    $result = $prod->insertProduct($data, $files);
-                } elseif ($data['action'] == 'update') {
-                    $result = $prod->updateProduct($data, $files);
+                    $result = $categ->insertCategory($data);
                 } elseif ($data['action'] == 'delete') {
-                    $result = $prod->deleteProduct($data);
+                    $result = $categ->deleteCategory($data);
                 }else {
                     $result = ['success' => false, 'messages' => 'Invalid action.'];
                 }
@@ -39,9 +37,9 @@ class Products extends Controller
            
         
 
-        $products = $prod->getProducts();
-        $data['products'] =$products;
-        $this->view('Products', $data);
+        $categories = $categ->getCategory();
+        $data['categ'] =$categories;
+        $this->view('Category', $data);
     }
 
 }

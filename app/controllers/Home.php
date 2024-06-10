@@ -8,7 +8,7 @@ class Home extends Controller
 
        
 
-        echo "This is the home controller";
+       
         $this->view('home');
     }
 

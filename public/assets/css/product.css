@@ -1,232 +1,397 @@
-@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;300;400;500;600&display=swap');
-
-:root{
-   --green:#27ae60;
-   --black:#333;
-   --white:#fff;
-   --bg-color:#eee;
-   --box-shadow:0 .5rem 1rem rgba(0,0,0,.1);
-   --border:.1rem solid var(--black);
+*::selection{ 
+   background-color: #6c4a21; 
+   color: #faf2e8; 
+} 
+*::-webkit-scrollbar-thumb{ 
+   background-color: #b79c7b; 
+   border-radius: 5px;
+   height: 10px;
 }
 
-*{
-   font-family: 'Poppins', sans-serif;
-   margin:0; padding:0;
-   box-sizing: border-box;
-   outline: none; border:none;
-   text-decoration: none;
-   text-transform: capitalize;
+::-webkit-scrollbar {
+   width: 8px;
+   
 }
 
-html{
-   font-size: 62.5%;
-   overflow-x: hidden;
+::-webkit-scrollbar-track {
+   background: #b79c7b68; 
 }
 
-.add-btn{
-    display: block;
-    width: 100%;
-    cursor: pointer;
-    border-radius: .5rem;
-    margin-top: 1rem;
-    font-size: 1.7rem;
-    padding:1rem 3rem;
-    background: var(--green);
-    color:var(--white);
-    text-align: center;
- }
- 
- .add-btn:hover{
-    background: var(--black);
- }
-
-.btn{
-   display: block;
-   width: 90%;
-   cursor: pointer;
-   border-radius: .5rem;
-   margin-top: 1rem;
-   font-size: 1.7rem;
-   padding:1rem 3rem;
-   background: var(--green);
-   color:var(--white);
-   text-align: center;
+/* Style for horizontal scrollbar */
+.product-display-table::-webkit-scrollbar-thumb {
+   width: 4px;
 }
 
-.btn:hover{
-   background: var(--black);
+.home {
+   padding-left: 0.5rem;
+   margin-top: 4rem;
 }
 
-.search {
-    width: 20%; 
-    padding: 0.5rem; 
-    border: 1px solid #ccc; 
-    border-radius: 5px; 
-    margin-bottom: 1rem; 
-}
-
-.search:focus {
-    outline: none; 
-    border-color: dodgerblue;
-}
-
-.message{
-   display: block;
-   background: var(--bg-color);
-   padding:1.5rem 1rem;
-   font-size: 2rem;
-   color:var(--black);
-   margin-bottom: 2rem;
-   text-align: center;
-}
-
-.container{
-   max-width: 1200px;
-   padding:2rem;
-   margin:0 auto;
-}
-
-.container1 {
-    position: relative;
-    max-width: 1000px;
-    padding: 2rem;
-    margin: 0 auto;
-    border-right: 2px solid #6c4a21 ;
-    left: -370px; /* Adjust the value as needed */
-    top: -20px;
-    height: 900px;
-}
-
-/* .whole-container {
-    position: relative;
-    max-width: 350px;
-    height: 900px;
-    padding: 2rem;
-    margin: 0 auto;
-    border-right: 2px solid #6c4a21 ;
-    top: -20px;
-    
-}    */
-
-.categ-container {
-    position: relative;
-    max-width: 500px;
-    padding: 2rem;
-    margin: 0 auto;
-    right: -500px; /* Adjust the value as needed */
-    top: -870px;
-    
-}
-
-.admin-product-form-container.centered{
+.container {
    display: flex;
-   align-items: center;
    justify-content: center;
-   min-height: 100vh;
-   
-}
-
-.admin-product-form-container form{
-   max-width: 50rem;
-   margin:0 auto;
-   padding:2rem;
-   border-radius: .5rem;
-   background: var(--bg-color);
-}
-
-.admin-product-form-container form h3{
-   text-transform: uppercase;
-   color:var(--black);
-   margin-bottom: 1rem;
-   text-align: center;
-   font-size: 2.5rem;
-}
-
-.admin-product-form-container form .box{
+   padding: 2rem;
    width: 100%;
-   border-radius: .5rem;
-   padding:1.2rem 1.5rem;
-   font-size: 1.7rem;
-   margin:1rem 0;
-   background: var(--white);
-   text-transform: none;
+   margin-top: 0.5rem;
+   position: relative;
 }
 
-.product-display{
-   position: relative;
-   margin:2rem 0;
-   max-height: 500px;
-   overflow: auto;
-   
+.product-display {
+   width: 100%;
+   max-width: 1200px;
+   margin: 0 auto;
 }
 
-.product-display .product-display-table{
-   position: relative;
-   width: 90%;
+.table-container {
+   max-height: 500px; 
+   overflow-y: auto; 
+   border: 2px solid #6c4a21;
+}
+
+.product-display-table {
+   width: 100%;
+   border-collapse: collapse;
+}
+
+.product-display-table thead {
+   color: #faf2e8; 
+   font-weight: 400;
+   position: sticky; 
+   top: 0;
+   background-color: #6c4a21; 
+   z-index: 1;
+}
+
+.product-display-table th,
+.product-display-table td {
+   font-size: medium;
+   padding: 1rem;
    text-align: center;
+   border: 1px solid #6c4a21;
+}
+
+.product-display-table th {
+   background-color: #6c4a213e;
+   text-transform: uppercase;
+}
+
+.product-display-table tbody {
+   font-size: medium;
+   font-weight: 500;
+   color: #6c4a21;
+}
+
+.product-display-table td {
+   width: auto;
+}
+
+.product-display-table td img {
+   max-width: 100px;
+   height: auto;
+}
+
+.product-display-table td:nth-child(4) {
+   max-width: 300px;
+   word-wrap: break-word;
+   white-space: normal; 
+}
+
+.product-display-table td button, .home .add {
+   margin: 0.5rem;
+   padding: 1rem;
+   border: 2px solid;
+   border-radius: 0.5rem;
+   transition: all 0.3s ease;
+}
+
+.product-display-table .edit {
+   background-color: #90734f;
+   color: cornsilk;
+   border: 2px solid #90734f;
+   padding-left: 1.7rem;
+   padding-right: 1.7rem;
+}
+
+.product-display-table .delete {
+   background-color: #352512;
+   color: cornsilk;
+}
+
+.product-display-table .edit:hover, .product-display-table .delete:hover, .home .add:hover {
+   transform: scale(1.1);
+}
+
+.home .add {
+   background-color: rgb(229, 196, 152);
+   color: #6c4a21;
+   font-size: small;
+   font-weight: 500;
+   padding: 1rem 3rem;
+   border: 2px solid rgb(229, 196, 152);
+   position: absolute;
+   right: 10rem;
+   bottom: -3.5rem;
+}
+
+.totalproduct {
+   padding-top: 0.5rem;
+}
+
+.totalproduct .tottext {
+   font-size: medium;
+   color: #352512;
+}
+
+.searchbar {
+   margin-bottom: 2rem;
+}
+
+.searchbar {
+   display: flex;
+   justify-content: left;
+}
+
+.searchbar .search {
+   padding: 1rem 1rem;
+   border: none;
+   background-color: #6c4a21;
+   color: #faf2e8;
+   border-radius: 2px;
+   margin-right: 0.2rem;
+}
+
+.searchbar .searchInput::placeholder {
+   color: #6c4a21;
+   padding-left: 0.5rem;
+}
+
+.searchbar .searchInput {
+   background-color: transparent;
+   color: #6c4a21;
+   border: 2px solid #6c4a21;
+   height: 35px;
+   width: 350px;
+   padding-left: 0.5rem;
+   font-size: 15px;
+}
+
+input[type="search"]::-webkit-search-cancel-button {
+   -webkit-appearance: none;
+}
+
+
+.modal {
+   display: none;
+   position: fixed; 
+   z-index: 99999; 
+   padding-top: 50px; 
+   left: 0;
+   top: 0;
+   width: 100%; 
+   height: 100%; 
+   overflow: auto; 
+   background-color: rgba(0,0,0,0.4); 
+}
+ 
+/* The Modal (background) */
+.modal {
+   display: none;
+   position: fixed; 
+   z-index: 99999; 
+   padding-top: 50px; 
+   left: 0;
+   top: 0;
+   width: 100%; 
+   height: 100%; 
+   overflow: auto; 
+   background-color: rgba(0,0,0,0.4); 
+}
+ 
+/* Modal Content */
+.modal-content {
+   background-color: #faf2e8;
+   margin: auto;
+   padding: 20px;
+   border: 1px solid #888;
+   width: 80%;
+   max-width: 700px;
+   display: flex;
+   flex-direction: column;
+   align-items: center;
+}
+
+/* Modal Header */
+.modal-header {
+   width: 100%;
+   display: flex;
+   justify-content: space-between;
+   align-items: center;
+}
+
+/* Modal Title */
+.modal-title {
+   font-size: 1.25rem;
+   color: #6c4a21;
+}
+
+/* Close Button */
+.btn-close {
+   background: none;
+   border: none;
+   font-size: 1.5rem;
+   color: #6c4a21;
+   cursor: pointer;
+}
+
+.btn-close:hover {
+   color: #352512;
+}
+
+/* Modal Body */
+.modal-body {
+   width: 100%;
+}
+
+/* Form elements */
+.form-label {
+   color: #6c4a21;
+   font-weight: bold;
+}
+
+.form-control, .form-select {
+   width: 100%;
+   margin-bottom: 1rem;
+   padding: 0.75rem;
+   border: 1px solid #6c4a21;
+   border-radius: 0.25rem;
+   font-size: 1rem;
+   color: #6c4a21;
+}
+
+.form-control::placeholder {
+   color: #b79c7b;
+}
+
+.form-control:focus, .form-select:focus {
+   border-color: #90734f;
+   box-shadow: 0 0 5px rgba(144, 115, 79, 0.5);
+}
+
+textarea.form-control {
+   resize: vertical;
+}
+
+/* Add Another Image Button */
+#addImageBtn {
+   margin-bottom: 1rem;
+   background-color: #90734f;
+   color: #faf2e8;
+   border: none;
+   padding: 0.75rem 1.5rem;
+   cursor: pointer;
+}
+
+#addImageBtn:hover {
+   background-color: #563b19;
+}
+
+/* Modal Footer */
+.modal-footer {
+   width: 100%;
+   display: flex;
+   justify-content: space-between;
+   align-items: center;
+}
+
+.btn {
+   padding: 0.75rem 1.5rem;
+   border: none;
+   cursor: pointer;
+   text-align: center;
+}
+
+.btn-secondary {
+   background-color: #90734f;
+   color: #faf2e8;
+}
+
+.btn-secondary:hover {
+   background-color: #563b19;
+}
+
+.btn-dark {
+   background-color: #6c4a21;
+   color: #faf2e8;
+}
+
+.btn-dark:hover {
+   background-color: #352512;
+}
+
+
+
+/* Adjust modal content width for smaller screens */
+@media (max-width: 768px) {
+   .modal-content {
+       width: 90%;
+   }
+}
+
+@media (max-width: 480px) {
+   .modal-content {
+       width: 95%;
+   }
+
+   .modal-content .add-btn, .modal-content .opt-btn {
+       width: 100%;
+       padding: 10px;
+   }
+}
+
+/* Adjust search bar width for smaller screens */
+@media (max-width:990px) {
+   .searchbar {
+       margin-left: 0rem;
+   }
+   
+   .home .add{
+       right: 1rem;
+   }
    
 }
 
-.product-display .product-display-table thead{
-   background: var(--bg-color);
-}
-
-.product-display .product-display-table th{
-   padding:1rem;
-   font-size: 2rem;
-}
-
-
-.product-display .product-display-table td{
-   padding:1rem;
-   font-size: 2rem;
-   border-bottom: var(--border);
-}
-
-.product-display .product-display-table .btn:first-child{
-   margin-top: 0;
-}
-
-.product-display .product-display-table .btn:last-child{
-   background: crimson;
-}
-
-.product-display .product-display-table .btn:last-child:hover{
-   background: var(--black);
-}
-
-
-
-
-
-
-
-
-
-@media (max-width:991px){
-
-   html{
-      font-size: 55%;
+@media (max-width: 768px) {
+   .searchbar {
+       margin-left: 0;
+       width: 80%;
+       flex-direction: column;
+       font-size: 15px;
+   }
+   
+   .searchbar .searchInput {
+       width: 80%;
+       margin-bottom: 0.5rem;
    }
 
-}
-
-@media (max-width:768px){
-
-   .product-display{
-      overflow-y:scroll;
+   .searchbar .search {
+       width: 10%;
+     
    }
 
-   .product-display .product-display-table{
-      width: 80rem;
+   .modal-content{
+       width: 60%;
    }
 
-}
-
-@media (max-width:450px){
-
-   html{
-      font-size: 50%;
+   .home .add{
+       right: 1rem;
+       bottom: -4.5rem;
    }
-
 }
+
+@media (max-width:480px) {
+   .searchbar .search {
+       width: 15%;
+     
+   }
+}
+

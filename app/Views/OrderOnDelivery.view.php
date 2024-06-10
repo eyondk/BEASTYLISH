@@ -35,7 +35,7 @@
                             <th>PAYMENT METHOD</th>
                             <th>PAYMENT STATUS</th>
                             <th>STATUS</th>
-                            <th>ACTION</th>
+                           
                         </tr>
                     </thead>
                     <tbody>
@@ -48,12 +48,18 @@
                                         <td>&#8369; <?= $order['order_total'] ?></td>
                                         <td><?= $order['payment_method'] ?></td>
                                         <td><?= $order['payment_status'] ?></td>
-                                        <td><?= $order['order_status'] ?></td>
                                         <td>
-                                        <button type="button" class="view" data-order-id="<?= $order['order_id'] ?>" data-customer-name="<?= $order['customer_name'] ?>" data-phone="<?= $order['phone'] ?>" data-email="<?= $order['email'] ?>" data-address="<?= $order['address'] ?>">
-                                                <i class="fa-solid fa-info"></i> View Details
-                                            </button>
+                                        <select name="order_status" class="order-status box" 
+                                            data-order-id="<?= $order['order_id'] ?>" 
+                                            data-original-status="<?= $order['order_status'] ?>" 
+                                            data-payment-method="<?= $order['payment_method'] ?>" 
+                                            data-payment-status="<?= $order['payment_status'] ?>">
+                                        <option value="On Delivery" <?= $order['order_status'] == 'On Delivery' ? 'selected' : '' ?>>On Delivery</option>
+                                        <option value="Completed" <?= $order['order_status'] == 'Completed' ? 'selected' : '' ?>>Completed</option>
+                                        
+                                        </select>
                                         </td>
+                                        
                                     </tr>
                                 <?php endforeach; ?>
                         </tr>
@@ -94,6 +100,6 @@
 </div>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.6/umd/popper.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-<script src="<?=ASSETS?>js/order.js"></script>
+<script src="<?=ASSETS?>js/orderondeliver.js"></script>
 </body>
 </html>
