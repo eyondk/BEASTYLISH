@@ -54,10 +54,16 @@
                         </a>
                     </li>
                     <li class="nav-link">
-                        <a href="#">
+                        <a href="#" id="acc-btn" class="acc">
                         <i class='fas fa-shopping-cart icon'></i>
-                        <span class="text nav-text">PRODUCTS</span>
+                        PRODUCTS
+                        <span class="fa fa-chevron-down"></span>
                         </a>
+                         <ul id="acc-show">
+                            <li><a href="#" class="first-sub">Necklace</a></li>
+                            <li><a href="#">Bracelet</a></li>
+                            <li><a href="#">Sunglass</a></li>
+                        </ul>
                     </li>
                     <li class="nav-link">
                         <a href="#">
@@ -99,6 +105,31 @@
     </section>
 
     <script src="js/admin.js"></script>
+    <script>
+        document.addEventListener("DOMContentLoaded", function() {
+            const accBtn = document.getElementById("acc-btn");
+            const accShow = document.getElementById("acc-show");
+
+            if (accBtn) {
+                accBtn.addEventListener("click", function(event) {
+                    event.preventDefault();
+                    accShow.classList.toggle("show");
+                    accBtn.querySelector(".fa-chevron-down").classList.toggle("flip");
+
+                    // Adjust the position of subsequent list items
+                    const parentLi = accBtn.parentElement;
+                    const allLis = Array.from(document.querySelectorAll('.sidebar > .menu-bar > .menu-links > li'));
+                    const submenuHeight = accShow.classList.contains('show') ? accShow.scrollHeight : 0;
+
+                    let nextElement = parentLi.nextElementSibling;
+                    if (nextElement) {
+                        nextElement.style.marginTop = accShow.classList.contains('show') ? `${submenuHeight}px` : '0';
+                        nextElement = nextElement.nextElementSibling;
+                    }
+                });
+            }
+        });
+    </script>
 
 </body>
 </html>
