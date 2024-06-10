@@ -1,15 +1,3 @@
-<?php 
-    if(isset($message)){
-        foreach($message as $message){
-        echo' 
-        <div class="message">
-                <span> '.$message.'</span>
-                <i class="fas fa-times" onclick="this.parentElement.remove();"></i>
-            </div>';
-        }
-    }
-?>
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -25,23 +13,15 @@
     <nav class="sidebar close">
         <header>
             <div class="image-text">
-                <?php
-                    $select_profile = $conn->prepare("SELECT * FROM user WHERE USER_ID = ?");
-                    $select_profile->execute([$admin_id]);
-                    $fetch_profile = $select_profile->fetch(PDO::FETCH_ASSOC);
-
-                ?>
                 <span class="image">
-                    <img src="uploaded_img/<?= $fetch_profile['IMAGE']?>" alt="dp">
+                    <img src="img/admin.png" alt="dp">
                 </span>
-
                 <div class="text header-text">
-                    <span class="name"><?= $fetch_profile['NAME']?></span>
+                    <span></span>
                     <span class="admin">ADMIN</span>
                 </div>
             </div>
-
-            <i class='fas fa-angle-right toggle' ></i>
+            <i class='fas fa-angle-right toggle'></i>
         </header>
 
         <div class="menu-bar">
@@ -49,17 +29,17 @@
                 <ul class="menu-links">
                     <li class="nav-link">
                         <a href="#">
-                        <i class="fa fa-dashboard icon"></i>
-                        <span class="text nav-text">DASHBOARD</span>
+                            <i class="fa fa-dashboard icon"></i>
+                            <span class="text nav-text">DASHBOARD</span>
                         </a>
                     </li>
                     <li class="nav-link">
                         <a href="#" id="acc-btn" class="acc">
-                        <i class='fas fa-shopping-cart icon'></i>
-                        PRODUCTS
-                        <span class="fa fa-chevron-down"></span>
+                            <i class="fa fa-dashboard icon"></i>
+                            ACCESSORIES
+                            <span class="fa fa-chevron-down"></span>
                         </a>
-                         <ul id="acc-show">
+                        <ul id="acc-show">
                             <li><a href="#" class="first-sub">Necklace</a></li>
                             <li><a href="#">Bracelet</a></li>
                             <li><a href="#">Sunglass</a></li>
@@ -67,42 +47,35 @@
                     </li>
                     <li class="nav-link">
                         <a href="#">
-                        <i class='fas fa-clipboard-list icon'></i>
-                        <span class="text nav-text">ORDERS</span>
+                            <i class='fas fa-clipboard-list icon'></i>
+                            <span class="text nav-text">ORDERS</span>
                         </a>
                     </li>
                     <li class="nav-link">
                         <a href="#">
-                        <i class='fas fa-user-friends icon'></i>
-                        <span class="text nav-text">CUSTOMER</span>
+                            <i class='fas fa-user-friends icon'></i>
+                            <span class="text nav-text">CUSTOMER</span>
                         </a>
                     </li>
                 </ul>
             </div>
 
             <div class="bottom-content">
-                <li class="">
-                    <a href="#">
-                    <i class='fas fa-user icon'></i>
-                    <span class="text nav-text">ACCOUNT</span>
+                <li>
+                    <a href="admin_update_profile.php">
+                        <i class='fas fa-user icon'></i>
+                        <span class="text nav-text">ACCOUNT</span>
                     </a>
                 </li>
-
                 <li class="logout">
                     <a href="logout.php">
-                    <i class='fas fa-sign-out icon'></i>                        
-                    <span class="text nav-text">LOG OUT</span>
+                        <i class='fas fa-sign-out icon'></i>
+                        <span class="text nav-text">LOG OUT</span>
                     </a>
                 </li>
-                
             </div>
         </div>
-
     </nav>
-
-    <section class="home">
-        <div class="text">Dashboard Sidebar</div>
-    </section>
 
     <script src="js/admin.js"></script>
     <script>
@@ -128,8 +101,11 @@
                     }
                 });
             }
+
+            
+
+            
         });
     </script>
-
 </body>
 </html>
