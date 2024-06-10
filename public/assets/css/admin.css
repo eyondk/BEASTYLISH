@@ -74,6 +74,9 @@ body{
     display: block !important; 
 }
 
+
+
+
 .sidebar ul ul.close{
     display:none;
 }
@@ -83,9 +86,8 @@ body{
     float: none;
     margin-top:0.5rem !important;
     text-align: left;
-    left:5rem;
+    left:3rem;
 }
-
 
 
 
