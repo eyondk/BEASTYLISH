@@ -1,21 +1,20 @@
-<?php require("shared/header.inc.php")?>
+<?php require("shared/header.inc.php") ?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Shop | Beastylish</title>
-    <link rel="shortcut icon" href="<?=ROOT?>/assets/img/logo.png" type="image/x-icon">
-    <link rel="stylesheet" href="<?=ROOT?>/assets/css/shop.css">
-    <link rel="stylesheet" href="<?=ROOT?>/assets/css/latestprod.css">
+    <link rel="shortcut icon" href="<?= ROOT ?>/assets/img/logo.png" type="image/x-icon">
+    <link rel="stylesheet" href="<?= ROOT ?>/assets/css/shop.css">
+    <link rel="stylesheet" href="<?= ROOT ?>/assets/css/latestprod.css">
 </head>
 <body>
 
 <div class="flex">
     <div class="shopCat">
         <ul>
-            <li ><a href="#" class="shopNew">NEW</a></li>
-            <li ><a href="#" class="shopSale">SALE</a></li>
+            <li><a href="?sale=true" class="shopSale">SALE</a></li>
             <li>
                 <a href="#" id="acc-btn" class="acc">ACCESSORIES
                     <span class="fa fa-chevron-down first"></span>
@@ -56,7 +55,7 @@
     </div>
 
     <div class="product-display">
-    <div class="searchbar">
+        <div class="searchbar">
             <form action="" method="get">
                 <button type="submit" id="search-btn" class="search"><i class="fa-solid fa-magnifying-glass"></i></button>
                 <input type="search" name="search" id="searchInput" class="searchInput" placeholder="Search for Products">
@@ -67,22 +66,28 @@
             <?php if (isset($is_search) && $is_search): ?>
                 <?php if (!empty($search_results)): ?>
                     <?php foreach ($search_results as $product): ?>
-                        <div class="product-card" data-description="<?= $product['prod_description'] ?>" data-price="<?= $product['prod_price'] ?>" data-image="<?= $product['image_path'] ?>" data-name="<?= $product['prod_name'] ?>">
-                            <div class="sale-details">
-                                <p class="sale">5&#37;</p>
+                        <div class="product-card" data-description="<?= htmlspecialchars($product['prod_description']) ?>" data-price="<?= htmlspecialchars($product['prod_price']) ?>" data-image="<?= htmlspecialchars($product['image_path']) ?>" data-name="<?= htmlspecialchars($product['prod_name']) ?>" data-discount="<?= intval($product['discount_percent']) ?>">
+                            <?php if ($product['discount_percent'] > 0): ?>
+                                <div class="sale-details">
+                                    <p class="sale"><?= intval($product['discount_percent']) ?>%</p>
+                                </div>
+                            <?php endif; ?>
+                            <div class="main-images">
+                                <img class="product-img" src="<?= htmlspecialchars($product['image_path']) ?>" alt="<?= htmlspecialchars($product['prod_name']) ?>">
                             </div>
-                                <div class="main-images">
-                                    <img class="product-img" src="<?= $product['image_path'] ?>" alt="<?= $product['prod_name'] ?>">
+                            <div class="details">
+                                <span class="product-name"><?= htmlspecialchars($product['prod_name']) ?></span>
+                            </div>
+                            <div class="size-price">
+                                <div class="price">
+                                    <?php if ($product['discount_percent'] > 0): ?>
+                                        <span class="price-num">&#x20B1;<?= number_format($product['prod_price'] - ($product['prod_price'] * $product['discount_percent'] / 100), 2) ?></span>
+                                        <span class="price-num"><del>&#x20B1;<?= number_format($product['prod_price'], 2) ?></del></span>
+                                    <?php else: ?>
+                                        <span class="price-num">&#x20B1;<?= number_format($product['prod_price'], 2) ?></span>
+                                    <?php endif; ?>
                                 </div>
-                                <div class="details">
-                                    <span class="product-name"><?= $product['prod_name'] ?></span>
-                                </div>
-                                <div class="size-price">
-                                    <div class="price">
-                                        <span class="price-num">&#x20B1;<?= $product['prod_price'] ?></span>
-                                        <span class="price-num"><del>&#x20B1;12.00</del></span>
-                                    </div>
-                                </div>
+                            </div>
                             <div class="button">
                                 <button type="button" style="width: 100%" class="add-btn">Add To Cart</button>
                             </div>
@@ -94,41 +99,47 @@
             <?php else: ?>
                 <?php if (!empty($products)): ?>
                     <?php foreach ($products as $product): ?>
-                        <div class="product-card" data-description="<?= $product['prod_description'] ?>" data-price="<?= $product['prod_price'] ?>" data-image="<?= $product['image_path'] ?>" data-name="<?= $product['prod_name'] ?>">
-                            <div class="sale-details">
-                                <p class="sale">5&#37;</p>
+                        <div class="product-card" data-description="<?= htmlspecialchars($product['prod_description']) ?>" data-price="<?= htmlspecialchars($product['prod_price']) ?>" data-image="<?= htmlspecialchars($product['image_path']) ?>" data-name="<?= htmlspecialchars($product['prod_name']) ?>" data-discount="<?= intval($product['discount_percent']) ?>">
+                            <?php if ($product['discount_percent'] > 0): ?>
+                                <div class="sale-details">
+                                    <p class="sale"><?= intval($product['discount_percent']) ?>%</p>
+                                </div>
+                            <?php endif; ?>
+                            <div class="main-images">
+                                <img class="product-img" src="<?= htmlspecialchars($product['image_path']) ?>" alt="<?= htmlspecialchars($product['prod_name']) ?>">
                             </div>
-                                <div class="main-images">
-                                    <img class="product-img" src="<?= $product['image_path'] ?>" alt="<?= $product['prod_name'] ?>">
+                            <div class="details">
+                                <span class="product-name"><?= htmlspecialchars($product['prod_name']) ?></span>
+                            </div>
+                            <div class="size-price">
+                                <div class="price">
+                                    <?php if ($product['discount_percent'] > 0): ?>
+                                        <span class="price-num">&#x20B1;<?= number_format($product['prod_price'] - ($product['prod_price'] * $product['discount_percent'] / 100), 2) ?></span>
+                                        <span class="price-num"><del>&#x20B1;<?= number_format($product['prod_price'], 2) ?></del></span>
+                                    <?php else: ?>
+                                        <span class="price-num">&#x20B1;<?= number_format($product['prod_price'], 2) ?></span>
+                                    <?php endif; ?>
                                 </div>
-                                <div class="details">
-                                    <span class="product-name"><?= $product['prod_name'] ?></span>
-                                </div>
-                                <div class="size-price">
-                                    <div class="price">
-                                        <span class="price-num">&#x20B1;<?= $product['prod_price'] ?></span>
-                                        <span class="price-num"><del>&#x20B1;12.00</del></span>
-                                    </div>
-                                </div>
+                            </div>
                             <div class="button">
                                 <button type="button" style="width: 100%" class="add-btn">Add To Cart</button>
                             </div>
                         </div>
-
                     <?php endforeach; ?>
                 <?php else: ?>
                     <p>No products available.</p>
                 <?php endif; ?>
             <?php endif; ?>
         </div>
-            <!-- The Modal -->
+
+        <!-- THE MODAL -->
         <div id="myModal" class="modal">
             <!-- Modal content dynamically filled by JavaScript -->
             <div class="modal-content">
                 <span class="close">&times;</span>
                 <div class="modal-product-card">
                     <div class="sale-details">
-                        <p class="sale">5%</p>
+                        <p class="sale modal-sale"></p>
                     </div>
                     <div class="main-images">
                         <img class="modal-product-img" src="" alt="Product Image">
@@ -138,8 +149,8 @@
                     </div>
                     <div class="size-price">
                         <div class="price">
-                            <span class="modal-price-num"></span>
-                            <span class="origprice-num"><del></del></span>
+                            <span class="modal-price-num">&#x20B1;</span>
+                            <span class="modal-origprice-num"><del>&#x20B1;</del></span>
                         </div>
                     </div>
                     <div class="prod-det">
@@ -162,16 +173,16 @@
                         </div>
                     </div>
                     <div class="button">
-                        <button type="button" style="width: 100%" class="add-btn">Add To Cart</button>
+                        <button type="button" style="width: 100%" class="modal-add-btn">Add To Cart</button>
                     </div>
                 </div>
             </div>
         </div>
-
     </div>
 </div>
 
-<script src="<?=ROOT?>/assets/js/shop.js"></script>
+<script src="<?= ROOT ?>/assets/js/shop.js"></script>
 <script src="https://kit.fontawesome.com/f8e1a90484.js" crossorigin="anonymous"></script>
+
 </body>
 </html>

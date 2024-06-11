@@ -9,17 +9,18 @@ class Shop extends Controller
         $search_results = [];
 
         // $productData = [
-        //     'prod_name' => 'Bracelet Test 2',
+        //     'prod_name' => 'Anklet Test 1',
         //     'prod_description' => 'Test Product',
-        //     'prod_price' => 300,
+        //     'prod_price' => 100,
         //     'prod_stock' => 50,
         //     'prod_sizes' => '',
         //     'prod_color' => '',
-        //     'categ_name' => 'BRACELET'  // Category name as per your categories table
+        //     'categ_name' => 'CLIP',  // Category name as per your categories table
+        //     'discount_percent' => 20
         // ];
         
         // $imageData = [
-        //     'image_path' => ROOT . '/assets/images/bracelet1.jpg'
+        //     'image_path' => ROOT . '/assets/images/anklet1.jpg'
         // ];
         // show($productData);
         // show($imageData);
@@ -34,18 +35,21 @@ class Shop extends Controller
         //     echo "Failed to insert product.";
         // }
 
-        if (isset($_GET['search']) && !empty($_GET['search'])) {
+        if (isset($_GET['sale']) && $_GET['sale'] == 'true') {
+            $products = $product->get_sale_products();
+        } else if (isset($_GET['categ_name']) && $_GET['categ_name'] === 'NEW') {
+            $products = $product->get_newest_products(10); // Adjust the limit as needed
+        } else if (isset($_GET['search']) && !empty($_GET['search'])) {
             $keyword = $_GET['search'];
             $is_search = true;
             $search_results = $product->search_products($keyword);
-        } elseif (isset($_GET['categ_name'])) {
+        } else if (isset($_GET['categ_name'])) {
             $categ_name = $_GET['categ_name'];
             $products = $product->get_products_by_category($categ_name);
         } else {
             $products = $product->get_products();
         }
-       
-
+    
         $this->view('shop', [
             'is_search' => $is_search,
             'search_results' => $search_results,

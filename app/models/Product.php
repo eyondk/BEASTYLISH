@@ -13,7 +13,8 @@ class Product
         'prod_stock',
         'prod_sizes',
         'prod_color',
-        'categ_id'
+        'categ_id',
+        'discount_percent'
     ];
 
     public function get_products()
@@ -37,6 +38,53 @@ class Product
             return [];
         }
     }
+
+    public function get_latest_products($limit = 10) {
+        try {
+            $conn = $this->connect();
+            $stmt = $conn->prepare("
+                SELECT p.*, pi.image_path, c.categ_name
+                FROM products p 
+                LEFT JOIN product_images pi ON p.prod_id = pi.prod_id 
+                LEFT JOIN category c ON p.categ_id = c.categ_id
+                ORDER BY p.prod_id DESC
+                LIMIT :limit
+            ");
+            $stmt->bindValue(':limit', $limit, PDO::PARAM_INT);
+            $stmt->execute();
+            $products = $stmt->fetchAll(PDO::FETCH_ASSOC);
+            
+            return $products;
+        } catch (PDOException $e) {
+            // Log the error or handle it as needed
+            error_log("Database error: " . $e->getMessage());
+            return [];
+        }
+    }
+
+
+    public function get_sale_products() {
+        try {
+            $conn = $this->connect();
+            $stmt = $conn->prepare("
+                SELECT p.*, pi.image_path, c.categ_name
+                FROM products p 
+                LEFT JOIN product_images pi ON p.prod_id = pi.prod_id 
+                LEFT JOIN category c ON p.categ_id = c.categ_id
+                WHERE p.discount_percent > 0
+                ORDER BY p.prod_id DESC
+            ");
+            $stmt->execute();
+            $products = $stmt->fetchAll(PDO::FETCH_ASSOC);
+
+            return $products;
+        } catch (PDOException $e) {
+            // Log the error or handle it as needed
+            error_log("Database error: " . $e->getMessage());
+            return [];
+        }
+    }
+
 
     public function search_products($keyword)
     {
@@ -66,7 +114,7 @@ class Product
             $conn = $this->connect();
             $conn->beginTransaction();
     
-            // Step 1: Check if category exists, if not, insert it
+            // Check if category exists, if not, insert it
             $categorySql = "SELECT categ_id FROM category WHERE categ_name = :categ_name";
             $categoryStmt = $conn->prepare($categorySql);
             $categoryStmt->bindParam(':categ_name', $productData['categ_name'], PDO::PARAM_STR);
@@ -85,9 +133,9 @@ class Product
                 $productData['categ_id'] = $categoryResult['categ_id'];
             }
     
-            // Step 2: Insert product data
-            $productSql = "INSERT INTO products (prod_name, prod_description, prod_price, prod_stock, prod_sizes, prod_color, categ_id) 
-                            VALUES (:prod_name, :prod_description, :prod_price, :prod_stock, :prod_sizes, :prod_color, :categ_id)";
+            // Insert product data
+            $productSql = "INSERT INTO products (prod_name, prod_description, prod_price, prod_stock, prod_sizes, prod_color, categ_id, discount_percent) 
+                            VALUES (:prod_name, :prod_description, :prod_price, :prod_stock, :prod_sizes, :prod_color, :categ_id, :discount_percent)";
             $productStmt = $conn->prepare($productSql);
             $productStmt->execute([
                 ':prod_name' => $productData['prod_name'],
@@ -96,11 +144,12 @@ class Product
                 ':prod_stock' => $productData['prod_stock'],
                 ':prod_sizes' => $productData['prod_sizes'],
                 ':prod_color' => $productData['prod_color'],
-                ':categ_id' => $productData['categ_id']
+                ':categ_id' => $productData['categ_id'],
+                ':discount_percent' => $productData['discount_percent']
             ]);
             $prodId = $conn->lastInsertId();
     
-            // Step 3: Insert image data
+            // Insert image data
             $imageSql = "INSERT INTO product_images (prod_id, image_path) VALUES (:prod_id, :image_path)";
             $imageStmt = $conn->prepare($imageSql);
             $imageStmt->execute([
@@ -108,11 +157,11 @@ class Product
                 ':image_path' => $imageData['image_path']
             ]);
     
-            // Step 4: Commit transaction
+            // Commit transaction
             $conn->commit();
             return true;
         } catch (PDOException $e) {
-            // Step 5: Roll back transaction on error
+            // Roll back transaction on error
             $conn->rollBack();
             error_log("Database error: " . $e->getMessage());
             return false;

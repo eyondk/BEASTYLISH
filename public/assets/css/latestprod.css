@@ -113,6 +113,10 @@ html{
   background-color: #6c4a21;
 }
 
+
+
+
+
 @media screen and (max-width: 768px) {
   .swiper-navBtn {
     display: none;

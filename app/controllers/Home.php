@@ -13,7 +13,7 @@ class Home extends Controller
         $product = new Product();
 
       
-        $products = $product->get_products();
+        $products = $product->get_latest_products();
         
         $this->view('home', ['products' => $products]);
     }   

@@ -40,16 +40,34 @@ document.addEventListener("DOMContentLoaded", function () {
 
       const productImage = this.getAttribute("data-image");
       const productName = this.getAttribute("data-name");
-      const productPrice = this.getAttribute("data-price");
+      const productPrice = parseFloat(this.getAttribute("data-price"));
       const productDescription = this.getAttribute("data-description");
+      const productDiscount = parseInt(this.getAttribute("data-discount"));
 
       document.querySelector(".modal-product-img").src = productImage;
       document.querySelector(".modal-product-name").textContent = productName;
-      document.querySelector(
-        ".modal-price-num"
-      ).textContent = `₱${productPrice}`;
       document.querySelector(".modal-description").textContent =
         productDescription;
+
+      if (productDiscount > 0) {
+        const discountedPrice =
+          productPrice - (productPrice * productDiscount) / 100;
+        document.querySelector(
+          ".modal-price-num"
+        ).innerHTML = `&#x20B1;${discountedPrice.toFixed(2)}`;
+        document.querySelector(
+          ".modal-origprice-num"
+        ).innerHTML = `<del>&#x20B1;${productPrice.toFixed(2)}</del>`;
+        document.querySelector(
+          ".modal-sale"
+        ).textContent = `${productDiscount}%`;
+      } else {
+        document.querySelector(
+          ".modal-price-num"
+        ).innerHTML = `&#x20B1;${productPrice.toFixed(2)}`;
+        document.querySelector(".modal-origprice-num").innerHTML = "";
+        document.querySelector(".modal-sale").textContent = "";
+      }
 
       modal.style.display = "block";
     });
