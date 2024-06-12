@@ -1,0 +1,210 @@
+@import url('https://fonts.googleapis.com/css2?family=Dancing+Script:wght@400..700&family=Montserrat:ital,wght@0,100..900;1,100..900&family=Style+Script&display=swap');
+
+*{
+    font-family: "Montserrat", sans-serif;
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    outline: none;
+    border: none;
+    text-decoration: none;
+}
+body{
+    background-color: #faf2e8;
+}
+*::selection{
+    background-color: #6c4a21;
+    color: #faf2e8;
+}
+/* *::-webkit-scrollbar{
+    background-color: transparent;
+    width: 5px;
+
+}
+*::-webkit-scrollbar-thumb{
+    background-color: #b79c7b;
+    width: 5px;
+} */
+
+
+
+*::placeholder{
+    color: #6c4a21;
+    font-size: 1.5rem;
+}
+
+html{
+    font-size: 62.5%;
+    overflow-x: hidden;
+    scroll-behavior: smooth;
+    scroll-padding-top: 6.5rem;
+}
+
+section{
+    padding: 3rem 2rem;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+.form-container{
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+
+.form-container form {
+    width: 50rem;
+    background-color: #faf2e8;
+    border-radius: 4px;
+    box-shadow: #563103;
+    border: 2px solid #6c4a21;
+    text-align: center;
+    padding: 2rem;
+}
+
+.form-container form h3{
+    font-size: 3.5rem;
+    color: #6c4a21;
+    margin-top: 2rem;
+    margin-bottom: 0rem;
+    text-transform: uppercase;
+}
+
+.form-container form h4{
+    font-size: 2rem;
+    font-weight: 500;
+    color: #6c4a21;
+    margin-bottom: 1rem;
+}
+
+.form-container form .box{
+    width: 100%;
+    margin: 1rem 0;
+    border-radius: 4px;
+    border: 2px solid #6c4a21;
+    padding: 1.2rem 1.4rem;
+    color: #6c4a21;
+    background-color: transparent;
+    font-weight: 500;
+    
+}
+
+input[type="file"]::file-selector-button {
+    border: 2px solid #6c4a21;
+    padding: 0.2em 0.4em;
+    border-radius: 2px;
+    background-color: transparent;
+    transition: 1s;
+    text-transform: uppercase;
+    color: #6c4a21;
+}
+
+input[type="file"]::file-selector-button:hover {
+    background-color: #6c4a21;
+    color: #faf2e8;
+}
+
+.form-container form p{
+    margin-top: 1.5rem;
+    margin-bottom: 2rem;
+    font-size: 1.8rem;
+    color: #6c4a21;
+}
+.form-container form a{
+    color: #6c4a21;
+    font-weight: 500;
+}
+
+.form-container form a:hover{
+    text-decoration: underline;
+}
+
+.btn, .delete-btn{
+    display: block;
+    width: 100%;
+    margin-top: 1rem;
+    border-radius: 4px;
+    font-size: 2rem;
+    padding: 1.5rem 3rem;
+    cursor: pointer;
+}
+.btn{
+    color: #faf2e8;
+    background-color: #6c4a21;
+    transition: 1s;
+}
+.btn:hover, .delete-btn:hover, .option-btn:hover{
+    background-color: #a47133;
+}
+
+.option_field {
+    margin-top: 14px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.form-container a {
+    color: #6c4a21;
+    font-size: 20px;
+}
+.form-container a:hover {
+    text-decoration: underline;
+}
+.checkbox {
+    display: flex;
+    column-gap: 10px;
+    white-space: nowrap;
+}
+.form-container .checkbox input {
+    accent-color: #6c4a21;
+}
+
+.checkbox label {
+    font-size: 12px;
+    cursor: pointer;
+    user-select: none;
+    color: #6c4a21;
+}
+
+/* media quries */
+@media(max-width:991px){
+    html{
+        font-size: 55%;
+    }
+}
+
+@media(max-width:450px){
+    html{
+        font-size: 50%;
+    }
+}
+
+.message{
+    max-width: 1200px;
+    background-color: #b79c7b;
+    padding: 1rem;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1.5rem;
+    border-radius: 4px;
+}
+
+.message span{
+    font-size: 2rem;
+    color: #6c4a21;
+    font-weight: bold;
+}
+
+.message i{
+    cursor: pointer;
+    color: #6c4a21;
+}
+
+.message i:hover{
+    color: #563103;
+}
+
