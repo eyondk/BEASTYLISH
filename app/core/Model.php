@@ -14,13 +14,12 @@
     protected $order_type  = "desc";
     protected $order_column = "id";
     public $errors   = [];
-
+    
     public function findAll()
     {
-    
-    $query = "select * from $this->table order by $this->order_column $this->order_type limit $this->limit offset $this->offset";
+        $query = "select * from $this->table order by $this->order_column $this->order_type limit $this->limit offset $this->offset";
 
-    return $this->query($query);
+        return $this->query($query);
     }
 
     public function test()
@@ -30,6 +29,15 @@
 
         show($results);
     }
+
+    // public function getDetailsByEmail($column, $email) {
+    //     $query = "SELECT * FROM $this->table WHERE $column = :email LIMIT 1";
+    //     $data = ['email' => $email];
+        
+    //     return $this->query($query, $data);
+    // }
+    
+
 
     public function where($data, $data_not = [])
     {
@@ -79,61 +87,55 @@
     return false;
     }
 
+    //modified
     public function insert($data)
     {
-    
-    /**remove unwanted data **/
-    if(!empty($this->allowedColumns))
-    {
-    foreach ($data as $key => $value) {
-        
-        if(!in_array($key, $this->allowedColumns))
+        /**remove unwanted data **/
+        if(!empty($this->allowedColumns))
         {
-        unset($data[$key]);
+            foreach ($data as $key => $value) {
+                if(!in_array($key, $this->allowedColumns))
+                {
+                    unset($data[$key]);
+                }
+            }
         }
-    }
-    }
 
-    $keys = array_keys($data);
+        $keys = array_keys($data);
+        $query = "insert into $this->table (".implode(",", $keys).") values (:".implode(",:", $keys).")";
+        $result = $this->query($query, $data);
 
-    $query = "insert into $this->table (".implode(",", $keys).") values (:".implode(",:", $keys).")";
-    $this->query($query, $data);
-
-    return false;
+        return $result !== false;
     }
 
+    //modified
     public function update($id, $data, $id_column = 'id')
     {
-
-    /**  remove unwanted data **/
-    if(!empty($this->allowedColumns))
-    {
-    foreach ($data as $key => $value) {
-        
-        if(!in_array($key, $this->allowedColumns))
-        {
-        unset($data[$key]);
+        // Remove unwanted data
+        if(!empty($this->allowedColumns)) {
+            foreach ($data as $key => $value) {
+                if(!in_array($key, $this->allowedColumns)) {
+                    unset($data[$key]);
+                }
+            }
         }
+
+        $keys = array_keys($data);
+        $query = "update $this->table set ";
+
+        foreach ($keys as $key) {
+            $query .= $key . " = :". $key . ", ";
+        }
+
+        $query = trim($query,", ");
+
+        $query .= " where $id_column = :$id_column";
+
+        $data[$id_column] = $id;
+
+        return $this->query($query, $data);
     }
-    }
 
-    $keys = array_keys($data);
-    $query = "update $this->table set ";
-
-    foreach ($keys as $key) {
-    $query .= $key . " = :". $key . ", ";
-    }
-
-    $query = trim($query,", ");
-
-    $query .= " where $id_column = :$id_column ";
-
-    $data[$id_column] = $id;
-
-    $this->query($query, $data);
-    return false;
-
-    }
 
     public function delete($id, $id_column = 'id')
     {
