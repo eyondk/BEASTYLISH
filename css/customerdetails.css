@@ -1,0 +1,266 @@
+*::-webkit-scrollbar-thumb{ 
+    background-color: #b79c7b; 
+    border-radius: 5px;
+    height: 10px;
+}
+
+::-webkit-scrollbar {
+    width: 8px;
+    
+}
+
+::-webkit-scrollbar-track {
+    background: #b79c7b68; 
+}
+
+/* title and btns above */
+.semiheader{
+    display: flex;
+    margin: auto;
+    flex-direction: row;
+    justify-content:space-between;
+    padding-top: 3rem;
+    padding-bottom: 1rem;
+    padding-left: 3rem;
+    padding-right: 3rem;
+    color: #6c4a21;
+}
+
+.semiheader h2{
+    font-size: 30px;
+    text-transform: uppercase;
+    font-weight: 500;
+
+}
+
+.cus-dlt-btn{
+    color: #faf2e8;
+    background-color: #3d2b12;
+    padding: 1rem;
+    border-radius: 0.5rem;
+    border: none;
+    transition: all 0.3s ease;
+    cursor:pointer;
+}
+
+.cus-dlt-btn:hover{
+    transform: scale(1.05);
+    background-color: #3d2b12be;
+}
+
+
+/* back anchor */
+.semifooter{
+    display: flex;
+    justify-content: end;
+    padding-right: 3.5rem;
+    margin-top: -3rem;
+}
+
+
+.semifooter .back{
+    text-decoration: none;
+    font-size: 20px;
+    font-weight: 500;
+    color: #573d1c;
+    transition: all 0.3s ease;
+}
+
+.semifooter .back:hover{
+    transform: scale(1.06);
+    text-decoration: 1px underline;
+}
+
+/* customer details card start */
+
+.customerdetails-container{
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    margin: auto ;
+    padding: 2rem;    
+}
+
+.customerdetails-card {
+    padding: 50px;
+    border: 2px solid #6c4a21;
+    border-radius: 0;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    background-color: none;
+    width: 30%; 
+    color: #6c4a21;
+
+
+}
+
+.pic-name-id {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center; /* Center align text and image */
+}
+
+.pic-name-id h3{
+    font-size: 20px;
+    font-weight: 500;
+
+}
+.pic-name-id h4{
+    font-size: 15px;
+    color: #6c4a218f;
+    font-weight: 500;
+
+
+}
+
+.pic-name-id img {
+    border-radius: 5%; 
+    margin-bottom: 1rem;
+}
+
+.customerdetails-info {
+    display: flex;
+    flex-direction: column;
+}
+
+.orders-div {
+    display: flex;
+    align-items: center;
+    margin-bottom: 2rem;
+    margin-top: 3rem;
+    color: #573d1c;
+}
+
+.orderdet{
+    display: flex;
+    flex-direction: column;
+}
+
+.orders-div i {
+    font-size: 30px;
+    margin-right: 10px;
+    
+}
+
+.orderdet h4{
+    font-size: 20px;
+    font-weight: 500;
+}
+
+
+
+.orderdet h5{
+    font-size: 15px;
+    font-weight: 600;
+}
+
+.total-order {
+    font-size: 24px;
+    margin: 0;
+}
+
+.tit {
+    margin: 0;
+    font-size: 18px;
+}
+
+
+.cus-det h3 {
+    margin: 10px 0;
+    font-size: 16px;
+    font-weight: 500;
+}
+
+strong {
+    font-weight: 600;
+    margin-right: 5px;
+    text-transform: uppercase;
+}
+
+
+
+
+
+/* order card details start*/
+
+.orderdetails-card {
+    border:0;
+    padding: 20px;
+    margin-bottom: 20px;
+    background-color: none;
+    width: 79%; 
+    color: #6c4a21;
+    font-weight: 500;
+
+
+}
+
+.orderdetails-card h3{
+    font-size: 24px;
+    font-weight: 600;
+    text-transform: uppercase;
+}
+
+.orderdetails-card h4{
+    font-size: 14px;
+}
+
+.order-details-table-wrapper {
+    height: 300px; 
+    overflow-y: auto;
+    margin-top:2rem;
+    border: 2px solid #6c4a21;
+}
+
+.order-details-table {
+    width: 100%;
+    border-collapse: collapse;
+    table-layout: fixed; 
+
+}
+
+.order-details-table th, .order-details-table td {
+    padding: 8px;
+    text-align: center;
+}
+
+.order-details-table td{
+    font-size: 15px;
+    font-weight: 500;
+}
+
+.order-details-table thead th {
+    position: sticky;
+    top: 0;
+    background-color:#faf2e8;
+    border-bottom: 2px solid #6c4a21;
+    z-index: 1;
+    font-size: 18px;
+    font-weight: 600;
+    text-transform: uppercase;
+}
+
+.order-summary {
+    margin-top: 20px;
+    background-color: none;
+    border: 2px solid #6c4a21;
+    padding: 15px;
+    font-size: 15px;
+}
+
+.order-summary h4{
+    font-size: 20px;
+    font-weight: 600;
+    margin-bottom: 1rem;
+    text-transform: uppercase;
+}
+
+
+/* Responsive adjustments */
+@media (max-width: 600px) {
+    .pic-name-id img {
+        max-width: 80px; 
+    }
+
+}
