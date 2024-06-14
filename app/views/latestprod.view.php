@@ -39,6 +39,15 @@
             opacity: 80%;
             font-size: 13px;
         }
+        .cart-summary {
+            display: none; /* Hide the cart summary by default */
+        }
+
+        .prod_name-price .prod_stock {
+            font-size: 12px;
+            font-weight: 500;
+            text-transform: uppercase;
+        }
     </style>
 </head>
 <body>
@@ -62,7 +71,9 @@
                         
                         <div class="product-details">
                             <div class="prod_name-price">
-                                <h3 class="prod_name"><?= $product['prod_name'] ?></h3>
+                                <h3 class="prod_name"><?= $product['prod_name'] ?></h3><h1 class="prod_stock">Stock:<?= $product['prod_stock'] ?></h1>
+
+                                
                                 <?php if ($product['discount_percent'] > 0): ?>
                                     <?php
                                         $discountedPrice = $product['prod_price'] - ($product['prod_price'] * $product['discount_percent'] / 100);
@@ -73,8 +84,7 @@
                                 <?php endif; ?>
                             </div>
                             <div class="button-box">
-                            <button class="product-button" data-product-id="<?= $product['prod_id'] ?>">ADD TO CART</button>
-
+                                <button class="product-button" data-product-id="<?= $product['prod_id'] ?>">ADD TO CART</button>
                             </div>
                         </div>
                     </div>
@@ -87,6 +97,13 @@
     <div class="swiper-button-next swiper-navBtn"></div>
     <div class="swiper-button-prev swiper-navBtn"></div>
     <div class="swiper-pagination"></div>
+</div>
+
+<!-- Cart Summary (Hidden by default) -->
+<div class="cart-summary">
+    <p>Items in cart: <span id="item-count">0</span></p>
+    <p>Subtotal: &#8369;<span id="subtotal">0.00</span></p>
+    <p>Total: &#8369;<span id="total">0.00</span></p>
 </div>
 
 <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>

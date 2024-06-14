@@ -137,13 +137,13 @@ document.addEventListener("DOMContentLoaded", function () {
   }
 
   // Attach event listeners to quantity buttons using event delegation
-  document.addEventListener("click", function (event) {
-    if (event.target.matches(".qty-container .minus")) {
-      updateQuantity(event.target, -1); // Decrease by 1
-    } else if (event.target.matches(".qty-container .plus")) {
-      updateQuantity(event.target, 1); // Increase by 1
-    }
-  });
+  // document.addEventListener("click", function (event) {
+  //   if (event.target.matches(".qty-container .minus")) {
+  //     updateQuantity(event.target, -1); // Decrease by 1
+  //   } else if (event.target.matches(".qty-container .plus")) {
+  //     updateQuantity(event.target, 1); // Increase by 1
+  //   }
+  // });
 
   // Function to handle adding product to cart
   function addToCart(productId) {

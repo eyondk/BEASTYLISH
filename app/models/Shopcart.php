@@ -34,27 +34,57 @@ class Shopcart
         }
     }
 
-    // Add item to cart
+     // Add item to cart
     public function add_to_cart($cartData)
     {
         try {
             $conn = $this->connect();
+
+            // Check if product already exists in cart for this customer
             $stmt = $conn->prepare("
-                INSERT INTO cart (cart_qty, cart_status, cus_id, prod_id) 
-                VALUES (:cart_qty, :cart_status, :cus_id, :prod_id)
+                SELECT * FROM cart 
+                WHERE cus_id = :cus_id AND prod_id = :prod_id AND cart_status = 'active'
             ");
             $stmt->execute([
-                ':cart_qty' => $cartData['cart_qty'],
-                ':cart_status' => $cartData['cart_status'],
                 ':cus_id' => $cartData['cus_id'],
                 ':prod_id' => $cartData['prod_id']
             ]);
+
+            $existingItem = $stmt->fetch(PDO::FETCH_ASSOC);
+
+            if ($existingItem) {
+                // If product exists, update the quantity
+                $newQty = $existingItem['cart_qty'] + $cartData['cart_qty'];
+                $stmt = $conn->prepare("
+                    UPDATE cart 
+                    SET cart_qty = :cart_qty 
+                    WHERE cart_id = :cart_id
+                ");
+                $stmt->execute([
+                    ':cart_qty' => $newQty,
+                    ':cart_id' => $existingItem['cart_id']
+                ]);
+            } else {
+                // If product does not exist, add new entry
+                $stmt = $conn->prepare("
+                    INSERT INTO cart (cart_qty, cart_status, cus_id, prod_id) 
+                    VALUES (:cart_qty, :cart_status, :cus_id, :prod_id)
+                ");
+                $stmt->execute([
+                    ':cart_qty' => $cartData['cart_qty'],
+                    ':cart_status' => $cartData['cart_status'],
+                    ':cus_id' => $cartData['cus_id'],
+                    ':prod_id' => $cartData['prod_id']
+                ]);
+            }
+
             return true;
         } catch (PDOException $e) {
             error_log("Database error: " . $e->getMessage());
             return false;
         }
     }
+
 
     // Update cart item quantity
     public function update_cart_item($cart_id, $cart_qty)
