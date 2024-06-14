@@ -29,7 +29,7 @@
                 <ul class="menu-links">
                     
                     <li class="nav-link">
-                        <a href="<?= ROOT ?>home">
+                        <a href="<?= ROOT ?>AdminHome">
                             <i class="fa fa-dashboard icon"></i>
                             <span class="text nav-text">DASHBOARD</span>
                         </a>
@@ -61,7 +61,7 @@
                         </ul>
                     </li>
                     <li class="nav-link">
-                        <a href="<?=ROOT?>Customer">
+                        <a href="<?=ROOT?>AdminCustomer">
                             <i class='fas fa-user-friends icon'></i>
                             <span class="text nav-text">CUSTOMER</span>
                         </a>

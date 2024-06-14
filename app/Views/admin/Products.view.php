@@ -49,7 +49,7 @@
                                             if (!empty($product['image_paths'])):
                                                 $imagePaths = explode(',', $product['image_paths']); // Split comma-separated paths
                                                 foreach ($imagePaths as $path): ?>
-                                                    <img src="../public/assets/uploads/<?= htmlspecialchars($path) ?>" height="100" alt="Product image">
+                                                    <img src="../public/assets/images/<?= htmlspecialchars($path) ?>" height="100" alt="Product image">
                                                 <?php endforeach;
                                             else: ?>
                                                 <!-- Placeholder or default image if no images are available -->

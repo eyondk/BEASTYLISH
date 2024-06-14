@@ -1,6 +1,6 @@
 <?php
 
-class Customer extends Controller
+class AdminCustomer extends Controller
 {
 
     public function index()

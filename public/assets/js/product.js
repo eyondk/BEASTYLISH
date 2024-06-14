@@ -104,8 +104,8 @@ $(document).ready(function() {
         var currentStock = parseInt($("#current_stocks").val());
 
         
-
-        if (parseInt(newStock) <= currentStock) {
+   
+        if (parseInt(newStock) < currentStock) {
             alert('New stock quantity must be greater than the current stock quantity.');
             return;
         }
