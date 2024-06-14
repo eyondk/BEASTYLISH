@@ -60,7 +60,7 @@
                                 </form>
                             </td>
                             <td>
-                                <img src="<?= htmlspecialchars($item['image_path']); ?>" alt="product" width="100" height="100">
+                                <img src="../public/assets/images/<?= htmlspecialchars($item['image_path']); ?>" alt="product" width="100" height="100">
                             </td>
                             <td><?= htmlspecialchars($item['prod_name']); ?></td>
                             <td>&#8369; <?= htmlspecialchars(number_format($item['prod_price'], 2)); ?></td>

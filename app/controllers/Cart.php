@@ -24,41 +24,7 @@ class Cart extends Controller
         ]);
     }
     
-    // public function add()
-    // {
-    //     if ($_SERVER['REQUEST_METHOD'] == 'POST') {
-    //         header('Content-Type: application/json'); // Ensure the response is JSON
-
-    //         $input = json_decode(file_get_contents('php://input'), true);
-
-    //         if (!isset($input['product_id']) || !isset($input['cart_qty'])) {
-    //             echo json_encode(['success' => false, 'message' => 'Invalid input']);
-    //             exit;
-    //         }
-
-    //         $cart = new Shopcart();
-    //         $cus_id = 1; // Replace with actual customer ID
-
-    //         $cartData = [
-    //             'cart_qty' => $input['cart_qty'],
-    //             'cart_status' => 'active',
-    //             'cus_id' => $cus_id, // Replace with actual customer ID
-    //             'prod_id' => $input['product_id']
-    //         ];
-
-    //         $added = $cart->add_to_cart($cartData);
-    //         if ($added) {
-    //             echo json_encode(['success' => true, 'message' => 'Product added to cart successfully.']);
-    //         } else {
-    //             echo json_encode(['success' => false, 'message' => 'Failed to add product to cart.']);
-    //         }
-    //         exit;
-    //     }
-
-    //     // If not a POST request, return an error response
-    //     header('Content-Type: application/json');
-    //     echo json_encode(['success' => false, 'message' => 'Invalid request method']);
-    // }
+    
 
     public function add()
     {
