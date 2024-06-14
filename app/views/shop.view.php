@@ -182,6 +182,7 @@
 </div>
 
 <script src="<?= ROOT ?>/assets/js/shop.js"></script>
+<script src="<?=ROOT?>/assets/js/addtocart.js"></script>
 <script src="https://kit.fontawesome.com/f8e1a90484.js" crossorigin="anonymous"></script>
 
 </body>

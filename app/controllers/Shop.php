@@ -9,18 +9,18 @@ class Shop extends Controller
         $search_results = [];
 
         // $productData = [
-        //     'prod_name' => 'Anklet Test 1',
+        //     'prod_name' => 'Sunglass Test 1',
         //     'prod_description' => 'Test Product',
-        //     'prod_price' => 100,
+        //     'prod_price' => 299,
         //     'prod_stock' => 50,
         //     'prod_sizes' => '',
         //     'prod_color' => '',
-        //     'categ_name' => 'CLIP',  // Category name as per your categories table
-        //     'discount_percent' => 20
+        //     'categ_name' => 'SUNGLASS',  // Category name as per your categories table
+        //     'discount_percent' => 28
         // ];
         
         // $imageData = [
-        //     'image_path' => ROOT . '/assets/images/anklet1.jpg'
+        //     'image_path' => ROOT . '/assets/images/sunglass1.jpg'
         // ];
         // show($productData);
         // show($imageData);
