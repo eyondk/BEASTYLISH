@@ -35,7 +35,7 @@ class OrderPending extends Controller
        
         $orders = $order->getOrderPending();
         $data['orders'] = $orders;
-        $this->view('OrderPending', $data);
+        $this->view('admin/OrderPending', $data);
     }
 
     

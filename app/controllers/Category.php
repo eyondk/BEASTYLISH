@@ -32,6 +32,6 @@ class Category extends Controller
 
         $categories = $categ->getCategory();
         $data['categ'] = $categories;
-        $this->view('Category', $data);
+        $this->view('admin/Category', $data);
     }
 }

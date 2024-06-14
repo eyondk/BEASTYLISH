@@ -10,7 +10,7 @@ class Report extends Controller
         $data['report'] = $reports;
 
        
-        $this->view('Report',$data);
+        $this->view('admin/Report',$data);
     }
 
 }

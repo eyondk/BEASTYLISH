@@ -41,7 +41,7 @@ class Products extends Controller
 
         $products = $prod->getProducts();
         $data['products'] =$products;
-        $this->view('Products', $data);
+        $this->view('admin/Products', $data);
     }
 
 }

@@ -12,7 +12,7 @@ class Orders extends Controller
         } else {
             $orders = $order->getOrders();
             $data['orders'] = $orders;
-            $this->view('Orders', $data);
+            $this->view('admin/Orders', $data);
         }
     }
 

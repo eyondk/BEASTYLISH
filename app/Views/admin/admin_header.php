@@ -35,29 +35,29 @@
                         </a>
                     </li>
                     <li class="nav-link">
-                        <a href="#" id="acc-btn" class="acc">
-                            <i class="fa fa-dashboard icon"></i>
+                        <a href="#" class="acc-btn">
+                        <i class="fas fa-shopping-cart icon"></i>
+
                             PRODUCTS
                             <span class="fa fa-chevron-down"></span>
                         </a>
-                        <ul id="prod-show">
-                            <li><a href="<?= ROOT ?>Products" >Product List</a></li>
+                        <ul class="prod-show">
+                            <li><a href="<?= ROOT ?>Products">Product List</a></li>
                             <li><a href="<?= ROOT ?>Category">Category</a></li>
                         </ul>
                     </li>
                     <li class="nav-link">
-                        <a href="#" id="acc-btn" class="acc">
+                        <a href="#" class="acc-btn">
                             <i class='fas fa-clipboard-list icon'></i>
                             ORDERS
                             <span class="fa fa-chevron-down"></span>
                         </a>
-                        <ul id="acc-show">
+                        <ul class="acc-show">
                             <li><a href="<?=ROOT?>Orders" class="first-sub">Order List</a></li>
                             <li><a href="<?=ROOT?>OrderPending">Order Pending</a></li>
                             <li><a href="<?=ROOT?>OrderOnDelivery">Order on Delivery</a></li>
                             <li><a href="<?=ROOT?>OrderCompleted">Order Completed</a></li>
                             <li><a href="<?=ROOT?>OrderCancel">Order Cancelled</a></li>
-                            
                         </ul>
                     </li>
                     <li class="nav-link">
@@ -74,7 +74,6 @@
                         </a>
                     </li>
                 </ul>
-            
             </div>
             
             <div class="bottom-content">
@@ -97,31 +96,29 @@
     <script src="js/admin.js"></script>
     <script>
         document.addEventListener("DOMContentLoaded", function() {
-            const accBtn = document.getElementById("acc-btn");
-            const accShow = document.getElementById("acc-show");
+            const accBtns = document.querySelectorAll(".acc-btn");
 
-            if (accBtn) {
+            accBtns.forEach(accBtn => {
                 accBtn.addEventListener("click", function(event) {
                     event.preventDefault();
-                    accShow.classList.toggle("show");
-                    accBtn.querySelector(".fa-chevron-down").classList.toggle("flip");
+                    const accShow = this.nextElementSibling;
 
-                    // Adjust the position of subsequent list items
-                    const parentLi = accBtn.parentElement;
-                    const allLis = Array.from(document.querySelectorAll('.sidebar > .menu-bar > .menu-links > li'));
-                    const submenuHeight = accShow.classList.contains('show') ? accShow.scrollHeight : 0;
+                    if (accShow) {
+                        accShow.classList.toggle("show");
+                        this.querySelector(".fa-chevron-down").classList.toggle("flip");
 
-                    let nextElement = parentLi.nextElementSibling;
-                    if (nextElement) {
-                        nextElement.style.marginTop = accShow.classList.contains('show') ? `${submenuHeight}px` : '0';
-                        nextElement = nextElement.nextElementSibling;
+                        // Adjust the position of subsequent list items
+                        const parentLi = this.parentElement;
+                        const submenuHeight = accShow.classList.contains('show') ? accShow.scrollHeight : 0;
+
+                        let nextElement = parentLi.nextElementSibling;
+                        while (nextElement) {
+                            nextElement.style.marginTop = accShow.classList.contains('show') ? `${submenuHeight}px` : '0';
+                            nextElement = nextElement.nextElementSibling;
+                        }
                     }
                 });
-            }
-
-            
-
-            
+            });
         });
     </script>
 </body>

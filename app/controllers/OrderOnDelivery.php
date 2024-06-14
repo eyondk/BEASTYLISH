@@ -26,7 +26,7 @@ class OrderOnDelivery extends Controller
        
         $orders = $order->getOrderOnDelivery();
         $data['orders'] = $orders;
-        $this->view('OrderOnDelivery', $data);
+        $this->view('admin/OrderOnDelivery', $data);
     }
 
     

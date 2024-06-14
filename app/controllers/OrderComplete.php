@@ -14,7 +14,7 @@ class OrderComplete extends Controller
        
         $orders = $order->getOrderComplete();
         $data['orders'] = $orders;
-        $this->view('OrderComplete', $data);
+        $this->view('admin/OrderComplete', $data);
     }
 
     

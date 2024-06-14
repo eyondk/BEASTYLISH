@@ -8,7 +8,7 @@ class Customer extends Controller
         print_r($_POST);
         $cus = new Customers;
         $data['orders'] = $cus->getCustomerOrders();
-        $this->view('Customer',$data);
+        $this->view('admin/Customer',$data);
     }
 
 }

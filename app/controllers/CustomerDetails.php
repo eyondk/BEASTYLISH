@@ -25,6 +25,6 @@ class CustomerDetails extends Controller
             'total_spent' => $customerData['data']['total_spent']
         ];
 
-        $this->view('CustomerDetails', $data);
+        $this->view('admin/CustomerDetails', $data);
     }
 }

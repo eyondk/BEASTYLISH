@@ -33,7 +33,7 @@ class Home extends Controller
 
        
         
-        $this->view("home",$data);
+        $this->view("admin/home",$data);
 
     }
 }       
