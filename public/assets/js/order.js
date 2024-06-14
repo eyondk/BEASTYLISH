@@ -13,13 +13,16 @@ $(document).ready(function () {
         var phone = $(this).data('phone');
         var email = $(this).data('email');
         var address = $(this).data('address');
+        var stat = $(this).data('stat');
 
+           
       
         $('#orderID').text(orderId);
         $('#customerName').text(customerName);
         $('#phoneNumber').text(phone);
         $('#email').text(email);
         $('#address').text(address);
+        $('#orderStatus').text(stat);
 
       
         $.ajax({
@@ -34,7 +37,8 @@ $(document).ready(function () {
                         var html = '';
                         var totalItems = 0;
                         response.forEach(function(product) {
-                            html += '<p><strong>Product Name:</strong> ' + product.prod_name + '</br> <strong>Quantity:</strong> ' + product.orderi_qty + '</p>';
+                            html += '<p><strong>Product Name:</strong> ' + product.prod_name + 
+                                    '</br><strong>Quantity:</strong> ' + product.orderi_qty + '</p>';
                             totalItems += parseInt(product.orderi_qty);
                         });
                         $('#productsContainer').html(html);
@@ -73,5 +77,19 @@ $(document).ready(function () {
         }
     });
 
+    $('#search-btn').click(function() {
+        var searchTerm = $('#searchInput').val().toLowerCase();
+    
+        $('#orderTable tbody tr').each(function() {
+            var row = $(this);
+            var allText = row.text().toLowerCase();
+    
+            if (allText.indexOf(searchTerm) !== -1) {
+                row.show();
+            } else {
+                row.hide();
+            }
+        });
+    });
 
 });

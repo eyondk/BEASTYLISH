@@ -4,6 +4,101 @@
             $this->conn = $this->connect();
         }
 
+        //CUSTOMER
+
+        public function getCustomerOrders() {
+            $sql = "
+                SELECT 
+                    c.cus_id, 
+                    c.cus_fname, 
+                    c.cus_lname, 
+                    CONCAT(a.add_street, ', ', a.add_city, ', ', a.add_province, COALESCE(', ' || a.add_infoaddress, '')) AS customer_address,
+                    COUNT(DISTINCT o.order_id) AS orders_count, 
+                    COALESCE(SUM(oi.orderi_qty * p.prod_price), 0) AS total_spent
+                FROM 
+                    customer c
+                LEFT JOIN 
+                    orders o ON c.cus_id = o.cus_id
+                LEFT JOIN 
+                    address a ON c.cus_id = a.cus_id
+                LEFT JOIN 
+                    order_item oi ON o.order_id = oi.order_id
+                LEFT JOIN 
+                    products p ON oi.prod_id = p.prod_id
+                GROUP BY 
+                    c.cus_id, c.cus_fname, c.cus_lname, customer_address
+                ORDER BY 
+                    c.cus_id";
+            
+            $stmt = $this->conn->prepare($sql);
+            $stmt->execute();
+            return $stmt->fetchAll(PDO::FETCH_ASSOC);
+        }
+        
+
+        
+        public function getCustomerDetailsById($cus_id)
+        {
+            try {
+                // Fetch customer details with orders and total spent
+                $sql = "
+                    SELECT 
+                        c.cus_id, 
+                        c.cus_fname, 
+                        c.cus_lname, 
+                        c.cus_username,
+                        c.cus_email,
+                        c.cus_phonenum,
+                        CONCAT(a.add_street, ', ', a.add_city, ', ', a.add_province, COALESCE(', ' || a.add_infoaddress, '')) AS customer_address,
+                        COUNT(DISTINCT o.order_id) AS orders_count, 
+                        COALESCE(SUM(oi.orderi_qty * p.prod_price), 0) AS total_spent
+                    FROM 
+                        customer c
+                    LEFT JOIN 
+                        orders o ON c.cus_id = o.cus_id
+                    LEFT JOIN 
+                        address a ON c.cus_id = a.cus_id
+                    LEFT JOIN 
+                        order_item oi ON o.order_id = oi.order_id
+                    LEFT JOIN 
+                        products p ON oi.prod_id = p.prod_id
+                    WHERE 
+                        c.cus_id = :cus_id
+                    GROUP BY 
+                        c.cus_id, c.cus_fname, c.cus_lname, c.cus_username, c.cus_email, c.cus_phonenum, customer_address
+                    ORDER BY 
+                        c.cus_id";
+            
+                $stmt = $this->conn->prepare($sql);
+                $stmt->bindParam(':cus_id', $cus_id, PDO::PARAM_INT);
+                $stmt->execute();
+                $customer = $stmt->fetch(PDO::FETCH_ASSOC);
+        
+                if ($customer === false) {
+                    return ['success' => false, 'message' => 'Customer not found'];
+                }
+        
+                return [
+                    'success' => true,
+                    'data' => [
+                        'customer' => $customer,
+                        'total_orders' => $customer['orders_count'],
+                        'total_spent' => $customer['total_spent']
+                    ]
+                ];
+            } catch (PDOException $e) {
+                return ['success' => false, 'message' => 'Error: ' . $e->getMessage()];
+            }
+        }
+        
+
+
+
+
+   
+
+
+        //PRODUCT FUNCTION
         public function insertProduct($data, $files) {
             try {
                 // Validate and upload product images
@@ -182,20 +277,37 @@
         }
     }
 
-    public function deleteCategory($data){
-            
+    public function hasProducts($categ_id) {
+        $sql = "SELECT COUNT(*) as count FROM products WHERE categ_id = :categ_id";
+        $stmt = $this->conn->prepare($sql);
+        $stmt->bindParam(':categ_id', $categ_id, PDO::PARAM_INT);
+        $stmt->execute();
+        $result = $stmt->fetch(PDO::FETCH_ASSOC);
+        return $result['count'] > 0;
+    }
+
+    
+
+    public function deleteCategory($data) {
         try {
+            // Check if the category has associated products
+            $checkResult = $this->checkForProducts($data['categ_id']);
+            if ($checkResult['hasProducts']) {
+                return ['success' => false, 'messages' => ['This category cannot be deleted because there are associated products.']];
+            }
+    
+            // Proceed to delete the category
             $sql = "DELETE FROM category WHERE categ_id = :categ_id";
             $stmt = $this->conn->prepare($sql);
             $stmt->bindParam(':categ_id', $data['categ_id']);
             $stmt->execute();
-        
-           
-        return ['success' => true, 'messages' => ['Product Deleted successfully']];
-    }catch (PDOException $e) {
-        return ['success' => false, 'messages' => ['Error: ' . $e->getMessage()]];
+    
+            return ['success' => true, 'messages' => ['Category deleted successfully']];
+        } catch (PDOException $e) {
+            return ['success' => false, 'messages' => ['Error: ' . $e->getMessage()]];
+        }
     }
-}
+    
 
     public function getCategory(){
             
@@ -228,7 +340,7 @@
                         orders o        
                     JOIN 
                         customer c ON o.cus_id = c.cus_id
-                    JOIN 
+                    LEFT JOIN 
                         address a ON a.cus_id = c.cus_id
                     JOIN 
                         payment p ON o.payment_id = p.payment_id
@@ -280,7 +392,7 @@ public function getOrderPending()
                 orders o        
             JOIN 
                 customer c ON o.cus_id = c.cus_id
-            JOIN 
+            LEFT JOIN 
                 address a ON a.cus_id = c.cus_id
             JOIN 
                 payment p ON o.payment_id = p.payment_id
@@ -338,6 +450,80 @@ public function getOrderOnDelivery()
             return $data;
 }
 
+public function getOrderComplete()
+{
+    $sql = "SELECT 
+                o.order_id, 
+                c.cus_fname || ' ' || c.cus_lname AS customer_name, 
+                c.cus_phonenum AS phone, 
+                c.cus_email AS email, 
+                a.add_street || ', ' || a.add_city || ', ' || a.add_province AS address, 
+                o.order_total, 
+                p.payment_method,
+                ol.orlog_created_at AS order_date, 
+                ps.pstat_name AS payment_status,
+                os.orderstat_name AS order_status
+            FROM 
+                orders o        
+            JOIN 
+                customer c ON o.cus_id = c.cus_id
+            JOIN 
+                address a ON a.cus_id = c.cus_id
+            JOIN 
+                payment p ON o.payment_id = p.payment_id
+            JOIN 
+                payment_status ps ON o.pstat_id = ps.pstat_id
+            JOIN 
+                order_status os ON o.orderstat_id = os.orderstat_id
+            JOIN 
+                order_log ol ON o.order_id = ol.order_id
+            WHERE 
+                o.orderstat_id = 3";
+
+            $stmt = $this->conn->prepare($sql);
+            $stmt->execute();
+            $data = $stmt->fetchAll(PDO::FETCH_ASSOC);
+
+            return $data;
+}
+
+public function getOrderCancelled()
+{
+    $sql = "SELECT 
+                o.order_id, 
+                c.cus_fname || ' ' || c.cus_lname AS customer_name, 
+                c.cus_phonenum AS phone, 
+                c.cus_email AS email, 
+                a.add_street || ', ' || a.add_city || ', ' || a.add_province AS address, 
+                o.order_total, 
+                p.payment_method,
+                ol.orlog_created_at AS order_date, 
+                ps.pstat_name AS payment_status,
+                os.orderstat_name AS order_status
+            FROM 
+                orders o        
+            JOIN 
+                customer c ON o.cus_id = c.cus_id
+            JOIN 
+                address a ON a.cus_id = c.cus_id
+            JOIN 
+                payment p ON o.payment_id = p.payment_id
+            JOIN 
+                payment_status ps ON o.pstat_id = ps.pstat_id
+            JOIN 
+                order_status os ON o.orderstat_id = os.orderstat_id
+            JOIN 
+                order_log ol ON o.order_id = ol.order_id
+            WHERE 
+                o.orderstat_id = 4";
+
+            $stmt = $this->conn->prepare($sql);
+            $stmt->execute();
+            $data = $stmt->fetchAll(PDO::FETCH_ASSOC);
+
+            return $data;
+}
+
 public function updateOrderStatus($data) {
 
     
@@ -381,4 +567,207 @@ public function updateOrderStatusComplete($data) {
     }
 }
 
+//DASHBOARD
+public function getTotalSales() {
+    $sql = "SELECT COUNT(DISTINCT o.order_id) AS total_sales 
+            FROM orders o
+            JOIN order_log ol ON o.order_id = ol.order_id";
+    $stmt = $this->conn->prepare($sql);
+    $stmt->execute();
+    $result = $stmt->fetch(PDO::FETCH_ASSOC);
+    return $result;
+}
+
+public function getTotalRevenue() {
+    $sql = "SELECT SUM(oi.orderi_qty * p.prod_price) AS total_revenue, SUM(oi.orderi_qty) AS total_qty
+            FROM orders o
+            JOIN order_log ol ON o.order_id = ol.order_id
+            JOIN order_item oi ON o.order_id = oi.order_id
+            JOIN products p ON oi.prod_id = p.prod_id";
+    $stmt = $this->conn->prepare($sql);
+    $stmt->execute();
+    $result = $stmt->fetch(PDO::FETCH_ASSOC);
+    return $result;
+}
+
+public function getTodaySales() {
+    $sql = "SELECT COUNT(DISTINCT o.order_id) AS today_sales 
+            FROM orders o
+            JOIN order_log ol ON o.order_id = ol.order_id
+            WHERE DATE(ol.orlog_created_at) = CURRENT_DATE";
+    $stmt = $this->conn->prepare($sql);
+    $stmt->execute();
+    $result = $stmt->fetch(PDO::FETCH_ASSOC);
+    return $result;
+}
+
+public function getTodayRevenue() {
+    $sql = "SELECT COALESCE(SUM(oi.orderi_qty * p.prod_price), 0) AS today_revenue,
+                   COALESCE(SUM(oi.orderi_qty), 0) AS today_qty
+            FROM orders o
+            JOIN order_log ol ON o.order_id = ol.order_id
+            JOIN order_item oi ON o.order_id = oi.order_id
+            JOIN products p ON oi.prod_id = p.prod_id
+            WHERE DATE(ol.orlog_created_at) = CURRENT_DATE";
+
+    $stmt = $this->conn->prepare($sql);
+    $stmt->execute();
+    $result = $stmt->fetch(PDO::FETCH_ASSOC);
+    return $result;
+}
+
+public function getWeeklySales() {
+    $sql = "SELECT 
+                DATE_TRUNC('week', ol.orlog_created_at) AS week, 
+                COUNT(DISTINCT o.order_id) AS total_sales
+            FROM 
+                orders o
+            JOIN 
+                order_log ol ON o.order_id = ol.order_id
+            GROUP BY 
+                week
+            ORDER BY 
+                week";
+    $stmt = $this->conn->prepare($sql);
+    $stmt->execute();
+    $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
+    return $result;
+}
+
+public function getWeeklyRevenue() {
+    $sql = "SELECT 
+                DATE_TRUNC('week', ol.orlog_created_at) AS week, 
+                SUM(oi.orderi_qty * p.prod_price) AS total_revenue,
+                SUM(oi.orderi_qty) AS total_qty
+            FROM 
+                orders o
+            JOIN 
+                order_log ol ON o.order_id = ol.order_id
+            JOIN 
+                order_item oi ON o.order_id = oi.order_id
+            JOIN 
+                products p ON oi.prod_id = p.prod_id
+            GROUP BY 
+                week
+            ORDER BY 
+                week";
+    $stmt = $this->conn->prepare($sql);
+    $stmt->execute();
+    $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
+    return $result;
+}
+
+
+
+public function getMonthlyTotalSales() {
+    $sql = "SELECT 
+                DATE_TRUNC('month', ol.orlog_created_at) AS month, 
+                COUNT(DISTINCT o.order_id) AS total_sales
+            FROM 
+                orders o
+            JOIN 
+                order_log ol ON o.order_id = ol.order_id
+            GROUP BY 
+                month
+            ORDER BY 
+                month";
+    $stmt = $this->conn->prepare($sql);
+    $stmt->execute();
+    $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
+    return $result;
+}
+
+public function getMonthlyTotalRevenue() {
+    $sql = "SELECT 
+                DATE_TRUNC('month', ol.orlog_created_at) AS month, 
+                SUM(oi.orderi_qty * p.prod_price) AS total_revenue,
+                SUM(oi.orderi_qty) AS total_qty
+            FROM 
+                orders o
+            JOIN 
+                order_log ol ON o.order_id = ol.order_id
+            JOIN 
+                order_item oi ON o.order_id = oi.order_id
+            JOIN 
+                products p ON oi.prod_id = p.prod_id
+            GROUP BY 
+                month
+            ORDER BY 
+                month";
+    $stmt = $this->conn->prepare($sql);
+    $stmt->execute();
+    $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
+    return $result;
+}
+
+public function getTopProducts($limit = 10) {
+    try {
+     
+        $sql = "SELECT 
+                    p.prod_id, 
+                    p.prod_name, 
+                    SUM(oi.orderi_qty) AS total_sales, 
+                    SUM(oi.orderi_qty * pr.prod_price) AS total_revenue
+                FROM 
+                    order_item oi
+                JOIN 
+                    products p ON oi.prod_id = p.prod_id
+                JOIN 
+                    orders o ON oi.order_id = o.order_id
+                JOIN 
+                    products pr ON oi.prod_id = pr.prod_id
+                GROUP BY 
+                    p.prod_id, p.prod_name
+                ORDER BY 
+                    total_sales DESC
+                LIMIT :limit";
+
+        $stmt = $this->conn->prepare($sql);
+        $stmt->bindParam(':limit', $limit, PDO::PARAM_INT);
+        $stmt->execute();
+        return $stmt->fetchAll(PDO::FETCH_ASSOC);
+    } catch (PDOException $e) {
+        return ['success' => false, 'messages' => ['Error: ' . $e->getMessage()]];
     }
+}
+
+//REPORTS
+public function getWeeklyReportSales() {
+    $sql = "SELECT 
+                DATE_TRUNC('month', ol.orlog_created_at) AS month, 
+                EXTRACT(YEAR FROM ol.orlog_created_at) AS year,
+                DATE_TRUNC('week', ol.orlog_created_at) AS week, 
+                p.prod_name, 
+                SUM(CASE WHEN EXTRACT(DOW FROM ol.orlog_created_at) = 1 THEN oi.orderi_qty ELSE 0 END) AS mon,
+                SUM(CASE WHEN EXTRACT(DOW FROM ol.orlog_created_at) = 2 THEN oi.orderi_qty ELSE 0 END) AS tue,
+                SUM(CASE WHEN EXTRACT(DOW FROM ol.orlog_created_at) = 3 THEN oi.orderi_qty ELSE 0 END) AS wed,
+                SUM(CASE WHEN EXTRACT(DOW FROM ol.orlog_created_at) = 4 THEN oi.orderi_qty ELSE 0 END) AS thu,
+                SUM(CASE WHEN EXTRACT(DOW FROM ol.orlog_created_at) = 5 THEN oi.orderi_qty ELSE 0 END) AS fri,
+                SUM(CASE WHEN EXTRACT(DOW FROM ol.orlog_created_at) = 6 THEN oi.orderi_qty ELSE 0 END) AS sat,
+                SUM(CASE WHEN EXTRACT(DOW FROM ol.orlog_created_at) = 0 THEN oi.orderi_qty ELSE 0 END) AS sun,
+                SUM(oi.orderi_qty) AS total
+            FROM 
+                order_item oi
+            JOIN 
+                products p ON oi.prod_id = p.prod_id
+            JOIN 
+                orders o ON oi.order_id = o.order_id
+            JOIN 
+                order_log ol ON o.order_id = ol.order_id
+            GROUP BY 
+                month, year, week, p.prod_name
+            ORDER BY 
+                month, week, p.prod_name";
+    $stmt = $this->conn->prepare($sql);
+    $stmt->execute();
+    $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
+
+    return $result;
+}
+
+
+}
+
+
+
+    

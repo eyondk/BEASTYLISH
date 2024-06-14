@@ -1,16 +1,31 @@
 $(document).ready(function() {
 
-    // $("#addImageBtn").click(function() {
-    //     var moreImages = $("#moreImages");
-    //     var input = $('<input>').attr({
-    //         type: 'file',
-    //         accept: 'image/png, image/jpeg, image/jpg',
-    //         name: 'product_image[]',
-    //         class: 'form-control form-control-lg fs-6 mt-3',
-    //         required: true
-    //     });
-    //     moreImages.append(input);
-    // });
+    $("#addImageBtn").click(function() {
+        var moreImages = $("#moreImages");
+        var input = $('<input>').attr({
+            type: 'file',
+            accept: 'image/png, image/jpeg, image/jpg',
+            name: 'product_image[]',
+            class: 'form-control form-control-lg fs-6 mt-3',
+            required: true
+        });
+        moreImages.append(input);
+    });
+
+    $('#search-btn').click(function() {
+        var searchTerm = $('#searchInput').val().toLowerCase();
+    
+        $('#productTable tbody tr').each(function() {
+            var row = $(this);
+            var allText = row.text().toLowerCase(); // Get all text from the row and convert to lower case
+    
+            if (allText.indexOf(searchTerm) !== -1) {
+                row.show(); // Show row if it contains the search term
+            } else {
+                row.hide(); // Hide row if it does not contain the search term
+            }
+        });
+    });
 
     $("#add_product").click(function() {
         var formData = new FormData();
@@ -73,6 +88,7 @@ $(document).ready(function() {
         $('#update_price').val(prod_price);
         $('#update_description').val(prod_description);
         $('#update_stocks').val(prod_stock);
+        $('#current_stocks').val(prod_stock);
         $('#update_color').val(prod_color);
         $('#update_sizes').val(prod_sizes);
         $('#update_category option').each(function() {
@@ -84,6 +100,15 @@ $(document).ready(function() {
 
     $(document).on('click', '#update_product', function() {
         var formData = new FormData();
+        var newStock = $("#update_stocks").val();
+        var currentStock = parseInt($("#current_stocks").val());
+
+        
+
+        if (parseInt(newStock) <= currentStock) {
+            alert('New stock quantity must be greater than the current stock quantity.');
+            return;
+        }
         formData.append('action', 'update');
     
         var updateImage = $('#update_image')[0].files;
@@ -133,9 +158,9 @@ $(document).ready(function() {
         var $tr = $(this).closest('tr');
         
         var prod_id = $tr.find("td:eq(1)").text();
+        var prod_stock = $tr.find("td:eq(5)").text();
        
-       
-       
+        $('#prod_stocks').val(prod_stock);
         $('#delete_id').val(prod_id);
        
     });
@@ -143,9 +168,12 @@ $(document).ready(function() {
     $(document).on('click', '#delete_product', function() {
         var formData = new FormData();
         formData.append('action', 'delete');
-    
+        var Stock = parseInt($("#prod_stocks").val());
+        if (parseInt(Stock) > 0) {
+            alert('You cannot delete product when theres still stocks left');
+            return;
+        }
         
-    
         formData.append('product_id', $("#delete_id").val());
        
         $.ajax({

@@ -35,7 +35,7 @@
                             <th>PAYMENT METHOD</th>
                             <th>PAYMENT STATUS</th>
                             <th>STATUS</th>
-                            <th>ACTION</th>
+                           
                         </tr>
                     </thead>
                     <tbody>
@@ -59,11 +59,7 @@
                                         <option value="Cancelled" <?= $order['order_status'] == 'Cancelled' ? 'selected' : '' ?>>Cancelled</option>
                                         </select>
                                         </td>
-                                        <td>
-                                        <button type="button" class="view" data-order-id="<?= $order['order_id'] ?>" data-customer-name="<?= $order['customer_name'] ?>" data-phone="<?= $order['phone'] ?>" data-email="<?= $order['email'] ?>" data-address="<?= $order['address'] ?>">
-                                                <i class="fa-solid fa-info"></i> View Details
-                                            </button>
-                                        </td>
+                                        
                                     </tr>
                                 <?php endforeach; ?>
                         </tr>
@@ -71,39 +67,18 @@
                 </table>
             </div>
             <div class="totalproduct">
-                <p class="tottext">TOTAL ORDERS: 800</p>
+            <?php $orderCount = count($orders);?>
+                <p class="tottext">Total Orders Pending: <?= $orderCount ?></p>
             </div>
         </div>
     </div>  
 </section>
                      
-<!-- View product Modal -->
-<div id="viewProdModal" class="modal">
-    <!-- Modal content -->
-    <div class="modal-content">
-        <h2>ORDER DETAILS</h2>
-        <div class="order-info">
-            <p><strong>Order ID:</strong> <span id="orderID">1111</span></p>
-            <p><strong>Name:</strong> <span id="customerName">Sample NameAdd</span></p>
-            <p><strong>Phone Number:</strong> <span id="phoneNumber">0928298203</span></p>
-            <p><strong>Email:</strong> <span id="email">name@gmail.com</span></p>
-            <p><strong>Address:</strong> <span id="address">sitio Pangpang Nalumos City</span></p>
-        </div>
-        <div class="products-info">
-            <h3>Products Ordered</h3>
-            <div id="productsContainer">
-             
-               
 
-               
-            </div>
-            <p><strong>Total Items Ordered:</strong> <span id="totalItems">74</span></p>
-            <p><strong>Status:</strong> <span id="orderStatus">Pending</span></p>
-        </div>
-    </div>
-</div>
+   
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.6/umd/popper.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 <script src="<?=ASSETS?>js/orderpending.js"></script>
+<script src="<?= ASSETS ?>js/admin.js"></script>
 </body>
 </html>

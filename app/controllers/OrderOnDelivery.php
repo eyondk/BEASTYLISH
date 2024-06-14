@@ -7,7 +7,8 @@ class OrderOnDelivery extends Controller
 
         $order = new Order;
 
-        print_r($_POST);
+       
+       
         if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             $data = $_POST;
 

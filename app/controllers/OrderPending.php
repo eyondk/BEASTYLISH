@@ -7,7 +7,7 @@ class OrderPending extends Controller
 
         $order = new Order;
 
-        print_r($_POST);
+      
         if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             $data = $_POST;
 
@@ -15,7 +15,7 @@ class OrderPending extends Controller
             $paymentStatus = $data['payment_status'];
             $newStatusString = $data['order_status'];
 
-            // Validate the order status update
+        
             $validationResult = $order->validateOrderStatusUpdate($paymentMethod, $paymentStatus, $newStatusString);
 
             if (!$validationResult['success']) {

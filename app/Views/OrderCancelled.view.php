@@ -9,7 +9,6 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
     <link rel="stylesheet" href="<?=ASSETS?>css/orders.css">
     <title>Document</title>
-    
 </head>
 <body>
     <?php include 'admin_header.php';?>
@@ -19,12 +18,14 @@
     <div class="container">
         
         <div class="product-display">
-            <div class="searchbar">      
-                <input type="search" id="searchInput" class="searchInput" placeholder="Search for Products">
-                <button type="button" id="search-btn" class="search"><i class="fa-solid fa-magnifying-glass"></i></button> 
+            <div class="searchbar">
+                <form action="" method="get">
+                    <button type="submit" id="search-btn" class="search"><i class="fa-solid fa-magnifying-glass"></i></button>
+                    <input type="search" name="" id="" class="searchInput" placeholder="Search for Orders">
+                </form>
             </div>
             <div class="table-container">
-                <table class="product-display-table" id = "orderTable">
+                <table class="product-display-table">
                     <thead>
                         <tr>
                             <th>ORDER ID</th>
@@ -34,7 +35,7 @@
                             <th>PAYMENT METHOD</th>
                             <th>PAYMENT STATUS</th>
                             <th>STATUS</th>
-                            <th>ACTION</th>
+                           
                         </tr>
                     </thead>
                     <tbody>
@@ -48,11 +49,7 @@
                                         <td><?= $order['payment_method'] ?></td>
                                         <td><?= $order['payment_status'] ?></td>
                                         <td><?= $order['order_status'] ?></td>
-                                        <td>
-                                        <button type="button" class="view" data-order-id="<?= $order['order_id'] ?>" data-customer-name="<?= $order['customer_name'] ?>" data-phone="<?= $order['phone'] ?>" data-email="<?= $order['email'] ?>" data-address="<?= $order['address'] ?>" data-stat="<?= $order['order_status'] ?>">
-                                                <i class="fa-solid fa-info"></i> View Details
-                                            </button>
-                                        </td>
+                                        
                                     </tr>
                                 <?php endforeach; ?>
                         </tr>
@@ -61,7 +58,7 @@
             </div>
             <div class="totalproduct">
             <?php $orderCount = count($orders);?>
-                <p class="tottext">Total Orders: <?= $orderCount ?></p>
+                <p class="tottext">Total Orders Completed: <?= $orderCount ?></p>
             </div>
         </div>
     </div>  
@@ -94,7 +91,7 @@
 </div>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.6/umd/popper.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-<script src="<?=ASSETS?>js/order.js"></script>
+<script src="<?=ASSETS?>js/orderondeliver.js"></script>
 <script src="<?= ASSETS ?>js/admin.js"></script>
 </body>
 </html>

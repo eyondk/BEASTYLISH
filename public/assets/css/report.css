@@ -1,0 +1,77 @@
+/* General reset and box-sizing */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+/* Body and container styling */
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f4f4f9;
+    color: #333;
+}
+
+.container {
+    width: 90%;
+    margin: 20px auto;
+    background: #fff;
+    padding: 20px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+.text {
+    font-size: 24px;
+    font-weight: bold;
+   
+}
+
+#downloadBtn {
+    display: block;
+    width: 200px;
+    margin: 20px auto;
+    padding: 10px;
+    background-color: #007bff;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 16px;
+}
+
+#downloadBtn:hover {
+    background-color: #0056b3;
+}
+
+/* Table styling */
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 20px;
+}
+
+table th, table td {
+    padding: 12px;
+    text-align: center;
+    border: 1px solid #ddd;
+}
+
+.header td {
+    font-weight: bold;
+    background-color: #f2f2f2;
+}
+
+.content tr:nth-child(odd) {
+    background-color: #f9f9f9;
+}
+
+.content tr:nth-child(even) {
+    background-color: #fff;
+}
+
+.content td:first-child {
+    text-align: left;
+    font-weight: bold;
+}
+
+

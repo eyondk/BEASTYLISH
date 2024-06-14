@@ -17,14 +17,12 @@
                     <hr id = "line" />
                     <div class="container">
                         <div class="product-display">
-                            <div class="searchbar">
-                                <form action="" method="get">
-                                    <button type="button" id="search-btn" class="search"><i class="fa-solid fa-magnifying-glass"></i></button>
-                                    <input type="search" name="" id="" class="searchInput" placeholder="Search for Products">
-                                </form>
+                            <div class="searchbar">      
+                                <input type="search" id="searchInput" class="searchInput" placeholder="Search for Products">
+                                <button type="button" id="search-btn" class="search"><i class="fa-solid fa-magnifying-glass"></i></button> 
                             </div>
                             <div class="table-container">
-                                <table class="product-display-table">
+                                <table id="productTable" class="product-display-table">
                                     <thead>
                                         <tr>
                                             <th>Product Image</th>
@@ -174,6 +172,7 @@
                                     <div class="message"></div>
                                     <input type="hidden" name="update_id" id="update_id">
                                     <input type="hidden" name="old_image" id="old_image">
+                                    <input type="hidden" name="current_stocks" id="current_stocks">
                                         <div id="imageFields">
                                             <div class="mb-3">
                                                 <label for="product_image" class="form-label">Product Image (Up to 3 images)</label>
@@ -245,6 +244,7 @@
                     <div class="modal-body">
                         <p>Are you sure you want to delete this product?</p>
                         <input type="hidden" name="delete_id" id="delete_id">
+                        <input type="hidden" name="prod_stocks" id="prod_stocks">
                     </div>
                     <div class="modal-footer">
                         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
@@ -261,5 +261,6 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.6/umd/popper.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
     <script src="<?=ASSETS?>js/product.js"></script>
+    <script src="<?= ASSETS ?>js/admin.js"></script>
 </body>
 </html>

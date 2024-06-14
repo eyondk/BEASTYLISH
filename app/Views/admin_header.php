@@ -27,6 +27,7 @@
         <div class="menu-bar">
             <div class="menu">
                 <ul class="menu-links">
+                    
                     <li class="nav-link">
                         <a href="<?=ROOT?>home">
                             <i class="fa fa-dashboard icon"></i>
@@ -35,7 +36,7 @@
                     </li>
                     <li class="nav-link">
                         <a href="#" id="acc-btn" class="acc">
-                            <i class="fa fa-dashboard icon"></i>
+                        <i class='fas fa-shopping-cart icon'></i>
                             PRODUCTS
                             <span class="fa fa-chevron-down"></span>
                         </a>
@@ -46,29 +47,36 @@
                         </ul>
                     </li>
                     <li class="nav-link">
-                        <a href="#" id="acc-btn" class="acc">
+                        <a href="#" id="orders-acc-btn" class="acc">
                             <i class='fas fa-clipboard-list icon'></i>
                             ORDERS
                             <span class="fa fa-chevron-down"></span>
                         </a>
-                        <ul id="acc-show">
+                        <ul id="orders-acc-show">
                             <li><a href="<?=ROOT?>Orders" class="first-sub">Order List</a></li>
                             <li><a href="<?=ROOT?>OrderPending">Order Pending</a></li>
                             <li><a href="<?=ROOT?>OrderOnDelivery">Order on Delivery</a></li>
-                            <li><a href="<?=ROOT?>OrderCompleted">Order Completed</a></li>
-                            <li><a href="<?=ROOT?>OrderCancel">Order Cancelled</a></li>
-                            
+                            <li><a href="<?=ROOT?>OrderComplete">Order Completed</a></li>
+                            <li><a href="<?=ROOT?>OrderCancelled">Order Cancelled</a></li>
                         </ul>
                     </li>
                     <li class="nav-link">
-                        <a href="#">
+                        <a href="<?=ROOT?>Customer">
                             <i class='fas fa-user-friends icon'></i>
                             <span class="text nav-text">CUSTOMER</span>
                         </a>
                     </li>
+                
+                <li class="nav-link">
+                        <a href="<?=ROOT?>Report">
+                            <i class='fas fa-chart-bar icon'></i>
+                            <span class="text nav-text">REPORT</span>
+                        </a>
+                    </li>
                 </ul>
+            
             </div>
-
+            
             <div class="bottom-content">
                 <li>
                     <a href="admin_update_profile.php">
@@ -110,11 +118,32 @@
                     }
                 });
             }
-
-            
-
             
         });
+
+        document.addEventListener("DOMContentLoaded", function() {
+    const ordersAccBtn = document.getElementById("orders-acc-btn");
+    const ordersAccShow = document.getElementById("orders-acc-show");
+
+    if (ordersAccBtn && ordersAccShow) {
+        ordersAccBtn.addEventListener("click", function(event) {
+            event.preventDefault();
+            ordersAccShow.classList.toggle("show");
+            ordersAccBtn.querySelector(".fa-chevron-down").classList.toggle("flip");
+
+            // Adjust the position of subsequent list items
+            const parentLi = ordersAccBtn.parentElement;
+            const allLis = Array.from(document.querySelectorAll('.sidebar > .menu-bar > .menu-links > li'));
+            const submenuHeight = ordersAccShow.classList.contains('show') ? ordersAccShow.scrollHeight : 0;
+
+            let nextElement = parentLi.nextElementSibling;
+            if (nextElement) {
+                nextElement.style.marginTop = ordersAccShow.classList.contains('show') ? `${submenuHeight}px` : '0';
+                nextElement = nextElement.nextElementSibling;
+            }
+        });
+    }
+});
     </script>
 </body>
 </html>

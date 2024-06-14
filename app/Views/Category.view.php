@@ -54,7 +54,7 @@
                             </div>
                             <div class="totalproduct">
                             
-                                <p class="tottext">Total Products: </p>
+                                <p class="tottext">Total Category: <?= count($categ) ?></p>
                             </div>
                         </div>
                         <button type="button" class="btns add" id="addProduct" data-bs-toggle="modal" data-bs-target="#addModal">Add Category</button>
@@ -81,7 +81,7 @@
                             </div>
                             <div class="modal-footer">
                                 <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
-                                <button type="button" id="add_category" name="add_category" class="btn btn-dark" value="add product">Add Product</button>
+                                <button type="button" id="add_category" name="add_category" class="btn btn-dark" value="add product">Add Category</button>
                             </div>
                         
                 </div>
@@ -120,5 +120,6 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.6/umd/popper.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
     <script src="<?=ASSETS?>js/category.js"></script>
+    <script src="<?= ASSETS ?>js/admin.js"></script>
 </body>
 </html>
