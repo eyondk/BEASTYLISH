@@ -1,16 +1,14 @@
 <?php
-//  require_once '../public/vendor/autoload.php';
-/**
- *  Checkout class
- */
+require_once '../public/vendor/autoload.php';
+
 class Checkout extends Controller
 {
     public function index()
     {
         // Check if there is checkout data in session storage
-        $checkoutData = null;
-        if (isset($_SESSION['checkoutData'])) {
-            $checkoutData = json_decode($_SESSION['checkoutData'], true);
+        $checkoutData = $_SESSION['checkoutData'] ?? null;
+        if ($checkoutData) {
+            $checkoutData = json_decode($checkoutData, true);
             unset($_SESSION['checkoutData']); // Clear the session data after retrieving
         }
 
@@ -20,7 +18,7 @@ class Checkout extends Controller
 
     public function processCheckout()
     {
-        if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+        if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             // Decode the JSON data from the request body
             $jsonData = file_get_contents('php://input');
             $requestData = json_decode($jsonData, true);
@@ -29,15 +27,19 @@ class Checkout extends Controller
                 $selectedItems = $requestData['selected_items'];
 
                 // Fetch item details from the database using the new function
-                $shopcartModel = new Shopcart;
+                $shopcartModel = new Shopcart();
                 $cartItems = $shopcartModel->get_cart_items_by_ids(array_column($selectedItems, 'cart_id'));
 
                 $subtotal = 0;
                 foreach ($cartItems as &$item) {
-                    $item['cart_qty'] = $selectedItems[array_search($item['cart_id'], array_column($selectedItems, 'cart_id'))]['cart_qty'];
-                    $item['subtotal'] = $item['prod_price'] * $item['cart_qty'];
-                    $subtotal += $item['subtotal'];
+                    $itemIndex = array_search($item['cart_id'], array_column($selectedItems, 'cart_id'));
+                    if ($itemIndex !== false) {
+                        $item['cart_qty'] = $selectedItems[$itemIndex]['cart_qty'];
+                        $item['subtotal'] = $item['prod_price'] * $item['cart_qty'];
+                        $subtotal += $item['subtotal'];
+                    }
                 }
+
                 $delivery_fee = 90;
                 $discount = 100;
                 $total = $subtotal + $delivery_fee - $discount;
@@ -53,23 +55,18 @@ class Checkout extends Controller
                 // Store the data in session storage and return success response
                 $_SESSION['checkoutData'] = json_encode($data);
                 echo json_encode(['success' => true, 'data' => $data]);
-                exit;
             } else {
                 echo json_encode(['success' => false, 'error' => 'No items selected']);
-                exit;
             }
         } else {
             header('Location: ' . ROOT . '/Cart');
             exit;
         }
-
-
     }
 
     public function confirmOrder()
 {
-    
-    if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+    if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         // Decode the JSON data from the request body
         $jsonData = file_get_contents('php://input');
         $requestData = json_decode($jsonData, true);
@@ -80,24 +77,34 @@ class Checkout extends Controller
             exit;
         }
 
-        $orderModel = new Checkouts;
-        $shopcartModel = new Shopcart;
+       
+        $orderModel = new Checkouts();
+        $shopcartModel = new Shopcart();
 
         try {
-            // Check for specific payment methods
-            if (in_array($requestData['payment_method'], ['GCASH', 'UNION BANK'])) {
-                $client = new \GuzzleHttp\Client();
+            if ($requestData['payment_method'] === 'COD') {
+                // Handle Cash on Delivery logic here
+                $orderId = $orderModel->createOrder($requestData, $requestData['cart_items']);
 
-                $response = $client->request('POST', 'https://api.paymongo.com/v1/links', [
-                    'body' => json_encode([
+                // Clear the cart
+                foreach ($requestData['cart_items'] as $item) {
+                    $shopcartModel->remove_from_cart($item['cart_id']);
+                }
+
+                echo json_encode(['success' => true, 'order_id' => $orderId]);
+            } else if (in_array($requestData['payment_method'], ['GCASH', 'UNION BANK'])) {
+                // Process payment through the GCASH API
+                $client = new \GuzzleHttp\Client();
+                $response = $client->post('https://api.paymongo.com/v1/links', [
+                    'json' => [
                         'data' => [
                             'attributes' => [
-                                'amount' => $requestData['order_total'],
+                                'amount' => 10000, // Amount in cents (Php 100.00)
                                 'description' => 'Order payment',
-                                'remarks' => 'Payment for order ID: ' . $requestData['order_id'] // example remark
+                                'remarks' => 'Payment for order ID: 1' 
                             ]
                         ]
-                    ]),
+                    ],
                     'headers' => [
                         'accept' => 'application/json',
                         'authorization' => 'Basic c2tfdGVzdF9NYVVlQzRKTXg1Y3RZZ3Y3S2tnSFpaWmU6',
@@ -106,26 +113,17 @@ class Checkout extends Controller
                 ]);
 
                 $apiResponse = json_decode($response->getBody(), true);
+                $checkoutUrl = $apiResponse['data']['attributes']['checkout_url'] ?? null;
 
-                // Check if API request was successful
-                if ($response->getStatusCode() !== 200 || !isset($apiResponse['data'])) {
-                    echo json_encode(['success' => false, 'error' => 'Payment API request failed']);
-                    exit;
+                if ($checkoutUrl) {
+                    header('Location: ' . $checkoutUrl);
+                    exit;   
+                } else {
+                    throw new Exception('Checkout URL not found in response');
                 }
-
-                // Assume you handle the API response appropriately here
-                // e.g., store the payment link or payment status
+            } else {
+                throw new Exception('Unsupported payment method');
             }
-
-            // Create the order
-            $orderId = $orderModel->createOrder($requestData, $requestData['cart_items']);
-
-            // Clear the cart
-            foreach ($requestData['cart_items'] as $item) {
-                $shopcartModel->remove_from_cart($item['cart_id']);
-            }
-
-            echo json_encode(['success' => true, 'order_id' => $orderId]);
         } catch (Exception $e) {
             echo json_encode(['success' => false, 'error' => $e->getMessage()]);
         }
@@ -134,10 +132,5 @@ class Checkout extends Controller
     }
 }
 
-
-
-
-    
-
-
 }
+
