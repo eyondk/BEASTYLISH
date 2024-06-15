@@ -15,12 +15,20 @@ document.addEventListener("DOMContentLoaded", function () {
       newQty = 1;
     }
 
-    // Update input field with new quantity
-    input.value = newQty;
-
     const cartId = wrapper.querySelector('input[type="hidden"]').value;
     const row = wrapper.closest("tr");
     const prodPrice = parseFloat(row.dataset.prodPrice);
+    const availableStock = parseInt(row.dataset.prodStock);
+
+    // Ensure quantity doesn't exceed available stock
+    if (newQty > availableStock) {
+      alert("Cannot exceed available stock");
+      input.value = currentQty; // Reset input value to previous quantity
+      return; // Exit function if quantity exceeds available stock
+    }
+
+    // Update input field with new quantity
+    input.value = newQty;
 
     // Update quantity in the server (you may adjust this part based on your backend implementation)
     fetch(ROOT_URL + "/cart/update", {
@@ -46,13 +54,21 @@ document.addEventListener("DOMContentLoaded", function () {
           // Update total and other calculations
           updateTotals();
         } else {
-          console.error("Failed to update quantity:", data.error);
+          console.error(
+            "Failed to update quantity:",
+            data.error || "Unknown error"
+          );
           alert("Failed to update quantity. Please try again.");
+          // Restore previous quantity in case of failure
+          input.value = currentQty;
+          location.reload();
         }
       })
       .catch((error) => {
-        console.error("Error updating quantity:", error);
+        console.error("Error updating quantity:", error.message);
         alert("Failed to update quantity. Please try again.");
+        // Restore previous quantity in case of error
+        input.value = currentQty;
       });
   }
 
@@ -113,46 +129,20 @@ document.addEventListener("DOMContentLoaded", function () {
     const discount = 100.0;
     const total = subtotal + deliveryFee - discount;
 
-    const itemCountElem = document.getElementById("item-count");
-    const subtotalElem = document.getElementById("subtotal");
-    const totalElem = document.getElementById("total");
-
-    if (itemCountElem) {
-      itemCountElem.textContent = itemCount;
-    } else {
-      console.warn("Item count element not found.");
-    }
-
-    if (subtotalElem) {
-      subtotalElem.textContent = subtotal.toFixed(2);
-    } else {
-      console.warn("Subtotal element not found.");
-    }
-
-    if (totalElem) {
-      totalElem.textContent = total.toFixed(2);
-    } else {
-      console.warn("Total element not found.");
-    }
+    // Update totals display (adjust as per your HTML structure)
+    document.getElementById("item-count").textContent = itemCount;
+    document.getElementById("subtotal").textContent = subtotal.toFixed(2);
+    document.getElementById("total").textContent = total.toFixed(2);
   }
 
-  // Attach event listeners to quantity buttons using event delegation
-  // document.addEventListener("click", function (event) {
-  //   if (event.target.matches(".qty-container .minus")) {
-  //     updateQuantity(event.target, -1); // Decrease by 1
-  //   } else if (event.target.matches(".qty-container .plus")) {
-  //     updateQuantity(event.target, 1); // Increase by 1
-  //   }
-  // });
-
   // Function to handle adding product to cart
-  function addToCart(productId) {
+  function addToCart(productId, quantity) {
     fetch(ROOT_URL + "/cart/add", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
       },
-      body: JSON.stringify({ product_id: productId, cart_qty: 1 }),
+      body: JSON.stringify({ product_id: productId, cart_qty: quantity }),
     })
       .then((response) => {
         if (!response.ok) {
@@ -165,21 +155,30 @@ document.addEventListener("DOMContentLoaded", function () {
           alert("Product added to cart successfully.");
           updateTotals();
         } else {
-          console.error("Failed to add product to cart:", data.error);
-          alert("Failed to add product to cart. Please try again.");
+          throw new Error(data.error || "Unknown error occurred");
         }
       })
       .catch((error) => {
-        console.error("Error adding product to cart:", error);
-        alert("Failed to add product to cart. Please try again.");
+        console.error("Error adding product to cart:", error.message);
+        alert(
+          "Failed to add product to cart. Quantity exceeds the available stocks. Please try again."
+        );
       });
   }
 
-  // Attach event listeners to "Add to Cart" buttons
+  // Attach event listeners to "Add to Cart" buttons on product pages
   document.querySelectorAll(".product-button").forEach((button) => {
     button.addEventListener("click", function () {
       const productId = button.dataset.productId;
-      addToCart(productId);
+      addToCart(productId, 1); // Assuming quantity is hardcoded to 1 for product buttons
+    });
+  });
+
+  // Attach event listeners to quantity buttons
+  document.querySelectorAll(".quantity-btn").forEach((button) => {
+    button.addEventListener("click", function () {
+      const change = button.classList.contains("minus") ? -1 : 1;
+      updateQuantity(button, change);
     });
   });
 

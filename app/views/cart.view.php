@@ -118,5 +118,6 @@
     </div>
 </main>
 <script src="<?=ROOT?>/assets/js/addtocart.js"></script>
+
 </body>
 </html>
