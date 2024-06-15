@@ -122,5 +122,26 @@ class Shopcart extends Model
             return false;
         }
     }
+
+    // Fetch items in the cart by their IDs
+    public function get_cart_items_by_ids($cart_ids)
+    {
+        try {
+            $conn = $this->connect();
+            $placeholders = implode(',', array_fill(0, count($cart_ids), '?'));
+            $stmt = $conn->prepare("
+                SELECT c.*, p.prod_name, p.prod_price, pi.image_path
+                FROM cart c
+                LEFT JOIN products p ON c.prod_id = p.prod_id
+                LEFT JOIN product_images pi ON p.prod_id = pi.prod_id
+                WHERE c.cart_id IN ($placeholders) AND c.cart_status = 'active'
+            ");
+            $stmt->execute($cart_ids);
+            return $stmt->fetchAll(PDO::FETCH_ASSOC);
+        } catch (PDOException $e) {
+            error_log("Database error: " . $e->getMessage());
+            return [];
+        }
+    }
 }
 ?>

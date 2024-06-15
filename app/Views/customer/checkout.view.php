@@ -1,12 +1,21 @@
-<link rel="stylesheet" href="css/checkout.css">
-<?php include 'header.inc.php';?>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="<?= ASSETS ?>/css/checkout.css">
+    <title>Checkout</title>
+</head>
+<body>
+<?php include 'header.inc.php'; ?>
+
 <section class="checkoutform">
     <div class="tt">
         <h1>CHECKOUT</h1>
     </div>
 
     <div class="addressform">
-        <form action="" method="get">
+        <form id="checkoutForm" action="" method="get">
             <h3>Address</h3>
             <div class="form-row">
                 <input type="text" name="street" id="street" placeholder="Street">
@@ -22,34 +31,66 @@
 
             <h3 class="payment">Select Payment Method</h3>
             <div class="form-row">
-                <button type="button" name="meetup" id="meetup">MEET UP<img src="img/meetup icon.png" alt="meetup icon" width="50" height="50"></button>
-                <button type="button" name="cod" id="cod">COD<img src="img/cod icon.png" alt="cod icon" width="50" height="50"></button>
-                <button type="button" name="gcash" id="gcash">GCASH<img src="https://i.pinimg.com/originals/ba/f8/81/baf881cb4af4d4b1ec7c8176fe18142c.png" alt="gcash icon" width="50" height="50"></button>
-                <button type="button" name="ub" id="ub">UNION BANK<img src="https://i.pinimg.com/564x/7f/18/5b/7f185b1028022ffbd360b0f8b9667104.jpg" alt="union bank icon" width="50" height="50"></button>
+                <div class="wrapper">
+                    <input type="radio" name="select" id="option-1" value="MEET UP">
+                    <input type="radio" name="select" id="option-2" value="COD">
+                    <input type="radio" name="select" id="option-3" value="GCASH">
+                    <input type="radio" name="select" id="option-4" value="UNION BANK">
+
+                    
+                    <label for="option-1" class="option option-1">
+                        <div class="dot"></div>
+                        <span>MEET UP</span>
+                    </label>
+                    <label for="option-2" class="option option-2">
+                        <div class="dot"></div>
+                        <span>COD via Maxim</span>
+                    </label>
+                    <label for="option-3" class="option option-3">
+                        <div class="dot"></div>
+                        <span>GCASH</span>
+                    </label>
+                    <label for="option-4" class="option option-4">
+                        <div class="dot"></div>
+                        <span>UNION BANK</span>
+                    </label>
+                </div>
+
             </div>
 
             <h3 class="order">Order Summary</h3>
-            <h5>Subtotal (3 Items): &#x20B1; 90.05</h5>
-            <h5>Delivery Fee: &#x20B1; 90.00</h5>
-            <h5>Discount Fee: &#x20B1; 100</h5>
-            <h5>Total: &#x20B1; 80.05</h5>        
-        
+            <?php if (isset($data) && !empty($data)): ?>
+            <h5>Subtotal (<?= count($data['cart_items']) ?> Items): &#x20B1; <span id="subtotal"><?= number_format($data['subtotal'], 2) ?></span></h5>
+            <h5>Delivery Fee: &#x20B1; <span id="delivery_fee"><?= number_format($data['delivery_fee'], 2) ?></span></h5>
+            <h5>Discount Fee: &#x20B1; <span id="discount"><?= number_format($data['discount'], 2) ?></span></h5>
+            <h5>Total: &#x20B1; <span id="total"><?= number_format($data['total'], 2) ?></span></h5>
+            <div class="cart-items">
+                <?php foreach ($data['cart_items'] as $item): ?>
+                    <div class="cart-item" data-product-id="<?= htmlspecialchars($item['prod_id']) ?>" data-cart-id="<?= htmlspecialchars($item['cart_id']) ?>">
+                        <img src="<?= ASSETS ?>/images/<?= htmlspecialchars($item['image_path']) ?>" alt="<?= htmlspecialchars($item['prod_name']) ?>" width="50" height="50">
+                        <p><?= htmlspecialchars($item['prod_name']) ?> - &#x20B1; <?= number_format($item['prod_price'], 2) ?> x <span class="quantity"><?= htmlspecialchars($item['cart_qty']) ?></span> = &#x20B1; <?= number_format($item['subtotal'], 2) ?></p>
+                    </div>
+                <?php endforeach; ?>
+            </div>
+        <?php else: ?>
+            <p>No items in the cart.</p>
+        <?php endif; ?>
         </form>
     </div>
 
     <div class="form-buttons">
         <button type="button" class="cancel-btn" id="cancel">Cancel Checkout</button>
-        <button type="button" class="continue-btn" id="checkoutbtn" onclick="confirmOrder()">Confirm Order</button>
-        </div>
+        <button type="button" class="continue-btn" id="checkoutbtn">Confirm Order</button>
+    </div>
 </section>
 
-
- <!-- Order Confirmation Modal -->
-<div id="checkedModal" class="modal" >
+<!-- Order Confirmation Modal -->
+<div id="checkedModal" class="modal">
     <div class="modal-content">
-        <h2>Ordered processed successfully!</h2>
+        <h2>Order processed successfully!</h2>
     </div>
 </div>
-
-
-<script src="js/checkout.js"></script>n
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<script src="<?= ASSETS ?>/js/checkout.js"></script>
+</body>
+</html>

@@ -38,6 +38,7 @@
     <div class="cart">
         <div class="product-display">
             <div class="table-container">
+            
                 <table class="product-display-table">
                     <thead>
                         <tr>
@@ -47,6 +48,7 @@
                             <th>Price</th>
                             <th>Quantity</th>
                             <th>SubTotal</th>
+                            <th>Select</th>     
                         </tr>
                     </thead>
                     <tbody>
@@ -75,6 +77,9 @@
                                 </div>
                             </td>
                             <td class="subtotal">&#8369; <?= htmlspecialchars(number_format($item['prod_price'] * $item['cart_qty'], 2)); ?></td>
+                            <td>
+                                    <input type="checkbox" name="selected_items[]" value="<?= htmlspecialchars($item['cart_id']); ?>">
+                            </td>
                         </tr>
                         <?php endforeach; ?>
                     <?php else: ?>
@@ -93,9 +98,11 @@
             </div>
             <?php endif; ?>
         </div>
+       
         <div class="cartTotals">
             <div class="carttot">
                 <p class="cart-tit">Cart totals</p>
+               
                 <div class="subtot">
                     <p>Subtotal (<span id="item-count"><?= count($cart_items); ?></span> Items)</p>
                     <p>&#8369; <span id="subtotal"><?= htmlspecialchars(number_format($subtotal, 2)); ?></span></p>
@@ -110,13 +117,16 @@
                 </div>
                 <div class="total">
                     <p>Total</p>
-                    <p>&#8369; <span id="total"><?= htmlspecialchars(number_format($total, 2)); ?></span></p>
+                    <p> <span id="total"><?= htmlspecialchars(number_format($total, 2)); ?></span></p>
                 </div>
-                <button id="proceedtocheckout" class="add-btn">Proceed To Checkout</button>
+                <button type="button" id="proceedtocheckout" class="add-btn">Proceed To Checkout</button>
+            
             </div>
         </div>
+     d
     </div>
 </main>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 <script src="<?=ROOT?>/assets/js/addtocart.js"></script>
 </body>
 </html>
