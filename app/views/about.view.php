@@ -34,15 +34,7 @@
             </div>
             <div class="about-content">
                 
-                <h2>What is your story?</h2>
-                <p>Like any entrepreneurial venture, the journey was not without its challenges. Initially, attracting buyers proved difficult, but through perseverance and understanding my target market, we cultivated a loyal customer base over time.</p>
-                <h2>How long have you been in business?</h2>
-                <p>Be'astylish has been in business since August 15, 2021, bringing you a unique blend of clothing and handcrafted bouquets.</p>
-                <h2>From where do you operate?</h2>
-                <p>Operating entirely online, we have the flexibility to reach customers worldwide, with a base located in [insert location].</p>
-                <h2>What makes you different from your competitors?</h2>
-                <p>Like any entrepreneurial venture, the journey was not without its challenges. Initially, attracting buyers proved difficult, but through perseverance and understanding my target market, we cultivated a loyal customer base over time.</p>
- 
+                <p>Since our delightful beginning on <b> August 15, 2021,</b> Be'astylish has embarked on an extraordinary journey filled with passion and determination. Our path has seen its fair share of challenges, especially in captivating our initial audience. Yet, through steadfast perseverance and a keen insight into our cherished customers' desires, we've blossomed into a beloved brand with a devoted following. As an exclusively online boutique, we revel in the freedom to enchant customers around the globe, <b> all from our charming base in Sitio Kamanggahan, Taboc, Mandaue City.</b> <br> <br> <br> What truly sets Be'astylish apart is our enchanting fusion of fashionable attire and exquisitely handcrafted bouquets, creating a shopping experience that is both unique and enchanting. <br> <br> At Be'astylish, we take pride in offering unparalleled quality and a personal touch that makes every customer feel special. Come, explore the magic that defines Be'astylish, and let us add a touch of elegance to your world.</p>
 
             </div>
         </section>
