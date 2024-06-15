@@ -13,6 +13,8 @@ html {
     color: #faf2e8;
 }
 *::-webkit-scrollbar{
+    width: 5px;
+    border-radius: 1rem;
     background-color: transparent;
 }
 *::-webkit-scrollbar-thumb{
@@ -25,13 +27,15 @@ html {
 
 .account {
     display: flex; 
+    flex: 1; /* Grow to fill remaining height */
+
 }
 
 .account-sidebar{
     padding-top: 7rem;
     padding-left: 3rem;
     width: 20%;
-    height: 90.5vh; 
+    min-height: 100vh; 
     border-right: 2px solid #6c4a21;
 }
 
@@ -95,19 +99,26 @@ html {
     font-size: 20px;
     text-align: center;
     flex: 1; 
-    padding: 7rem 3rem;
+    padding: 5rem 3rem;
 }
 
 .acc_info form{
     max-width: 65rem;
-    margin: 5rem;
+    margin: 3rem;
     margin: 1rem auto;
     border:2px solid #6c4a21;
     border-radius: 2px;
     padding: 2rem;
     text-align: center;
     background-color: transparent;
-    max-height: 63vh;
+    max-height: 97vh;
+}
+
+
+.acc_info .user_details{
+    max-height: 70vh;
+    width: 50rem;
+    align-self: center;
 }
 
 .changePass form{
@@ -119,7 +130,7 @@ html {
     padding: 2rem;
     text-align: center;
     background-color: transparent;
-    max-height: 44vh;
+    max-height: 47vh;
 }
 
 input{
@@ -172,7 +183,7 @@ form .inputBox .box{
     background-color: transparent;
 }
 
-.btn, .option-btn, .details-btn{
+.btn, .option-btn, .details-btn, .edit_add, .back-btn, .save_upd_add{
     width: 100%;
     display: block;
     margin-top: 1rem;
@@ -221,7 +232,6 @@ form .inputBox .box{
     background-color: #6c4a2165;
     border: none;
 }
-
 
 /* ===============order================================= */
 
@@ -577,62 +587,161 @@ form h3{
 
 
 
-/* .orders .order-container{
-    width: 110rem;
-    border-radius: 2px;
+/* ======================  FAQ START  ============================= */
+
+
+.faqSection {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 80%;
+    padding: 20px;
+    padding-top:6rem;
+    box-sizing: border-box;
+}
+
+.title-faqs {
     text-align: left;
-    background-color: transparent;
-    max-height: 60vh;
+    width: 90%;
+    padding-bottom: 6rem;
 }
 
-.orders .order-container p{
-    font-size: 30px;
-    font-weight: 450;
+.title-faqs h2{
+    font-size: 50px;
+    font-weight: 600;
+}
+
+.title-faqs h3{
+    font-size: 15px;
+    font-weight: 500;
+    color: #6c4a2199;
+}
+
+.faqSection .faq-container {
+    width: 80%;
+}
+
+.faq-item {
+    border-top: 2px solid #6c4a21;
+    padding: 10px 0;
+}
+
+.faq-item:last-child {
+    border-bottom: 2px solid #6c4a21;
+}
+
+.faq-question {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    cursor: pointer;
+    font-size: 18px;
+    font-weight: 400;
+}
+
+.faq-answer {
+    display: none;
+    padding: 20px 0;
+    font-size: 15px;
+    font-weight: 400;
+}
+
+.plus-icon {
+    font-size: 18px;
+}
+
+/* ======================  FAQ END  ============================= */
+
+/* ========================= ADDRESS START ============================ */
+.addressSec {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    width: 70%;
+    padding: 20px;
+    box-sizing: border-box;
+    
 
 }
 
-.orders .order-container .order{
-    margin-top: 2rem;
+.address_details, .edit_add, .edit_address {
+    width: 50%; /* Adjust this percentage to make the form wider or narrower */
+    margin: auto;
+}
+
+.address_details, .edit_address{
+    border: 2px solid #6c4a21;
+    padding: 2rem;
+}
+
+.inputBox {
     width: 60%;
-    padding: 1.5rem;
-    border: #6c4a21 2px solid;
-    position: relative;
-    display: flex; 
-    align-items: center; 
-    align-self: center;
+    margin-bottom: 15px;
 }
 
-.order-table {
-    border-collapse: collapse;
+.inputBox span {
+    display: block;
+    margin-bottom: 5px;
+    font-weight: bold;
+}
+
+.inputBox .box {
     width: 100%;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
 }
 
-.order-table td {
-    padding: 5px;
+.flex {
+    display: flex;
+    justify-content: center;
+    gap: 20px;
 }
 
-.order-table .title {
-    font-weight: 450;
-}
-
-.order-table .cancel-btn {
-    margin-right: 10px;
-}
-
-.order-table .btns{
-    margin-top: 2rem;
-}
-.order-table .cancel-btn,
-.order-table .modify-btn {
+.edit_add, .back-btn, .save_upd_add{
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
     text-decoration: none;
+    text-align: center;
 }
 
-.order-table .cancel-btn:hover,
-.order-table .modify-btn:hover{
-    text-decoration: underline 1px solid;
-} 
- */
+.edit_add{
+    background-color: #6c4a217b;
+    color: #faf2e8;
+}
 
+.back-btn{
+    border: 2px solid ;
+    color:#6c4a217d;
+    border-color: #6c4a217d;
+}
+
+.save_upd_add{
+    background-color: #9e7440a4;
+    color: #faf2e8;
+}
+
+
+.save_upd_add:hover{
+    background-color: #9e7440df;
+}
+.edit_add:hover {
+    background-color: #6c4a2160;
+    color: #faf2e8;
+}
+
+.back-btn:hover{
+    color: #6c4a21;
+    border-color: #6c4a21;
+}
+
+
+
+
+/* ========================= ADDRESS END ============================ */
 
 /* media quries */
 @media(max-width:1200px){
@@ -656,7 +765,6 @@ form h3{
     }
 
     .account-sidebar{
-        height: 95vh;
         width: 22%;  
     }
     
@@ -673,8 +781,15 @@ form h3{
 
     .acc_info form{
         align-self: center;
-        max-height: 66vh;
+        max-height: 92vh;
     }
+
+    .acc_info .user_details{
+        align-self: center;
+        max-height: 68vh;
+        width: 55rem;
+    }
+    
 
     .changePass form{
         align-self: center;
@@ -814,11 +929,10 @@ form h3{
 
 }
 
-
 /* order page */
 @media (max-width: 1200px) {
     .order {
-        width: calc(100% - 30px); /* Adjust as per your design needs */
+        width: calc(100% - 40px); /* Adjust as per your design needs */
     }
 
     .order-table td button{
@@ -842,13 +956,13 @@ form h3{
 
 @media (max-width: 900px) {
     .order {
-        width: calc(100% - 20px); /* Adjust as per your design needs */
+        width: calc(100% - 50px); /* Adjust as per your design needs */
     }
 }
 
 @media (max-width: 768px) {
     .order {
-        width: calc(100% - 20px); /* Adjust as per your design needs */
+        width: calc(100% - 30px); /* Adjust as per your design needs */
     }
     
     .order-table td button{
