@@ -15,51 +15,48 @@
     </div>
 
     <div class="addressform">
-        <form id="checkoutForm" action="" method="get">
-            <h3>Address</h3>
-            <div class="form-row">
-                <input type="text" name="street" id="street" placeholder="Street">
-                <input type="text" name="brgy" id="brgy" placeholder="Barangay">
-                <input type="text" name="city" id="city" placeholder="City">
-                <input type="text" name="province" id="province" placeholder="Province">
-                <input type="text" name="zipcode" id="zipcode" placeholder="Zipcode">
+        <h3>Address</h3>
+        <div class="form-row">
+            <input type="text" name="street" id="street" placeholder="Street">
+            <input type="text" name="brgy" id="brgy" placeholder="Barangay">
+            <input type="text" name="city" id="city" placeholder="City">
+            <input type="text" name="province" id="province" placeholder="Province">
+            <input type="text" name="zipcode" id="zipcode" placeholder="Zipcode">
+        </div>
+        <div class="form-checkbox">
+            <input type="checkbox" name="address_type" id="address_type">
+            <label for="address_type">Set as my default address</label>
+        </div>
+
+        <h3 class="payment">Select Payment Method</h3>
+        <div class="form-row">
+            <div class="wrapper">
+                <input type="radio" name="select" id="option-1" value="MEET UP">
+                <input type="radio" name="select" id="option-2" value="COD">
+                <input type="radio" name="select" id="option-3" value="GCASH">
+                <input type="radio" name="select" id="option-4" value="UNION BANK">
+                
+                <label for="option-1" class="option option-1">
+                    <div class="dot"></div>
+                    <span>MEET UP</span>
+                </label>
+                <label for="option-2" class="option option-2">
+                    <div class="dot"></div>
+                    <span>COD via Maxim</span>
+                </label>
+                <label for="option-3" class="option option-3">
+                    <div class="dot"></div>
+                    <span>GCASH</span>
+                </label>
+                <label for="option-4" class="option option-4">
+                    <div class="dot"></div>
+                    <span>UNION BANK</span>
+                </label>
             </div>
-            <div class="form-checkbox">
-                <input type="checkbox" name="address_type" id="address_type">
-                <label for="address_type">Set as my default address</label>
-            </div>
+        </div>
 
-            <h3 class="payment">Select Payment Method</h3>
-            <div class="form-row">
-                <div class="wrapper">
-                    <input type="radio" name="select" id="option-1" value="MEET UP">
-                    <input type="radio" name="select" id="option-2" value="COD">
-                    <input type="radio" name="select" id="option-3" value="GCASH">
-                    <input type="radio" name="select" id="option-4" value="UNION BANK">
-
-                    
-                    <label for="option-1" class="option option-1">
-                        <div class="dot"></div>
-                        <span>MEET UP</span>
-                    </label>
-                    <label for="option-2" class="option option-2">
-                        <div class="dot"></div>
-                        <span>COD via Maxim</span>
-                    </label>
-                    <label for="option-3" class="option option-3">
-                        <div class="dot"></div>
-                        <span>GCASH</span>
-                    </label>
-                    <label for="option-4" class="option option-4">
-                        <div class="dot"></div>
-                        <span>UNION BANK</span>
-                    </label>
-                </div>
-
-            </div>
-
-            <h3 class="order">Order Summary</h3>
-            <?php if (isset($data) && !empty($data)): ?>
+        <h3 class="order">Order Summary</h3>
+        <?php if (isset($data) && !empty($data)): ?>
             <h5>Subtotal (<?= count($data['cart_items']) ?> Items): &#x20B1; <span id="subtotal"><?= number_format($data['subtotal'], 2) ?></span></h5>
             <h5>Delivery Fee: &#x20B1; <span id="delivery_fee"><?= number_format($data['delivery_fee'], 2) ?></span></h5>
             <h5>Discount Fee: &#x20B1; <span id="discount"><?= number_format($data['discount'], 2) ?></span></h5>
@@ -75,7 +72,6 @@
         <?php else: ?>
             <p>No items in the cart.</p>
         <?php endif; ?>
-        </form>
     </div>
 
     <div class="form-buttons">

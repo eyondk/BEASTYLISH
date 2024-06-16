@@ -6,7 +6,7 @@ if($_SERVER['SERVER_NAME'] == 'localhost'){
 
 
     define('DB_HOST', 'localhost');
-    define('DB_NAME', 'Beastylish');
+    define('DB_NAME', 'beastylish_db');
     define('DB_USER', 'postgres');
     define('DB_PASSWORD', 'yron312');
 

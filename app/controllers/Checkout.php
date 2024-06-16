@@ -5,28 +5,23 @@ class Checkout extends Controller
 {
     public function index()
     {
-        // Check if there is checkout data in session storage
         $checkoutData = $_SESSION['checkoutData'] ?? null;
         if ($checkoutData) {
             $checkoutData = json_decode($checkoutData, true);
-            unset($_SESSION['checkoutData']); // Clear the session data after retrieving
+            unset($_SESSION['checkoutData']);
         }
 
-        // Pass the data to the view
         $this->view('customer/checkout', $checkoutData);
     }
 
     public function processCheckout()
     {
         if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-            // Decode the JSON data from the request body
             $jsonData = file_get_contents('php://input');
             $requestData = json_decode($jsonData, true);
 
             if (isset($requestData['selected_items'])) {
                 $selectedItems = $requestData['selected_items'];
-
-                // Fetch item details from the database using the new function
                 $shopcartModel = new Shopcart();
                 $cartItems = $shopcartModel->get_cart_items_by_ids(array_column($selectedItems, 'cart_id'));
 
@@ -52,7 +47,6 @@ class Checkout extends Controller
                     'total' => $total,
                 ];
 
-                // Store the data in session storage and return success response
                 $_SESSION['checkoutData'] = json_encode($data);
                 echo json_encode(['success' => true, 'data' => $data]);
             } else {
@@ -64,8 +58,12 @@ class Checkout extends Controller
         }
     }
 
-    public function confirmOrder()
+   public function confirmOrder()
 {
+    header('Access-Control-Allow-Origin: http://localhost:3000/'); // Allow all domains
+    header('Access-Control-Allow-Methods: POST, GET, OPTIONS'); // Allowed methods
+    header('Access-Control-Allow-Headers: Content-Type, Authorization'); // Allowed headers
+
     if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         // Decode the JSON data from the request body
         $jsonData = file_get_contents('php://input');
@@ -77,7 +75,6 @@ class Checkout extends Controller
             exit;
         }
 
-       
         $orderModel = new Checkouts();
         $shopcartModel = new Shopcart();
 
@@ -95,13 +92,13 @@ class Checkout extends Controller
             } else if (in_array($requestData['payment_method'], ['GCASH', 'UNION BANK'])) {
                 // Process payment through the GCASH API
                 $client = new \GuzzleHttp\Client();
-                $response = $client->post('https://api.paymongo.com/v1/links', [
+                $response = $client->post('http://localhost/my-proxy-server/proxy.php', [
                     'json' => [
                         'data' => [
                             'attributes' => [
-                                'amount' => 10000, // Amount in cents (Php 100.00)
+                                'amount' => $requestData['order_total'] * 100, // Amount in cents
                                 'description' => 'Order payment',
-                                'remarks' => 'Payment for order ID: 1' 
+                                'remarks' => 'Payment for order ID: ' . $orderId
                             ]
                         ]
                     ],
@@ -113,18 +110,23 @@ class Checkout extends Controller
                 ]);
 
                 $apiResponse = json_decode($response->getBody(), true);
+                error_log(print_r($apiResponse, true)); // Log the API response for debugging
+
                 $checkoutUrl = $apiResponse['data']['attributes']['checkout_url'] ?? null;
 
                 if ($checkoutUrl) {
                     header('Location: ' . $checkoutUrl);
-                    exit;   
                 } else {
-                    throw new Exception('Checkout URL not found in response');
+                    // Handle the case where checkout URL is null or missing
+                    error_log('Checkout URL not found in response');
+                    echo json_encode(['success' => false, 'error' => 'Checkout URL not available']);
                 }
             } else {
                 throw new Exception('Unsupported payment method');
             }
         } catch (Exception $e) {
+            // Log the error for debugging
+            error_log('Error processing order: ' . $e->getMessage());
             echo json_encode(['success' => false, 'error' => $e->getMessage()]);
         }
     } else {
@@ -132,5 +134,6 @@ class Checkout extends Controller
     }
 }
 
-}
 
+}
+?>
