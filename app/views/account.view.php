@@ -416,17 +416,18 @@
     </div>
 
     <!-- logout mmodal -->
+    <!-- logout modal -->
     <div id="logoutModal" class="modal" style="display: none;">
         <div class="modal-content">
-            <form action="" method="post">
+            <form action="<?= ROOT ?>/Account/logout" method="post">
                 <div class="cancel-container">
                     <div class="cancel">
                         <h3>LOG OUT</h3>
-                        <h4>are you sure you want to logout?</h4>
+                        <h4>Are you sure you want to logout?</h4>
                     </div>
                     <div class="btns">
-                        <input type="button" class="back" value="CANCEL">
-                        <input type="button" class="logoutbtn"  value="YES, LOG OUT">
+                        <input type="button" class="back" value="CANCEL" onclick="closeModal()">
+                        <input type="submit" class="logoutbtn" value="YES, LOG OUT">
                     </div>
                 </div>
             </form>
