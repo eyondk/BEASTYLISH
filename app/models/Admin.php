@@ -29,7 +29,7 @@ class Admin{
     }
 
     public function getByPhone($phone) {
-        return $this->first(['admin_email' => $phone]);
+        return $this->first(['admin_phonenum' => $phone]);
     }
 
     public function updateResetToken($userId, $resetToken, $resetExpiry) {
@@ -40,7 +40,9 @@ class Admin{
     }
 
 
-     
+    public function updateProfile($userId, $data) {
+        return $this->update($userId, $data, 'CUS_ID');
+    }
     public function getById($id) {
         return $this->first(['admin_id' => $id]);
     }
