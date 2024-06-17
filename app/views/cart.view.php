@@ -52,7 +52,14 @@
                     <tbody>
                     <?php if (!empty($cart_items)): ?>
                         <?php foreach ($cart_items as $item): ?>
-                        <tr data-cart-id="<?= htmlspecialchars($item['cart_id']); ?>" data-prod-price="<?= htmlspecialchars($item['prod_price']); ?>">
+                          <?php
+                            // Calculate the discounted price if discount_percent is available
+                            $final_price = !empty($item['discount_percent']) ? $item['prod_price'] * (1 - $item['discount_percent'] / 100) : $item['prod_price'];
+                            $subtotal = $final_price * $item['cart_qty'];
+                            ?>
+                       
+                        <tr data-cart-id="<?= htmlspecialchars($item['cart_id']); ?>" data-prod-price="<?= htmlspecialchars($final_price); ?>">
+                            
                             <td>
                                 <form onsubmit="removeItem(event, this)">
                                     <input type="hidden" name="cart_id" value="<?= htmlspecialchars($item['cart_id']); ?>" />
@@ -63,7 +70,7 @@
                                 <img src="<?= htmlspecialchars($item['image_path']); ?>" alt="product" width="100" height="100">
                             </td>
                             <td><?= htmlspecialchars($item['prod_name']); ?></td>
-                            <td>&#8369; <?= htmlspecialchars(number_format($item['prod_price'], 2)); ?></td>
+                            <td>&#8369; <?= htmlspecialchars($final_price); ?></td>
                             <td>
                                 <div class="qty-container">
                                     <div class="wrapper">

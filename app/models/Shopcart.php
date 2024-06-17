@@ -14,12 +14,32 @@ class Shopcart
     ];
 
     
+    // public function get_cart_items($cus_id)
+    // {
+    //     try {
+    //         $conn = $this->connect();
+    //         $stmt = $conn->prepare("
+    //             SELECT c.*, p.prod_name, p.prod_price, pi.image_path, p.prod_stock
+    //             FROM cart c
+    //             LEFT JOIN products p ON c.prod_id = p.prod_id
+    //             LEFT JOIN product_images pi ON p.prod_id = pi.prod_id
+    //             WHERE c.cus_id = :cus_id AND c.cart_status = 'active'
+    //         ");
+    //         $stmt->bindParam(':cus_id', $cus_id, PDO::PARAM_INT);
+    //         $stmt->execute();
+    //         return $stmt->fetchAll(PDO::FETCH_ASSOC);
+    //     } catch (PDOException $e) {
+    //         error_log("Database error: " . $e->getMessage());
+    //         return [];
+    //     }
+    // }
+
     public function get_cart_items($cus_id)
     {
         try {
             $conn = $this->connect();
             $stmt = $conn->prepare("
-                SELECT c.*, p.prod_name, p.prod_price, pi.image_path, p.prod_stock
+                SELECT c.*, p.prod_name, p.prod_price, pi.image_path, p.prod_stock, p.discount_percent
                 FROM cart c
                 LEFT JOIN products p ON c.prod_id = p.prod_id
                 LEFT JOIN product_images pi ON p.prod_id = pi.prod_id
