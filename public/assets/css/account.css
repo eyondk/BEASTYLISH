@@ -1,1032 +1,302 @@
-@import url('https://fonts.googleapis.com/css2?family=Dancing+Script:wght@400..700&family=Montserrat:ital,wght@0,100..900;1,100..900&family=Style+Script&display=swap');
+/* checkout.css */
 
-* {
-    color: #6c4a21;
-}
-
-html {
-    font-size: 62.5%;
-}
-
-*::selection{
-    background-color: #6c4a21;
-    color: #faf2e8;
-}
-*::-webkit-scrollbar{
-    width: 5px;
-    border-radius: 1rem;
-    background-color: transparent;
-}
-*::-webkit-scrollbar-thumb{
-    background-color: #b79c7b;
-}
-
-*::placeholder{
-    color: #6c4a21;
-}
-
-.account {
-    display: flex; 
-    flex: 1; /* Grow to fill remaining height */
-
-}
-
-.account-sidebar{
-    padding-top: 7rem;
-    padding-left: 3rem;
-    width: 20%;
-    min-height: 100vh; 
-    border-right: 2px solid #6c4a21;
-}
-
-.account-sidebar .profile{
-    display: flex; 
-    align-items: center; 
-    flex-direction: row; 
-}
-
-.account-sidebar img{
-    border: 2px solid #6c4a21;
-    border-radius: 5px;
-    height: 100px;
-    width: 100px;
-    margin-right: 20px; 
-}
-
-.account-sidebar p{
-    font-size: 18px;
-    width: 90px;
-    margin: 0; 
-    text-transform: uppercase;
-    font-weight: 450;
-}
-
-.account-sidebar ul{
-    padding-top: 2rem;
-    text-align: center;
-    align-items: center;
-}
-.account-sidebar ul a{
-    display: flex;
-    text-align: center;
-    margin-top: 3rem;
-    margin-right: 1rem;
-    padding-bottom: 1rem;
-    text-decoration: none;
-    text-transform: uppercase;
-    font-size: 18px;
-}
-
-
-
-.account-sidebar ul a .fas,
-.account-sidebar ul a .far {
-    margin-right: 1rem;
-    color: #6c4a21cf;
-    font-size: 21px;
-    transition: all 0.3s ease;
-}
-
-.account-sidebar ul a:hover{
-    border-bottom: 2px solid #6c4a21;
-}
-
-
-
-.acc_info, .changePass{
-    display: flex;
-    flex-direction: row;
-    font-size: 20px;
-    text-align: center;
-    flex: 1; 
-    padding: 5rem 3rem;
-}
-
-.acc_info form{
-    max-width: 65rem;
-    margin: 3rem;
-    margin: 1rem auto;
-    border:2px solid #6c4a21;
-    border-radius: 2px;
-    padding: 2rem;
-    text-align: center;
-    background-color: transparent;
-    max-height: 97vh;
-}
-
-
-.acc_info .user_details{
-    max-height: 70vh;
-    width: 50rem;
-    align-self: center;
-}
-
-.changePass form{
-    width: 70rem;
-    margin: 5rem;
-    margin: 1rem auto;
-    border:2px solid #6c4a21;
-    border-radius: 2px;
-    padding: 2rem;
-    text-align: center;
-    background-color: transparent;
-    max-height: 47vh;
-}
-
-input{
-    color: #6c4a21;
-}
-
-input[type="file"]::file-selector-button {
-    display: none;
-}
-
-
-form i{
-    color: #6c4a21;
-    font-size: 1.7rem;
-}
-
-form .inputBox{
-    text-align: left;
-}
-
-.inputBox span{
-    display: block;
-    padding-top: 1rem;
-    padding-bottom: 0.1rem;
-    font-size: 1.3rem;
-    font-weight: 450;
-    color: #6c4a21;
-}
-
-.acc_info form .flex{
-    display: flex;
-    gap: 1.5rem;
-    justify-content: space-between;
-    flex-wrap: wrap;
-}
-
-
-.flex> *{
-    flex: 1;
-}
-
-
-
-form .inputBox .box{
-    width: 100%;
-    padding: 1.2rem 1.4rem;
-    font-size: 1.3rem;
-    color: #6c4a21;
-    border: 2px solid #6c4a21;
-    background-color: transparent;
-}
-
-.btn, .option-btn, .details-btn, .edit_add, .back-btn, .save_upd_add{
-    width: 100%;
-    display: block;
-    margin-top: 1rem;
-    border-radius: 2px;
-    font-size: 1.5rem;
-    padding: 1.2rem 1.4rem;
-    cursor: pointer;
-    text-decoration: none;
-    background-color: transparent;
-    transition: all 0.3s ease;
-    border: none;
-}
-
-.btn{
-    background-color: #6c4a2165;
-    color: #6c4a21;
-    font-weight: 500;
-}
-
-.option-btn{
-    color: #6c4a2182;
-    border: 2px solid  #6c4a2182;
-    font-weight: 500;
-}
-
-.details-btn{
-    border:2px solid #6c4a2165;
-    text-align: center;
-    color: #6c4a2165;
-    font-weight: 500;
-
-}
-.btn:hover{
-    background-color: #6c4a21;
-    color: #faf2e8;
-}
-
-.option-btn:hover{
-    color: #6c4a21;
-    border: 2px solid #6c4a21;
-    font-weight: 550;
-}
-
-.details-btn:hover{
-    color: #faf2e8;
-    background-color: #6c4a2165;
-    border: none;
-}
-
-/* ===============order================================= */
-
-/* .orders{
-    display: flex;
-    flex-direction: row;
-    font-size: 20px;
-    text-align: center;
-    flex: 1; 
-}
- */
-
- .orders {
-    display: flex;
-    justify-content: center; /* Center horizontally */
-    text-align: center;
-    flex: 1;
-}
-
-.order-container {
-    border: 0;
-    padding-top: 30px;
-    border-radius: none;
-    background-color: none;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-}
-
-.order-container p{
-    font-size: 50px;
-    color: #6c4a21;
-    font-weight:300;
-}
-
-.orderstatus input {
-    margin: 5px;
-    color: #6c4a21;
-    font-size: 18px;
-    font-weight: 500;
-    background-color: #b79c7bae;
-    padding: 1rem;
-    border-radius: 2px;
-    border: none;
-    transition: all 0.3s ease;
-}
-
-.orderstatus input:hover{
-    transform: scale(1.05);
-    color: #faf2e8;
-}
-
-.order{
-    width: 100%;
-    border: 2px solid #6c4a21;
-    margin-top: 20px;
-    height: 400px;
-    overflow-y: auto; /* Enable vertical scroll */
-
-
-}
-
-
-.order-table {
-    width: 100%;
-    border-collapse: collapse;
-    text-align: center;
-    overflow: auto; /* Enable scroll for the table */
-
-
-}
-
-.order-table th, .order-table td {
-    padding: 8px;
-    text-transform: uppercase;
-    font-size: 2rem;
-}
-
-
-
-.order-table th {
-    background-color:#faf2e8;
-    border-bottom: #6c4a21 2px solid;
-    font-weight: 600;
-    text-transform: uppercase;
-    position: sticky;
-    top: 0;
-    z-index: 3;
-}
-
-.order-table td button {
-    margin: 0 5px;
-    padding: 0.5rem;
-    font-size: 20px;
-    font-weight: 500;
-    border: none;
-    border-radius: 2px;
-    text-transform: uppercase;
-    background-color: none;
-    background: none;
-    transition: all 0.2s ease;
-    /* background-color: rgba(255, 222, 173, 0.359); */
-}
-
-.order-table td button:hover{
-    text-decoration: 1.5px underline;
-    transform: scale(1.05);
-}
-
-
-/* Modal styles */
-.modal {
-    display: none; /* Hidden by default */
-    position: fixed; /* Stay in place */
-    z-index: 999999; /* Sit on top */
-    left: 0;
-    top: 0;
-    width: 100%;
-    height: 100%;
-    overflow: auto; /* Enable scroll if needed */
-    background-color: rgb(0,0,0); /* Fallback color */
-    background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
-    display: flex;
-    justify-content: center;
-    align-items: center;
-}
-
-.modal-content {
-    background-color: #faf2e8;
-    margin: auto ;
-    padding: 20px;
-    border: 1px solid #faf2e8;
-    width: 80%;
-    max-width: 600px;
-    border-radius: 5px;
-    
-}
-
-.table-container {
-    flex: 1; /* Take up remaining space */
-    overflow-y: auto; /* Enable vertical scroll */
-    height: 40vh; /* Set fixed height */
-    margin-top: 1rem;
-    
-}
-
-
-.close {
-    color: #6c4a21a1;
-    float: right;
-    padding-left: 0.5rem;
-    margin-top: -1rem;
-    font-size: 28px;
-    font-weight: bold;
-}
-
-.close:hover,
-.close:focus {
-    color: #3d280f;
-    text-decoration: none;
-    cursor: pointer;
-}
-
-.details-table {
-    width: 100%;
-    border-collapse: collapse;
-    font-weight: 500;
-    font-size: 16px;
-
-}
-
-.details-table td {
-    padding: 8px;
-    align-items: center;
-}
-
-
-
-.details-table img {
-    max-width: 100px;
-    border-radius: 5%;
-}
-
-.modal-content .o, .i{
-    font-size: 15px;
-    font-weight: 500;
-    color: #6c4a21;
-    text-transform: capitalize;
-    margin-top:0.5rem;
-    display: flex;
-    flex-direction: column;
-}
-
-.o h4{
-    font-size: 30px;
-    font-weight: 500;
-    text-transform: uppercase;
-}
-
-.orderssummary{
-    
-    font-size: 15px;
-    font-weight: 500;
-    color: #6c4a21;
-    text-transform: capitalize;
-    display: flex;
-    flex-direction: row;
-}
-
-.orderssummary .r{
-    padding: 1rem;
-}
-
-.i{
-    padding: 1rem;
-}
-
-.i p{
-    padding-bottom: 5px;
-}
-
-.orderssummary h4{
-    text-transform: uppercase;
-    font-weight: 500;
-    font-size: 18px;
-}
-
-.modal-content .orderssummary .tt{
-    margin-top: 5px;
-}
-
-
-/* cancel modal */
-.cancel-container{
-    display:flex;
-    flex-direction:column;
-    text-align: center;
-    color:#6c4a21;
-}
-
-.cancel h2{
-    font-size: 50px;
-}
-
-.cancel h3{
-    font-size: 25px;
-    font-weight: 600;
-    text-transform: uppercase;
-}
-
-.cancel h4{
-    padding-bottom: 1rem;
-    font-size: 15px;
-    font-weight: 500;
-}
-
-.btns, .modifyBtns{
-    display: flex;
-    flex-direction: row;
-    justify-content: center;
-    padding: 1rem;
-}
-
-.btns input, .modifyBtns input{
-    padding: 1.5rem 2rem;
-    border: none;
-    text-transform: uppercase;
-    font-size: 14px;
-    font-weight: 600;
-    border-radius: 2px;
-    transition: all 0.2s ease;
-    margin: 0 10px; /* Add margin between buttons */
-    width: 48%;
-
-}
-
-.btns input[type="button"] {
-    background-color:#b79c7b62;
-    color: #6c4a21;
-}
-
-.btns input[type="button"]:hover{
-    transform: scale(1.08);
-    background-color: #b79c7b46;
-}
-.btns input[type="submit"] {
-    background-color: transparent;
-    border: 2px solid #6c4a21;
+*::placeholder {
     color: #6c4a21;
     
 }
 
-.btns input[type="submit"]:hover{
-    transform: scale(1.08);
-    color: #6c4a21a0;
-    border-color: #6c4a21ac;
-}
-
-/* modify modal */
-.modifyBtns input{
-    font-size: 14px;
-    font-weight: 500;
-}
-
-.modifyBtns input[type="submit"]{
-    background-color: #6c4a218e;
-    color: #faf2e8;
-    width: 50%;
-
-}
-
-.modifyBtns input[type="submit"]:hover{
-    transform: scale(1.08);
-    background-color: #6c4a2166;
-}
-
-.modifyBtns input[type="button"]{
-    background-color: #6c4a212e;
-}
-
-.modifyBtns input[type="button"]:hover{
-    transform: scale(1.08);
-    background-color: #6c4a2118 ;
-}
-
-.form-row {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 10px;
-    margin-bottom: 1rem;
-}
-
-form h3{
-    margin-top: 0.5rem;
-    margin-bottom: 0.5rem;
-    font-size: 40px;
-    font-weight: 400;
-    text-transform:uppercase;
-    color: #6c4a21;
-}
-
-.form-row input {
+select.box {
     flex: 1 1 calc(20% - 10px);
     padding: 10px;
-    border: 2px solid #6c4a21;
+    border: 1px solid #6c4a21;
     background-color: transparent;
     border-radius: 0px;
     color: #6c4a21;
 }
 
-
-/* ===============order end================================= */
-
-
-
-/* ======================  FAQ START  ============================= */
-
-
-.faqSection {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    width: 80%;
-    padding: 20px;
-    padding-top:6rem;
-    box-sizing: border-box;
-}
-
-.title-faqs {
-    text-align: left;
-    width: 90%;
-    padding-bottom: 6rem;
-}
-
-.title-faqs h2{
-    font-size: 50px;
-    font-weight: 600;
-}
-
-.title-faqs h3{
-    font-size: 15px;
-    font-weight: 500;
-    color: #6c4a2199;
-}
-
-.faqSection .faq-container {
-    width: 80%;
-}
-
-.faq-item {
-    border-top: 2px solid #6c4a21;
-    padding: 10px 0;
-}
-
-.faq-item:last-child {
-    border-bottom: 2px solid #6c4a21;
-}
-
-.faq-question {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    cursor: pointer;
-    font-size: 18px;
-    font-weight: 400;
-}
-
-.faq-answer {
-    display: none;
-    padding: 20px 0;
-    font-size: 15px;
-    font-weight: 400;
-}
-
-.plus-icon {
-    font-size: 18px;
-}
-
-/* ======================  FAQ END  ============================= */
-
-/* ========================= ADDRESS START ============================ */
-.addressSec {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    flex-direction: column;
-    width: 70%;
-    padding: 20px;
-    box-sizing: border-box;
-    
-
-}
-
-.address_details, .edit_add, .edit_address {
-    width: 50%; /* Adjust this percentage to make the form wider or narrower */
-    margin: auto;
-}
-
-.address_details, .edit_address{
-    border: 2px solid #6c4a21;
-    padding: 2rem;
-}
-
-.inputBox {
-    width: 60%;
-    margin-bottom: 15px;
-}
-
-.inputBox span {
-    display: block;
-    margin-bottom: 5px;
-    font-weight: bold;
-}
-
-.inputBox .box {
-    width: 100%;
+select.box option {
+    color: #6c4a21; /* Text color */
+    background-color: #faf2e8; /* Background color */
     padding: 10px;
-    border: 1px solid #ccc;
-    border-radius: 5px;
 }
 
-.flex {
+
+.checkoutform {
+    padding: 20px;
+    max-width: 800px;
+    margin: 0 auto;
+}
+
+.tt {
+    margin-top: 1rem;
+}
+
+.tt h1 {
+    text-align: center;
+    margin-bottom: 20px;
+    font-size: 5rem;
+    font-weight: 400;
+    color: #6c4a21;
+}
+
+.addressform {
+    background: transparent;
+    padding: 20px 20px;
+    border: 2px solid #6c4a21;
+    color: #6c4a21;
+    border-radius: 0px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+.addressform h3{
+    margin-bottom: 20px;
+    font-size: large;
+    font-weight: 500;
+    text-transform: uppercase;
+}
+
+.addressform h5 {
+    text-transform: capitalize;
+    font-size: medium;
+    font-weight: 400;
+}
+
+.addressform .order{
+    margin-top: 2rem;
+    margin-bottom: 1rem;
+}
+
+
+
+.form-row {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+}
+
+.form-row input, .form-row select {
+    flex: 1 1 calc(20% - 10px);
+    padding: 10px;
+    border: 1px solid #6c4a21;
+    background-color: transparent;
+    border-radius: 0px;
+    color: #6c4a21;
+}
+
+.form-checkbox {
+    margin-top: 10px;
+    margin-bottom: 3rem;
+    font-size: small;
+    display: flex;
+    align-items: center;
+}
+
+.form-checkbox input[type="checkbox"] {
+    margin-right: 5px;
+    accent-color: #6c4a21;
+}
+
+.addressform .billadd{
+    margin-top: 2rem;
+}
+
+
+.addressform .payment{
+    margin-top: 2rem;
+    margin-bottom: 0rem;
+} 
+
+/* .form-row button {
+    background-color: transparent;
+    border: none;
+    padding: 10px;
+    cursor: pointer;
+    color: #6c4a21;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 5px;
+}
+
+.form-row button img {
+    display: block;
+    transition: transform 0.3s;
+}
+
+.form-row button:hover img {
+    transform: scale(1.1);
+} */
+
+.form-buttons {
     display: flex;
     justify-content: center;
-    gap: 20px;
-}
+    margin-top: 20px;
+    padding: 20px 2rem;
+    gap: 10px;  
+} 
 
-.edit_add, .back-btn, .save_upd_add{
-    padding: 10px 20px;
+ .form-buttons button {
+    padding: 5px 10px;
     border: none;
-    border-radius: 5px;
+    border-radius: 0px;
     cursor: pointer;
-    text-decoration: none;
-    text-align: center;
+    text-transform: uppercase;
+} 
+
+.form-row .wrapper {
+    display: flex;
+    background: transparent;
+    height: 80px; /* Reduced height */
+    align-items: center;
+    justify-content: space-evenly;
+    border-radius: 0px;
+    padding: 5px 5px;
 }
 
-.edit_add{
-    background-color: #6c4a217b;
-    color: #faf2e8;
+.form-row .wrapper .option {
+    background: transparent;
+    height: 80%;
+    width: auto; /* Adjusted to fit content */
+    display: flex;
+    align-items: center;
+    justify-content: center; /* Centered content */
+    margin: 0 10px;
+    border-radius: 0;
+    cursor: pointer;
+    padding: 10px 15px; /* Adjusted padding */
+    border: 1px solid #6c4a21;
+    transition: all 0.3s ease;
 }
 
-.back-btn{
-    border: 2px solid ;
-    color:#6c4a217d;
-    border-color: #6c4a217d;
+.wrapper .option .dot {
+    height: 10px;
+    width: 10px;
+    background: #6c4a21;
+    border-radius: 50%;
+    position: relative;
+    margin-right: 8px; /* Spacing between dot and text */
 }
 
-.save_upd_add{
-    background-color: #9e7440a4;
-    color: #faf2e8;
+.wrapper .option .dot::before {
+    position: absolute;
+    content: "";
+    top: 4px;
+    left: 4px;
+    width: 12px;
+    height: 12px;
+    background: #faf2e8;
+    border-radius: 50%;
+    opacity: 0;
+    transform: scale(1.5);
+    transition: all 0.3s ease;
 }
 
-
-.save_upd_add:hover{
-    background-color: #9e7440df;
-}
-.edit_add:hover {
-    background-color: #6c4a2160;
-    color: #faf2e8;
+input[type="radio"] {
+    display: none;
 }
 
-.back-btn:hover{
+#option-1:checked ~ .option-1,
+#option-2:checked ~ .option-2,
+#option-3:checked ~ .option-3,
+#option-4:checked ~ .option-4 {
+    border-color: #563b19;
+    background: #563b19;
+}
+
+#option-1:checked ~ .option-1 .dot,
+#option-2:checked ~ .option-2 .dot,
+#option-3:checked ~ .option-3 .dot,
+#option-4:checked ~ .option-4 .dot {
+    background: #faf2e8;
+}
+
+/* #option-1:checked ~ .option-1 .dot::before,
+#option-2:checked ~ .option-2 .dot::before,
+#option-3:checked ~ .option-3 .dot::before,
+#option-4:checked ~ .option-4 .dot::before {
+    opacity: 1;
+    transform: scale(1);
+} */
+
+.wrapper .option span {
+    font-size: 15px;
     color: #6c4a21;
-    border-color: #6c4a21;
+    text-align: center; /* Center text within the label */
+}
+
+#option-1:checked ~ .option-1 span,
+#option-2:checked ~ .option-2 span,
+#option-3:checked ~ .option-3 span,
+#option-4:checked ~ .option-4 span {
+    color: #faf2e8;
+}
+.cancel-btn {
+    background-color: #90734f8e;
+    color: #352512;
+}
+
+.continue-btn {
+    background-color: #6c4a21;
+    color: #faf2e8;
+}
+
+.form-buttons button:hover {
+    opacity: 0.8;
 }
 
 
 
 
-/* ========================= ADDRESS END ============================ */
-
-/* media quries */
-@media(max-width:1200px){
-    html{
-        font-size: 55%;
-    }
-
-    .account-sidebar .profile{
-        display: flex;
-        align-items: center; 
-        justify-content: center;
-    }
-    .account-sidebar .profile img{
-        width: 80px;
-        height: 80px;
-    }
-
-
-    form .flex .inputBox{
-        width: 100%;
-    }
-
-    .account-sidebar{
-        width: 22%;  
-    }
-    
-
-
-    .account-sidebar ul a:hover{
-        border-bottom: 2px solid #6c4a21;
-    }
-
-    .account-sidebar ul a span {
-        font-size: 18px; 
-    }
-
-
-    .acc_info form{
-        align-self: center;
-        max-height: 92vh;
-    }
-
-    .acc_info .user_details{
-        align-self: center;
-        max-height: 68vh;
-        width: 55rem;
-    }
-    
-
-    .changePass form{
-        align-self: center;
-        max-height: 48vh;
-        margin-top: -5rem;
-    }
-
-
-
+/* The Modal (background) */
+.modal {
+    display: none;
+    position: fixed; 
+    z-index: 99999; 
+    padding-top: 100px; 
+    left: 0;
+    top: 0;
+    width: 100%; 
+    height: 100%; 
+    overflow: auto; 
+    background-color: rgb(0,0,0); 
+    background-color: rgba(0,0,0,0.4); 
 }
-
-@media screen and (max-width:991px) {
-        
-    .account-sidebar .profile{
-        display: flex;
-        align-items: center; 
-        justify-content: center;
-    }
-    .account-sidebar .profile img{
-        width: 80px;
-        height: 80px;
-    }
-
-
-    .account-sidebar .profile .name{
-        display: none;
-    }
-
-
-    .account-sidebar ul a {
-        display: flex;
-        align-items: center; 
-        justify-content: center;  
-        margin-top: 1rem; 
-    }
-
-    .account-sidebar ul a .fas,
-    .account-sidebar ul a .far {
-        margin-right: 0.5rem;
-        margin-top: 4rem;
-        display: block;
-    }
-
-    .account-sidebar ul a span {
-        font-size: 0; 
-    }
-
-
-    .acc_info form{
-        align-self: center;
-    }
-
-    .changePass form{
-        align-self: center;
-        max-height: 45vh;
-
-    }
+  
+/* Modal Content */
+.modal-content {
+    background-color: #faf2e8;
+    margin:  auto;
+    padding: 20px;
+    border: 1px solid #888;
+    width: 40%; 
+    display: flex;
+    align-items: center; 
 }
-@media screen and (max-width:450px){
-    html{
-        font-size: 50%;
-    }
-
-
-    .flex{
-        flex-flow: column;
-        gap: 0;
-        padding-top: 0.5rem;
-    }
-    .acc_info form img {
-        width: calc(100% - 20px); 
-    }
-
-    .acc_info form{
-        margin-top: -2rem;
-        align-self: center;
-    }
-
-    .changePass form{
-        margin-top: -5rem;
-    }
-
+  
+/* The Close Button */
+.closecheck {
+    color: #6c4a21;
+    align-self: flex-end; 
+    font-size: 20px;
+    font-weight: bold;
+    z-index: 999999;
+    padding-right: 1rem;
 }
-
-@media screen and (max-width: 768px) {    
-
-    .account-sidebar{
-        height: 95vh;
-        width: 22%;  
-    }
-    
-    .account-sidebar .profile{
-        display: flex;
-        align-items: center; 
-        justify-content: center;
-    }
-    .account-sidebar .profile img{
-        width: 50px;
-        height: 50px;
-    }
-
-
-    .account-sidebar .profile .name{
-        display: none;
-    }
-
-
-    .account-sidebar ul a {
-        display: flex;
-        align-items: center; 
-        justify-content: center;  
-        margin-top: 1rem; 
-    }
-
-    .account-sidebar ul a .fas,
-    .account-sidebar ul a .far {
-        margin-right: 0.5rem;
-        margin-top: 4rem;
-        display: block;
-    }
-
-    .account-sidebar ul a span {
-        font-size: 0; 
-    }
-
-
-    .acc_info form{
-        align-self: center;
-        max-height: none; 
-        padding: 2rem; 
-    }
-
-    .changePass form{
-        width: 40rem;
-        max-height: 30vh ;
-    }
-
-}
-
-/* order page */
-@media (max-width: 1200px) {
-    .order {
-        width: calc(100% - 40px); /* Adjust as per your design needs */
-    }
-
-    .order-table td button{
-        font-size: 16px;
-    }
-    
-}
-
-@media (max-width: 1100px) {
-    .order {
-        width: calc(100% - 40px); /* Adjust as per your design needs */
-    }
-
-    
-    .order-table td button{
-        font-size: 14px;
-    }
+  
+.closecheck:hover,
+.closecheck:focus {
+    color: #352512;
+    text-decoration: none;
+    cursor: pointer;
 }
 
 
-
-@media (max-width: 900px) {
-    .order {
-        width: calc(100% - 50px); /* Adjust as per your design needs */
-    }
+/* for view moadl content starts*/
+.modal-content h2{
+    color: #563b19;
+    font-size: medium;
+    text-align: left; 
+    font-weight: 400;
 }
-
-@media (max-width: 768px) {
-    .order {
-        width: calc(100% - 30px); /* Adjust as per your design needs */
-    }
-    
-    .order-table td button{
-        font-size: 14px;
-    }
-}
-
-@media (max-width: 480px) {
-
-    .order-container {
-        border: 0;
-        padding-top: 20px;
-        width: 44vh;
-    }
-
-    .order-container p{
-        font-size: 30px;
-        color: #6c4a21;
-        font-weight:300;
-    }
-
-    .orderstatus input {
-        font-size: 10px;
-        padding: 0.5rem;
-     
-    }
-
-    .order{
-        width: calc(100% - 40px); /* Adjust as per your design needs */
-        border: 2px solid #6c4a21;
-        margin-top: 20px;
-        height: 400px;
-        overflow-y: auto; /* Enable vertical scroll */
-
-
-    }
-
-
-    .order-table {
-        width: 100%;
-        border-collapse: collapse;
-        text-align: center;
-        overflow: auto; /* Enable scroll for the table */
-
-
-    }
-
-    .order-table td button {
-        font-size: 12px;
-    }
-
-
-    
-    .btns input, .modifyBtns input{
-        padding: 1.5rem 2rem;
-        border: none;
-        text-transform: uppercase;
-        font-size: 10px;
-        font-weight: 600;
-        border-radius: 2px;
-        transition: all 0.2s ease;
-        margin: 0 10px; /* Add margin between buttons */
-        width: 48%;
-
-    }
-
-}
+ 
+/* Modal footer */
