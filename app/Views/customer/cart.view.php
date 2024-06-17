@@ -68,7 +68,7 @@
                             <td>&#8369; <?= htmlspecialchars(number_format($item['prod_price'], 2)); ?></td>
                             <td>
                                 <div class="qty-container">
-                                    <div class="wrapper">
+                                   <div class="wrapper">
                                         <input type="hidden" name="cart_id" value="<?= htmlspecialchars($item['cart_id']); ?>" />
                                         <button type="button" class="minus" onclick="updateQuantity(this, -1)">-</button>
                                         <input type="number" min="1" name="cart_qty" class="num" value="<?= htmlspecialchars($item['cart_qty']); ?>" onchange="updateQuantity(this, 0)">

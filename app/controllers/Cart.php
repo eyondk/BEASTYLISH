@@ -69,6 +69,7 @@ class Cart extends Controller
     //     echo json_encode(['success' => false, 'message' => 'Invalid request method']);
     // }
 
+    //changed
     public function add()
     {
         if ($_SERVER['REQUEST_METHOD'] == 'POST') {
@@ -82,7 +83,7 @@ class Cart extends Controller
             }
 
             $cart = new Shopcart();
-            $cus_id = $_SESSION['user_id'];
+            $cus_id = $_SESSION['user_id']; // Replace with actual customer ID
 
             $cartData = [
                 'cart_qty' => $input['cart_qty'],
