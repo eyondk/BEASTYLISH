@@ -6,33 +6,6 @@
     padding:0;
     box-sizing: border-box;
 }
-.update_profile .error-messages {
-    margin-top: 20px;
-    margin-bottom: 20px;
-    background-color: #6c4a218d;
-    color: #faf2e8;
-    font-size: medium;
-    font-weight: 500;
-    border: none;
-    text-transform: uppercase;
-    border-radius: 5px;
-    padding: 10px;
-    text-align: center;
-    width: 50%;
-    margin-left: auto;
-    margin-right: auto;
-    position: relative; /* Add position relative */
-}
-
-.update_profile .error-messages i {
-    position: absolute;
-    top: 10px;
-    right: 20px;
-    color: #faf2e8cc;
-    cursor: pointer;
-}
-
-
 
 html{
     font-size: 62.5%;
@@ -375,7 +348,7 @@ header .image-text .admin{
 
 .update_profile form .flex{
     display: flex;
-    gap: 1rem;
+    gap: 1.5rem;
     justify-content: space-between;
     flex-wrap: wrap;
 }
@@ -397,30 +370,28 @@ input[type="file"]::file-selector-button {
 
 .update_profile form i{
     color: #6c4a21;
-    font-size: 1.5rem;
+    font-size: 1.7rem;
 }
 
 .update_profile form .inputBox{
     text-align: left;
 }
 
-
-
 .update_profile form .inputBox span{
     display: block;
     padding-top: 1rem;
     padding-bottom: 0.1rem;
     font-size: 1.3rem;
-    font-weight: 600;
+    font-weight: 450;
     color: #6c4a21;
 }
 
 .update_profile form{
-    max-width: 60rem;
+    max-width: 65rem;
     margin: 3rem auto;
     border:2px solid #6c4a21;
     border-radius: 2px;
-    padding: 2rem 2rem;
+    padding: 2rem;
     text-align: center;
     background-color: transparent;
 
