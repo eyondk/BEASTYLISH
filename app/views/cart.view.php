@@ -87,9 +87,13 @@
             </div>
             <?php if (!empty($cart_items)): ?>
             <div>
-                <!-- <form action="/Cart/removeAll" method="post"> -->
-                    <button type="submit" class="deleteall" id="delete-all">DELETE ALL ITEMS</button>
-                <!-- </form> -->
+             <div>
+<!-- Inside cart.view.php -->
+<button type="button" class="deleteall" id="delete-all">DELETE ALL ITEMS</button>
+</div>
+
+
+
             </div>
             <?php endif; ?>
         </div>

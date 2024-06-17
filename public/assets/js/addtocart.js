@@ -194,58 +194,38 @@ document.addEventListener("DOMContentLoaded", function () {
     });
   });
 
-  // Initial call to update totals on page load
-  updateTotals();
-
-  // Function to handle deleting all items from the cart
-  function deleteAllItems() {
+  // Inside addtocart.js
+  document.getElementById("delete-all").addEventListener("click", function () {
     if (confirm("Are you sure you want to delete all items from your cart?")) {
-      fetch(ROOT_URL + "/cart/removeAll", {
+      fetch(ROOT_URL + "/cart/remove_all", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
         },
+        body: JSON.stringify({}),
       })
         .then((response) => {
           if (!response.ok) {
             throw new Error("Network response was not ok");
           }
-          return response.text(); // Change to response.text() to debug the response content
+          return response.json();
         })
-        .then((text) => {
-          console.log("Server response text:", text); // Log the raw response text for debugging
-          try {
-            const data = JSON.parse(text); // Parse the response text as JSON
-            if (data.success) {
-              alert("All items removed successfully.");
-              // Remove all rows from the cart table
-              const rows = document.querySelectorAll(
-                ".product-display-table tbody tr"
-              );
-              rows.forEach((row) => row.remove());
-              // Update totals
-              updateTotals();
-            } else {
-              console.error("Failed to remove items:", data.error);
-              alert("Failed to remove items. Please try again.");
-            }
-          } catch (error) {
-            console.error("Error parsing JSON:", error, "Response text:", text);
-            alert("Failed to remove items. Invalid response from server.");
+        .then((data) => {
+          if (data.success) {
+            alert("All items removed successfully.");
+            location.reload(); // Refresh the page to reflect changes
+          } else {
+            console.error("Failed to remove all items:", data.error);
+            alert("Failed to remove all items. Please try again.");
           }
         })
         .catch((error) => {
-          console.error("Error removing items:", error);
-          alert("Failed to remove items. Please try again.");
+          console.error("Error removing all items:", error);
+          alert("Failed to remove all items. Please try again.");
         });
     }
-  }
+  });
 
-  // Attach event listener to "Delete All Items" button
-  const deleteAllBtn = document.getElementById("delete-all");
-  if (deleteAllBtn) {
-    deleteAllBtn.addEventListener("click", deleteAllItems);
-  } else {
-    console.warn("Delete All button not found.");
-  }
+  // Initial call to update totals on page load
+  updateTotals();
 });

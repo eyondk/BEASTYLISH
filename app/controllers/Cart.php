@@ -190,36 +190,6 @@ class Cart extends Controller
         exit;
     }
 
-//     public function quantity()
-// {
-//     if ($_SERVER['REQUEST_METHOD'] == 'POST') {
-//         header('Content-Type: application/json'); // Ensure the response is JSON
-
-//         $input = json_decode(file_get_contents('php://input'), true);
-
-//         $product_id = $input['product_id'] ?? null;
-//         $cus_id = 1; // Replace with actual customer ID
-
-//         if ($product_id === null) {
-//             echo json_encode(['success' => false, 'message' => 'Product ID is required']);
-//             exit;
-//         }
-
-//         $cart = new Shopcart();
-//         $quantity = $cart->get_cart_quantity($cus_id, $product_id);
-
-//         // Debugging statement to verify server-side behavior
-//         error_log("Product ID: $product_id, Quantity: $quantity");
-
-//         echo json_encode(['success' => true, 'quantity' => $quantity]);
-//         exit;
-//     }
-
-//     // If not a POST request, return an error response
-//     header('Content-Type: application/json');
-//     echo json_encode(['success' => false, 'message' => 'Invalid request method']);
-//     exit;
-// }
 
 public function quantity()
 {
@@ -254,22 +224,25 @@ public function quantity()
     exit;
 }
 
+// Inside Cart.php controller
+public function remove_all()
+{
+    header('Content-Type: application/json'); // Ensure the response is JSON
 
-public function removeAll()
-    {
-        // $cus_id = $_SESSION['cus_id']; // Assuming you have customer ID stored in session
-        $cus_id = 1;
-        $shopcart = new Shopcart();
-        show($shopcart);
-        if ($shopcart->remove_all_from_cart($cus_id)) {
-            // Redirect or return success response
-            header("Location: /cart");
-        } else {
-            // Handle error
-            echo "Failed to remove all items from cart.";
-        }
+    // Retrieve customer ID from session or wherever it's stored
+    $cus_id = 1; // Replace with actual customer ID
+
+    $cart = new Shopcart();
+    $removed = $cart->remove_all_from_cart($cus_id);
+
+    if ($removed) {
+        echo json_encode(['success' => true]);
+    } else {
+        echo json_encode(['success' => false, 'error' => 'Failed to remove all items']);
     }
+    exit;
+}
 
-    
+
 
 }
