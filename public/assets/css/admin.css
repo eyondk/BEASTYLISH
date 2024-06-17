@@ -6,7 +6,6 @@
     padding:0;
     box-sizing: border-box;
 }
-
 .update_profile .error-messages {
     margin-top: 20px;
     margin-bottom: 20px;
@@ -15,14 +14,25 @@
     font-size: medium;
     font-weight: 500;
     border: none;
-    text-transform:uppercase;
+    text-transform: uppercase;
     border-radius: 5px;
     padding: 10px;
     text-align: center;
     width: 50%;
     margin-left: auto;
     margin-right: auto;
+    position: relative; /* Add position relative */
 }
+
+.update_profile .error-messages i {
+    position: absolute;
+    top: 10px;
+    right: 20px;
+    color: #faf2e8cc;
+    cursor: pointer;
+}
+
+
 
 html{
     font-size: 62.5%;
