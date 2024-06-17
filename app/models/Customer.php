@@ -19,7 +19,11 @@ class Customer {
         'CUS_RESETEXPIRED',
         'CUS_TYPE',
         'CUS_PASSWORDHASH',
-        'CUS_PASSWORDSALT'
+        'CUS_PASSWORDSALT',
+        'add_street',
+        'add_city',
+        'add_province',
+        'add_infoaddress'
     ];
 
     public function getByEmail($email) {
@@ -34,15 +38,34 @@ class Customer {
         return $this->first(['CUS_PHONENUM' => $phone]);
     }
 
+    public function getByToken($token) {
+        return $this->first(['CUS_RESETTOKEN' => $token]);
+    }
+    
+
     public function updateResetToken($userId, $resetToken, $resetExpiry) {
-        return $this->update($userId, [
+        $data = [
             'CUS_RESETTOKEN' => $resetToken,
             'CUS_RESETEXPIRED' => $resetExpiry
-        ], 'CUS_ID');
+        ];
+        return $this->update($userId, $data, 'cus_id');
     }
+    
 
-    public function getById($id) {
-        return $this->first(['CUS_ID' => $id]);
+    public function updatePassword($userId, $passwordHash, $salt) {
+        $data = [
+            'CUS_PASSWORD' => $passwordHash,
+            'CUS_SALT' => $salt,
+            'CUS_RESETTOKEN' => null,
+            'CUS_RESETEXPIRED' => null
+        ];
+        return $this->update($userId, $data, 'cus_id');
+    }
+    
+
+    public function getByCustomerId($cus_id) {
+        // Ensure the method uses the correct column names
+        return $this->where(['cus_id' => $cus_id]);
     }
 
 
@@ -54,5 +77,34 @@ class Customer {
     public function updateCustomerInfo($userId, $data) {
         return $this->update($userId, $data, 'CUS_ID');
     }
+
+    public function getByResetToken($token) 
+    {
+       
+        $query = 'SELECT * FROM customers WHERE cus_reset_token = :token LIMIT 1';
+        $stmt = $this->conn->prepare($query);
+        $stmt->bindParam(':token', $token, PDO::PARAM_STR);
+        $stmt->execute();
+
+        // Fetch the user as an object
+        $user = $stmt->fetch(PDO::FETCH_OBJ);
+
+        // Return the user object or false if no user found
+        return $user ?: false;
+    }
+    
+    public function getLastInsertedCustomerID() {
+        $query = "SELECT currval('customer_cus_id_seq') AS last_insert_id";
+        $result = $this->query($query);
+        if ($result && isset($result[0]['last_insert_id'])) {
+            return $result[0]['last_insert_id'];
+        }
+        return false;
+    }
+
+    public function insertCustomer($data) {
+        return $this->insert($data);
+    }
+     
 }
 ?>
