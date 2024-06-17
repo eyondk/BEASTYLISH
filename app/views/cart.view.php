@@ -81,7 +81,7 @@
                                     </div>
                                 </div>
                             </td>
-                            <td class="subtotal">&#8369; <?= htmlspecialchars(number_format($item['prod_price'] * $item['cart_qty'], 2)); ?></td>
+                            <td class="subtotal">&#8369; <?= htmlspecialchars(number_format($subtotal * $item['cart_qty'], 2)); ?></td>
                         </tr>
                         <?php endforeach; ?>
                     <?php else: ?>
