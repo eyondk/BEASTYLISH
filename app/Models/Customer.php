@@ -1,8 +1,8 @@
 <?php
 
-class Customer {
+class Customer extends Model {
 
-    use Model;
+    
 
     protected $table = 'CUSTOMER';
 

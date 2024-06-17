@@ -54,9 +54,9 @@
                                             data-original-status="<?= $order['order_status'] ?>" 
                                             data-payment-method="<?= $order['payment_method'] ?>" 
                                             data-payment-status="<?= $order['payment_status'] ?>">
-                                        <option value="Pending" <?= $order['order_status'] == 'Pending' ? 'selected' : '' ?>>Pending</option>
-                                        <option value="On Delivery" <?= $order['order_status'] == 'On Ship' ? 'selected' : '' ?>>On Ship</option>Wz`
-                                        <option value="Cancelled" <?= $order['order_status'] == 'Cancelled' ? 'selected' : '' ?>>Cancelled</option>
+                                        <option value="On Ship" <?= $order['order_status'] == 'On Ship' ? 'selected' : '' ?>>On Ship</option>
+                                        <option value="On Delivery" <?= $order['order_status'] == 'On Delivery' ? 'selected' : '' ?>>On Delivery</option>
+                                        
                                         </select>
                                         </td>
                                         
@@ -68,17 +68,40 @@
             </div>
             <div class="totalproduct">
             <?php $orderCount = count($orders);?>
-                <p class="tottext">Total Orders Pending: <?= $orderCount ?></p>
+                <p class="tottext">Total Orders on Delivery: <?= $orderCount ?></p>
             </div>
         </div>
     </div>  
 </section>
                      
+<!-- View product Modal -->
+<div id="viewProdModal" class="modal">
+    <!-- Modal content -->
+    <div class="modal-content">
+        <h2>ORDER DETAILS</h2>
+        <div class="order-info">
+            <p><strong>Order ID:</strong> <span id="orderID">1111</span></p>
+            <p><strong>Name:</strong> <span id="customerName">Sample NameAdd</span></p>
+            <p><strong>Phone Number:</strong> <span id="phoneNumber">0928298203</span></p>
+            <p><strong>Email:</strong> <span id="email">name@gmail.com</span></p>
+            <p><strong>Address:</strong> <span id="address">sitio Pangpang Nalumos City</span></p>
+        </div>
+        <div class="products-info">
+            <h3>Products Ordered</h3>
+            <div id="productsContainer">
+             
+               
 
-   
+               
+            </div>
+            <p><strong>Total Items Ordered:</strong> <span id="totalItems">74</span></p>
+            <p><strong>Status:</strong> <span id="orderStatus">Pending</span></p>
+        </div>
+    </div>
+</div>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.6/umd/popper.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-<script src="<?=ASSETS?>js/orderpending.js"></script>
+<script src="<?=ASSETS?>js/orderondeliver.js"></script>
 <script src="<?= ASSETS ?>js/admin.js"></script>
 </body>
 </html>

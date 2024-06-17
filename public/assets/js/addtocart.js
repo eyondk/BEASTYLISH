@@ -3,24 +3,32 @@ $(document).ready(function() {
 
  // Function to update quantity in cart
  function updateQuantity(button, change) {
-  const $wrapper = $(button).closest(".wrapper");
-  const $input = $wrapper.find(".num");
-  let currentQty = parseInt($input.val());
+    const $wrapper = $(button).closest(".wrapper");
+    const $input = $wrapper.find(".num");
+    let currentQty = parseInt($input.val());
 
-  // Calculate new quantity
-  let newQty = currentQty + change;
+    // Calculate new quantity
+    let newQty = currentQty + change;
 
-  // Ensure quantity doesn't go below 1
-  if (newQty < 1) {
+    // Ensure quantity doesn't go below 1
+    if (newQty < 1) {
       newQty = 1;
-  }
+    }
 
-  // Update input field with new quantity
-  $input.val(newQty);
+    const cartId = $wrapper.find('input[type="hidden"]').val();
+    const $row = $wrapper.closest("tr");
+    const prodPrice = parseFloat($row.data("prodPrice"));
+    var availableStock = parseInt($row.data("prodStock"));
 
-  const cartId = $wrapper.find('input[type="hidden"]').val();
-  const $row = $wrapper.closest("tr");
-  const prodPrice = parseFloat($row.data("prod-price"));
+    console.log(prodPrice, availableStock);
+    if (newQty > availableStock) {
+      alert("Cannot exceed available stock");
+      $input.val(currentQty); // Reset input value to previous quantity
+      return; // Exit function if quantity exceeds available stock
+    }
+
+    // Update input field with new quantity
+    $input.val(newQty);
 
   // Update quantity in the server (you may adjust this part based on your backend implementation)
   $.ajax({
@@ -48,6 +56,8 @@ $(document).ready(function() {
       }
   });
 }
+
+window.updateQuantity = updateQuantity;
 
 // Function to remove item from cart
 window.removeItem = function(event, form) {
@@ -98,8 +108,8 @@ function updateTotals() {
     });
 
     const deliveryFee = 90.0;
-    const discount = 100.0;
-    const total = subtotal + deliveryFee - discount;
+   
+    const total = subtotal + deliveryFee ;
 
     $("#item-count").text(itemCount);
     $("#subtotal").text("₱ " + subtotal.toFixed(2));
@@ -107,14 +117,13 @@ function updateTotals() {
 }
 
 
-// Attach event listeners to quantity buttons using event delegation
-$(document).on("click", ".qty-container .minus", function() {
-  updateQuantity(this, -1); // Decrease by 1
-});
+// $(document).on("click", ".qty-container .minus", function() {
+//   updateQuantity(this, -1); // Decrease by 1
+// });
 
-$(document).on("click", ".qty-container .plus", function() {
-  updateQuantity(this, 1); // Increase by 1
-});
+// $(document).on("click", ".qty-container .plus", function() {
+//   updateQuantity(this, 1); // Increase by 1
+// });
 
 // Function to handle adding product to cart
 function addToCart(productId) {

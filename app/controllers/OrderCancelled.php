@@ -12,9 +12,9 @@ class OrderCancelled extends Controller
        
 
        
-        $orders = $order->getOrderCancelled();
+        $orders = $order->getCancelled();
         $data['orders'] = $orders;
-        $this->view('admin/rderComplete', $data);
+        $this->view('admin/OrderCancelled', $data);
     }
 
     

@@ -1,16 +1,16 @@
 <?php
 
-// // Require Composer's autoloader
-// require_once __DIR__ . '/../vendor/autoload.php';
+// Require Composer's autoloader
+require_once '../public/vendor/autoload.php';
 
-// use PHPMailer\PHPMailer\PHPMailer;
-// use PHPMailer\PHPMailer\Exception;
-// use PHPMailer\PHPMailer\SMTP;
+use PHPMailer\PHPMailer\PHPMailer;
+use PHPMailer\PHPMailer\Exception;
+use PHPMailer\PHPMailer\SMTP;
 
 class Login extends Controller {
 
     public function index() {
-        $this->view('login');
+        $this->view('home/login');
     }
 
    
@@ -45,14 +45,18 @@ class Login extends Controller {
 
 
 
-                        
+                        // Debugging output
+                        // echo '<pre>';
+                        // print_r($customer);
+                        // echo '</pre>';
+                        // exit();
 
                         
-                        header('Location: ' . ROOT . '/home');
+                        header('Location: ' . ROOT . 'home');
                         exit();
                     } else {
                         $message = "Invalid email or password.";
-                        $this->view('login', ['message' => $message]);
+                        $this->view('home/login', ['message' => $message]);
                     }
                 } elseif ($admin) {
                     $saltedPassword = $admin->admin_passwordsalt . $password;
@@ -71,22 +75,22 @@ class Login extends Controller {
                         $_SESSION['user_city'] = $admin->admin_city;
                         $_SESSION['user_province'] = $admin->admin_province;
 
-                        header('Location: ' . ROOT . '/dashboard');
+                        header('Location: ' . ROOT . 'dashboard');
                         exit();
                     } else {
                         $message = "Invalid email or password.";
-                        $this->view('login', ['message' => $message]);
+                        $this->view('home/login', ['message' => $message]);
                     }
                 } else {
                     $message = "Invalid email or password.";
-                    $this->view('login', ['message' => $message]);
+                    $this->view('home/login', ['message' => $message]);
                 }
             } else {
                 $message = "Email and password are required.";
-                $this->view('login', ['message' => $message]);
+                $this->view('home   /login', ['message' => $message]);
             }
         } else {
-            header('Location: ' . ROOT . '/login');
+            header('Location: ' . ROOT . 'login');
             exit();
         }
     }
@@ -100,7 +104,7 @@ class Login extends Controller {
             // Validate email
             if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
                 $message = 'Invalid email address.';
-                $this->view('login', ['message' => $message]);
+                $this->view('home/login', ['message' => $message]);
                 return;
             }
     
@@ -128,10 +132,10 @@ class Login extends Controller {
                     $message = 'Failed to update reset token.';
                 }
     
-                $this->view('login', ['message' => $message]);
+                $this->view('home/login', ['message' => $message]);
             } else {
                 $message = 'Email address not found.';
-                $this->view('login', ['message' => $message]);
+                $this->view('home/login', ['message' => $message]);
             }
         }
     }
@@ -169,3 +173,4 @@ class Login extends Controller {
         }
     }
 }
+

@@ -55,9 +55,10 @@
                         <ul class="acc-show">
                             <li><a href="<?=ROOT?>Orders" class="first-sub">Order List</a></li>
                             <li><a href="<?=ROOT?>OrderPending">Order Pending</a></li>
+                            <li><a href="<?=ROOT?>OrderOnShip">Order Ship</a></li>
                             <li><a href="<?=ROOT?>OrderOnDelivery">Order on Delivery</a></li>
-                            <li><a href="<?=ROOT?>OrderCompleted">Order Completed</a></li>
-                            <li><a href="<?=ROOT?>OrderCancel">Order Cancelled</a></li>
+                            <li><a href="<?=ROOT?>OrderComplete">Order Completed</a></li>
+                            <li><a href="<?=ROOT?>OrderCancelled">Order Cancelled</a></li>
                         </ul>
                     </li>
                     <li class="nav-link">

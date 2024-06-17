@@ -15,6 +15,7 @@ if($_SERVER['SERVER_NAME'] == 'localhost'){
 
     define('ROOT', $path);
     define('ASSETS', $path. "assets/");
+   
 
 }
 else{

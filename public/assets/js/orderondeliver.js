@@ -1,9 +1,10 @@
 $(document).ready(function () {
     const statusMap = {
         "Pending": 1,
-        "On Delivery": 2,
-        "Completed": 3,
-        "Cancelled": 4
+        "On Ship": 2,
+        "On Delivery": 3,
+        "Completed": 4,
+        "Cancelled": 5
     };
     $('select[name="order_status"]').on('change', function () {
         var $selectElement = $(this);
@@ -35,7 +36,7 @@ $(document).ready(function () {
             payment_status: paymentStatus
         };
 
-        if (newStatusString.toUpperCase() === "COMPLETED" && paymentMethod === "COD") {
+        if (newStatusString.toUpperCase() === "COMPLETED" && paymentMethod === "COD" && paymentMethod === "MEET UP") {
             requestData.payment_status = 2; // Assuming 2 is the 'PAID' status ID
         }
 

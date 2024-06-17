@@ -111,10 +111,7 @@
                     <p>Delivery Fee</p>
                     <p>&#8369; 90.00</p>
                 </div>
-                <div class="discount">
-                    <p>Discount</p>
-                    <p>&#8369; 100.00</p>
-                </div>
+               
                 <div class="total">
                     <p>Total</p>
                     <p> <span id="total"><?= htmlspecialchars(number_format($total, 2)); ?></span></p>

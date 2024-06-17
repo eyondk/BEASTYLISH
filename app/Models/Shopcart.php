@@ -123,6 +123,23 @@ class Shopcart extends Model
         }
     }
 
+
+    public function get_cart_quantity($cus_id, $prod_id)
+    {
+        try {
+            $conn = $this->connect();
+            $stmt = $conn->prepare("SELECT SUM(cart_qty) as quantity FROM cart WHERE cus_id = :cus_id AND prod_id = :prod_id AND cart_status = 'active'");
+            $stmt->bindParam(':cus_id', $cus_id, PDO::PARAM_INT);
+            $stmt->bindParam(':prod_id', $prod_id, PDO::PARAM_INT);
+            $stmt->execute();
+    
+            $result = $stmt->fetch(PDO::FETCH_ASSOC);
+            return $result['quantity'] ?? 0;
+        } catch (PDOException $e) {
+            error_log('Database error: ' . $e->getMessage());
+            return 0;
+        }
+    }
     // Fetch items in the cart by their IDs
     public function get_cart_items_by_ids($cart_ids)
     {
@@ -142,6 +159,14 @@ class Shopcart extends Model
             error_log("Database error: " . $e->getMessage());
             return [];
         }
+    }
+    
+    public function get_product_stock($product_id) {
+        $query = "SELECT prod_stock FROM products WHERE prod_id = :product_id";
+        $this->db->query($query);
+        $this->db->bind(':product_id', $product_id);
+        $result = $this->db->single(); // Assuming this returns a single result
+        return $result ? $result['prod_stock'] : 0; // Return 0 if no stock is found
     }
 }
 ?>

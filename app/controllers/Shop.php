@@ -4,6 +4,11 @@ class Shop extends Controller
 {  
     public function index()
     {
+        if (!isset($_SESSION['user_id']) || $_SESSION['user_id'] === null) {
+            // Redirect to the login page
+            header('Location: home/login'); // Adjust the path as needed for your application
+            exit();
+        }
         $product = new UserProduct();
         $is_search = false;
         $search_results = [];

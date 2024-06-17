@@ -52,7 +52,7 @@
 </head>
 <body>
 <div class="container swiper">
-    <a href="<?= ROOT ?>/shop" class="view-all">View all products &#10230;</a>
+    <a href="<?= ROOT ?>shop" class="view-all">View all products &#10230;</a>
     <div class="slide-container">
         <div class="card-wrapper swiper-wrapper">
             <?php if (!empty($products)): ?>
@@ -71,6 +71,7 @@
                         
                         <div class="product-details">
                             <div class="prod_name-price">
+                            
                                 <h3 class="prod_name"><?= $product['prod_name'] ?></h3><h1 class="prod_stock">Stock:<?= $product['prod_stock'] ?></h1>
 
                                 
@@ -102,13 +103,13 @@
 <!-- Cart Summary (Hidden by default) -->
 <div class="cart-summary">
     <p>Items in cart: <span id="item-count">0</span></p>
-    <p>Subtotal: &#8369;<span id="subtotal">0.00</span></p>
+    <p>Subtotal: &#8369;<span id="subtotal">0.00</span><xc/p>
     <p>Total: &#8369;<span id="total">0.00</span></p>
 </div>
 
 <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 <script src="<?=ROOT?>/assets/js/latestprod.js"></script>
 <script src="<?=ROOT?>/assets/js/addtocart.js"></script> <!-- Include the new JavaScript file -->
 </body>

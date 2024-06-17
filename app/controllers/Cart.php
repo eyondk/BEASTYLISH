@@ -4,11 +4,18 @@ class Cart extends Controller
 {
     public function index()
     {
+
+        if (!isset($_SESSION['user_id']) || $_SESSION['user_id'] === null) {
+            // Redirect to the login page
+            header('Location: home/login'); // Adjust the path as needed for your application
+            exit();
+        }
+        
         $cart = new Shopcart();
         
         // $cus_id = $_SESSION['cus_id']; // Assuming customer ID is stored in session after login
-        $cus_id = 1;
-        
+        $cus_id = $_SESSION['user_id'];
+        print_r($cus_id);
         $cart_items = $cart->get_cart_items($cus_id);
         
         $subtotal = 0;
@@ -17,7 +24,7 @@ class Cart extends Controller
         }
 
         
-        $total = $subtotal + 90.00 - 100.00; // Add delivery fee and subtract discount
+        $total = $subtotal + 90.00; // Add delivery fee and subtract discount
         
         $this->view('customer/cart', [
             'cart_items' => $cart_items,
@@ -75,7 +82,7 @@ class Cart extends Controller
             }
 
             $cart = new Shopcart();
-            $cus_id = 1; // Replace with actual customer ID
+            $cus_id = $_SESSION['user_id'];
 
             $cartData = [
                 'cart_qty' => $input['cart_qty'],
@@ -105,7 +112,7 @@ class Cart extends Controller
         header('Content-Type: application/json'); // Ensure the response is JSON
         if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             $cart = new Shopcart();
-            $cus_id = 1; // Replace with actual customer ID
+            $cus_id = $_SESSION['user_id'];
     
             // Get the JSON input
             $input = json_decode(file_get_contents('php://input'), true);
@@ -146,7 +153,7 @@ class Cart extends Controller
             }
 
             $cart = new Shopcart();
-            $cus_id = 1; // Replace with actual customer ID
+            $cus_id = $_SESSION['user_id'];
 
             $cart_id = $input['cart_id'];
 
@@ -164,5 +171,38 @@ class Cart extends Controller
         echo json_encode(['success' => false, 'message' => 'Invalid request method']);
         exit;
     }
+
+    public function quantity()
+{
+    if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+        header('Content-Type: application/json'); // Ensure the response is JSON
+
+        $input = json_decode(file_get_contents('php://input'), true);
+
+        $product_id = $input['product_id'] ?? null;
+        $cus_id = $_SESSION['user_id'];
+
+        if ($product_id === null) {
+            echo json_encode(['success' => false, 'message' => 'Product ID is required']);
+            exit;
+        }
+
+        $cart = new Shopcart();
+        $quantity = $cart->get_cart_quantity($cus_id, $product_id);
+        
+
+        // Debugging statement to verify server-side behavior
+        error_log("Product ID: $product_id, Quantity: $quantity");
+
+        echo json_encode(['success' => true, 'quantity' => $quantity]);
+        exit;
+    }
+
+    // If not a POST request, return an error response
+    header('Content-Type: application/json');
+    echo json_encode(['success' => false, 'message' => 'Invalid request method']);
+    
+    exit;
+}
 
 }

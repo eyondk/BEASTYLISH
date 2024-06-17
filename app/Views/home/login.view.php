@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
-    <link rel="stylesheet" href="<?=ASSETS?>/css/components.css">
+    <link rel="stylesheet" href="<?=ROOT?>/assets/css/components.css">
     <link rel="shortcut icon" href="<?=ROOT?>/assets/images/logo.png" type="image/x-icon">
     <title>Beastylish</title>
     <style>
@@ -51,7 +51,7 @@
 
 
 
-<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+
 <section class="form-container" id="loginform">
     <form action="<?= ROOT ?>/login/authenticate" enctype="multipart/form-data" method="POST">
         <h3>Login</h3>
@@ -74,7 +74,7 @@
         </div>
 
         <input type="submit" value="Login" class="btn" name="submit">
-        <p>Don't have an account? <a href="<?= ROOT ?>signup">Sign Up now</a></p>
+        <p>Don't have an account? <a href="<?= ROOT ?>/signup">Sign Up now</a></p>
     </form>
 </section>
 
