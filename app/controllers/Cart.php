@@ -15,14 +15,41 @@ class Cart extends Controller
         foreach ($cart_items as $item) {
             $subtotal += $item['prod_price'] * $item['cart_qty'];
         }
-        $total = $subtotal + 90.00 - 100.00; // Add delivery fee and subtract discount
+
+         // Get customer city for delivery fee calculation
+        $customerModel = new Customer();
+        $customerCity = $customerModel->getCustomerCity($cus_id);
+       
+        $deliveryFee = $this->calculateDeliveryFee($customerCity);
+
+        $total = $subtotal + $deliveryFee;// Add delivery fee and subtract discount
+
     
         $this->view('cart', [
             'cart_items' => $cart_items,
             'subtotal' => $subtotal,
-            'total' => $total
+            'deliveryFee' => $deliveryFee,
+            'total' => $total,
+           
+            
         ]);
     }
+
+      private function calculateDeliveryFee($cityName) {
+        $feePerCity = [
+            'Cebu City' => 100,
+            'Mandaue City' => 150,
+            'Lapu-Lapu City' => 120,
+            // Add more cities and corresponding fees as needed
+        ];
+
+        $defaultFee = 90.00;
+        
+        // Return the fee for the specific city or the default fee if the city is not listed
+        return isset($feePerCity[$cityName]) ? $feePerCity[$cityName] : $defaultFee;
+    }
+
+
     
     // public function add()
     // {
@@ -228,7 +255,20 @@ public function quantity()
 }
 
 
-
+public function removeAll()
+    {
+        // $cus_id = $_SESSION['cus_id']; // Assuming you have customer ID stored in session
+        $cus_id = 1;
+        $shopcart = new Shopcart();
+        show($shopcart);
+        if ($shopcart->remove_all_from_cart($cus_id)) {
+            // Redirect or return success response
+            header("Location: /cart");
+        } else {
+            // Handle error
+            echo "Failed to remove all items from cart.";
+        }
+    }
 
     
 

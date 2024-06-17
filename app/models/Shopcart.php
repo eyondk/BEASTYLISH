@@ -312,5 +312,24 @@ class Shopcart
     }
 }
 
+
+ // Remove all items from cart for a specific customer
+    public function remove_all_from_cart($cus_id)
+    {
+        try {
+            $conn = $this->connect();
+            $stmt = $conn->prepare("
+                DELETE FROM cart WHERE cus_id = :cus_id
+            ");
+            $stmt->bindParam(':cus_id', $cus_id, PDO::PARAM_INT);
+            $stmt->execute();
+            return true;
+        } catch (PDOException $e) {
+            error_log("Database error: " . $e->getMessage());
+            return false;
+        }
+    }
+
+
 }
 ?>

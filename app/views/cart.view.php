@@ -87,9 +87,9 @@
             </div>
             <?php if (!empty($cart_items)): ?>
             <div>
-                <form action="/Cart/removeAll" method="post">
-                    <button type="submit" class="deleteall">DELETE ALL ITEMS</button>
-                </form>
+                <!-- <form action="/Cart/removeAll" method="post"> -->
+                    <button type="submit" class="deleteall" id="delete-all">DELETE ALL ITEMS</button>
+                <!-- </form> -->
             </div>
             <?php endif; ?>
         </div>
@@ -99,18 +99,17 @@
                 <div class="subtot">
                     <p>Subtotal (<span id="item-count"><?= count($cart_items); ?></span> Items)</p>
                     <p>&#8369; <span id="subtotal"><?= htmlspecialchars(number_format($subtotal, 2)); ?></span></p>
+
                 </div>
                 <div class="shipping">
                     <p>Delivery Fee</p>
-                    <p>&#8369; 90.00</p>
+                    <p>&#8369; <span id="delivery-fee"><?= htmlspecialchars(number_format($deliveryFee, 2)); ?></span></p>
                 </div>
-                <div class="discount">
-                    <p>Discount</p>
-                    <p>&#8369; 100.00</p>
-                </div>
+                
                 <div class="total">
                     <p>Total</p>
                     <p>&#8369; <span id="total"><?= htmlspecialchars(number_format($total, 2)); ?></span></p>
+
                 </div>
                 <button id="proceedtocheckout" class="add-btn">Proceed To Checkout</button>
             </div>

@@ -125,9 +125,21 @@ document.addEventListener("DOMContentLoaded", function () {
         }
       });
 
-    const deliveryFee = 90.0;
-    const discount = 100.0;
-    const total = subtotal + deliveryFee - discount;
+    const deliveryFeeElem = document.getElementById("delivery-fee");
+    let deliveryFee = 0; // Default to 0 if the element is not found
+
+    if (deliveryFeeElem) {
+      deliveryFee = parseFloat(deliveryFeeElem.textContent) || 0;
+    }
+
+    // const deliveryFeeElem = document.getElementById("delivery-fee");
+    // const deliveryFee = parseFloat(deliveryFeeElem.textContent);
+    // const deliveryFee = 90;
+    // const deliveryFee = parseFloat(
+    //   document.getElementById("delivery-fee").textContent
+    // );
+
+    const total = subtotal + deliveryFee;
 
     // Update totals display (adjust as per your HTML structure)
     document.getElementById("item-count").textContent = itemCount;
@@ -161,7 +173,7 @@ document.addEventListener("DOMContentLoaded", function () {
       .catch((error) => {
         console.error("Error adding product to cart:", error.message);
         alert(
-          "Failed to add product to cart. Quantity exceeds the available stocks. Please try again."
+          "Failed to add product to cart. Quantity exceeds the available stocks."
         );
       });
   }
@@ -184,4 +196,56 @@ document.addEventListener("DOMContentLoaded", function () {
 
   // Initial call to update totals on page load
   updateTotals();
+
+  // Function to handle deleting all items from the cart
+  function deleteAllItems() {
+    if (confirm("Are you sure you want to delete all items from your cart?")) {
+      fetch(ROOT_URL + "/cart/removeAll", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+      })
+        .then((response) => {
+          if (!response.ok) {
+            throw new Error("Network response was not ok");
+          }
+          return response.text(); // Change to response.text() to debug the response content
+        })
+        .then((text) => {
+          console.log("Server response text:", text); // Log the raw response text for debugging
+          try {
+            const data = JSON.parse(text); // Parse the response text as JSON
+            if (data.success) {
+              alert("All items removed successfully.");
+              // Remove all rows from the cart table
+              const rows = document.querySelectorAll(
+                ".product-display-table tbody tr"
+              );
+              rows.forEach((row) => row.remove());
+              // Update totals
+              updateTotals();
+            } else {
+              console.error("Failed to remove items:", data.error);
+              alert("Failed to remove items. Please try again.");
+            }
+          } catch (error) {
+            console.error("Error parsing JSON:", error, "Response text:", text);
+            alert("Failed to remove items. Invalid response from server.");
+          }
+        })
+        .catch((error) => {
+          console.error("Error removing items:", error);
+          alert("Failed to remove items. Please try again.");
+        });
+    }
+  }
+
+  // Attach event listener to "Delete All Items" button
+  const deleteAllBtn = document.getElementById("delete-all");
+  if (deleteAllBtn) {
+    deleteAllBtn.addEventListener("click", deleteAllItems);
+  } else {
+    console.warn("Delete All button not found.");
+  }
 });
