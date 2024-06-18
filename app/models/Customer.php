@@ -38,18 +38,83 @@ class Customer {
         return $this->first(['CUS_PHONENUM' => $phone]);
     }
 
+    // public function getByToken($token) {
+    //     return $this->first(['CUS_RESETTOKEN' => $token]);
+    // }
     public function getByToken($token) {
-        return $this->first(['CUS_RESETTOKEN' => $token]);
+                echo "Looking for token: " . htmlspecialchars($token) . "<br>";
+
+        try {
+            $conn = $this->connect();
+            $stmt = $conn->prepare("
+                SELECT *
+                FROM {$this->table}
+                WHERE CUS_RESETTOKEN = :token
+                LIMIT 1
+            ");
+            $stmt->bindParam(':token', $token, PDO::PARAM_STR);
+            $stmt->execute();
+            $customer = $stmt->fetch(PDO::FETCH_ASSOC);
+    
+            if ($customer) {
+                echo "Token found: " . htmlspecialchars($customer['CUS_RESETTOKEN']) . "<br>";
+                echo "Expiry: " . htmlspecialchars($customer['CUS_RESETEXPIRED']) . "<br>";
+            } else {
+                echo "Token not found or invalid.<br>";
+            }
+    
+            return $customer;
+        } catch (PDOException $e) {
+            // Log the error or handle it as needed
+            error_log("Database error: " . $e->getMessage());
+            return false;
+        }
     }
     
+    // public function getByToken($token) {
+    //     // Debug output to check the input token
+    //     echo "Looking for token: " . htmlspecialchars($token) . "<br>";
 
+    //     // Query to fetch customer by reset token
+    //     $query = "SELECT * FROM {$this->table} WHERE CUS_RESETTOKEN = :token LIMIT 1";
+    //     $data = ['token' => $token];
+
+    //     // Execute the query
+    //     $result = $this->query($query, $data);
+
+    //     if ($result && isset($result[0])) {
+    //         $customer = $result[0];
+    //         echo "Token found: " . htmlspecialchars($customer->CUS_RESETTOKEN) . "<br>";
+    //         echo "Expiry: " . htmlspecialchars($customer->CUS_RESETEXPIRED) . "<br>";
+    //         return $customer;
+    //     } else {
+    //         echo "Token not found or invalid.<br>";
+    //         return false;
+    //     }
+    // }
+    
+
+    // public function updateResetToken($userId, $resetToken, $resetExpiry) {
+    //     $data = [
+    //         'CUS_RESETTOKEN' => $resetToken,
+    //         'CUS_RESETEXPIRED' => $resetExpiry
+    //     ];
+    //     return $this->update($userId, $data, 'cus_id');
+    // }
     public function updateResetToken($userId, $resetToken, $resetExpiry) {
         $data = [
             'CUS_RESETTOKEN' => $resetToken,
             'CUS_RESETEXPIRED' => $resetExpiry
         ];
-        return $this->update($userId, $data, 'cus_id');
+        $result = $this->update($userId, $data, 'CUS_ID');
+        if ($result) {
+            echo "Reset token and expiry updated successfully.<br>";
+        } else {
+            echo "Failed to update reset token and expiry.<br>";
+        }
+        return $result;
     }
+    
     
 
     public function updatePassword($userId, $passwordHash, $salt) {
@@ -93,35 +158,29 @@ class Customer {
         return $user ?: false;
     }
     
+    
+
     public function getLastInsertedCustomerID() {
-        $query = "SELECT currval('customer_cus_id_seq') AS last_insert_id";
-        $result = $this->query($query);
-        if ($result && isset($result[0]['last_insert_id'])) {
-            return $result[0]['last_insert_id'];
+        try {
+            $conn = $this->connect();
+            $stmt = $conn->prepare("
+                SELECT cus_id 
+                FROM customer 
+                ORDER BY cus_id DESC 
+                LIMIT 1
+            ");
+            $stmt->execute();
+
+            $result = $stmt->fetch(PDO::FETCH_ASSOC);
+            return $result['cus_id'] ?? null;
+        } catch (PDOException $e) {
+            error_log('Database error: ' . $e->getMessage());
+            return null;
         }
-        return false;
     }
 
     public function insertCustomer($data) {
         return $this->insert($data);
-    }
-
-    public function getCustomerCity($cus_id) {
-    try {
-        $conn = $this->connect();
-        $stmt = $conn->prepare("
-            SELECT add_city 
-            FROM address 
-            WHERE cus_id = :cus_id
-        ");
-        $stmt->bindParam(':cus_id', $cus_id, PDO::PARAM_INT);
-        $stmt->execute();
-
-        $result = $stmt->fetch(PDO::FETCH_ASSOC);
-        return $result['add_city'] ?? null;
-    } catch (PDOException $e) {
-        error_log('Database error: ' . $e->getMessage());
-        return null;
     }
      
 }
