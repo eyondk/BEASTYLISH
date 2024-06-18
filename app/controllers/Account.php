@@ -4,7 +4,6 @@ class Account extends Controller{
 
     public function index(){
         if (!isset($_SESSION['user_id']) || !isset($_SESSION['user_email']) || !isset($_SESSION['user_type'])) {
-            // User is not logged in, redirect to the login page
             header('Location: ' . ROOT . '/login');
             exit();
         }
@@ -149,10 +148,26 @@ class Account extends Controller{
     
                 // Generate a new salt and hash for the new password
                 
+
+                echo '<pre>';
+                print_r($currentUser);
+                echo '</pre>';
+
+                
+
                 $salt = $currentUser->cus_passwordsalt;
                 $saltedPassword = $salt . $_POST['updatepass'];
                 $newPasswordHash = password_hash($saltedPassword, PASSWORD_DEFAULT);
-    
+                
+                
+                echo '<pre>';
+                print_r($newPasswordHash);                
+                print_r($salt);
+                print_r($saltedPassword);
+                echo '</pre>';
+                exit();
+
+
                     
                 // Prepare update data
                 $updateData = [
@@ -206,11 +221,8 @@ class Account extends Controller{
         // echo '<pre>';
         // print_r($currentUser);
         // echo '</pre>';
-        // exit();
 
         
-
-
         // Validate old password
         if (!password_verify($currentUser->cus_passwordsalt . $data['oldpass'], $currentUser->cus_passwordhash)) {
             $errors[] = "Old password is incorrect.";
@@ -225,6 +237,61 @@ class Account extends Controller{
         return $errors;
     }
 
+
+   
+    public function updateAddress() {
+        if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['update_address'])) {
+            // Retrieve cus_id from session
+            $customerModel = new Customer();
+            $customer = $customerModel->getByEmail($_SESSION['user_email']);
+            $cus_id = $customer->cus_id;
+
+            $errors = [];
+
+
+            // Retrieve form data
+            $updatestreet = isset($_POST['updatestreet']) ? $_POST['updatestreet'] : '';
+            $updatecity = isset($_POST['updatecity']) ? $_POST['updatecity'] : '';
+            $updateprovince = isset($_POST['updateprovince']) ? $_POST['updateprovince'] : '';
+            $message = isset($_POST['message']) ? $_POST['message'] : '';
+
+            // Prepare data for update
+            $data = [
+               'add_street' => empty($updatestreet) ? $_SESSION['user_street'] : $updatestreet,
+                'add_city' => empty($updatecity) ? $_SESSION['user_city'] : $updatecity,
+                'add_province' => empty($updateprovince) ? $_SESSION['user_province'] : $updateprovince,
+                'add_infoaddress' => empty($message) ? $_SESSION['user_infoaddress'] : $message,
+            ];
+
+            // Assuming you have an instance of AddressModel
+            $addressModel = new AddressModel();
+
+            try {
+                // Update or insert the address
+                $addressModel->updateAddressByCustomerId($cus_id, $data);
+
+                 // Update session variables
+                 $_SESSION['user_street'] = $data['add_street'];
+                 $_SESSION['user_city'] = $data['add_city'];
+                 $_SESSION['user_province'] = $data['add_province'];
+                 $_SESSION['user_infoaddress'] = $data['add_infoaddress'];
+                 
+                // Redirect or do something else after update
+                header("Location: account?update=success");
+
+            } catch (Exception $e) {
+                $errors[] = "Failed to update account.";
+                // Handle error case, maybe redirect or show an error message
+            }
+
+            $this->view("account", ['errors' => $errors]);
+
+        }
+    }
+    
+    
+    
+    
     
     public function logout() {
         
