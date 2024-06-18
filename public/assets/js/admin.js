@@ -6,7 +6,7 @@ document.addEventListener("DOMContentLoaded", function() {
   const toggleBtn = document.querySelector('.toggle');
   const sidebar = document.querySelector('.sidebar');
 
-  if (toggleBtn) {
+  while (toggleBtn) {
       toggleBtn.addEventListener("click", function () {
           sidebar.classList.toggle("close");
       });
