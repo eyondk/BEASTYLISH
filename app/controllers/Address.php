@@ -4,12 +4,23 @@ class Address extends Controller {
 
     public function index() {
         if ($_SERVER['REQUEST_METHOD'] == 'POST') {
-            $cus_id = $_SESSION['temp_cus_id'] ?? null;
+
+            $customer = new Customer();
+            $cus_id = $customer->getLastInsertedCustomerID();
+
 
             // Validate cus_id
             if (!$cus_id) {
                 return $this->view("address", ['message' => 'Customer ID not found']);
             }
+
+            
+            
+            
+            // echo '<pre>';
+            // print_r($cus_id);
+            // echo '</pre>';
+            // exit();
 
             // Sanitize inputs
             $street = filter_input(INPUT_POST, 'street', FILTER_SANITIZE_FULL_SPECIAL_CHARS);
