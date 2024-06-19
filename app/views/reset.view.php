@@ -35,8 +35,8 @@
         .reset-form input[type="submit"] {
             width: 100%;
             padding: 10px;
-            background-color: #4CAF50;
-            color: white;
+            background-color: #6c4a21;
+            color: #faf2e8;
             border: none;
             border-radius: 3px;
             cursor: pointer;
@@ -58,11 +58,22 @@
             <p class="error-message"><?= htmlspecialchars($message, ENT_QUOTES, 'UTF-8') ?></p>
         <?php endif; ?>
         <form action="<?= htmlspecialchars(ROOT . '/login/resetPassword', ENT_QUOTES, 'UTF-8') ?>" method="POST">
-            <input type="hidden" name="token" value="<?= isset($token) ? htmlspecialchars($token, ENT_QUOTES, 'UTF-8') : '' ?>">
+            <input type="hidden" name="token" id="token">            
             <input type="password" name="password" placeholder="New Password" required>
             <input type="password" name="confirm_password" placeholder="Confirm Password" required>
             <input type="submit" value="Reset Password">
         </form>
     </div>
+
+    <script>
+        // Extract the token from the URL
+        const urlParams = new URLSearchParams(window.location.search);
+        const token = urlParams.get('token');
+        
+        // Set the token value in the hidden input field
+        if (token) {
+            document.getElementById('token').value = token;
+        }
+    </script>
 </body>
 </html>
