@@ -41,9 +41,9 @@ class Login extends Controller {
 
                         $address = $addressModel->getByCustomerId($customer->cus_id);
 
-                        echo '<pre>';
-                        print_r($address);
-                        echo '</pre>';
+                        // echo '<pre>';
+                        // print_r($address);
+                        // echo '</pre>';
                         
 
                         $_SESSION['user_id'] = $customer->cus_id;
@@ -266,7 +266,7 @@ class Login extends Controller {
     
                 if ($user) {
                     $currentTimestamp = time();
-                    $resetExpiryTimestamp = strtotime($user->cus_resetexpired);
+                    $resetExpiryTimestamp = strtotime($user['cus_resetexpired']);
     
                     if ($resetExpiryTimestamp > $currentTimestamp) {
                         if (strlen($password) < 8 || !preg_match('/[A-Z]/', $password) || !preg_match('/[a-z]/', $password) || !preg_match('/[0-9]/', $password)) {
@@ -276,7 +276,7 @@ class Login extends Controller {
                             $saltedPassword = $salt . $password;
                             $passwordHash = password_hash($saltedPassword, PASSWORD_BCRYPT);
     
-                            if ($customerModel->updatePassword($user->cus_id, $passwordHash, $salt)) {
+                            if ($customerModel->updatePassword($user['cus_id'], $passwordHash, $salt)) {
                                 $message = "Password reset successfully.";
                             } else {
                                 $message = "Failed to reset password.";
@@ -296,6 +296,28 @@ class Login extends Controller {
         }
     }
     
+    // public function resetPassword($token, $newPassword) {
+    //     $customer = $this->getByToken($token);
+    
+    //     if ($customer) {
+    //         $expiryTime = strtotime($customer->CUS_RESETEXPIRED);
+    //         $currentTime = time();
+    
+    //         echo "Current time: " . date('Y-m-d H:i:s', $currentTime) . "<br>";
+    //         echo "Expiry time: " . date('Y-m-d H:i:s', $expiryTime) . "<br>";
+    
+    //         if ($expiryTime > $currentTime) {
+    //             $passwordHash = password_hash($newPassword, PASSWORD_BCRYPT);
+    //             $this->updatePassword($customer->CUS_ID, $passwordHash, $customer->CUS_PASSWORDSALT);
+    //             return true;
+    //         } else {
+    //             echo "Token has expired.<br>";
+    //         }
+    //     } else {
+    //         echo "Invalid token.<br>";
+    //     }
+    //     return false;
+    // }
     
     
     
