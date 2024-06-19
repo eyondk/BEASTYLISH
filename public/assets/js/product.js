@@ -44,6 +44,7 @@ $(document).ready(function() {
         formData.append('product_colors', $("#product_colors").val());
         formData.append('product_category', $("#product_category").val());
         formData.append('product_description', $("#product_description").val());
+        formData.append('product_discount', $("#product_discount").val());  
 
         // Log FormData
         for (var pair of formData.entries()) {
@@ -66,7 +67,7 @@ $(document).ready(function() {
             }
         });
     });
-
+    
     $(document).on('click', '.button-update', function() {
         $('#updateModal').modal('show');
         
@@ -74,28 +75,33 @@ $(document).ready(function() {
         
         var prod_id = $tr.find("td:eq(1)").text();
         var prod_name = $tr.find("td:eq(2)").text();
-        var prod_price = $tr.find("td:eq(3)").text();
-        var prod_description = $tr.find("td:eq(4)").text();
-        var prod_stock = $tr.find("td:eq(5)").text();
-        var prod_color = $tr.find("td:eq(6)").text();
-        var prod_sizes = $tr.find("td:eq(7)").text();
-        var categ_name = $tr.find("td:eq(8)").text();
+        var prod_price = $tr.find("td:eq(3)").text().replace('₱ ', '').replace(',', '');
+        var discount_percent = $tr.find("td:eq(4)").text().replace('%', '');
+        var prod_description = $tr.find("td:eq(6)").text();
+        var prod_stock = $tr.find("td:eq(7)").text();
+        var prod_color = $tr.find("td:eq(8)").text();
+        var prod_sizes = $tr.find("td:eq(9)").text();
+        var categ_id = $tr.find("td:eq(10)").data('categ-id');
         var image_path = $tr.find("td:eq(0)").find('img').attr('src');
+        console.log(categ_id);
        
         $('#old_image').attr('src', image_path);
         $('#update_id').val(prod_id);
         $('#update_name').val(prod_name);
         $('#update_price').val(prod_price);
+        $('#update_discount').val(discount_percent);
         $('#update_description').val(prod_description);
         $('#update_stocks').val(prod_stock);
         $('#current_stocks').val(prod_stock);
         $('#update_color').val(prod_color);
         $('#update_sizes').val(prod_sizes);
-        $('#update_category option').each(function() {
-            if ($(this).text() === categ_name) {
-                $(this).prop('selected', true);
-            }
-        });
+        $('#update_discount').val(discount_percent);
+       
+        $('#update_category').val(categ_id);
+
+// Log the selected value to verify
+        toggleFieldsForUpdateCategory();
+
     });
 
     $(document).on('click', '#update_product', function() {
@@ -129,6 +135,8 @@ $(document).ready(function() {
         formData.append('product_colors', $("#update_colors").val());
         formData.append('product_category', $("#update_category").val());
         formData.append('product_description', $("#update_description").val());
+        formData.append('product_discount', $("#update_discount").val()); 
+        
         
         // Log FormData
         for (var pair of formData.entries()) {
@@ -152,6 +160,43 @@ $(document).ready(function() {
         });
     });
 
+    function toggleFieldsBasedOnCategory() {
+        var selectedCategory = $('#product_category').val(); 
+        if (selectedCategory == 5 || selectedCategory == 6 || selectedCategory == 7 || selectedCategory == 8 || selectedCategory == 9 || selectedCategory == 10 || selectedCategory == 11)  { 
+            $('#product_sizes').prop('disabled', true).parent().hide();
+            $('#product_colors').prop('disabled', true).parent().hide(); 
+        } else {
+            $('#product_sizes').prop('disabled', false).parent().show();
+            $('#product_colors').prop('disabled', false).parent().show();
+        }
+    }
+    // Function to toggle fields in the update modal
+function toggleFieldsForUpdateCategory() {
+   
+    
+    var selectedCategory = $('#update_category').val(); // Get the selected category ID in the modal
+    if (selectedCategory == 5 || selectedCategory == 6 || selectedCategory == 7 || selectedCategory == 8 || selectedCategory == 9 || selectedCategory == 10 || selectedCategory == 11) { // Assuming 3 is the ID for accessories
+        $(' #update_sizes').prop('disabled', true).parent().hide(); // Disable and hide the sizes field
+        $(' #update_colors').prop('disabled', true).parent().hide(); // Disable and hide the colors field
+    } else {
+        $(' #update_sizes').prop('disabled', false).parent().show(); // Enable and show the sizes field
+        $(' #update_colors').prop('disabled', false).parent().show(); // Enable and show the colors field
+    }
+}
+
+    // Initial state setup for the update modal
+    $('#updateModal').on('show.bs.modal', function (event) {
+        toggleFieldsForUpdateCategory('#updateModal');
+    });
+    toggleFieldsBasedOnCategory();
+
+    // Event listener for category change
+    $('#product_category').change(function() {
+        toggleFieldsBasedOnCategory();
+    });
+    $('#update_category').change(function() {
+        toggleFieldsForUpdateCategory();
+    });
     $(document).on('click', '.button-delete', function() {
         $('#deleteModal').modal('show');
         

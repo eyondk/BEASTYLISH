@@ -29,14 +29,14 @@
                 </ul>
             </li>
             <li>
-                <a href="#" id="brandnew-btn" class="brand">BRAND NEW
+                <a href="#" id="brandnew-btn" class="brand">CLOTHING
                     <span class="fa fa-chevron-down second"></span>
                 </a>
                 <ul id="brandnew-show">
-                    <li><a href="?categ_name=NEW-TOPS" class="first-sub">Tops</a></li>
-                    <li><a href="?categ_name=NEW-BOTTOMS">Bottoms</a></li>
-                    <li><a href="?categ_name=NEW-DRESS">Dress</a></li>
-                    <li><a href="?categ_name=NEW-SWIMWEAR">Swimwear</a></li>
+                    <li><a href="?categ_name=TOPS" class="first-sub">Tops</a></li>
+                    <li><a href="?categ_name=BOTTOMS">Bottoms</a></li>
+                    <li><a href="?categ_name=DRESS">Dress</a></li>
+                    <li><a href="?categ_name=SWIMWEAR">Swimwear</a></li>
                 </ul>
             </li>
             <li>
@@ -50,7 +50,7 @@
                     <li><a href="?categ_name=PL-SWIMWEAR">Swimwear</a></li>
                 </ul>
             </li>
-            <li><a href="?categ_name=HANDMADE-BOUQUET" class="hand">HANDMADE BOUQUET</a></li>
+            <li><a href="?categ_name=HANDMADE BOUQUET" class="hand">HANDMADE BOUQUET</a></li>
         </ul>
     </div>
 

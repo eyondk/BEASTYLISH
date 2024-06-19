@@ -229,6 +229,57 @@
             return $errors;
         } 
 
+
+        public function updateAddress() {
+            if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['update_address'])) {
+                // Retrieve cus_id from session
+                $customerModel = new Customer();
+                $customer = $customerModel->getByEmail($_SESSION['user_email']);
+                $cus_id = $customer->cus_id;
+    
+                $errors = [];
+    
+    
+                // Retrieve form data
+                $updatestreet = isset($_POST['updatestreet']) ? $_POST['updatestreet'] : '';
+                $updatecity = isset($_POST['updatecity']) ? $_POST['updatecity'] : '';
+                $updateprovince = isset($_POST['updateprovince']) ? $_POST['updateprovince'] : '';
+                $message = isset($_POST['message']) ? $_POST['message'] : '';
+    
+                // Prepare data for update
+                $data = [
+                   'add_street' => empty($updatestreet) ? $_SESSION['user_street'] : $updatestreet,
+                    'add_city' => empty($updatecity) ? $_SESSION['user_city'] : $updatecity,
+                    'add_province' => empty($updateprovince) ? $_SESSION['user_province'] : $updateprovince,
+                    'add_infoaddress' => empty($message) ? $_SESSION['user_infoaddress'] : $message,
+                ];
+    
+                // Assuming you have an instance of AddressModel
+                $addressModel = new AddressModel();
+    
+                try {
+                    // Update or insert the address
+                    $addressModel->updateAddressByCustomerId($cus_id, $data);
+    
+                     // Update session variables
+                     $_SESSION['user_street'] = $data['add_street'];
+                     $_SESSION['user_city'] = $data['add_city'];
+                     $_SESSION['user_province'] = $data['add_province'];
+                     $_SESSION['user_infoaddress'] = $data['add_infoaddress'];
+                     
+                    // Redirect or do something else after update
+                    header("Location: account?update=success");
+    
+                } catch (Exception $e) {
+                    $errors[] = "Failed to update account.";
+                    // Handle error case, maybe redirect or show an error message
+                }
+    
+                $this->view("account", ['errors' => $errors]);
+    
+            }
+        }
+
         
         public function logout() {
             

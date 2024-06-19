@@ -33,4 +33,35 @@ $(document).ready(function() {
             }
         });
     }
+
+   $('.cus-dlt-btn').click(function() {
+    var customerId = $(this).data('customer-id');
+
+    if (confirm('Are you sure you want to delete this customer? This action cannot be undone.')) {
+        $.ajax({
+            url: 'CustomerDetails/deleteCustomer',
+            method: 'POST',
+            data: { customer_id: customerId },
+            success: function(response) {
+                try {
+                    var data = JSON.parse(response);
+                    alert(data.message);
+                    if (data.status === 'success') {
+                        window.location.href = 'AdminCustomer';
+                    }
+                } catch (e) {
+                    console.error('Error parsing JSON:', e);
+                    alert('An unexpected error occurred: ' + response); // Show the raw response for debugging
+                }
+            },
+            error: function(xhr, status, error) {
+                console.error('AJAX error:', error);
+                alert('Failed to communicate with the server.');
+            }
+        });
+    }
+});
+
+    
+
 });

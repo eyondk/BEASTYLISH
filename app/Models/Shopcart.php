@@ -19,7 +19,7 @@ class Shopcart extends Model
         try {
             $conn = $this->connect();
             $stmt = $conn->prepare("
-                SELECT c.*, p.prod_name, p.prod_price, pi.image_path
+                SELECT c.*, p.prod_name, p.prod_price, pi.image_path, p.discount_percent
                 FROM cart c
                 LEFT JOIN products p ON c.prod_id = p.prod_id
                 LEFT JOIN product_images pi ON p.prod_id = pi.prod_id
@@ -34,11 +34,25 @@ class Shopcart extends Model
         }
     }
 
-     // Add item to cart
-    public function add_to_cart($cartData)
+     // Add item to cart //changed
+     public function add_to_cart($cartData)
     {
         try {
             $conn = $this->connect();
+
+            // Fetch product stock
+            $stmt = $conn->prepare("
+                SELECT prod_stock 
+                FROM products 
+                WHERE prod_id = :prod_id
+            ");
+            $stmt->execute([
+                ':prod_id' => $cartData['prod_id']
+            ]);
+            $product = $stmt->fetch(PDO::FETCH_ASSOC);
+            if (!$product || $cartData['cart_qty'] > $product['prod_stock']) {
+                return false; // Quantity exceeds available stock
+            }
 
             // Check if product already exists in cart for this customer
             $stmt = $conn->prepare("
@@ -55,6 +69,9 @@ class Shopcart extends Model
             if ($existingItem) {
                 // If product exists, update the quantity
                 $newQty = $existingItem['cart_qty'] + $cartData['cart_qty'];
+                if ($newQty > $product['prod_stock']) {
+                    return false; // Quantity exceeds available stock
+                }
                 $stmt = $conn->prepare("
                     UPDATE cart 
                     SET cart_qty = :cart_qty 
@@ -86,11 +103,27 @@ class Shopcart extends Model
     }
 
 
-    // Update cart item quantity
-    public function update_cart_item($cart_id, $cart_qty)
+    // Update cart item quantity //changed
+     public function update_cart_item($cart_id, $cart_qty)
     {
         try {
             $conn = $this->connect();
+
+            // Fetch product stock
+            $stmt = $conn->prepare("
+                SELECT p.prod_stock 
+                FROM cart c
+                LEFT JOIN products p ON c.prod_id = p.prod_id
+                WHERE c.cart_id = :cart_id
+            ");
+            $stmt->execute([
+                ':cart_id' => $cart_id
+            ]);
+            $product = $stmt->fetch(PDO::FETCH_ASSOC);
+            if (!$product || $cart_qty > $product['prod_stock']) {
+                return false; // Quantity exceeds available stock
+            }
+
             $stmt = $conn->prepare("
                 UPDATE cart 
                 SET cart_qty = :cart_qty
@@ -142,24 +175,24 @@ class Shopcart extends Model
     }
     // Fetch items in the cart by their IDs
     public function get_cart_items_by_ids($cart_ids)
-    {
-        try {
-            $conn = $this->connect();
-            $placeholders = implode(',', array_fill(0, count($cart_ids), '?'));
-            $stmt = $conn->prepare("
-                SELECT c.*, p.prod_name, p.prod_price, pi.image_path
-                FROM cart c
-                LEFT JOIN products p ON c.prod_id = p.prod_id
-                LEFT JOIN product_images pi ON p.prod_id = pi.prod_id
-                WHERE c.cart_id IN ($placeholders) AND c.cart_status = 'active'
-            ");
-            $stmt->execute($cart_ids);
-            return $stmt->fetchAll(PDO::FETCH_ASSOC);
-        } catch (PDOException $e) {
-            error_log("Database error: " . $e->getMessage());
-            return [];
+        {
+            try {
+                $conn = $this->connect();
+                $placeholders = implode(',', array_fill(0, count($cart_ids), '?'));
+                $stmt = $conn->prepare("
+                    SELECT c.*, p.prod_name, p.prod_price, p.discount_percent, pi.image_path
+                    FROM cart c
+                    LEFT JOIN products p ON c.prod_id = p.prod_id
+                    LEFT JOIN product_images pi ON p.prod_id = pi.prod_id
+                    WHERE c.cart_id IN ($placeholders) AND c.cart_status = 'active'
+                ");
+                $stmt->execute($cart_ids);
+                return $stmt->fetchAll(PDO::FETCH_ASSOC);
+            } catch (PDOException $e) {
+                error_log("Database error: " . $e->getMessage());
+                return [];
+            }
         }
-    }
     
     public function get_product_stock($product_id) {
         $query = "SELECT prod_stock FROM products WHERE prod_id = :product_id";
@@ -168,5 +201,19 @@ class Shopcart extends Model
         $result = $this->db->single(); // Assuming this returns a single result
         return $result ? $result['prod_stock'] : 0; // Return 0 if no stock is found
     }
+
+    // Inside Shopcart.php model
+    public function remove_all_from_cart($cus_id) {
+    try {
+        $conn = $this->connect();
+        $stmt = $conn->prepare("DELETE FROM cart WHERE cus_id = :cus_id");
+        $stmt->bindParam(':cus_id', $cus_id, PDO::PARAM_INT);
+        $stmt->execute();
+        return true;
+    } catch (PDOException $e) {
+        error_log("Database error: " . $e->getMessage());
+        return false;
+    }
+}
 }
 ?>

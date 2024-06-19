@@ -7,12 +7,12 @@ class SignUp extends Controller {
 
     public function register() {
         if ($_SERVER['REQUEST_METHOD'] == 'POST') {
-            $fname = filter_input(INPUT_POST, 'fname', FILTER_SANITIZE_STRING);
-            $lname = filter_input(INPUT_POST, 'lname', FILTER_SANITIZE_STRING);
-            $username = filter_input(INPUT_POST, 'username', FILTER_SANITIZE_STRING);
+            $fname = filter_input(INPUT_POST, 'fname', FILTER_SANITIZE_FULL_SPECIAL_CHARS);
+            $lname = filter_input(INPUT_POST, 'lname', FILTER_SANITIZE_FULL_SPECIAL_CHARS);
+            $username = filter_input(INPUT_POST, 'username', FILTER_SANITIZE_FULL_SPECIAL_CHARS);
             $email = filter_input(INPUT_POST, 'email', FILTER_SANITIZE_EMAIL);
-            $phonenum = filter_input(INPUT_POST, 'phonenum', FILTER_SANITIZE_STRING);
-            $sex = filter_input(INPUT_POST, 'sex', FILTER_SANITIZE_STRING);
+            $phonenum = filter_input(INPUT_POST, 'phonenum', FILTER_SANITIZE_FULL_SPECIAL_CHARS);
+            $sex = filter_input(INPUT_POST, 'sex', FILTER_SANITIZE_FULL_SPECIAL_CHARS);
             $password = $_POST['password'];
             $cpassword = $_POST['cpassword'];
             
@@ -27,7 +27,7 @@ class SignUp extends Controller {
             if ($password !== $cpassword) {
                 $message[] = 'Passwords do not match';
                 error_log('Validation error: Passwords do not match');
-                return $this->view("home/signup", ['message' => $message]);
+                return $this->view("home/ssignup", ['message' => $message]);
             }
 
             if ($image_error !== UPLOAD_ERR_OK) {
@@ -101,7 +101,7 @@ class SignUp extends Controller {
                     ];
 
                     if ($adminModel->insert($adminData)) {
-                        header('Location: ' . ROOT . '/login');
+                        header('Location: ' . ROOT . 'login');
                         exit();
                     } else {
                         $message[] = 'Error occurred while signing up. Please try again later.';
@@ -145,8 +145,13 @@ class SignUp extends Controller {
                         'CUS_SEX' => $sex
                     ];
 
-                    if ($customerModel->insert($data)) {
-                        header('Location: ' . ROOT . '/login');
+                    
+                    // Insert customer data
+                    $cus_id = $customerModel->insertCustomer($data);
+
+                    if ($cus_id) {
+                        $_SESSION['temp_cus_id'] = $cus_id;
+                        header('Location: ' . ROOT . 'address');
                         exit();
                     } else {
                         $message[] = 'Error occurred while signing up. Please try again later.';

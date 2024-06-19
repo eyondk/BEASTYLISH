@@ -77,7 +77,7 @@ document.addEventListener("DOMContentLoaded", function () {
       const productDiscount = parseInt(this.getAttribute("data-discount"));
       productStock = parseInt(this.getAttribute("data-stock"));
 
-      document.querySelector(".modal-product-img").src = "../public/assets/images/",productImage;
+      document.querySelector(".modal-product-img").src = "../public/assets/images/" + productImage;
       document.querySelector(".modal-product-name").textContent = productName;
       document.querySelector(".modal-description").textContent =
         productDescription;

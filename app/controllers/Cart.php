@@ -22,16 +22,35 @@ class Cart extends Controller
         foreach ($cart_items as $item) {
             $subtotal += $item['prod_price'] * $item['cart_qty'];
         }
-
+        $customerModel = new Customer();
+        $customerCity = $customerModel->getCustomerCity($cus_id);
         
-        $total = $subtotal + 90.00; // Add delivery fee and subtract discount
+        $deliveryFee = $this->calculateDeliveryFee($customerCity);
+
+        $total = $subtotal + $deliveryFee;// Add delivery fee and subtract discount
         
         $this->view('customer/cart', [
             'cart_items' => $cart_items,
             'subtotal' => $subtotal,
+            'deliveryFee' => $deliveryFee,
             'total' => $total
         ]);
     }
+
+    private function calculateDeliveryFee($cityName) {
+        $feePerCity = [
+            'Cebu City' => 100,
+            'Mandaue City' => 150,
+            'LAPU-LAPU CITY' => 120,
+            // Add more cities and corresponding fees as needed
+        ];
+
+        $defaultFee = 90.00;
+        
+        // Return the fee for the specific city or the default fee if the city is not listed
+        return isset($feePerCity[$cityName]) ? $feePerCity[$cityName] : $defaultFee;
+    }
+
     
     // public function add()
     // {
@@ -82,7 +101,8 @@ class Cart extends Controller
             }
 
             $cart = new Shopcart();
-            $cus_id = $_SESSION['user_id'];
+
+            $cus_id = $_SESSION['user_id']; // Replace with actual customer ID
 
             $cartData = [
                 'cart_qty' => $input['cart_qty'],
@@ -204,5 +224,25 @@ class Cart extends Controller
     
     exit;
 }
+
+
+public function remove_all()
+{
+    header('Content-Type: application/json'); 
+
+  
+    $cus_id = $_SESSION['user_id'];
+
+    $cart = new Shopcart();
+    $removed = $cart->remove_all_from_cart($cus_id);
+
+    if ($removed) {
+        echo json_encode(['success' => true]);
+    } else {
+        echo json_encode(['success' => false, 'error' => 'Failed to remove all items']);
+    }
+    exit;
+}
+
 
 }

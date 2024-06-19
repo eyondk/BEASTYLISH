@@ -14,18 +14,26 @@
     </div>
 
     <div class="addressform">
-        <h3>Address</h3>
-        <div class="form-row">
-            <input type="text" name="street" id="street" placeholder="Street">
-            <input type="text" name="brgy" id="brgy" placeholder="Barangay">
-            <input type="text" name="city" id="city" placeholder="City">
-            <input type="text" name="province" id="province" placeholder="Province">
-            <input type="text" name="zipcode" id="zipcode" placeholder="Zipcode">
-        </div>
-        <div class="form-checkbox">
-            <input type="checkbox" name="address_type" id="address_type">
-            <label for="address_type">Set as my default address</label>
-        </div>
+        <form action="" method="get">
+            <h3>Address</h3>
+            <div class="form-row">
+                        <input type="text" name="street" value="<?= isset($_SESSION['user_street']) ? htmlspecialchars($_SESSION['user_street']) : '' ?>" >
+                        <select class="box" name="updatecity" id="city">
+                            <option value="" disabled selected>City</option>
+                            <option value="BOGO CITY" <?= (isset($_SESSION['user_city']) && $_SESSION['user_city'] === 'BOGO CITY') ? 'selected' : '' ?>>Bogo City</option>
+                            <option value="CAR CITY" <?= (isset($_SESSION['user_city']) && $_SESSION['user_city'] === 'CAR CITY') ? 'selected' : '' ?>>Carcar City</option>
+                            <option value="CEBU CITY" <?= (isset($_SESSION['user_city']) && $_SESSION['user_city'] === 'CEBU CITY') ? 'selected' : '' ?>>Cebu City</option>
+                            <option value="DANAO CITY" <?= (isset($_SESSION['user_city']) && $_SESSION['user_city'] === 'DANAO CITY') ? 'selected' : '' ?>>Danao City</option>
+                            <option value="LAPU-LAPU CITY" <?= (isset($_SESSION['user_city']) && $_SESSION['user_city'] === 'LAPU-LAPU CITY') ? 'selected' : '' ?>>Lapu-lapu City</option>
+                            <option value="MANDAUE CITY" <?= (isset($_SESSION['user_city']) && $_SESSION['user_city'] === 'MANDAUE CITY') ? 'selected' : '' ?>>Mandaue City</option>
+                            <option value="NAGA CITY" <?= (isset($_SESSION['user_city']) && $_SESSION['user_city'] === 'NAGA CITY') ? 'selected' : '' ?>>Naga City</option>
+                            <option value="TALISAY CITY" <?= (isset($_SESSION['user_city']) && $_SESSION['user_city'] === 'TALISAY CITY') ? 'selected' : '' ?>>Talisay City</option>
+                            <option value="TOLEDO CITY" <?= (isset($_SESSION['user_city']) && $_SESSION['user_city'] === 'TOLEDO CITY') ? 'selected' : '' ?>>Toledo City</option>
+                        </select>
+                        <input type="text" name="province"  value="<?= isset($_SESSION['user_province']) ? htmlspecialchars($_SESSION['user_province']) : '' ?>" disabled>
+                        <input type="text" name="mess" value="<?= isset($_SESSION['user_infoaddress']) ? htmlspecialchars($_SESSION['user_infoaddress']) : '' ?>" >
+
+            </div>
 
         <h3 class="payment">Select Payment Method</h3>
         <div class="form-row">

@@ -115,18 +115,18 @@
 
         
                 
-        <div class="addressSec" style="display: none;">
+       <div class="addressSec" style="display: none;">
             <form class="address_details" action="" method="POST" enctype="multipart/form-data">
                 <div class="flex">
                     <div class="inputBox">
                         <span>STREET</span>
                         <input type="text" name="street" class="box" value="<?= isset($_SESSION['user_street']) ? htmlspecialchars($_SESSION['user_street']) : '' ?>" disabled>
-                        <span>BARANGAY</span>
-                        <input type="text" name="brgy" class="box" value="<?= isset($_SESSION['user_brgy']) ? htmlspecialchars($_SESSION['user_brgy']) : '' ?>" disabled>
                         <span>CITY</span>
                         <input type="text" name="city" class="box" value="<?= isset($_SESSION['user_city']) ? htmlspecialchars($_SESSION['user_city']) : '' ?>" disabled>
                         <span>PROVINCE</span>
                         <input type="text" name="province" class="box" value="<?= isset($_SESSION['user_province']) ? htmlspecialchars($_SESSION['user_province']) : '' ?>" disabled>
+                        <span>MESSAGE</span>
+                        <input type="text" name="mess" class="box" value="<?= isset($_SESSION['user_infoaddress']) ? htmlspecialchars($_SESSION['user_infoaddress']) : '' ?>" disabled>
                     </div>
                 </div>
                 <div class="flex">
@@ -134,24 +134,36 @@
                 </div>
             </form>
 
-            <form class="edit_address" action="" method="POST" enctype="multipart/form-data" style="display: none;">
+            <form class="edit_address" action="<?=ROOT?>/Account/updateAddress" method="POST" enctype="multipart/form-data" style="display: none;">
                 <div class="flex">
                     <div class="inputBox">
-                        <span>STREET</span>
-                        <input type="text" name="street" class="box">
-                        <span>BARANGAY</span>
-                        <input type="text" name="brgy" class="box">
-                        <span>CITY</span>
-                        <input type="text" name="city" class="box">
-                        <span>PROVINCE</span>
-                        <input type="text" name="province" class="box">
+                        <input type="text" name="updatestreet" class="box" placeholder="Street" >
+                        <select class="box" name="updatecity" id="city" >
+                            <option value="" disabled selected>City</option>
+                            <option value="BOGO CITY">Bogo City</option>
+                            <option value="CAR CITY">Carcar City</option>
+                            <option value="CEBU CITY">Cebu City</option>
+                            <option value="DANAO CITY">Danao City</option>
+                            <option value="LAPU-LAPU CITY">Lapu-lapu City</option>
+                            <option value="MANDAUE CITY">Mandaue City</option>
+                            <option value="NAGA CITY">Naga City</option>
+                            <option value="TALISAY CITY">Talisay City</option>
+                            <option value="TOLEDO CITY">Toledo City</option>
+                        </select>
+                        <select class="box" name="updateprovince" id="province" >
+                            <option value="" disabled selected>Province</option>
+                            <option value="CEBU">Cebu</option>
+                        </select>
+                        <input type="text" name="message" class="box" placeholder="Add message (optional)">
+
+
                     </div>
                 </div>
                 <div class="flex">
                     <input type="submit" class="save_upd_add" value="UPDATE" name="update_address">
                     <a class="back-btn">BACK</a>
                 </div>
-            </form> 
+            </form>
         </div>
 
 
@@ -172,6 +184,7 @@
                         <th>Order ID</th>
                         <th>Total Cost</th>
                         <th>Ordered Date</th>
+                        <th>Payment Status</th>
                         <th>Status</th>
                      
                     </tr>
@@ -183,6 +196,7 @@
                                 <td><?php echo htmlspecialchars($order['order_id']); ?></td>
                                 <td><?php echo htmlspecialchars($order['order_total']); ?></td>
                                 <td><?php echo htmlspecialchars($order['order_date']); ?></td>
+                                <td><?php echo htmlspecialchars($order['payment_status']); ?></td>
                                 <td><?php echo htmlspecialchars($order['order_status']); ?></td>
                                 
                             </tr>
@@ -194,6 +208,8 @@
                     <?php endif; ?>
                 </tbody>
             </table>
+        </div>
+        </div>
         </div>
 
 
@@ -415,27 +431,28 @@
 
     </div>
 
-    <!-- logout mmodal -->
+    <!-- logout modal -->
     <div id="logoutModal" class="modal" style="display: none;">
-        <div class="modal-content">
-            <form action="" method="post">
-                <div class="cancel-container">
-                    <div class="cancel">
-                        <h3>LOG OUT</h3>
-                        <h4>are you sure you want to logout?</h4>
+            <div class="modal-content">
+                <form action="<?= ROOT ?>/Account/logout" method="post">
+                    <div class="cancel-container">
+                        <div class="cancel">
+                            <h3>LOG OUT</h3>
+                            <h4>Are you sure you want to logout?</h4>
+                        </div>
+                        <div class="btns">
+                            <input type="button" class="back" value="CANCEL" onclick="closeModal()">
+                            <input type="submit" class="logoutbtn" value="YES, LOG OUT">
+                        </div>
                     </div>
-                    <div class="btns">
-                        <input type="button" class="back" value="CANCEL">
-                        <input type="button" class="logoutbtn"  value="YES, LOG OUT">
-                    </div>
-                </div>
-            </form>
+                </form>
+            </div>
         </div>
-    </div>
-    
+        
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <script src="<?=ROOT?>/assets/js/getorders.js"></script>
+    <script src="<?=ROOT?>/assets/js/logout.js"></script>
     <script src="<?=ROOT?>/assets/js/account.js"></script>
     <script src="https://kit.fontawesome.com/f8e1a90484.js" crossorigin="anonymous"></script>
 </body>

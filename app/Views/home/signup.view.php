@@ -29,7 +29,7 @@
         <input type="text" name="lname" class="box" placeholder="LAST NAME" required>
         <input type="text" name="username" class="box" placeholder="USER NAME" required>
         <input type="email" name="email" class="box" placeholder="EMAIL" required>
-        <input type="tel" name="phonenum" class="box" placeholder="PHONE NUMBER" pattern="(\+639|09)\d{9}"  title="Sample phone number: +639xxxxxxxxx or 09xxxxxxxxx" required>
+        <input type="text" name="phonenum" class="box" placeholder="PHONE NUMBER" pattern="(\+639|09)\d{9}"  title="Sample phone number: +639xxxxxxxxx or 09xxxxxxxxx" required>
         <select class="box" name="sex" id="sex" required>
             <option value="" disabled selected>SEX</option>
             <option value="FEMALE">Female</option>
@@ -43,5 +43,6 @@
         <p>already have account? <a href="<?=ROOT?>/Login">login now</a></p>
     </form>
 </section>
+
 </body>
 </html>

@@ -95,5 +95,5 @@
 </section>
 
 </body>
-<script src="<?=ROOT?>/assets/js/login.js"></script>
+<script src="<?=ROOT?>js/login.js"></script>
 </html>

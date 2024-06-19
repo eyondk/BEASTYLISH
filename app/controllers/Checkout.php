@@ -24,6 +24,7 @@ class Checkout extends Controller
         if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             $jsonData = file_get_contents('php://input');
             $requestData = json_decode($jsonData, true);
+            $deliveryFee = isset($requestData['delivery_fee']) ? (float)$requestData['delivery_fee'] : 0;
 
             if (isset($requestData['selected_items'])) {
                 $selectedItems = $requestData['selected_items'];
@@ -35,20 +36,27 @@ class Checkout extends Controller
                     $itemIndex = array_search($item['cart_id'], array_column($selectedItems, 'cart_id'));
                     if ($itemIndex !== false) {
                         $item['cart_qty'] = $selectedItems[$itemIndex]['cart_qty'];
-                        $item['subtotal'] = $item['prod_price'] * $item['cart_qty'];
+                       
+                        $item['discount_percent'] = isset($item['discount_percent']) ? (float)$item['discount_percent'] : 0;
+                        $item['discounted_price'] = $item['prod_price'];
+
+                        if ($item['discount_percent'] > 0) {
+                            $item['discounted_price'] = $item['prod_price'] * ((100 - $item['discount_percent']) / 100);
+                        }
+
+                        $item['subtotal'] = $item['discounted_price'] * $item['cart_qty'];
                         $subtotal += $item['subtotal'];
                     }
                 }
 
-                $delivery_fee = 90;
                
-                $total = $subtotal + $delivery_fee;
+               
+                $total = $subtotal + $deliveryFee;
 
                 $data = [
                     'cart_items' => $cartItems,
                     'subtotal' => $subtotal,
-                    'delivery_fee' => $delivery_fee,
-                    'discount' => $discount,
+                    'delivery_fee' => $deliveryFee,
                     'total' => $total,
                 ];
 
@@ -62,7 +70,9 @@ class Checkout extends Controller
             exit;
         }
     }
+    
 
+    
     public function confirmOrder()
     {
         if ($_SERVER['REQUEST_METHOD'] === 'POST') {

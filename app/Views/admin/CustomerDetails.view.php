@@ -7,14 +7,15 @@
     <div class="semiheader">
         <h2>CUSTOMER ID #<?= $data['customer']['cus_id'] ?></h2>
         <div class="delete-div">
-            <input type="button" class="cus-dlt-btn" value="DELETE CUSTOMER">
+        <button class="cus-dlt-btn" data-customer-id="<?= $data['customer']['cus_id'] ?>">DELETE CUSTOMER</button>
+>
         </div>        
     </div>
 
     <div class="customerdetails-container">
         <div class="customerdetails-card">
             <div class="pic-name-id">
-                <img src="img/11.png" alt="" srcset="" width="200" height="200">
+                <img src="<?=ROOT .$data['customer']['cus_profile'] ?>" alt="" srcset="" width="200" height="200">
                 <h3 class="full-name"><?= $data['customer']['cus_fname'] . ' ' . $data['customer']['cus_lname'] ?></h3>
                 <h4>Customer Id #<?= $data['customer']['cus_id'] ?></h4>
             </div>
@@ -47,7 +48,7 @@
     </div>
 
     <div class="semifooter">
-        <a href="<?= ROOT ?>Customer" class="back">         
+        <a href="<?= ROOT ?>AdminCustomer" class="back">         
             &#10230; BACK TO CUSTOMERS
         </a>
     </div>

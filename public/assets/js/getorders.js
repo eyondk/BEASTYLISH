@@ -85,17 +85,25 @@ $(document).ready(function() {
         const tbody = $('.order-table tbody');
         tbody.empty();
         if (orders.length === 0) {
-            tbody.append('<tr><td colspan="5">No orders found</td></tr>');
+            tbody.append('<tr><td colspan="6">No orders found</td></tr>');
         } else {
             orders.forEach(order => {
-                const isPending = order.order_status === "PENDING";
-                const buttonText = isPending ? 'Cancel' : 'ON GOING';
-                const cancelButtonDisabled = isPending ? '' : 'disabled';
+                let buttonText = 'ON GOING';
+                let cancelButtonDisabled = 'disabled';
+    
+                if (order.order_status === "PENDING" && order.payment_status !== "PAID") {
+                    buttonText = 'Cancel';
+                    cancelButtonDisabled = '';
+                } else if (order.order_status === "COMPLETED" || order.order_status === "CANCELLED") {
+                    buttonText = 'DONE';
+                }
+    
                 const tr = `
                     <tr>
                         <td>${order.order_id}</td>
                         <td>&#8369; ${order.order_total}</td>
                         <td>${order.order_date}</td>
+                        <td>${order.payment_status}</td>
                         <td>${order.order_status}</td>
                         <td>
                             <button class="cancel-order" data-order-id="${order.order_id}" ${cancelButtonDisabled}>${buttonText}</button>
@@ -106,4 +114,6 @@ $(document).ready(function() {
             });
         }
     }
+    
+    
 });

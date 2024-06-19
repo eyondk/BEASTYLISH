@@ -1,6 +1,6 @@
 $(document).ready(function() {
     // Insert category
-    $("#add_category").click(function() {
+    $("#add_category").click(function(event) {
         var formData = new FormData();
         formData.append('action', 'insert');
         formData.append('categ_name', $("#categ_name").val());
@@ -18,19 +18,17 @@ $(document).ready(function() {
             },
             error: function(xhr, status, error) {
                 console.error(error);
+                alert('Failed to add category. Please try again.');
             }
         });
     });
 
     // Show delete confirmation and handle product check
-    $(document).on('click', '.button-delete', function() {
-        $('#deleteModal').modal('show');
-        
+    $(document).on('click', '.button-delete', function(event) {
         var $tr = $(this).closest('tr');
         var categ_id = $tr.find("td:eq(0)").text();
         $('#delete_id').val(categ_id);
         
-        alert(categ_id);
         $.ajax({
             url: 'Category/index',
             method: 'POST',
@@ -40,7 +38,8 @@ $(document).ready(function() {
                 if (result.hasProducts) {
                     alert('This category cannot be deleted because there are associated products.');
                     $('#delete_id').val('');
-                    return
+                } else {
+                    $('#deleteModal').modal('show');
                 }
             },
             error: function(xhr, status, error) {
@@ -51,10 +50,16 @@ $(document).ready(function() {
     });
 
     // Delete category
-    $(document).on('click', '#delete_category', function() {
+    $(document).on('click', '#delete_category', function(event) {
+        var categ_id = $("#delete_id").val();
+        if (!categ_id) {
+            alert('No category selected for deletion.');
+            return;
+        }
+
         var formData = new FormData();
         formData.append('action', 'delete');
-        formData.append('categ_id', $("#delete_id").val());
+        formData.append('categ_id', categ_id);
 
         $.ajax({
             url: 'Category/index',
@@ -65,10 +70,11 @@ $(document).ready(function() {
             success: function(response) {
                 console.log(response);
                 $('#deleteModal').modal('hide');
-                location.reload();
+                location.reload(); // Ensure this is commented out if you do not want the page to reload
             },
             error: function(xhr, status, error) {
                 console.error(error);
+                alert('Failed to delete category. Please try again.');
             }
         });
     });

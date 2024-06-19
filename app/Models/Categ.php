@@ -36,8 +36,8 @@ public function hasProducts($categ_id) {
 public function deleteCategory($data) {
     try {
         // Check if the category has associated products
-        $checkResult = $this->checkForProducts($data['categ_id']);
-        if ($checkResult['hasProducts']) {
+        $hasProducts = $this->hasProducts($data['categ_id']);
+        if ($hasProducts) {
             return ['success' => false, 'messages' => ['This category cannot be deleted because there are associated products.']];
         }
 
@@ -52,7 +52,6 @@ public function deleteCategory($data) {
         return ['success' => false, 'messages' => ['Error: ' . $e->getMessage()]];
     }
 }
-
 
 public function getCategory(){
         

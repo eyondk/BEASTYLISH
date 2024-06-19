@@ -3,6 +3,12 @@ class Product extends Model
 {
     protected $table = 'products';
 
+    function getCategories() {
+        
+        $stmt = $this->conn->query("SELECT categ_id, categ_name FROM CATEGORY");
+        return $stmt->fetchAll(PDO::FETCH_ASSOC);
+    }
+
     public function insertProduct($data, $files) {
         try {
             // Validate and upload product images
@@ -34,8 +40,14 @@ class Product extends Model
                 $productImages[] = $imageName; // Store image names for database insertion
             }
 
+              // Ensure required numeric fields are not empty and are valid numbers
+            $prod_price = isset($data['product_price']) ? floatval($data['product_price']) : null;
+            $prod_stocks = isset($data['product_stocks']) ? intval($data['product_stocks']) : null;
+            $categ_id = isset($data['product_category']) ? intval($data['product_category']) : null;
+            $discount_percent = isset($data['product_discount']) ? intval($data['product_discount']) : null;
+
             // Insert product details into the products table using named placeholders
-            $stmt = $this->conn->prepare("INSERT INTO products (prod_name, prod_price, prod_stock, prod_sizes, prod_color, categ_id, prod_description) VALUES (:prod_name, :prod_price, :prod_stocks, :prod_sizes, :prod_colors, :categ_id, :product_description)");
+            $stmt = $this->conn->prepare("INSERT INTO products (prod_name, prod_price, prod_stock, prod_sizes, prod_color, categ_id, prod_description, discount_percent) VALUES (:prod_name, :prod_price, :prod_stocks, :prod_sizes, :prod_colors, :categ_id,:product_description, :discount_percent)");
 
             $stmt->bindParam(':prod_name', $data['product_name']);
             $stmt->bindParam(':prod_price', $data['product_price']);
@@ -44,6 +56,7 @@ class Product extends Model
             $stmt->bindParam(':prod_colors', $data['product_colors']);
             $stmt->bindParam(':categ_id', $data['product_category']);
             $stmt->bindParam(':product_description', $data['product_description']);
+            $stmt->bindParam(':discount_percent', $data['product_discount']);
 
             $stmt->execute();
 
@@ -97,7 +110,7 @@ class Product extends Model
                 $productImages[] = basename($data['old_images']);
             }
     
-            $stmt = $this->conn->prepare("UPDATE products SET prod_name = :prod_name, prod_price = :prod_price, prod_stock = :prod_stocks, prod_sizes = :prod_sizes, prod_color = :prod_colors, categ_id = :categ_id, prod_description = :product_description WHERE prod_id = :product_id");
+            $stmt = $this->conn->prepare("UPDATE products SET prod_name = :prod_name, prod_price = :prod_price, prod_stock = :prod_stocks, prod_sizes = :prod_sizes, prod_color = :prod_colors, categ_id = :categ_id, prod_description = :product_description, discount_percent = :discount_percent WHERE prod_id = :product_id");
             $stmt->bindParam(':prod_name', $data['product_name']);
             $stmt->bindParam(':prod_price', $data['product_price']);
             $stmt->bindParam(':prod_stocks', $data['product_stocks']);
@@ -106,6 +119,7 @@ class Product extends Model
             $stmt->bindParam(':categ_id', $data['product_category']);
             $stmt->bindParam(':product_description', $data['product_description']);
             $stmt->bindParam(':product_id', $data['product_id']);
+            $stmt->bindParam(':discount_percent', $data['product_discount']);
             $stmt->execute();
     
             $this->conn->prepare("DELETE FROM product_images WHERE prod_id = :prod_id")->execute([':prod_id' => $data['product_id']]);

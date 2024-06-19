@@ -6,6 +6,11 @@ class AdminHome extends Controller
     public function index()
     {
 
+        if (!isset($_SESSION['admin_id']) || $_SESSION['admin_id'] === null) {
+            // Redirect to the login page
+            header('Location: home/login'); // Adjust the path as needed for your application
+            exit();
+        }
         $dash = new Dashboard;
 
         $total_sales_result = $dash->getTotalSales();
@@ -36,5 +41,19 @@ class AdminHome extends Controller
         $this->view("admin/adminhome",$data);
 
     }
+
+    public function logout() {
+            
+        // Unset all of the session variables
+        $_SESSION = array();
+        
+        // Destroy the session
+        session_destroy();
+        
+        // Redirect to the login page or any other desired page
+        header("Location:" .ROOT. "/login?logout=success");
+        exit();
+    }
+
 }       
 

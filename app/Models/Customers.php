@@ -2,6 +2,37 @@
 class Customers extends Model
 {
     protected $table = 'customer';
+    public function hasOrders($cus_id) {
+        $sql = "SELECT COUNT(*) FROM orders WHERE cus_id = :cus_id";
+        $stmt = $this->conn->prepare($sql);
+        $stmt->bindParam(':cus_id', $cus_id, PDO::PARAM_INT);
+        $stmt->execute();
+        return $stmt->fetchColumn() > 0; // Returns true if there are orders
+    }
+    
+
+    public function deleteCustomerById($cus_id) {
+        // Check if there are orders before proceeding with deletion
+        if ($this->hasOrders($cus_id)) {
+            return ['success' => false, 'message' => 'Cannot delete customer with associated orders.'];
+        }
+    
+        try {
+            $sql = "DELETE FROM customer WHERE cus_id = :cus_id";
+            $stmt = $this->conn->prepare($sql);
+            $stmt->bindParam(':cus_id', $cus_id, PDO::PARAM_INT);
+            $stmt->execute();
+    
+            if ($stmt->rowCount() > 0) {
+                return ['success' => true, 'message' => 'Customer successfully deleted.'];
+            } else {
+                return ['success' => false, 'message' => 'Customer not found or already deleted.'];
+            }
+        } catch (PDOException $e) {
+            return ['success' => false, 'message' => 'Error: ' . $e->getMessage()];
+        }
+    }
+    
 
     public function getCustomerOrders() {
         $sql = "
@@ -45,6 +76,7 @@ class Customers extends Model
                     c.cus_lname, 
                     c.cus_username,
                     c.cus_email,
+                    c.cus_profile,
                     c.cus_phonenum,
                     CONCAT(a.add_street, ', ', a.add_city, ', ', a.add_province, COALESCE(', ' || a.add_infoaddress, '')) AS customer_address,
                     COUNT(DISTINCT o.order_id) AS orders_count, 

@@ -3,6 +3,8 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
+    <title>Cart | Beastylish</title>
+    <link rel="shortcut icon" href="<?=ROOT?>/assets/images/logo.png" type="image/x-icon">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="<?=ROOT?>/assets/css/cart.css">
     <style>
@@ -54,7 +56,12 @@
                     <tbody>
                     <?php if (!empty($cart_items)): ?>
                         <?php foreach ($cart_items as $item): ?>
-                        <tr data-cart-id="<?= htmlspecialchars($item['cart_id']); ?>" data-prod-price="<?= htmlspecialchars($item['prod_price']); ?>">
+                            <?php
+                            // Calculate the discounted price if discount_percent is available
+                            $final_price = !empty($item['discount_percent']) ? $item['prod_price'] * (1 - $item['discount_percent'] / 100) : $item['prod_price'];
+                            $subtotal = $final_price * $item['cart_qty'];
+                            ?>
+                        <tr data-cart-id="<?= htmlspecialchars($item['cart_id']); ?>" data-prod-price="<?= htmlspecialchars($final_price); ?>">
                             <td>
                                 <form onsubmit="removeItem(event, this)">
                                     <input type="hidden" name="cart_id" value="<?= htmlspecialchars($item['cart_id']); ?>" />
@@ -65,7 +72,7 @@
                                 <img src="../public/assets/images/<?= htmlspecialchars($item['image_path']); ?>" alt="product" width="100" height="100">
                             </td>
                             <td><?= htmlspecialchars($item['prod_name']); ?></td>
-                            <td>&#8369; <?= htmlspecialchars(number_format($item['prod_price'], 2)); ?></td>
+                            <td>&#8369; <?= htmlspecialchars(number_format($final_price, 2)); ?></td>
                             <td>
                                 <div class="qty-container">
                                     <div class="wrapper">
@@ -76,7 +83,7 @@
                                     </div>
                                 </div>
                             </td>
-                            <td class="subtotal">&#8369; <?= htmlspecialchars(number_format($item['prod_price'] * $item['cart_qty'], 2)); ?></td>
+                            <td class="subtotal">&#8369; <?= htmlspecialchars(number_format($subtotal * $item['cart_qty'], 2)); ?></td>
                             <td>
                                     <input type="checkbox" name="selected_items[]" value="<?= htmlspecialchars($item['cart_id']); ?>">
                             </td>
@@ -92,9 +99,10 @@
             </div>
             <?php if (!empty($cart_items)): ?>
             <div>
-                <form action="/Cart/removeAll" method="post">
-                    <button type="submit" class="deleteall">DELETE ALL ITEMS</button>
-                </form>
+             <div>
+            <!-- Inside cart.view.php -->
+            <button type="button" class="deleteall" id="delete-all">DELETE ALL ITEMS</button>
+            </div>
             </div>
             <?php endif; ?>
         </div>
@@ -105,11 +113,11 @@
                
                 <div class="subtot">
                     <p>Subtotal (<span id="item-count"><?= count($cart_items); ?></span> Items)</p>
-                    <p>&#8369; <span id="subtotal"><?= htmlspecialchars(number_format($subtotal, 2)); ?></span></p>
+                    <p><span id="subtotal"><?= htmlspecialchars(number_format($subtotal, 2)); ?></span></p>
                 </div>
                 <div class="shipping">
                     <p>Delivery Fee</p>
-                    <p>&#8369; 90.00</p>
+                    <p>&#8369;<span id="delivery-fee"><?= htmlspecialchars(number_format($deliveryFee, 2)); ?></span></p>
                 </div>
                
                 <div class="total">
@@ -120,7 +128,6 @@
             
             </div>
         </div>
-     d
     </div>
 </main>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>

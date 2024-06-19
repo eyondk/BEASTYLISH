@@ -4,6 +4,11 @@ class Category extends Controller
 {
     public function index()
     {
+        if (!isset($_SESSION['admin_id']) || $_SESSION['admin_id'] === null) {
+            // Redirect to the login page
+            header('Location: home/login'); // Adjust the path as needed for your application
+            exit();
+        }
         $categ = new Categ();
 
         if ($_SERVER["REQUEST_METHOD"] == "POST") {

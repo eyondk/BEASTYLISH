@@ -1,39 +1,41 @@
 @import url('https://fonts.googleapis.com/css2?family=Dancing+Script:wght@400..700&family=Montserrat:ital,wght@0,100..900;1,100..900&family=Style+Script&display=swap');
 
-* {
+*{
     font-family: "Montserrat", sans-serif;
-    margin: 0;
-    padding: 0;
+    margin:0;
+    padding:0;
     box-sizing: border-box;
 }
-
-html {
+#line {
+    border: 1px solid #6c4a21;
+    margin-left: -13px;
+    position: relative;
+}
+html{
     font-size: 62.5%;
     overflow-x: hidden;
     scroll-behavior: smooth;
     scroll-padding-top: 6.5rem;
 }
 
-body {
+body{
     min-height: 100vh;
-    background-color: #faf2e8;
+    background-color:#faf2e8;
     transition: all 0.3s ease;
 }
 
-::selection {
-    background-color: #6c4a2191;
-    color: #6c4a21;
+::selection{
+    background-color:#6c4a2191;
+    color:#6c4a21;
 }
 
-*::placeholder {
+*::placeholder{
     color: #6c4a21;
     font-size: 1.3rem;
 }
-hr#line {
-    border: 1px solid  #6c4a21;
-  
-}
-.sidebar {
+
+
+.sidebar{
     position: fixed;
     top: 0;
     left: 0;
@@ -43,14 +45,13 @@ hr#line {
     background-color: transparent;
     border-right: 2px solid #6c4a21;
     transition: all 0.3s ease;
-    z-index: 100;
+    z-index: 100;  
 }
-
-.sidebar.close {
+.sidebar.close{
     width: 88px;
 }
 
-.sidebar li {
+.sidebar li{
     height: 50px;
     list-style: none;
     display: flex;
@@ -59,32 +60,40 @@ hr#line {
     position: relative;
 }
 
-.sidebar ul ul {
+
+
+.sidebar ul ul{
     display: none;
     position: absolute;
-    top: 50px;
+    top: 50px; 
     left: 0;
     background-color: #faf2e8;
     border-bottom: 2px solid #6c4a21;
     z-index: 1;
-    width: 100%;
+    width: 100%;  
 }
+
 
 .sidebar ul ul.show {
-    display: block !important;
+    display: block !important; 
 }
 
-.sidebar ul ul.close {
-    display: none;
+
+
+
+.sidebar ul ul.close{
+    display:none;
 }
 
 .sidebar ul ul li {
-    width: 100%;
+    width: 100%; 
     float: none;
-    margin-top: 0.5rem !important;
+    margin-top:0.5rem !important;
     text-align: left;
-    left: 5rem;
+    left:3rem;
 }
+
+
 
 .sidebar ul ul a {
     margin-bottom: 0.5rem;
@@ -98,34 +107,36 @@ hr#line {
     border: none;
     font-size: 16px;
     transition: all 0.3s ease;
+
 }
 
-.sidebar ul ul a:hover {
-    border-bottom: none;
-    color: #6c4a2193;
+.sidebar ul ul a:hover{
+    border-bottom:none;
+    color:#6c4a2193;
     transform: scale(1.03);
 }
 
-.sidebar ul a {
+.sidebar ul a{
     display: flex;
     text-align: left;
     text-decoration: none;
     text-transform: uppercase;
     color: #6c4a21;
-    align-items: center;
+    align-items: center; 
     transition: all 0.3s ease;
     font-size: 16px;
 }
 
+
 .fa-chevron-down {
-    margin-left: 1rem;
+    margin-left: 1rem; 
     font-size: 16px;
     color: #6c4a21b5;
     display: flex;
-    align-self: center;
+    align-self: center; 
 }
 
-.fa-chevron-down:hover, .fa-chevron-down:focus {
+.fa-chevron-down:hover, .fa-chevron-down:focus{
     color: #6c4a21;
     transform: scale(1.1);
 }
@@ -135,13 +146,15 @@ hr#line {
     transition: transform 0.3s ease;
 }
 
-.sidebar header .image {
+
+
+.sidebar header .image{
     width: 50px;
     height: 50px;
     border-radius: 4px;
 }
 
-.sidebar .icon {
+.sidebar .icon{
     min-width: 60px;
     height: 100%;
     display: flex;
@@ -150,37 +163,36 @@ hr#line {
     font-size: 18px;
 }
 
-.sidebar .text, .sidebar .icon {
-    color: #6c4a21;
+.sidebar .text,
+.sidebar .icon{
+    color:#6c4a21;
     transition: all 0.3s ease;
 }
 
-.sidebar .text {
+.sidebar .text{
     font-size: 16px;
     font-weight: 500;
     white-space: nowrap;
     opacity: 1;
 }
-
-.sidebar.close .text {
+.sidebar.close .text{
     opacity: 0;
 }
 
-.sidebar header {
+.sidebar header{
     position: relative;
     padding-top: 2rem;
 }
 
-.sidebar header .image-text {
+.sidebar header .image-text{
     display: flex;
     align-items: center;
 }
 
-.sidebar header .header-text {
+.sidebar header .haeder-text{
     display: flex;
     flex-direction: column;
 }
-
 header .image-text .name {
     margin-top: 2px;
     font-size: 18px;
@@ -188,39 +200,42 @@ header .image-text .name {
 }
 
 .sidebar .bottom-content {
-    margin-top: auto;
-    margin-bottom: 20px;
+    margin-top: auto; 
+    margin-bottom: 20px;  
 }
 
 .sidebar header .image {
-    margin-right: 10px;
+    margin-right: 10px; 
 }
 
 .sidebar header .header-text {
-    margin-left: 10px;
+    margin-left: 10px; 
 }
 
-header .image-text .admin {
+
+header .image-text .admin{
     font-size: 16px;
     margin-top: -2px;
     display: block;
     color: #6c4a2175;
 }
 
-.sidebar header .image {
+.sidebar header .image{
     display: flex;
     align-items: center;
     justify-content: center;
+    
 }
 
-.sidebar header .image img {
+.sidebar header .image img{
     width: 50px;
     height: 50px;
     border-radius: 4px;
     border: 2px solid #6c4a21;
+
 }
 
-.sidebar header .toggle {
+.sidebar header .toggle{
     position: absolute;
     top: 50%;
     right: -25px;
@@ -228,7 +243,7 @@ header .image-text .admin {
     height: 25px;
     width: 25px;
     background-color: #faf2e8;
-    border: 2px solid #6c4a21;
+    border:2px solid #6c4a21;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -238,28 +253,29 @@ header .image-text .admin {
     cursor: pointer;
 }
 
-.sidebar.close header .toggle {
+.sidebar.close header .toggle{
     transform: translateY(-50%);
     cursor: pointer;
 }
 
-.sidebar.close .toggle {
+.sidebar.close .toggle{
     padding: 8px;
 }
 
-.sidebar.close .toggle:hover {
+.sidebar.close .toggle:hover{
     color: #6c4a214d;
 }
 
-.sidebar .toggle:hover {
+.sidebar .toggle:hover{
     color: #6c4a214d;
 }
 
-.sidebar .menu {
+.sidebar .menu{
     margin-top: 40px;
 }
 
-.sidebar li a {
+
+.sidebar li a{
     list-style: none;
     height: 100%;
     background-color: transparent;
@@ -271,38 +287,41 @@ header .image-text .admin {
     transition: all 0.3s ease;
 }
 
-.sidebar li .text {
+
+.sidebar li .text{
     font-weight: 400;
 }
 
-.sidebar li a:hover {
+.sidebar li a:hover{
+    /*transform: scale(1.1);*/
     transform: all 0.2s ease;
     border-bottom: 2px solid #6c4a21;
     border-radius: 2px;
+
 }
 
-.sidebar li a:hover .text {
+.sidebar li a:hover .text{
     font-weight: 500;
 }
 
-.sidebar .menu-bar {
+.sidebar .menu-bar{
     height: calc(100% - 55px);
     display: flex;
     flex-direction: column;
     justify-content: space-between;
     overflow-y: scroll;
-}
 
-.menu-bar::-webkit-scrollbar {
+}
+.menu-bar::-webkit-scrollbar{
     display: none;
 }
-
-.sidebar .menu-bar .logout {
+.sidebar .menu-bar .logout{
     position: relative;
 }
 
-.home {
+.home{
     position: absolute;
+    top: 0;
     top: 0;
     left: 280px;
     right: 2rem;
@@ -311,37 +330,40 @@ header .image-text .admin {
     transition: all 0.3s ease;
 }
 
-.sidebar.close ~ .home {
+.sidebar.close ~ .home{
     left: 100px;
     height: 100vh;
     width: calc(100% - 100px);
 }
 
-.home .text {
+.home .text{
     font-size: 55px;
     font-weight: 400;
-    padding: 40px 30px;
+    padding: 40px 30px; 
     color: #6c4a21;
+       
 }
 
-.home .line {
+.home .line{
     width: 98%;
     margin-top: -1.5rem;
     border-bottom: 2px solid #6c4a21;
 }
 
-.update_profile form .flex {
+.update_profile form .flex{
     display: flex;
     gap: 1.5rem;
     justify-content: space-between;
     flex-wrap: wrap;
 }
 
-.flex > * {
+.flex> *{
     flex: 1;
 }
 
-input {
+
+
+input{
     color: #6c4a21;
 }
 
@@ -349,16 +371,17 @@ input[type="file"]::file-selector-button {
     display: none;
 }
 
-.update_profile form i {
+
+.update_profile form i{
     color: #6c4a21;
     font-size: 1.7rem;
 }
 
-.update_profile form .inputBox {
+.update_profile form .inputBox{
     text-align: left;
 }
 
-.update_profile form .inputBox span {
+.update_profile form .inputBox span{
     display: block;
     padding-top: 1rem;
     padding-bottom: 0.1rem;
@@ -367,17 +390,18 @@ input[type="file"]::file-selector-button {
     color: #6c4a21;
 }
 
-.update_profile form {
+.update_profile form{
     max-width: 65rem;
     margin: 3rem auto;
-    border: 2px solid #6c4a21;
+    border:2px solid #6c4a21;
     border-radius: 2px;
     padding: 2rem;
     text-align: center;
     background-color: transparent;
+
 }
 
-form img {
+form img{
     width: 200px;
     height: 200px;
     border-radius: 4px;
@@ -386,8 +410,7 @@ form img {
     object-fit: cover;
     align-content: center;
 }
-
-.update_profile form .inputBox .box {
+.update_profile form .inputBox .box{
     width: 100%;
     padding: 1.2rem 1.4rem;
     font-size: 1.3rem;
@@ -396,7 +419,7 @@ form img {
     background-color: transparent;
 }
 
-.btn, .option-btn {
+.btn, .option-btn{
     display: block;
     width: 100%;
     margin-top: 1rem;
@@ -409,68 +432,78 @@ form img {
     transition: all 0.3s ease;
 }
 
-.btn {
+.btn{
     background-color: #6c4a2165;
-    border: #6c4a2165;
+    border:#6c4a2165;
     color: #6c4a21;
     font-weight: 500;
 }
 
-.option-btn {
+.option-btn{
     color: #6c4a2182;
-    border: 2px solid #6c4a2182;
+    border: 2px solid  #6c4a2182;
     font-weight: 500;
 }
 
-.btn:hover {
+.btn:hover{
     background-color: #6c4a21;
     color: #faf2e8;
 }
 
-.option-btn:hover {
+.option-btn:hover{
     color: #6c4a21;
     border: 2px solid #6c4a21;
     font-weight: 550;
 }
 
-
-@media (max-width: 991px) {
-    html {
+/* media quries */
+@media(max-width:991px){
+    html{
         font-size: 55%;
     }
-    .home .text {
+    .home .text{
         font-size: 40px;
         padding: 4rem 2rem;
     }
-    .update_profile form .flex .inputBox {
+
+    .update_profile form .flex .inputBox{
         width: 100%;
     }
+
+
+
 }
 
-@media screen and (max-width: 450px) {
-    html {
+@media screen and (max-width:450px){
+    html{
         font-size: 50%;
     }
-    .home .text {
+
+    .home .text{
         font-size: 35px;
         padding: 2rem 2rem;
     }
-    .flex {
+
+    .flex{
         flex-flow: column;
         gap: 0;
         padding-top: 0.5rem;
     }
     .update_profile form img {
-        width: calc(100% - 20px);
+        width: calc(100% - 20px); 
     }
-    .update_profile form {
+
+    .update_profile form{
         margin-right: 1.5rem;
     }
+
 }
 
 @media screen and (max-width: 768px) {
-    .update_profile form {
+
+    .update_profile form{
         margin-left: auto;
-        margin-right: 1.5rem;
+        margin-right: 1.5rem
     }
+    
 }

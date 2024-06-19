@@ -6,9 +6,11 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
     <link rel="stylesheet" href="<?=ASSETS?>css/product.css">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
     <title>Products</title>
+    <link rel="shortcut icon" href="<?=ROOT?>/assets/images/logo.png" type="image/x-icon">
 </head>
 <body>
     <?php include 'admin_header.php';?>
@@ -23,12 +25,14 @@
                             </div>
                             <div class="table-container">
                                 <table id="productTable" class="product-display-table">
-                                    <thead>
+                                <thead>
                                         <tr>
                                             <th>Product Image</th>
                                             <th>Product ID</th>
-                                            <th>Product Name</th> 
+                                            <th>Product Name</th>
                                             <th>Product Price</th>
+                                            <th>Discount</th> <!-- New column -->
+                                            <th>Discounted Price</th> <!-- New column -->
                                             <th>Product Description</th>
                                             <th>Product Stocks</th>
                                             <th>Product Color</th>
@@ -38,40 +42,36 @@
                                         </tr>
                                     </thead>
                                     <tbody>
-                                       <?php foreach ($products as $product): ?>
-                                        <tr>
-                                            
-                                            <td>
-
-                                            <div class="image-gallery">
-                                            <?php 
-                                            // Check if 'image_paths' is not empty and split into an array
-                                            if (!empty($product['image_paths'])):
-                                                $imagePaths = explode(',', $product['image_paths']); // Split comma-separated paths
-                                                foreach ($imagePaths as $path): ?>
-                                                    <img src="../public/assets/images/<?= htmlspecialchars($path) ?>" height="100" alt="Product image">
-                                                <?php endforeach;
-                                            else: ?>
-                                                <!-- Placeholder or default image if no images are available -->
-                                                <img src="../public/assets/uploads/default.jpg" height="100" alt="No image available">
-                                            <?php endif; ?>
-                                        </div>
-                                            </td>
-                                            <td><?= $product['prod_id'] ?></td>
-                                            <td><?= $product['prod_name'] ?></td>
-                                            <td>&#8369; <?= number_format($product['prod_price'], 2) ?></td>
-                                            <td><?= $product['prod_description'] ?></td>
-                                            <td><?= $product['prod_stock'] ?></td>
-                                            <td><?= $product['prod_color'] ?></td>
-                                            <td><?= $product['prod_sizes'] ?></td>
-                                            <td><?= $product['categ_name'] ?></td>
-                                            <td>
-                                                <button type="button" class="btns edit button-update" ><i class="fas fa-edit"></i> Edit</button>
-                                                <button type="button"   class="btns delete button-delete"  ><i class="fas fa-trash"></i> Delete</button>
-                                            </td>
-                                        </tr>
-                                    <?php endforeach; ?>
-                                                                        
+                                        <?php foreach ($products as $product): ?>
+                                            <tr>
+                                                <td>
+                                                    <div class="image-gallery">
+                                                        <?php if (!empty($product['image_paths'])):
+                                                            $imagePaths = explode(',', $product['image_paths']);
+                                                            foreach ($imagePaths as $path): ?>
+                                                                <img src="../public/assets/images/<?= htmlspecialchars($path) ?>" height="100" alt="Product image">
+                                                            <?php endforeach;
+                                                        else: ?>
+                                                            <img src="../public/assets/uploads/default.jpg" height="100" alt="No image available">
+                                                        <?php endif; ?>
+                                                    </div>
+                                                </td>
+                                                <td><?= $product['prod_id'] ?></td>
+                                                <td><?= $product['prod_name'] ?></td>
+                                                <td>&#8369; <?= number_format($product['prod_price'], 2) ?></td>
+                                                <td><?= $product['discount_percent'] ?>%</td>
+                                                <td>&#8369; <?= number_format($product['prod_price'] * (1 - $product['discount_percent'] / 100), 2) ?></td> <!-- Display discounted price -->
+                                                <td><?= $product['prod_description'] ?></td>
+                                                <td><?= $product['prod_stock'] ?></td>
+                                                <td><?= $product['prod_color'] ?></td>
+                                                <td><?= $product['prod_sizes'] ?></td>
+                                                <td data-categ-id="<?= htmlspecialchars($product['categ_id']) ?>"><?= htmlspecialchars($product['categ_name']) ?></td>
+                                                <td>
+                                                    <button type="button" class="btns edit button-update"><i class="fas fa-edit"></i> Edit</button>
+                                                    <button type="button" class="btns delete button-delete"><i class="fas fa-trash"></i> Delete</button>
+                                                </td>
+                                            </tr>
+                                        <?php endforeach; ?>
                                     </tbody>
                                 </table>
                             </div>
@@ -86,151 +86,159 @@
                 </section>
                     
                 <div id="addModal" class="modal fade" tabindex="-1" aria-labelledby="modal-title" aria-hidden="true">
-
-                <div class="modal-dialog modal-lg">
-                <div class="modal-content" >
-                <div class="modal-header">
+                    <div class="modal-dialog modal-lg">
+                        <div class="modal-content">
+                            <div class="modal-header">
                                 <h1 class="modal-title fs-5" id="modal-title">Add Product</h1>
                                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                             </div>
                             <div class="modal-body">
                                 <div class="message"></div>
-                            
-                                    <div id="imageFields">
-                                        <div class="mb-3">
-                                            <label for="product_image" class="form-label">Product Image</label>
-                                            <input type="file" accept="image/png, image/jpeg, image/jpg" name="product_image[]" class="form-control form-control-lg fs-6" id="product_image" required>
-                                        </div>
-                                    </div>
-                                    <div id="moreImages"></div>
-                                    
-                                    <button type="button" class="btn btn-secondary" id="addImageBtn">Add Another Image</button>
+                                <div id="imageFields">
                                     <div class="mb-3">
-                                        <label for="product_name" class="form-label">Product Name</label>
-                                        <input type="text" class="form-control form-control-lg fs-6" name="product_name" id="product_name" placeholder="Product Name">
+                                        <label for="product_image" class="form-label">Product Image</label>
+                                        <input type="file" accept="image/png, image/jpeg, image/jpg" name="product_image[]" class="form-control form-control-lg fs-6" id="product_image" required>
                                     </div>
-                                    <div class="mb-3">
-                                        <label for="product_price" class="form-label">Price</label>
-                                        <input type="text" class="form-control form-control-lg fs-6" name="product_price" id="product_price" placeholder="Price">
-                                    </div>
-                                    <div class="mb-3">
-                                        <label for="product_stocks" class="form-label">Stocks</label>
-                                        <input type="number" class="form-control form-control-lg fs-6" name="product_stocks" id="product_stocks" placeholder="Stocks">
-                                    </div>
-                                    <div class="mb-3">
-                                        <label for="product_sizes" class="form-label">Sizes</label>
-                                        <select class="form-select form-select-lg fs-6" name="product_sizes" id="product_sizes">
-                                            <option value="S">Small</option>
-                                            <option value="M">Medium</option>
-                                            <option value="L">Large</option>
-                                        </select>
-                                    </div>
-                                    <div class="mb-3">
-                                        <label for="product_colors" class="form-label">Colors</label>
-                                        <select class="form-select form-select-lg fs-6" name="product_colors" id="product_colors">
-                                            <option value="Red">Red</option>
-                                            <option value="Blue">Blue</option>
-                                            <option value="Green">Green</option>
-                                        </select>
-                                    </div>
-                                    <div class="mb-3">
-                                        <label for="product_category" class="form-label">Category</label>
-                                        <select class="form-select form-select-lg fs-6" name="product_category" id="product_category">
-                                            <option value="1">Electronics</option>
-                                            <option value="2">Clothing</option>
-                                            <option value="3">Books</option>
-                                        </select>
-                                    </div>
-                                    <div class="mb-3">
-                                        <label for="product_description" class="form-label">Description</label>
-                                        <textarea class="form-control form-control-lg fs-6" name="product_description" id="product_description" rows="3"></textarea>
-                                    </div>
+                                </div>
+                                <div id="moreImages"></div>
+                                <button type="button" class="btn btn-secondary" id="addImageBtn">Add Another Image</button>
+                                <div class="mb-3">
+                                    <label for="product_name" class="form-label">Product Name</label>
+                                    <input type="text" class="form-control form-control-lg fs-6" name="product_name" id="product_name" placeholder="Product Name">
+                                </div>
+                                <div class="mb-3">
+                                    <label for="product_price" class="form-label">Price</label>
+                                    <input type="text" class="form-control form-control-lg fs-6" name="product_price" id="product_price" placeholder="Price">
+                                </div>
+                                <div class="mb-3">
+                                    <label for="product_stocks" class="form-label">Stocks</label>
+                                    <input type="number" class="form-control form-control-lg fs-6" name="product_stocks" id="product_stocks" placeholder="Stocks">
+                                </div>
+                                <div class="mb-3">
+                                    <label for="product_sizes" class="form-label">Sizes</label>
+                                    <select class="form-select form-select-lg fs-6" name="product_sizes" id="product_sizes">
+                                        <option value="S">Small</option>
+                                        <option value="M">Medium</option>
+                                        <option value="L">Large</option>
+                                    </select>
+                                </div>
+                                <div class="mb-3">
+                                    <label for="product_colors" class="form-label">Colors</label>
+                                    <select class="form-select form-select-lg fs-6" name="product_colors" id="product_colors">
+                                    <option value="Red">Red</option>
+                                        <option value="Blue">Blue</option>
+                                        <option value="Green">Green</option>
+                                        <option value="Yellow">Yellow</option>
+                                        <option value="Black">Black</option>
+                                        <option value="White">White</option>
+                                        <option value="Orange">Orange</option>
+                                        <option value="Purple">Purple</option>
+                                        <option value="Brown">Brown</option>
+                                        <option value="Pink">Pink</option>
+                                        <option value="Gray">Gray</option>
+                                        
+                                    </select>
+                                </div>
+                                <div class="mb-3">
+                                <label for="product_category" class="form-label">Category</label>
+                                    <select class="form-select form-select-lg fs-6" name="product_category" id="product_category">
+                                        <?php foreach ($data['category'] as $category): ?>
+                                            <option value="<?= htmlspecialchars($category['categ_id']) ?>"><?= htmlspecialchars($category['categ_name']) ?></option>
+                                        <?php endforeach; ?>
+                                    </select>
+                                </div>
+                                <div class="mb-3">
+                                    <label for="product_description" class="form-label">Description</label>
+                                    <textarea class="form-control form-control-lg fs-6" name="product_description" id="product_description" rows="3"></textarea>
+                                </div>
+                                <div class="mb-3">
+                                    <label for="product_discount" class="form-label">Discount (%)</label>
+                                    <input type="text" class="form-control form-control-lg fs-6" name="product_discount" id="product_discount" placeholder="Discount Percentage">
+                                </div>
                             </div>
                             <div class="modal-footer">
                                 <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
                                 <button type="button" id="add_product" name="add_product" class="btn btn-dark" value="add product">Add Product</button>
                             </div>
-                        
-                </div>
-                </div>
+                        </div>
+                    </div>
                 </div>
 
                
 
 
-                 <!-- Update Modal -->
-      
-                 <div id="updateModal" class="modal fade" tabindex="-1" aria-labelledby="modal-title" aria-hidden="true">
-
+                <div id="updateModal" class="modal fade" tabindex="-1" aria-labelledby="modal-title" aria-hidden="true">
                     <div class="modal-dialog modal-lg">
-                        <div class="modal-content" >
+                        <div class="modal-content">
                             <div class="modal-header">
                                 <h1 class="modal-title fs-5" id="modal-title">Update Product</h1>
                                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                             </div>
-                                <div class="modal-body">
-                                    <div class="message"></div>
-                                    <input type="hidden" name="update_id" id="update_id">
-                                    <input type="hidden" name="old_image" id="old_image">
-                                    <input type="hidden" name="current_stocks" id="current_stocks">
-                                        <div id="imageFields">
-                                            <div class="mb-3">
-                                                <label for="product_image" class="form-label">Product Image (Up to 3 images)</label>
-                                                <input type="file" accept="image/png, image/jpeg, image/jpg" name="product_image[]" class="form-control form-control-lg fs-6" id="update_image" required>
-                                            </div>
-                                        </div>
-                                        <div id="moreImages"></div>
-                                        
-                                        <button type="button" class="btn btn-secondary" id="addImageBtn">Add Another Image</button>
-                                        <div class="mb-3">
-                                            <label for="product_name" class="form-label">Product Name</label>
-                                            <input type="text" class="form-control form-control-lg fs-6" name="update_name" id="update_name" placeholder="Product Name">
-                                        </div>
-                                        <div class="mb-3">
-                                            <label for="product_price" class="form-label">Price</label>
-                                            <input type="text" class="form-control form-control-lg fs-6" name="update_price" id="update_price" placeholder="Price">
-                                        </div>
-                                        <div class="mb-3">
-                                            <label for="product_stocks" class="form-label">Stocks</label>
-                                            <input type="number" class="form-control form-control-lg fs-6" name="update_stocks" id="update_stocks" placeholder="Stocks">
-                                        </div>
-                                        <div class="mb-3">
-                                            <label for="product_sizes" class="form-label">Sizes</label>
-                                            <select class="form-select form-select-lg fs-6" name="update_sizes" id="update_sizes">
-                                                <option value="S">Small</option>
-                                                <option value="M">Medium</option>
-                                                <option value="L">Large</option>
-                                            </select>
-                                        </div>
-                                        <div class="mb-3">
-                                            <label for="product_colors" class="form-label">Colors</label>
-                                            <select class="form-select form-select-lg fs-6" name="update_colors" id="update_colors">
-                                                <option value="Red">Red</option>
-                                                <option value="Blue">Blue</option>
-                                                <option value="Green">Green</option>
-                                            </select>
-                                        </div>
-                                        <div class="mb-3">
-                                            <label for="product_category" class="form-label">Category</label>
-                                            <select class="form-select form-select-lg fs-6" name="update_category" id="update_category">
-                                                <option value="1">Electronics</option>
-                                                <option value="2">Clothing</option>
-                                                <option value="3">Books</option>
-                                            </select>
-                                        </div>
-                                        <div class="mb-3">
-                                            <label for="product_description" class="form-label">Description</label>
-                                            <textarea class="form-control form-control-lg fs-6" name="update_description" id="update_description" rows="3"></textarea>
-                                        </div>
+                            <div class="modal-body">
+                                <div class="message"></div>
+                                <input type="hidden" name="update_id" id="update_id">
+                                <input type="hidden" name="old_image" id="old_image">
+                                <input type="hidden" name="current_stocks" id="current_stocks">
+                                <div id="imageFields">
+                                    <div class="mb-3">
+                                        <label for="product_image" class="form-label">Product Image (Up to 3 images)</label>
+                                        <input type="file" accept="image/png, image/jpeg, image/jpg" name="product_image[]" class="form-control form-control-lg fs-6" id="update_image" required>
+                                    </div>
                                 </div>
+                                <div id="moreImages"></div>
+                                <button type="button" class="btn btn-secondary" id="addImageBtn">Add Another Image</button>
+                                <div class="mb-3">
+                                    <label for="product_name" class="form-label">Product Name</label>
+                                    <input type="text" class="form-control form-control-lg fs-6" name="update_name" id="update_name" placeholder="Product Name">
+                                </div>
+                                <div class="mb-3">
+                                    <label for="product_price" class="form-label">Price</label>
+                                    <input type="text" class="form-control form-control-lg fs-6" name="update_price" id="update_price" placeholder="Price">
+                                </div>
+                                <div class="mb-3">
+                                    <label for="product_stocks" class="form-label">Stocks</label>
+                                    <input type="number" class="form-control form-control-lg fs-6" name="update_stocks" id="update_stocks" placeholder="Stocks">
+                                </div>
+                                <div class="mb-3">
+                                    <label for="product_sizes" class="form-label">Sizes</label>
+                                    <select class="form-select form-select-lg fs-6" name="update_sizes" id="update_sizes">
+                                        <option value="S">Small</option>
+                                        <option value="M">Medium</option>
+                                        <option value="L">Large</option>
+                                    </select>
+                                </div>
+                                <div class="mb-3">
+                                    <label for="product_colors" class="form-label">Colors</label>
+                                    <select class="form-select form-select-lg fs-6" name="update_colors" id="update_colors">
+                                        <option value="Red">Red</option>
+                                        <option value="Blue">Blue</option>
+                                        <option value="Green">Green</option>
+                                    </select>
+                                </div>
+                                <div class="mb-3">
+                                    <label for="update_category" class="form-label">Category</label>
+                                    <select class="form-select form-select-lg fs-6" name="update_category" id="update_category">
+                                        <?php foreach ($data['category'] as $category): ?>
+                                            <option value="<?= htmlspecialchars($category['categ_id']) ?>"><?= htmlspecialchars($category['categ_name']) ?></option>
+                                        <?php endforeach; ?>
+                                    </select>
+                                </div>
+                                <div class="mb-3">
+                                    <label for="product_discount" class="form-label">Discount Percentage</label>
+                                    <input type="number" class="form-control form-control-lg fs-6" name="update_discount" id="update_discount" placeholder="Discount Percentage">
+                                </div>
+                                <div class="mb-3">
+                                    <label for="product_description" class="form-label">Description</label>
+                                    <textarea class="form-control form-control-lg fs-6" name="update_description" id="update_description" rows="3"></textarea>
+                                </div>
+                            </div>
                             <div class="modal-footer">
                                 <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
                                 <button type="button" id="update_product" name="update_product" class="btn btn-dark" value="add product">Update Product</button>
                             </div>
-        
-                            </div>
                         </div>
                     </div>
+                </div>
 
     <!-- Delete Modal -->
     <div class="modal fade" id="deleteModal" tabindex="-1" aria-labelledby="deleteModalLabel" aria-hidden="true">
