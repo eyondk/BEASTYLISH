@@ -12,7 +12,7 @@
             <li><a href="<?=ROOT?>/home" class="link">Home</a></li>
             <li><a href="<?=ROOT?>/shop" class="link">SHOP</a></li>
             <li><a href="<?=ROOT?>/about" class="link">About</a></li>
-            <li><a class="logo">BEASTYLISH</a></li>
+            <li><a  href="<?=ROOT?>/home" class="logo">BEASTYLISH</a></li>
             <li><a href="<?=ROOT?>/account" class="link">Account</a></li>
             <li><a href="<?=ROOT?>/cart" class="link">Cart</a></li>
             <li><a href="<?=ROOT?>/contact" class="link">Contact</a></li>
@@ -22,17 +22,14 @@
         </div>
     </nav>
 
-
     <script>
-        let menuList = document.getElementById("menuList")
+        let menuList = document.getElementById("menuList");
         menuList.style.maxHeight = "0px";
 
         function toggleMenu(){
-            if(menuList.style.maxHeight == "0px")
-            {
+            if(menuList.style.maxHeight == "0px") {
                 menuList.style.maxHeight = "300px";
-            }
-            else{
+            } else {
                 menuList.style.maxHeight = "0px";
             }
         }
