@@ -170,12 +170,13 @@ class adminAccount extends Controller
         return '/assets/uploaded_img/' . $imageName;
     }
 
-    public function logout() {
+     public function logoutAdmin() {
         $_SESSION = array();
         session_destroy();
-        header("Location:" . ROOT . "/login?logout=success");
+        header("Location:" .ROOT. "/login?logout=success");
         exit();
     }
+
     
 }
 
