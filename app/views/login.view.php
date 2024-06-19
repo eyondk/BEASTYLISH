@@ -45,12 +45,48 @@
             user-select: none;
             color: #6c4a21;
         }
+        .btns {
+            display: flex;
+            justify-content: space-between; /* Align items with space between them */
+            margin-top: 1rem; /* Adjust margin between buttons */
+        }
+
+        .btn-back {
+            display: block;
+            width: 48%; /* Adjust width of the buttons */
+            border-radius: 4px;
+            font-size: 2rem;
+            padding: 1.5rem 3rem;
+            cursor: pointer;
+            color: #faf2e8;
+            background-color: #6c4a2199;
+            transition: background-color 0.5s, color 0.5s;
+        }
+
+        .btn-back:hover {
+            background-color: #6c4a21;
+        }
+
+        .btn-reset {
+            display: block;
+            width: 48%; /* Adjust width of the buttons */
+            border-radius: 4px;
+            font-size: 2rem;
+            padding: 1.5rem 3rem;
+            cursor: pointer;
+            color: #faf2e8;
+            background-color: #6c4a21;
+            transition: background-color 0.5s, color 0.5s;
+        }
+
+        .btn-reset:hover {
+            background-color: #a47133;
+        }
+
+
         </style>
 </head>
 <body>
-
-
-
 
 <section class="form-container" id="loginform">
     <form action="<?= ROOT ?>/login/authenticate" enctype="multipart/form-data" method="POST">
@@ -74,26 +110,25 @@
         </div>
 
         <input type="submit" value="Login" class="btn" name="submit">
+        <p style="font-size: small; margin-bottom: 1rem;">By logging in, you agree to our <a href="<?= ROOT ?>/policy" style="font-size: small;  margin-bottom: 1rem;">Terms and Conditions</a>.</p>
+
         <p>Don't have an account? <a href="<?= ROOT ?>/signup">Sign Up now</a></p>
     </form>
 </section>
-
 
 <section class="form-container" id="resetpass" style="display: none;">
     <form action="<?= ROOT ?>/login/requestReset" enctype="multipart/form-data" method="POST">
         <h3>RESET PASSWORD</h3>
         <h4>We will send you an email to reset your password</h4>
-        <?php if (isset($message)): ?>
-            <div class="message">
-                <span><?= $message ?></span>
-                <i class="fas fa-times" onclick="this.parentElement.remove();"></i>
-            </div>
-        <?php endif; ?>
         <input type="email" name="email" class="box" placeholder="EMAIL" required>
-        <input type="submit" value="Email Me" class="btn" name="submit">
+        <div class="btns">
+            <button type="button" id="btn-back" class="btn-back">Cancel</button>
+            <input type="submit" value="Email Me" class="btn-reset" name="submit">
+        </div>
     </form>
 </section>
 
-</body>
 <script src="<?=ROOT?>/assets/js/login.js"></script>
+
+</body>
 </html>
