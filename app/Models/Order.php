@@ -111,6 +111,44 @@ public function getOrderPending()
             return $data;
 }
 
+public function getOrderShip()
+{
+    $sql = "SELECT 
+                o.order_id, 
+                c.cus_fname || ' ' || c.cus_lname AS customer_name, 
+                c.cus_phonenum AS phone, 
+                c.cus_email AS email, 
+                a.add_street || ', ' || a.add_city || ', ' || a.add_province AS address, 
+                o.order_total, 
+                p.payment_method,
+                ol.orlog_created_at AS order_date, 
+                ps.pstat_name AS payment_status,
+                os.orderstat_name AS order_status
+            FROM 
+                orders o        
+            JOIN 
+                customer c ON o.cus_id = c.cus_id
+            LEFT JOIN 
+                address a ON a.cus_id = c.cus_id
+            JOIN 
+                payment p ON o.payment_id = p.payment_id
+            JOIN 
+                payment_status ps ON o.pstat_id = ps.pstat_id
+            JOIN 
+                order_status os ON o.orderstat_id = os.orderstat_id
+            JOIN 
+                order_log ol ON o.order_id = ol.order_id
+            WHERE 
+                o.orderstat_id = 2";
+
+            $stmt = $this->conn->prepare($sql);
+            $stmt->execute();
+            $data = $stmt->fetchAll(PDO::FETCH_ASSOC);
+
+            return $data;
+}
+
+
 
 public function getOrderOnDelivery()
 {
@@ -129,7 +167,7 @@ public function getOrderOnDelivery()
                 orders o        
             JOIN 
                 customer c ON o.cus_id = c.cus_id
-            JOIN 
+            LEFT JOIN 
                 address a ON a.cus_id = c.cus_id
             JOIN 
                 payment p ON o.payment_id = p.payment_id
@@ -140,7 +178,7 @@ public function getOrderOnDelivery()
             JOIN 
                 order_log ol ON o.order_id = ol.order_id
             WHERE 
-                o.orderstat_id = 2";
+                o.orderstat_id = 3";
 
             $stmt = $this->conn->prepare($sql);
             $stmt->execute();
@@ -166,44 +204,7 @@ public function getOrderComplete()
                 orders o        
             JOIN 
                 customer c ON o.cus_id = c.cus_id
-            JOIN 
-                address a ON a.cus_id = c.cus_id
-            JOIN 
-                payment p ON o.payment_id = p.payment_id
-            JOIN 
-                payment_status ps ON o.pstat_id = ps.pstat_id
-            JOIN 
-                order_status os ON o.orderstat_id = os.orderstat_id
-            JOIN 
-                order_log ol ON o.order_id = ol.order_id
-            WHERE 
-                o.orderstat_id = 3";
-
-            $stmt = $this->conn->prepare($sql);
-            $stmt->execute();
-            $data = $stmt->fetchAll(PDO::FETCH_ASSOC);
-
-            return $data;
-}
-
-public function getOrderCancelled()
-{
-    $sql = "SELECT 
-                o.order_id, 
-                c.cus_fname || ' ' || c.cus_lname AS customer_name, 
-                c.cus_phonenum AS phone, 
-                c.cus_email AS email, 
-                a.add_street || ', ' || a.add_city || ', ' || a.add_province AS address, 
-                o.order_total, 
-                p.payment_method,
-                ol.orlog_created_at AS order_date, 
-                ps.pstat_name AS payment_status,
-                os.orderstat_name AS order_status
-            FROM 
-                orders o        
-            JOIN 
-                customer c ON o.cus_id = c.cus_id
-            JOIN 
+            LEFT JOIN 
                 address a ON a.cus_id = c.cus_id
             JOIN 
                 payment p ON o.payment_id = p.payment_id
@@ -222,6 +223,44 @@ public function getOrderCancelled()
 
             return $data;
 }
+
+public function getCancelled()
+{
+    $sql = "SELECT 
+                o.order_id, 
+                c.cus_fname || ' ' || c.cus_lname AS customer_name, 
+                c.cus_phonenum AS phone, 
+                c.cus_email AS email, 
+                a.add_street || ', ' || a.add_city || ', ' || a.add_province AS address, 
+                o.order_total, 
+                p.payment_method,
+                ol.orlog_created_at AS order_date, 
+                ps.pstat_name AS payment_status,
+                os.orderstat_name AS order_status
+            FROM 
+                orders o        
+            JOIN 
+                customer c ON o.cus_id = c.cus_id
+            LEFT JOIN 
+                address a ON a.cus_id = c.cus_id
+            JOIN 
+                payment p ON o.payment_id = p.payment_id
+            JOIN 
+                payment_status ps ON o.pstat_id = ps.pstat_id
+            JOIN 
+                order_status os ON o.orderstat_id = os.orderstat_id
+            JOIN 
+                order_log ol ON o.order_id = ol.order_id
+            WHERE 
+                o.orderstat_id = 5";
+
+            $stmt = $this->conn->prepare($sql);
+            $stmt->execute();
+            $data = $stmt->fetchAll(PDO::FETCH_ASSOC);
+
+            return $data;
+}
+
 
 public function updateOrderStatus($data) {
 

@@ -4,7 +4,9 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
     <link rel="stylesheet" href="<?= ASSETS ?>css/orders.css">
+    <link rel="shortcut icon" href="<?=ROOT?>/assets/images/logo.png" type="image/x-icon">
     <title>Customer Details</title>
 </head>
 <body>
@@ -14,14 +16,12 @@
         <hr id="line" />
         <div class="container">
             <div class="product-display">
-                <div class="searchbar">
-                    <form action="" method="get">
-                        <button type="submit" id="search-btn" class="search"><i class="fa-solid fa-magnifying-glass"></i></button>
-                        <input type="search" name="" class="searchInput" placeholder="Search for Orders">
-                    </form>
+            <div class="searchbar">      
+                    <input type="search" id="searchInput" class="searchInput" placeholder="Search for Products">
+                    <button type="button" id="search-btn" class="search"><i class="fa-solid fa-magnifying-glass"></i></button> 
                 </div>
                 <div class="table-container">
-                    <table class="product-display-table">
+                    <table class="product-display-table" id="productTable">
                         <thead>
                             <tr>
                                 <th>CUSTOMER ID</th>

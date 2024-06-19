@@ -7,8 +7,10 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
     <link rel="stylesheet" href="<?=ASSETS?>css/orders.css">
-    <title>Document</title>
+    <link rel="shortcut icon" href="<?=ROOT?>/assets/images/logo.png" type="image/x-icon">
+    <title>Orders Pending</title>
 </head>
 <body>
     <?php include 'admin_header.php';?>
@@ -55,7 +57,7 @@
                                             data-payment-method="<?= $order['payment_method'] ?>" 
                                             data-payment-status="<?= $order['payment_status'] ?>">
                                         <option value="Pending" <?= $order['order_status'] == 'Pending' ? 'selected' : '' ?>>Pending</option>
-                                        <option value="On Delivery" <?= $order['order_status'] == 'On Delivery' ? 'selected' : '' ?>>On Delivery</option>Wz`
+                                        <option value="On Delivery" <?= $order['order_status'] == 'On Ship' ? 'selected' : '' ?>>On Ship</option>Wz`
                                         <option value="Cancelled" <?= $order['order_status'] == 'Cancelled' ? 'selected' : '' ?>>Cancelled</option>
                                         </select>
                                         </td>

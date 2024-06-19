@@ -8,13 +8,17 @@ class OrderCancelled extends Controller
         $order = new Order;
 
        
-       
+        if (!isset($_SESSION['admin_id']) || $_SESSION['admin_id'] === null) {
+            // Redirect to the login page
+            header('Location: login'); // Adjust the path as needed for your application
+            exit();
+        }
        
 
        
-        $orders = $order->getOrderCancelled();
+        $orders = $order->getCancelled();
         $data['orders'] = $orders;
-        $this->view('admin/rderComplete', $data);
+        $this->view('admin/OrderCancelled', $data);
     }
 
     

@@ -1,40 +1,25 @@
 <?php
 
+/**
+ *  home class
+ */
+
 class Home extends Controller
-{
 
+{  
+    
     public function index()
-    {
+    {   
+        if (!isset($_SESSION['user_id']) || $_SESSION['user_id'] === null) {
+            // Redirect to the login page
+            header('Location: ' . ROOT . 'login'); // Adjust the path as needed for your application
+            exit();
+        }
+        $userId=$_SESSION['user_id'];
 
-        $dash = new Dashboard;
-
-        $total_sales_result = $dash->getTotalSales();
-        $total_revenue_result = $dash->getTotalRevenue();
-        $today_sales_result = $dash->getTodaySales();
-        $today_revenue_result = $dash->getTodayRevenue();
-
-       
-        $monthly_sales_result = $dash->getMonthlyTotalSales();
-        $monthly_revenue_result = $dash->getMonthlyTotalRevenue();
-        $weekly_sales = $dash->getWeeklySales();
-        $weekly_revenue = $dash->getWeeklyRevenue();
-        $topproducts = $dash->getTopProducts(10);
-       
-
-        $data['top_products'] = $topproducts;
-        $data['weekly_sales'] = $weekly_sales;
-        $data['weekly_revenue'] = $weekly_revenue;
-        $data['monthly_sales'] = $monthly_sales_result;
-        $data['monthly_revenue'] = $monthly_revenue_result;
-        $data['total_sales'] = $total_sales_result['total_sales'];
-        $data['total_revenue'] = $total_revenue_result['total_revenue'];
-        $data['today_sales'] = $today_sales_result['today_sales'];
-        $data['today_revenue'] = $today_revenue_result['today_revenue'];
-
-       
+        $product = new UserProduct();
+        $products = $product->get_latest_products();
         
-        $this->view("admin/home",$data);
-
-    }
-}       
-
+        $this->view('customer/home', ['products' => $products]);
+    }   
+}

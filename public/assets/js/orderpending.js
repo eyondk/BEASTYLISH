@@ -1,9 +1,10 @@
 $(document).ready(function () {
     const statusMap = {
         "Pending": 1,
-        "On Delivery": 2,
-        "Completed": 3,
-        "Cancelled": 4
+        "On Ship": 2,
+        "On Delivery": 3,
+        "Completed": 4,
+        "Cancelled": 5
     };
     $('select[name="order_status"]').on('change', function () {
         var $selectElement = $(this);

@@ -1,21 +1,17 @@
-// $(document).ready(function() {
-//     $('.view-details').click(function(e) {
-//         e.preventDefault();
-//         var cusId = $(this).data('cus-id'); // Assuming you have data-cus-id attribute on your element
+$(document).ready(function() {
+        $('#search-btn').click(function() {
+        var searchTerm = $('#searchInput').val().toLowerCase();
+        
+        $('#productTable tbody tr').each(function() {
+            var row = $(this);
+            var allText = row.text().toLowerCase(); // Get all text from the row and convert to lower case
 
-//         $.ajax({
-//             url: 'CustomerDetails/index',
-//             type: 'POST',
-//             data: { cus_id: cusId },
-//             success: function(response) {
-                
-//             console.log(response);
-                
-//             },
-//             error: function(jqXHR, textStatus, errorThrown) {
-//                 console.error('Error:', textStatus, errorThrown);
-//                 alert('Error loading customer details.');
-//             }
-//         });
-//     });
-// });
+            if (allText.indexOf(searchTerm) !== -1) {
+                row.show(); // Show row if it contains the search term
+            } else {
+                row.hide(); // Hide row if it does not contain the search term
+            }
+        });
+});
+});
+

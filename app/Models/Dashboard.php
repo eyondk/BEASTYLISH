@@ -14,7 +14,7 @@ class Dashboard extends Model
     }
     
     public function getTotalRevenue() {
-        $sql = "SELECT SUM(oi.orderi_qty * p.prod_price) AS total_revenue, SUM(oi.orderi_qty) AS total_qty
+        $sql = "SELECT COALESCE(SUM(oi.orderi_qty * p.prod_price), 0) AS total_revenue, COALESCE(SUM(oi.orderi_qty), 0) AS total_qty
                 FROM orders o
                 JOIN order_log ol ON o.order_id = ol.order_id
                 JOIN order_item oi ON o.order_id = oi.order_id
