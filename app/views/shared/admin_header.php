@@ -4,9 +4,10 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="<?= ASSETS ?>css/admin.css">
+    <link rel="stylesheet" href="<?= ROOT ?>/assets/css/admin.css">
+    <link rel="stylesheet" href="<?=ROOT?>/assets/css/logoutadmin.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
-    <link rel="shortcut icon" href="img/Beastylish-favicon.png" type="image/x-icon">
+    <link rel="shortcut icon" href="images/logo.png" type="image/x-icon">
     <title>Admin Page</title>
 </head>
 <body>
@@ -69,13 +70,13 @@
 
             <div class="bottom-content">
                 <li>
-                    <a href="admin_update_profile.php">
+                    <a href="<?=ROOT?>/adminAccount">
                         <i class='fas fa-user icon'></i>
                         <span class="text nav-text">ACCOUNT</span>
                     </a>
                 </li>
                 <li class="logout">
-                    <a href="logout.php">
+                    <a href="#" id="logout-link">
                         <i class='fas fa-sign-out icon'></i>
                         <span class="text nav-text">LOG OUT</span>
                     </a>
@@ -84,6 +85,33 @@
         </div>
     </nav>
 
+
+  <!-- logout modal -->
+  <div id="logoutModal" class="modal" style="display: none;">
+        <div class="modal-content">
+            <form action="<?= ROOT ?>/AdminAccount/logoutAdmin" method="post">
+                <div class="cancel-container">
+                    <div class="cancel">
+                        <h3>LOG OUT</h3>
+                        <h4>Are you sure you want to logout?</h4>
+                    </div>
+                    <div class="btns">
+                        <input type="button" class="back" value="CANCEL" onclick="closeModal()">
+                        <input type="submit" class="logoutbtn" value="YES, LOG OUT">
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+
     <script src="<?= ROOT ?>/assets/js/admin.js"></script>
-</body>
-</html>
+    <script>
+        document.getElementById('logout-link').addEventListener('click', function(event) {
+            event.preventDefault();
+            document.getElementById('logoutModal').style.display = 'block';
+        });
+
+        function closeModal() {
+            document.getElementById('logoutModal').style.display = 'none';
+        }
+    </script>
