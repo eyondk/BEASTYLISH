@@ -41,35 +41,36 @@ class Customer {
     // public function getByToken($token) {
     //     return $this->first(['CUS_RESETTOKEN' => $token]);
     // }
-    public function getByToken($token) {
-                echo "Looking for token: " . htmlspecialchars($token) . "<br>";
 
-        try {
-            $conn = $this->connect();
-            $stmt = $conn->prepare("
-                SELECT *
-                FROM {$this->table}
-                WHERE CUS_RESETTOKEN = :token
-                LIMIT 1
-            ");
-            $stmt->bindParam(':token', $token, PDO::PARAM_STR);
-            $stmt->execute();
-            $customer = $stmt->fetch(PDO::FETCH_ASSOC);
+
+    public function getByToken($token)
+{
+    echo "Looking for token: " . htmlspecialchars($token) . "<br>";
     
-            if ($customer) {
-                echo "Token found: " . htmlspecialchars($customer['CUS_RESETTOKEN']) . "<br>";
-                echo "Expiry: " . htmlspecialchars($customer['CUS_RESETEXPIRED']) . "<br>";
-            } else {
-                echo "Token not found or invalid.<br>";
-            }
-    
-            return $customer;
-        } catch (PDOException $e) {
-            // Log the error or handle it as needed
-            error_log("Database error: " . $e->getMessage());
-            return false;
-        }
+    try {
+        $conn = $this->connect();
+        $stmt = $conn->prepare("
+            SELECT *
+            FROM {$this->table}
+            WHERE CUS_RESETTOKEN = :token
+            LIMIT 1
+        ");
+        $stmt->bindParam(':token', $token, PDO::PARAM_STR);
+        $stmt->execute();
+        $result = $stmt->fetch(PDO::FETCH_ASSOC);
+        
+        // Debugging output
+        echo "Query result: ";
+        print_r($result);
+        
+        return $result;
+    } catch (PDOException $e) {
+        error_log("Database error: " . $e->getMessage());
+        return false;
     }
+}
+
+    
     
     // public function getByToken($token) {
     //     // Debug output to check the input token
@@ -106,27 +107,21 @@ class Customer {
             'CUS_RESETTOKEN' => $resetToken,
             'CUS_RESETEXPIRED' => $resetExpiry
         ];
-        $result = $this->update($userId, $data, 'CUS_ID');
-        if ($result) {
-            echo "Reset token and expiry updated successfully.<br>";
-        } else {
-            echo "Failed to update reset token and expiry.<br>";
-        }
-        return $result;
+        return $this->update($userId, $data, 'CUS_ID');
+    }
+
+    public function updatePassword($userId, $passwordHash, $salt) {
+        $data = [
+            'CUS_PASSWORDHASH' => $passwordHash,
+            'CUS_PASSWORDSALT' => $salt,
+            'CUS_RESETTOKEN' => null,
+            'CUS_RESETEXPIRED' => null
+        ];
+        return $this->update($userId, $data, 'CUS_ID');
     }
     
     
 
-    public function updatePassword($userId, $passwordHash, $salt) {
-        $data = [
-            'CUS_PASSWORD' => $passwordHash,
-            'CUS_SALT' => $salt,
-            'CUS_RESETTOKEN' => null,
-            'CUS_RESETEXPIRED' => null
-        ];
-        return $this->update($userId, $data, 'cus_id');
-    }
-    
 
     public function getByCustomerId($cus_id) {
         // Ensure the method uses the correct column names
