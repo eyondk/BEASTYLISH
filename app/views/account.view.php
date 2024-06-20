@@ -277,7 +277,7 @@
                 <h3>Customs, Duties and Taxes</h3>
                 <p>Beastylish is not responsible for any customs and taxes applied to your order. All fees imposed during or after shipping are the responsibility of the customer (tariffs, taxes, etc.).</p>
                 <h3>Damaged Items in Transport</h3>
-                <p>If there is any damage to the packaging on delivery, contact us immediately at beatrice061599@gmail.com or through our website.</p>
+                <p>If there is any damage to the packaging on delivery, <a href="<?=ROOT?>/contact" style="font-weight:600;">contact us</a> immediately.</p>
             
             </div>
 
