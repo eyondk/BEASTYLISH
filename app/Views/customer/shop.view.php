@@ -113,7 +113,7 @@
                              data-image="<?= htmlspecialchars($product['image_path']) ?>"
                              data-name="<?= htmlspecialchars($product['prod_name']) ?>"
                              data-discount="<?= intval($product['discount_percent']) ?>"
-                             data-stock="<?= intval($product['prod_stock']) ?>">
+                             data-stock="<?= intval($product['prod_stock']) ?>" data-size="<?= htmlspecialchars($product['prod_sizes']) ?>">
                              
                             <?php if ($product['discount_percent'] > 0): ?>
                                 <div class="sale-details" style="padding:0;   margin-bottom: -4.9rem;">
@@ -178,10 +178,7 @@
                     <div class="prod-det">
                         <p class="modal-description"></p>
                         <div class="content size">
-                            <form action="" method="post">
-                                <div class="size-select">
-                                    <p>Size:</p>
-                                    <!-- Add radio buttons for sizes here if needed -->
+                        <p>Size:<span class="modal-size"></span></p>
                                 </div>
                             
                                

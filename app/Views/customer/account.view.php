@@ -258,8 +258,35 @@
                 </div>
                 <!-- Add more FAQ items as needed -->
             </div>
+
+            <div id="policy" class="container" style="width: 100%; padding: 6rem;">            
+                <h2>No Refund Policy</h2>
+                <p>All sales are final. We do not offer refunds or exchanges for any products or services purchased through our Site. Please ensure that you review your order carefully before making a purchase.</p>
+                <p>The only exceptions to this policy are as required by law. If you receive a product that is defective or not as described, please contact us within 3 days of receipt, and we will address the issue in compliance with local consumer protection laws.</p>
+                
+
+                <h2>Delivery Policy</h2>
+                <p>Following are the terms and conditions that constitute our Delivery Policy.</p>
+                <h3>Domestic Shipping Policy</h3>
+                <p>Shipment processing time: All orders are processed within 2-3 business days. Orders are not shipped or delivered on weekends or holidays.</p>
+                <p>If we are experiencing a high volume of orders, shipments may be delayed by a few days. Please allow additional days in transit for delivery. If there will be a significant delay in shipment of your order, we will contact you via email or phonenumber.</p>
+                <h3>Shipping rates</h3>
+                <p>Shipping charges for your order will be calculated and displayed at checkout.</p>
+                <h3>Order tracking</h3>
+                <p>You can track your orders by viewing your orders in the order section of your account.</p>
+                <h3>Customs, Duties and Taxes</h3>
+                <p>Beastylish is not responsible for any customs and taxes applied to your order. All fees imposed during or after shipping are the responsibility of the customer (tariffs, taxes, etc.).</p>
+                <h3>Damaged Items in Transport</h3>
+                <p>If there is any damage to the packaging on delivery, <a href="<?=ROOT?>/contact" style="font-weight:600;">contact us</a> immediately.</p>
+            
+            </div>
         </div>                
-   
+        
+
+
+           
+
+       
     
     
     </section>  

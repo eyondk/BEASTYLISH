@@ -46,6 +46,8 @@ class Login extends Controller {
                         $_SESSION['user_passwordhash'] = $customer->cus_passwordhash;
                         $_SESSION['user_passwordsalt'] = $customer->cus_passwordsalt;
                         $_SESSION['user_type'] = 'CUSTOMER';
+                        $_SESSION['timeout'] = 1800; // 1800 seconds = 30 minutes
+                        $_SESSION['last_activity'] = time();
 
 
                         if ($address) {

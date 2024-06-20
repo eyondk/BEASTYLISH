@@ -25,6 +25,29 @@ html {
     color: #6c4a21;
 }
 
+
+
+.error-messages {
+    background-color: #6c4a2174;
+    color: #721c24;
+    border: 1px solid #6c4a2118;
+    padding: 15px;
+    margin-top: 10px;
+    margin: auto;
+    border: 20px 20px;
+    width: 50%; /* Adjust width as needed */
+    text-align: center;
+    position: absolute;
+}
+
+ .error-messages p {
+    margin: 5px 0;
+    font-size: 20px;
+}
+
+/* Adjust as needed */
+
+
 .account {
     display: flex; 
     flex: 1; /* Grow to fill remaining height */
@@ -608,7 +631,7 @@ form h3{
 
 .title-faqs h2{
     font-size: 50px;
-    font-weight: 600;
+    font-weight: 400;
 }
 
 .title-faqs h3{
@@ -648,6 +671,23 @@ form h3{
 
 .plus-icon {
     font-size: 18px;
+}
+
+
+.faqSection .container h2{
+    font-size: xx-large;
+    font-weight: 400;
+}
+
+.faqSection .container p{
+    font-size:small;
+    padding: 8px;
+}
+
+.faqSection .container h3{
+    font-size:  medium;
+    padding-top: 10px;
+    font-weight: 600;
 }
 
 /* ======================  FAQ END  ============================= */

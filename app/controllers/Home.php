@@ -10,6 +10,23 @@ class Home extends Controller
     
     public function index()
     {   
+        if (isset($_SESSION['timeout']) && isset($_SESSION['last_activity'])) {
+            // Check if the session has timed out
+            if (time() - $_SESSION['last_activity'] > $_SESSION['timeout']) {
+             
+                session_unset(); // Unset all session variables
+                session_destroy(); // Destroy the session
+                header('Location: ' . ROOT . '/login');
+                exit();
+            } else {
+                // Update last activity time
+                $_SESSION['last_activity'] = time();
+            }
+        } else {
+            
+            $_SESSION['timeout'] = 1800; 
+            $_SESSION['last_activity'] = time();
+        }
         if (!isset($_SESSION['user_id']) || $_SESSION['user_id'] === null) {
             // Redirect to the login page
             header('Location: ' . ROOT . 'login'); // Adjust the path as needed for your application

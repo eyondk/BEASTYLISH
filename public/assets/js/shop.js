@@ -76,11 +76,13 @@ document.addEventListener("DOMContentLoaded", function () {
       const productDescription = this.getAttribute("data-description");
       const productDiscount = parseInt(this.getAttribute("data-discount"));
       productStock = parseInt(this.getAttribute("data-stock"));
+      const productSize = this.getAttribute("data-size");
 
       document.querySelector(".modal-product-img").src = "../public/assets/images/" + productImage;
       document.querySelector(".modal-product-name").textContent = productName;
       document.querySelector(".modal-description").textContent =
         productDescription;
+      document.querySelector(".modal-size").textContent = productSize;
       document.querySelector(
         ".modal-stock"
       ).textContent = `Available Stock: ${productStock}`;
