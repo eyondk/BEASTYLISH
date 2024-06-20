@@ -47,7 +47,8 @@ $(document).ready(function () {
             url: 'OrderOnDelivery/index',
             data: requestData,
             success: function (response) {
-                console.log(response);  
+                console.log(response);
+                location.reload();   
             },
             error: function () {
                 alert('Failed to update order status.');

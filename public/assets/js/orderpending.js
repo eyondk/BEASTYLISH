@@ -42,6 +42,7 @@ $(document).ready(function () {
             },
             success: function (response) {
                 console.log(response);
+                location.reload(); 
             },
             error: function () {
                 alert('Failed to update order status.');

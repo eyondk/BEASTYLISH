@@ -6,7 +6,8 @@ class Dashboard extends Model
     public function getTotalSales() {
         $sql = "SELECT COUNT(DISTINCT o.order_id) AS total_sales 
                 FROM orders o
-                JOIN order_log ol ON o.order_id = ol.order_id";
+                JOIN order_log ol ON o.order_id = ol.order_id
+                WHERE o.orderstat_id = 4";
         $stmt = $this->conn->prepare($sql);
         $stmt->execute();
         $result = $stmt->fetch(PDO::FETCH_ASSOC);
@@ -18,7 +19,8 @@ class Dashboard extends Model
                 FROM orders o
                 JOIN order_log ol ON o.order_id = ol.order_id
                 JOIN order_item oi ON o.order_id = oi.order_id
-                JOIN products p ON oi.prod_id = p.prod_id";
+                JOIN products p ON oi.prod_id = p.prod_id
+                WHERE o.orderstat_id = 4";
         $stmt = $this->conn->prepare($sql);
         $stmt->execute();
         $result = $stmt->fetch(PDO::FETCH_ASSOC);
@@ -29,7 +31,7 @@ class Dashboard extends Model
         $sql = "SELECT COUNT(DISTINCT o.order_id) AS today_sales 
                 FROM orders o
                 JOIN order_log ol ON o.order_id = ol.order_id
-                WHERE DATE(ol.orlog_created_at) = CURRENT_DATE";
+                WHERE DATE(ol.orlog_created_at) = CURRENT_DATE AND o.orderstat_id = 4";
         $stmt = $this->conn->prepare($sql);
         $stmt->execute();
         $result = $stmt->fetch(PDO::FETCH_ASSOC);
@@ -43,7 +45,7 @@ class Dashboard extends Model
                 JOIN order_log ol ON o.order_id = ol.order_id
                 JOIN order_item oi ON o.order_id = oi.order_id
                 JOIN products p ON oi.prod_id = p.prod_id
-                WHERE DATE(ol.orlog_created_at) = CURRENT_DATE";
+                WHERE DATE(ol.orlog_created_at) = CURRENT_DATE AND o.orderstat_id = 4";
     
         $stmt = $this->conn->prepare($sql);
         $stmt->execute();
@@ -59,6 +61,7 @@ class Dashboard extends Model
                     orders o
                 JOIN 
                     order_log ol ON o.order_id = ol.order_id
+                WHERE o.orderstat_id = 4
                 GROUP BY 
                     week
                 ORDER BY 
@@ -82,6 +85,7 @@ class Dashboard extends Model
                     order_item oi ON o.order_id = oi.order_id
                 JOIN 
                     products p ON oi.prod_id = p.prod_id
+                WHERE o.orderstat_id = 4
                 GROUP BY 
                     week
                 ORDER BY 
@@ -102,6 +106,7 @@ class Dashboard extends Model
                     orders o
                 JOIN 
                     order_log ol ON o.order_id = ol.order_id
+                WHERE o.orderstat_id = 4
                 GROUP BY 
                     month
                 ORDER BY 
@@ -125,6 +130,7 @@ class Dashboard extends Model
                     order_item oi ON o.order_id = oi.order_id
                 JOIN 
                     products p ON oi.prod_id = p.prod_id
+                WHERE o.orderstat_id = 4
                 GROUP BY 
                     month
                 ORDER BY 
@@ -151,6 +157,7 @@ class Dashboard extends Model
                         orders o ON oi.order_id = o.order_id
                     JOIN 
                         products pr ON oi.prod_id = pr.prod_id
+                    WHERE o.orderstat_id = 4
                     GROUP BY 
                         p.prod_id, p.prod_name
                     ORDER BY 

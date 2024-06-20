@@ -96,7 +96,7 @@
                         <th scope="row"><?= $index + 1 ?></th>
                         <td><?= htmlspecialchars($product['prod_name']) ?></td>
                         <td><?= htmlspecialchars($product['total_sales']) ?></td>
-                        <td><?= htmlspecialchars('$' . number_format($product['total_revenue'], 2)) ?></td>
+                        <td>&#x20B1;<?= htmlspecialchars(  number_format($product['total_revenue'], 2)) ?></td>
                     </tr>
                     <?php endforeach; ?>
                 <?php else: ?>

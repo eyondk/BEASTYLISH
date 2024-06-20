@@ -7,8 +7,8 @@ class Products extends Controller
     {
       
         if (!isset($_SESSION['admin_id']) || $_SESSION['admin_id'] === null) {
-            // Redirect to the login page
-            header('Location: login'); // Adjust the path as needed for your application
+         
+            header('Location: login'); 
             exit();
         }
         

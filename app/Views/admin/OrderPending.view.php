@@ -57,7 +57,7 @@
                                             data-payment-method="<?= $order['payment_method'] ?>" 
                                             data-payment-status="<?= $order['payment_status'] ?>">
                                         <option value="Pending" <?= $order['order_status'] == 'Pending' ? 'selected' : '' ?>>Pending</option>
-                                        <option value="On Delivery" <?= $order['order_status'] == 'On Ship' ? 'selected' : '' ?>>On Ship</option>Wz`
+                                        <option value="On Ship" <?= $order['order_status'] == 'On Ship' ? 'selected' : '' ?>>On Ship</option>Wz`
                                         <option value="Cancelled" <?= $order['order_status'] == 'Cancelled' ? 'selected' : '' ?>>Cancelled</option>
                                         </select>
                                         </td>
