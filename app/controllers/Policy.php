@@ -25,6 +25,6 @@ public function index(){
         header('Location: home/login'); // Adjust the path as needed for your application
         exit();
     }
-    $this->view("policy");
+    $this->view("customer/policy");
 }
 }
