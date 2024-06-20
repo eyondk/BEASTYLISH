@@ -40,6 +40,7 @@
         <input type="password" name="cpassword" class="box" placeholder="CONFIRM PASSWORD" required>
         <input type="file" name="image" id="files" class="box" style="display: flex;" required accept="image/jpg, image/jpeg, image/png">
         <input type="submit" value="Signup" class="btn" name="submit">
+        <p style="font-size: small; margin-bottom: 1rem;">By signing up, you agree to our <a href="<?= ROOT ?>policy" style="font-size: small;  margin-bottom: 1rem;">Terms and Conditions</a>.</p>
         <p>already have account? <a href="<?=ROOT?>/Login">login now</a></p>
     </form>
 </section>

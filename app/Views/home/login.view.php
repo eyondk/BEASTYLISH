@@ -74,6 +74,7 @@
         </div>
 
         <input type="submit" value="Login" class="btn" name="submit">
+        <p style="font-size: small; margin-bottom: 1rem;">By logging in, you agree to our <a href="<?= ROOT ?>policy" style="font-size: small;  margin-bottom: 1rem;">Terms and Conditions</a>.</p>
         <p>Don't have an account? <a href="<?= ROOT ?>/signup">Sign Up now</a></p>
     </form>
 </section>

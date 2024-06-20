@@ -457,11 +457,6 @@ form img{
 }
 
 
-/* Animation for modal */
-@keyframes fadeIn {
-    from {opacity: 0;}
-    to {opacity: 1;}
-}
 
 /* media quries */
 @media(max-width:991px){
