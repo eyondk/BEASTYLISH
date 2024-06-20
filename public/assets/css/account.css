@@ -631,7 +631,7 @@ form h3{
 
 .title-faqs h2{
     font-size: 50px;
-    font-weight: 600;
+    font-weight: 400;
 }
 
 .title-faqs h3{
@@ -671,6 +671,23 @@ form h3{
 
 .plus-icon {
     font-size: 18px;
+}
+
+
+.faqSection .container h2{
+    font-size: xx-large;
+    font-weight: 400;
+}
+
+.faqSection .container p{
+    font-size:small;
+    padding: 8px;
+}
+
+.faqSection .container h3{
+    font-size:  medium;
+    padding-top: 10px;
+    font-weight: 600;
 }
 
 /* ======================  FAQ END  ============================= */
