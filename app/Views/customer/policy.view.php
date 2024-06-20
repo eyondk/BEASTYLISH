@@ -5,8 +5,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Be'astylish Policy</title>
-    <link rel="shortcut icon" href="<?=ROOT?>/assets/images/logo.png" type="image/x-icon">
-    <link rel="stylesheet" href="<?=ROOT?>/assets/css/privacypolicy.css"> <!-- Link to your CSS file -->
+    <link rel="shortcut icon" href="<?=ROOT?>images/logo.png" type="image/x-icon">
+    <link rel="stylesheet" href="<?=ROOT?>css/privacypolicy.css"> <!-- Link to your CSS file -->
 </head>
 
 <body>
