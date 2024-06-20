@@ -214,40 +214,12 @@
 
 
         <div class="faqSection" style="display: none;">
-            <div id="policy" class="container" style="width: 100%; margin-top: -6rem; padding: 5rem;">
-                <h2>Privacy Policy</h2>
-                <p>Your privacy is important to us. It is Beastylish's policy to respect your privacy regarding any information we may collect from you across our website.</p>
-                <p>We only ask for personal information when we truly need it to provide a service to you. We collect it by fair and lawful means, with your knowledge and consent. We also let you know why we’re collecting it and how it will be used.</p>
-                <p>We only retain collected information for as long as necessary to provide you with your requested service. What data we store, we’ll protect within commercially acceptable means to prevent loss and theft, as well as unauthorized access, disclosure, copying, use or modification.</p>
-                <p>Your continued use of our website will be regarded as acceptance of our practices around privacy and personal information. If you have any questions about how we handle user data and personal information, feel free to contact us.</p>
-            
-                <h2>No Refund Policy</h2>
-                <p>All sales are final. We do not offer refunds or exchanges for any products or services purchased through our Site. Please ensure that you review your order carefully before making a purchase.</p>
-                <p>The only exceptions to this policy are as required by law. If you receive a product that is defective or not as described, please contact us within 3 days of receipt, and we will address the issue in compliance with local consumer protection laws.</p>
-                
-
-                <h2>Delivery Policy</h2>
-                <p>Following are the terms and conditions that constitute our Delivery Policy.</p>
-                <h3>Domestic Shipping Policy</h3>
-                <p>Shipment processing time: All orders are processed within 2-3 business days. Orders are not shipped or delivered on weekends or holidays.</p>
-                <p>If we are experiencing a high volume of orders, shipments may be delayed by a few days. Please allow additional days in transit for delivery. If there will be a significant delay in shipment of your order, we will contact you via email or phonenumber.</p>
-                <h3>Shipping rates</h3>
-                <p>Shipping charges for your order will be calculated and displayed at checkout.</p>
-                <h3>Order tracking</h3>
-                <p>You can track your orders by viewing your orders in the order section of your account.</p>
-                <h3>Customs, Duties and Taxes</h3>
-                <p>Beastylish is not responsible for any customs and taxes applied to your order. All fees imposed during or after shipping are the responsibility of the customer (tariffs, taxes, etc.).</p>
-                <h3>Damaged Items in Transport</h3>
-                <p>If there is any damage to the packaging on delivery, contact us immediately at beatrice061599@gmail.com or through our website.</p>
-            
-            </div>
-
             <div class="title-faqs">
                 <h2>FAQs</h2>
                 <h3>Frequently Ask Questions</h3>
                 <h3>Here are some common questions about Be'astylish</h3>
             </div>
-            <div class="faq-container" style="margin-bottom: 5rem;">
+            <div class="faq-container">
                 <div class="faq-item">
                     <div class="faq-question" onclick="toggleAnswer(this)">
                         <span>Do you have a physical store location where I can shop in person?</span>
@@ -285,6 +257,28 @@
                     </div>
                 </div>
                 <!-- Add more FAQ items as needed -->
+            </div>
+
+            <div id="policy" class="container" style="width: 100%; padding: 6rem;">            
+                <h2>No Refund Policy</h2>
+                <p>All sales are final. We do not offer refunds or exchanges for any products or services purchased through our Site. Please ensure that you review your order carefully before making a purchase.</p>
+                <p>The only exceptions to this policy are as required by law. If you receive a product that is defective or not as described, please contact us within 3 days of receipt, and we will address the issue in compliance with local consumer protection laws.</p>
+                
+
+                <h2>Delivery Policy</h2>
+                <p>Following are the terms and conditions that constitute our Delivery Policy.</p>
+                <h3>Domestic Shipping Policy</h3>
+                <p>Shipment processing time: All orders are processed within 2-3 business days. Orders are not shipped or delivered on weekends or holidays.</p>
+                <p>If we are experiencing a high volume of orders, shipments may be delayed by a few days. Please allow additional days in transit for delivery. If there will be a significant delay in shipment of your order, we will contact you via email or phonenumber.</p>
+                <h3>Shipping rates</h3>
+                <p>Shipping charges for your order will be calculated and displayed at checkout.</p>
+                <h3>Order tracking</h3>
+                <p>You can track your orders by viewing your orders in the order section of your account.</p>
+                <h3>Customs, Duties and Taxes</h3>
+                <p>Beastylish is not responsible for any customs and taxes applied to your order. All fees imposed during or after shipping are the responsibility of the customer (tariffs, taxes, etc.).</p>
+                <h3>Damaged Items in Transport</h3>
+                <p>If there is any damage to the packaging on delivery, contact us immediately at beatrice061599@gmail.com or through our website.</p>
+            
             </div>
 
 
